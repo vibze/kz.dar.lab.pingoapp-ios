@@ -1,0 +1,5 @@
+git_url "git@github.com:vibze/kz.dar.lab.fastlane.match.git"
+
+type "appstore", "development"
+
+app_identifier ["kz.dar.lab.pingoapp"]
