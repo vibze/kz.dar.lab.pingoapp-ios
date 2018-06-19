@@ -164,12 +164,12 @@ class MessageViewController: UIViewController {
             constraint.width.equalTo(300)
             constraint.height.equalTo(178)
         }
-//        messageContentTextField.snp.makeConstraints { (constraint) in
-//            constraint.top.equalTo(sendMessageAlertView.snp.top)
-//            constraint.left.equalTo(sendMessageAlertView.snp.left)
-//            constraint.right.equalTo(sendMessageAlertView.snp.right)
-//            constraint.bottom.equalTo(sendMessageAlertView.snp.bottom)
-//        }
+        newMessageTextField.snp.makeConstraints { (constraint) in
+            constraint.top.equalTo(sendMessageAlertView.snp.top)
+            constraint.left.equalTo(sendMessageAlertView.snp.left)
+            constraint.right.equalTo(sendMessageAlertView.snp.right)
+            constraint.bottom.equalTo(sendMessageAlertView.snp.bottom)
+        }
     }
     
     func setupViews() {
