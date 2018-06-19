@@ -16,6 +16,10 @@ class MessageViewController: UIViewController {
 
     let defaultMessages = ["Привет", "Как дела?"]
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.allowsSelection = true
@@ -65,20 +69,58 @@ class MessageViewController: UIViewController {
         return btn
     }()
     
-    let sendMessageView: UIView = {
+    let sendBtn: UIButton = {
+        let sendBtn = UIButton()
+        sendBtn.addTarget(self, action: #selector(sendBtnPressed), for: .touchUpInside)
+        sendBtn.layer.masksToBounds = true
+        sendBtn.layer.cornerRadius = 10
+        sendBtn.backgroundColor = .red
+        
+        return sendBtn
+    }()
+    
+    let cancelBtn: UIButton = {
+        let cancelBtn = UIButton()
+        cancelBtn.addTarget(self, action: #selector(cancelBtnPressed), for: .touchUpInside)
+        cancelBtn.layer.masksToBounds = true
+        cancelBtn.layer.cornerRadius = 10
+        cancelBtn.backgroundColor = .blue
+        
+        return cancelBtn
+    }()
+    
+    let sendMessageAlertView: UIView = {
         let sendView = UIView()
         sendView.layer.masksToBounds = true
         sendView.layer.cornerRadius = 10
+        sendView.backgroundColor = .green
         
         return sendView
     }()
     
-//    let messageContentLabel: UILabel = {
-//        let message = UILabel()
-//    }
+    let newMessageTextField: UITextField = {
+        let message = UITextField()
+        return message
+    }()
 
-    override var prefersStatusBarHidden: Bool {
-        return true
+    @objc func sendBtnPressed() {
+        
+    }
+    
+    @objc func cancelBtnPressed() {
+        sendMessageAlertView.isHidden = true
+        [cancelBtn, sendBtn].forEach { (button) in
+            button.isEnabled = false
+            button.isHidden = true
+        }
+    }
+    
+    @objc func writeBtnPressed() {
+        sendMessageAlertView.isHidden = false
+        [cancelBtn, sendBtn].forEach { (button) in
+            button.isEnabled = true
+            button.isHidden = false
+        }
     }
     
     override func viewDidLoad() {
@@ -87,11 +129,6 @@ class MessageViewController: UIViewController {
         setupViews()
         backImageSet()
         setupCustomAlert()
-    }
-
-    
-    @objc func writeBtnPressed() {
-        
     }
     
     @objc func backBtnPressed() {
@@ -106,15 +143,33 @@ class MessageViewController: UIViewController {
     }
     
     func setupCustomAlert() {
-        [sendMessageView].forEach { (newView) in
+        [sendMessageAlertView, newMessageTextField, sendBtn, cancelBtn].forEach { (newView) in
             view.addSubview(newView)
         }
-        sendMessageView.snp.makeConstraints { (constraint) in
+        sendBtn.snp.makeConstraints { (constraint) in
+            constraint.bottom.equalTo(sendMessageAlertView.snp.bottom)
+            constraint.left.equalTo(sendMessageAlertView.snp.left)
+            constraint.width.equalTo(300 / 2)
+            constraint.height.equalTo(35)
+        }
+        cancelBtn.snp.makeConstraints { (constraint) in
+            constraint.bottom.equalTo(sendMessageAlertView.snp.bottom)
+            constraint.right.equalTo(sendMessageAlertView.snp.right)
+            constraint.width.equalTo(300 / 2)
+            constraint.height.equalTo(35)
+        }
+        sendMessageAlertView.snp.makeConstraints { (constraint) in
             constraint.centerX.equalTo(self.view.center)
             constraint.centerY.equalTo(self.view.center)
             constraint.width.equalTo(300)
             constraint.height.equalTo(178)
         }
+//        messageContentTextField.snp.makeConstraints { (constraint) in
+//            constraint.top.equalTo(sendMessageAlertView.snp.top)
+//            constraint.left.equalTo(sendMessageAlertView.snp.left)
+//            constraint.right.equalTo(sendMessageAlertView.snp.right)
+//            constraint.bottom.equalTo(sendMessageAlertView.snp.bottom)
+//        }
     }
     
     func setupViews() {
@@ -161,8 +216,8 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.messageCell, for: indexPath) as! MessageTableViewCell
-//        cell.sampleMessageText = defaultMessages[indexPath.row]
-        cell.sampleMessageLabel.text = defaultMessages[indexPath.row]
+        cell.sampleMessageText = defaultMessages[indexPath.row]
+//        cell.sampleMessageLabel.text = defaultMessages[indexPath.row]
         return cell
     }
 }
