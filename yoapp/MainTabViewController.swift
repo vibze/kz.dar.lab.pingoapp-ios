@@ -21,7 +21,7 @@ class MainTabViewController: UIViewController {
     
     let contactsBtn: UIButton = {
         let btn = UIButton()
-        btn.setImage(#imageLiteral(resourceName: "chaticon"), for: .normal)
+        btn.setImage(#imageLiteral(resourceName: "contacts"), for: .normal)
         btn.tag = 0
         btn.addTarget(self, action: #selector(tabBarBtnPressed), for: .touchUpInside)
 
@@ -30,27 +30,27 @@ class MainTabViewController: UIViewController {
     
     let homeBtn: UIButton = {
         let btn = UIButton()
-        btn.setImage(#imageLiteral(resourceName: "homeicon"), for: .normal)
         btn.tag = 1
+        btn.setImage(#imageLiteral(resourceName: "homeSelected"), for: .normal)
         btn.addTarget(self, action: #selector(tabBarBtnPressed), for: .touchUpInside)
 
         return btn
     }()
     
-    let settingsBtn: UIButton = {
+    let profileBtn: UIButton = {
         let btn = UIButton()
         btn.tag = 2
-        btn.setImage(#imageLiteral(resourceName: "profileIcon"), for: .normal)
+        btn.setImage(#imageLiteral(resourceName: "profile"), for: .normal)
         btn.addTarget(self, action: #selector(tabBarBtnPressed), for: .touchUpInside)
         return btn
     }()
     
-    let activeImg = [#imageLiteral(resourceName: "chatInicon"), #imageLiteral(resourceName: "homeInicon"), #imageLiteral(resourceName: "profileInicon")]
-    let inactiveImg = [#imageLiteral(resourceName: "chaticon"), #imageLiteral(resourceName: "homeicon"), #imageLiteral(resourceName: "profileIcon"),]
+    let activeImg = [#imageLiteral(resourceName: "contactsSelected"), #imageLiteral(resourceName: "homeSelected"), #imageLiteral(resourceName: "profileSelected")]
+    let inactiveImg = [#imageLiteral(resourceName: "contacts"), #imageLiteral(resourceName: "home"), #imageLiteral(resourceName: "profile"),]
     let controllers = [MyContactsViewController(), ContactsViewController(), SettingsViewController()]
     
     @objc func tabBarBtnPressed(sender: UIButton) {
-        [settingsBtn, homeBtn, contactsBtn].forEach { (btn) in
+        [profileBtn, homeBtn, contactsBtn].forEach { (btn) in
             btn.setImage(inactiveImg[btn.tag], for: .normal)
         }
         sender.setImage(activeImg[sender.tag], for: .normal)
@@ -69,14 +69,13 @@ class MainTabViewController: UIViewController {
         let controller = ContactsViewController()
         addChildViewController(controller)
         containerView.addSubview(controller.view)
-        homeBtn.setImage(activeImg[1], for: .normal)
         
         controller.didMove(toParentViewController: self)
 
     }
     
     func setupViews() {
-        [containerView, homeBtn, settingsBtn, contactsBtn].forEach { (newView) in
+        [containerView, homeBtn, profileBtn, contactsBtn].forEach { (newView) in
             view.addSubview(newView)
         }
         containerView.snp.makeConstraints { (constraint) in
@@ -94,7 +93,7 @@ class MainTabViewController: UIViewController {
             constraint.height.equalTo(60)
             constraint.width.equalTo(self.view.frame.width / 3)
         }
-        settingsBtn.snp.makeConstraints { (constraint) in
+        profileBtn.snp.makeConstraints { (constraint) in
             constraint.left.equalTo(homeBtn.snp.right)
             constraint.bottom.equalTo(-10)
             constraint.height.equalTo(60)

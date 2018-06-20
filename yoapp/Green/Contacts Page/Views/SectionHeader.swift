@@ -23,11 +23,10 @@ class SectionHeader: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     let categoryTitleLabel: UILabel = {
         let categoryTitleLabel = UILabel()
-        categoryTitleLabel.textColor = UIColor.init(hexString: "9C4572")
-        categoryTitleLabel.font = UIFont.systemFont(ofSize: 18)
+        categoryTitleLabel.textColor = UIColor.init(hexString: "308757")
+        categoryTitleLabel.font = UIFont.systemFont(ofSize: 16)
         categoryTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         categoryTitleLabel.textAlignment = .left
         

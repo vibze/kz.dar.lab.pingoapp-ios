@@ -16,12 +16,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        window = UIWindow(frame: UIScreen.main.bounds)
-        let contactsViewController = MainTabViewController()
-        window!.rootViewController = contactsViewController
-        window!.makeKeyAndVisible()
+        checkStorage()
         
         return true
+    }
+    
+    func checkStorage() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let userDefaults = UserDefaults.standard
+        let decoded  = userDefaults.object(forKey: "user") as? Data
+        
+        var user: User?
+        if let decoded = decoded {
+            user = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? User
+        }
+        
+        if user != nil {
+            window?.rootViewController = MainTabViewController()
+        }
+        else {
+            window?.rootViewController = AuthViewController()
+        }
+        window!.makeKeyAndVisible()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
