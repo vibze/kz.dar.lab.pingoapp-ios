@@ -13,6 +13,8 @@
 		7C1D3FB720D6BA8E007037D9 /* ContactsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D3FB620D6BA8E007037D9 /* ContactsCollectionViewCell.swift */; };
 		7C1D3FB920D6D7B7007037D9 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D3FB820D6D7B7007037D9 /* SectionHeader.swift */; };
 		7C1ECE7F20D8B81E00879650 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ECE7E20D8B81E00879650 /* MessageTableViewCell.swift */; };
+		7C1ECE8320D97BC800879650 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ECE8220D97BC800879650 /* MainTabViewController.swift */; };
+		7C1ECE8920D9887900879650 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ECE8820D9887900879650 /* SettingsViewController.swift */; };
 		7C910C4A20D6AAF90072A673 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C910C4920D6AAF90072A673 /* AppDelegate.swift */; };
 		7C910C5120D6AAFC0072A673 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C910C5020D6AAFC0072A673 /* Assets.xcassets */; };
 		7C910C5C20D6B2E50072A673 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C910C5B20D6B2E50072A673 /* ContactsViewController.swift */; };
@@ -27,6 +29,8 @@
 		7C1D3FB620D6BA8E007037D9 /* ContactsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C1D3FB820D6D7B7007037D9 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		7C1ECE7E20D8B81E00879650 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		7C1ECE8220D97BC800879650 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		7C1ECE8820D9887900879650 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7C910C4620D6AAF90072A673 /* yoapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yoapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C910C4920D6AAF90072A673 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C910C5020D6AAFC0072A673 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -168,11 +172,45 @@
 		7C1ECE8120D8C9A400879650 /* Green */ = {
 			isa = PBXGroup;
 			children = (
+				7C1ECE8420D9883E00879650 /* Settings Page */,
 				7C1CDFD520D7AB2500A90E16 /* Message Page */,
 				7C1CDFCF20D7A93000A90E16 /* My Contacts Page */,
 				7C1CDFCC20D7808D00A90E16 /* Contacts Page */,
+				7C1ECE8220D97BC800879650 /* MainTabViewController.swift */,
 			);
 			path = Green;
+			sourceTree = "<group>";
+		};
+		7C1ECE8420D9883E00879650 /* Settings Page */ = {
+			isa = PBXGroup;
+			children = (
+				7C1ECE8720D9886700879650 /* Models */,
+				7C1ECE8620D9885E00879650 /* Controllers */,
+				7C1ECE8520D9885400879650 /* Views */,
+			);
+			path = "Settings Page";
+			sourceTree = "<group>";
+		};
+		7C1ECE8520D9885400879650 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7C1ECE8620D9885E00879650 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7C1ECE8820D9887900879650 /* SettingsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		7C1ECE8720D9886700879650 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		7C910C3D20D6AAF90072A673 = {
@@ -238,6 +276,11 @@
 				TargetAttributes = {
 					7C910C4520D6AAF90072A673 = {
 						CreatedOnToolsVersion = 9.4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -317,11 +360,13 @@
 				7C1CDFC920D7632B00A90E16 /* Extensions.swift in Sources */,
 				7C1D3FB920D6D7B7007037D9 /* SectionHeader.swift in Sources */,
 				7C910C4A20D6AAF90072A673 /* AppDelegate.swift in Sources */,
+				7C1ECE8920D9887900879650 /* SettingsViewController.swift in Sources */,
 				7C910C5C20D6B2E50072A673 /* ContactsViewController.swift in Sources */,
 				7C1D3FB720D6BA8E007037D9 /* ContactsCollectionViewCell.swift in Sources */,
 				7C1ECE7F20D8B81E00879650 /* MessageTableViewCell.swift in Sources */,
 				7C1CDFD420D7A9A000A90E16 /* MyContactsViewController.swift in Sources */,
 				7C1CDFD720D7AB5100A90E16 /* MessageViewController.swift in Sources */,
+				7C1ECE8320D97BC800879650 /* MainTabViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

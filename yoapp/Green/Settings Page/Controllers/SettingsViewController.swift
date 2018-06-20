@@ -1,18 +1,17 @@
 //
-//  MyContactsViewController.swift
+//  SettingsViewController.swift
 //  yoapp
 //
-//  Created by Kurnmanbay Ayan on 6/18/18.
+//  Created by Kurnmanbay Ayan on 6/20/18.
 //  Copyright © 2018 Kurmanbay Ayan. All rights reserved.
 //
 
 import UIKit
 
-class MyContactsViewController: UIViewController {
+class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(testLabel)
         backImageSet()
     }
     
@@ -22,11 +21,4 @@ class MyContactsViewController: UIViewController {
         backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
         self.view.insertSubview(backgroundImage, at: 0)
     }
-    
-    let testLabel: UILabel = {
-        let label = UILabel()
-        label.text = "TEST Lable my contacts"
-        label.font = UIFont(name: "", size: 20)
-        return label
-    }()
 }

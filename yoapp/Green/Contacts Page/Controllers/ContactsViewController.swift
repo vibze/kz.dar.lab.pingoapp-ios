@@ -17,7 +17,7 @@ private struct Constants {
 class ContactsViewController: UIViewController {
 
     var collectionView: UICollectionView!
-    
+
     let sectionLabels = ["Недавние"]
     
     override func viewDidLoad() {
@@ -130,6 +130,7 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = MessageViewController()
+        vc.contact = "asdasdasd"
         self.present(vc, animated: true, completion: nil)
     }
 }
@@ -138,7 +139,9 @@ extension ContactsViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.leftViewMode = UITextFieldViewMode.never
         textField.leftViewMode = .never
+        self.hideKeyboard()
     }
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let text = textField.text {
             if text.count == 0 {
@@ -150,12 +153,15 @@ extension ContactsViewController: UITextFieldDelegate {
 }
 
 extension UIViewController {
+    
     func hideKeyboard() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        print(tap)
         view.addGestureRecognizer(tap)
     }
     
     @objc func dismissKeyboard() {
+        view.gestureRecognizers?.removeAll()
         view.endEditing(true)
     }
 }

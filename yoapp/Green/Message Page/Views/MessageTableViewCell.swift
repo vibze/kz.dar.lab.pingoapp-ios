@@ -9,8 +9,6 @@
 import UIKit
 
 class MessageTableViewCell: UITableViewCell {
-
-    var sampleMessageText: String?
     
     let sampleMessageLabel: UILabel = {
         let label = UILabel()
@@ -27,11 +25,9 @@ class MessageTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     func setupViews() {
-        if let sampleMessage = sampleMessageText {
-            sampleMessageLabel.text = sampleMessage
-        }
-        
+    
         addSubview(sampleMessageLabel)
         sampleMessageLabel.snp.makeConstraints { (constraint) in
             constraint.top.bottom.right.equalTo(0)

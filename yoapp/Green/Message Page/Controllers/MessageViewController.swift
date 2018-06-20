@@ -15,6 +15,7 @@ private struct Constants {
 class MessageViewController: UIViewController {
 
     let defaultMessages = ["Привет", "Как дела?"]
+    var contact: String?
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -49,10 +50,10 @@ class MessageViewController: UIViewController {
     
     let userName: UILabel = {
         let username = UILabel()
-        username.text = "Someone"
         username.textAlignment = .center
         username.font = UIFont(name: "Avenir Next", size: 24)
         username.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        
         return username
     }()
     
@@ -74,7 +75,11 @@ class MessageViewController: UIViewController {
         sendBtn.addTarget(self, action: #selector(sendBtnPressed), for: .touchUpInside)
         sendBtn.layer.masksToBounds = true
         sendBtn.layer.cornerRadius = 10
-        sendBtn.backgroundColor = .red
+        sendBtn.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        sendBtn.layer.borderWidth = 0.5
+        sendBtn.setTitleColor(UIColor.init(hexString: "9C4272"), for: .normal)
+        sendBtn.backgroundColor = UIColor.init(hexString: "81E2AA")
+        sendBtn.setTitle("Отправить", for: .normal)
         
         return sendBtn
     }()
@@ -84,7 +89,11 @@ class MessageViewController: UIViewController {
         cancelBtn.addTarget(self, action: #selector(cancelBtnPressed), for: .touchUpInside)
         cancelBtn.layer.masksToBounds = true
         cancelBtn.layer.cornerRadius = 10
-        cancelBtn.backgroundColor = .blue
+        cancelBtn.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        cancelBtn.layer.borderWidth = 0.5
+        cancelBtn.setTitleColor(UIColor.init(hexString: "9C4272"), for: .normal)
+        cancelBtn.backgroundColor = UIColor.init(hexString: "81E2AA")
+        cancelBtn.setTitle("Отмена", for: .normal)
         
         return cancelBtn
     }()
@@ -93,14 +102,33 @@ class MessageViewController: UIViewController {
         let sendView = UIView()
         sendView.layer.masksToBounds = true
         sendView.layer.cornerRadius = 10
-        sendView.backgroundColor = .green
+        sendView.backgroundColor = UIColor.init(hexString: "58AD7E")
         
         return sendView
     }()
     
+    let alertBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+        view.isHidden = true
+        return view
+    }()
+    
     let newMessageTextField: UITextField = {
-        let message = UITextField()
-        return message
+        let textField = UITextField()
+        textField.borderStyle = .none
+        textField.font = UIFont(name: "Avenir Next", size: 22)
+        
+        let attributes = [
+            NSAttributedStringKey.foregroundColor: UIColor.white,
+        ]
+        
+        textField.attributedPlaceholder = NSAttributedString(string: "New message", attributes: attributes)
+        
+        textField.layer.borderColor = UIColor.init(hexString: "9F4C76").cgColor
+        textField.layer.sublayerTransform = CATransform3DMakeTranslation(16, 0, 0)
+        
+        return textField
     }()
 
     @objc func sendBtnPressed() {
@@ -108,19 +136,11 @@ class MessageViewController: UIViewController {
     }
     
     @objc func cancelBtnPressed() {
-        sendMessageAlertView.isHidden = true
-        [cancelBtn, sendBtn].forEach { (button) in
-            button.isEnabled = false
-            button.isHidden = true
-        }
+        alertBackgroundView.isHidden = true
     }
     
     @objc func writeBtnPressed() {
-        sendMessageAlertView.isHidden = false
-        [cancelBtn, sendBtn].forEach { (button) in
-            button.isEnabled = true
-            button.isHidden = false
-        }
+        alertBackgroundView.isHidden = false
     }
     
     override func viewDidLoad() {
@@ -129,6 +149,13 @@ class MessageViewController: UIViewController {
         setupViews()
         backImageSet()
         setupCustomAlert()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let contact = contact {
+            userName.text = contact
+        }
     }
     
     @objc func backBtnPressed() {
@@ -143,8 +170,12 @@ class MessageViewController: UIViewController {
     }
     
     func setupCustomAlert() {
+        view.addSubview(alertBackgroundView)
         [sendMessageAlertView, newMessageTextField, sendBtn, cancelBtn].forEach { (newView) in
-            view.addSubview(newView)
+            alertBackgroundView.addSubview(newView)
+        }
+        alertBackgroundView.snp.makeConstraints { (constraint) in
+            constraint.bottom.left.right.top.equalTo(0)
         }
         sendBtn.snp.makeConstraints { (constraint) in
             constraint.bottom.equalTo(sendMessageAlertView.snp.bottom)
@@ -168,7 +199,7 @@ class MessageViewController: UIViewController {
             constraint.top.equalTo(sendMessageAlertView.snp.top)
             constraint.left.equalTo(sendMessageAlertView.snp.left)
             constraint.right.equalTo(sendMessageAlertView.snp.right)
-            constraint.bottom.equalTo(sendMessageAlertView.snp.bottom)
+            constraint.bottom.equalTo(cancelBtn.snp.top)
         }
     }
     
@@ -189,8 +220,8 @@ class MessageViewController: UIViewController {
         }
         writeButton.snp.makeConstraints { (constraint) in
             constraint.top.equalTo(tableView.snp.bottom).offset(40)
-            constraint.left.equalTo(62)
-            constraint.width.equalTo(self.view.frame.width - 2 * 62)
+            constraint.left.equalTo(30)
+            constraint.width.equalTo(self.view.frame.width - 2 * 30)
             constraint.height.equalTo(43)
         }
         userName.snp.makeConstraints { (constraint) in
@@ -216,8 +247,7 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.messageCell, for: indexPath) as! MessageTableViewCell
-        cell.sampleMessageText = defaultMessages[indexPath.row]
-//        cell.sampleMessageLabel.text = defaultMessages[indexPath.row]
+        cell.sampleMessageLabel.text = defaultMessages[indexPath.row]
         return cell
     }
 }
