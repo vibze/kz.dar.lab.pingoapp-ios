@@ -17,15 +17,18 @@ private struct Constants {
 class ContactsViewController: UIViewController {
 
     var collectionView: UICollectionView!
-    
-    let sectionLabels = ["Недавние"]
+
+    let sectionLabels = ["Недавние", "Все, кто в теме"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.hideKeyboard()
+        if let bundleID = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+        }
+        
+        view.backgroundColor = UIColor(hexString: "6BBE90")
         collectionViewSetup()
-        backImageSet()
         textFieldSetup()
     }
     
@@ -36,22 +39,22 @@ class ContactsViewController: UIViewController {
     let searchTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .none
-        textField.font = UIFont(name: "Avenir Next", size: 22)
+        textField.font = UIFont(name: "Avenir Next", size: 16)
         
         let attributes = [
             NSAttributedStringKey.foregroundColor: UIColor.white,
-        ]
+            ]
         
         textField.attributedPlaceholder = NSAttributedString(string: " Поиск", attributes: attributes)
         
-        textField.layer.cornerRadius = 25
-        textField.layer.borderWidth = 0.5
-        textField.layer.borderColor = UIColor.init(hexString: "9F4C76").cgColor
+        textField.layer.cornerRadius = 10
+        textField.layer.borderWidth = 2
+        textField.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.35).cgColor
         textField.backgroundColor = UIColor.init(hexString: "58AD7E")
-        textField.layer.sublayerTransform = CATransform3DMakeTranslation(20, 0, 0)
+        textField.layer.sublayerTransform = CATransform3DMakeTranslation(16, 0, 0)
         
-        var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-        var image = UIImage(named: "search")
+        var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 18, height: 18))
+        var image = #imageLiteral(resourceName: "search")
         imageView.image = image
         textField.leftView = imageView
         textField.leftViewMode = UITextFieldViewMode.always
@@ -66,9 +69,9 @@ class ContactsViewController: UIViewController {
         self.view.addSubview(searchTextField)
         searchTextField.delegate = self
         searchTextField.snp.makeConstraints { (constraint) in
-            constraint.left.top.equalTo(20)
-            constraint.height.equalTo(52)
-            constraint.width.equalTo(self.view.frame.width - 40)
+            constraint.top.left.equalTo(20)
+            constraint.height.equalTo(48)
+            constraint.width.equalTo(self.view.frame.width - 2 * 20)
         }
     }
     
@@ -97,18 +100,11 @@ class ContactsViewController: UIViewController {
             constraint.top.equalTo(87)
         }
     }
-    
-    func backImageSet() {
-        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-        backgroundImage.image = UIImage(named: "contactsBackground")
-        backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
-        self.view.insertSubview(backgroundImage, at: 0)
-    }
 }
 
 extension ContactsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return sectionLabels.count
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -130,6 +126,7 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = MessageViewController()
+        vc.contact = "asdasdasd"
         self.present(vc, animated: true, completion: nil)
     }
 }
@@ -138,7 +135,9 @@ extension ContactsViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.leftViewMode = UITextFieldViewMode.never
         textField.leftViewMode = .never
+        self.hideKeyboard()
     }
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let text = textField.text {
             if text.count == 0 {
@@ -146,17 +145,6 @@ extension ContactsViewController: UITextFieldDelegate {
                 textField.leftViewMode = .always
             }
         }
-    }
-}
-
-extension UIViewController {
-    func hideKeyboard() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
 }
 
