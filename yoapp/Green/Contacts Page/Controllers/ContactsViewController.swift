@@ -23,9 +23,9 @@ class ContactsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let bundleID = Bundle.main.bundleIdentifier {
-            UserDefaults.standard.removePersistentDomain(forName: bundleID)
-        }
+//        if let bundleID = Bundle.main.bundleIdentifier {
+//            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+//        }
         
         view.backgroundColor = UIColor(hexString: "6BBE90")
         collectionViewSetup()
@@ -36,34 +36,7 @@ class ContactsViewController: UIViewController {
         return true
     }
     
-    let searchTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.font = UIFont(name: "Avenir Next", size: 16)
-        
-        let attributes = [
-            NSAttributedStringKey.foregroundColor: UIColor.white,
-            ]
-        
-        textField.attributedPlaceholder = NSAttributedString(string: " Поиск", attributes: attributes)
-        
-        textField.layer.cornerRadius = 10
-        textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.35).cgColor
-        textField.backgroundColor = UIColor.init(hexString: "58AD7E")
-        textField.layer.sublayerTransform = CATransform3DMakeTranslation(16, 0, 0)
-        
-        var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 18, height: 18))
-        var image = #imageLiteral(resourceName: "search")
-        imageView.image = image
-        textField.leftView = imageView
-        textField.leftViewMode = UITextFieldViewMode.always
-        textField.leftViewMode = .always
-        
-        return textField
-    }()
-    
-    
+    let searchTextField = SearchTexField()
     
     func textFieldSetup() {
         self.view.addSubview(searchTextField)
@@ -96,8 +69,8 @@ class ContactsViewController: UIViewController {
         self.view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { (constraint) in
-            constraint.left.right.bottom.equalTo(0)
-            constraint.top.equalTo(87)
+            constraint.left.right.bottom.equalToSuperview()
+            constraint.top.equalToSuperview().offset(87)
         }
     }
 }
@@ -126,7 +99,7 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = MessageViewController()
-        vc.contact = "asdasdasd"
+        vc.contact = "Hello"
         self.present(vc, animated: true, completion: nil)
     }
 }

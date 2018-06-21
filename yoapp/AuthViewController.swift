@@ -13,16 +13,13 @@ class AuthViewController: UIViewController {
     // TEST SAMPLE
     
     let nametest = "Ayan"
-    let emailtest = "qwe@mail.com"
+    let urltest = "qwe@mail.com"
     let passwordtest = "Qwerty123"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let user = User(name: nametest, email: emailtest, password: passwordtest)
-        let userDefaults = UserDefaults.standard
-        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: user)
-        userDefaults.set(encodedData, forKey: "user")
-        userDefaults.synchronize()
+        let user = User(name: nametest, url: urltest, password: passwordtest)
+        User.addToUserDefaults(user)
         view.backgroundColor = .red
     }
     

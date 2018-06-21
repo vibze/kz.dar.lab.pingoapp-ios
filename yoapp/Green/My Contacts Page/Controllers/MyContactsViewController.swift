@@ -26,41 +26,16 @@ class MyContactsViewController: UIViewController {
         return tableView
     }()
     
-    let searchTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.font = UIFont(name: "Avenir Next", size: 16)
-        
-        let attributes = [
-            NSAttributedStringKey.foregroundColor: UIColor.white,
-        ]
-        
-        textField.attributedPlaceholder = NSAttributedString(string: " Поиск", attributes: attributes)
-        
-        textField.layer.cornerRadius = 10
-        textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.35).cgColor
-        textField.backgroundColor = UIColor.init(hexString: "58AD7E")
-        textField.layer.sublayerTransform = CATransform3DMakeTranslation(16, 0, 0)
-        
-        var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 18, height: 18))
-        var image = #imageLiteral(resourceName: "search")
-        imageView.image = image
-        textField.leftView = imageView
-        textField.leftViewMode = UITextFieldViewMode.always
-        textField.leftViewMode = .always
-        
-        return textField
-    }()
+    let searchTextField = SearchTexField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor(hexString: "6BBE90")
-        viewsSetup()
+        setupViews()
     }
     
-    func viewsSetup() {
+    func setupViews() {
         view.addSubview(tableView)
         view.addSubview(searchTextField)
         
@@ -69,14 +44,14 @@ class MyContactsViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(MyContactsTableViewCell.self, forCellReuseIdentifier: Constants.myContactCell)
 
-        searchTextField.snp.makeConstraints { (constraint) in
-            constraint.top.left.equalTo(20)
-            constraint.height.equalTo(48)
-            constraint.width.equalTo(self.view.frame.width - 2 * 20)
+        searchTextField.snp.makeConstraints {
+            $0.top.left.equalTo(20)
+            $0.height.equalTo(48)
+            $0.width.equalTo(self.view.frame.width - 2 * 20)
         }
-        tableView.snp.makeConstraints { (constraint) in
-            constraint.bottom.left.right.equalTo(0)
-            constraint.top.equalTo(searchTextField.snp.bottom).offset(12)
+        tableView.snp.makeConstraints {
+            $0.bottom.left.right.equalTo(0)
+            $0.top.equalTo(searchTextField.snp.bottom).offset(12)
         }
     }
 }
@@ -87,8 +62,6 @@ extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.myContactCell, for: indexPath) as! MyContactsTableViewCell
-        cell.backgroundColor = .clear
-        
         return cell
     }
 
@@ -100,7 +73,7 @@ extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource {
         headerLabel.font = UIFont.systemFont(ofSize: 16)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         headerLabel.text = "Все контакты"
-
+        
         headerView.addSubview(headerLabel)
         return headerView
     }

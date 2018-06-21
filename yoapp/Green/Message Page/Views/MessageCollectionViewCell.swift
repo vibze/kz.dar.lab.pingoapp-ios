@@ -21,10 +21,10 @@ class MessageCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
+        
+        self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.15)
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = 8
     }
     
     required init?(coder aDecoder: NSCoder) {
