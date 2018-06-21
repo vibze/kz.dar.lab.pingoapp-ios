@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = MainTabViewController()
         }
         else {
-            window?.rootViewController = AuthViewController()
+            window?.rootViewController = MainTabViewController() // AuthViewController() -- Это временно, пока не сделаем авторизацию
         }
         window!.makeKeyAndVisible()
     }

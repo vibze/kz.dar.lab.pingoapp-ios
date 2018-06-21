@@ -224,7 +224,6 @@
 		7C1ECE8120D8C9A400879650 /* Green */ = {
 			isa = PBXGroup;
 			children = (
-				7C1ECE8420D9883E00879650 /* Settings Page */,
 				7C1ECE8420D9883E00879650 /* Profile Page */,
 				7C1CDFD520D7AB2500A90E16 /* Message Page */,
 				7C1CDFCF20D7A93000A90E16 /* My Contacts Page */,

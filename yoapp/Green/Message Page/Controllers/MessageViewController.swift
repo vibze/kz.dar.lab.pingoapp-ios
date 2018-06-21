@@ -94,9 +94,6 @@ class MessageViewController: UIViewController {
     @objc func writeBtnPressed() {
     }
     
-    @objc func blockBtnPressed() {
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let contact = contact {
