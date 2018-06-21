@@ -17,7 +17,7 @@ class SearchTexField: UITextField {
         
         let attributes = [
             NSAttributedStringKey.foregroundColor: UIColor.white,
-            ]
+        ]
         
         self.attributedPlaceholder = NSAttributedString(string: " Поиск", attributes: attributes)
         
