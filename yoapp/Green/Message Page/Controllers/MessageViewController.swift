@@ -58,7 +58,7 @@ class MessageViewController: UIViewController {
         btn.setTitle("Написать текст", for: .normal)
         btn.layer.masksToBounds = true
         btn.layer.cornerRadius = 10
-        btn.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        btn.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         btn.layer.borderWidth = 0.5
         btn.setTitleColor(UIColor.init(hexString: "9C4272"), for: .normal)
         btn.backgroundColor = UIColor.init(hexString: "81E2AA")
