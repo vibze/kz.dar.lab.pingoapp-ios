@@ -16,18 +16,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        window = UIWindow(frame: UIScreen.main.bounds)
-        //        let contactsViewController = ContactsViewController()
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let loginViewController = LoginViewController(collectionViewLayout: layout)
-        window!.rootViewController = loginViewController
-//        window!.rootViewController = contactsViewController
-        window!.makeKeyAndVisible()
+        checkStorage()
         
         return true
     }
     
+    func checkStorage() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let userDefaults = UserDefaults.standard
+        let decoded  = userDefaults.object(forKey: "user") as? Data
+        
+        var user: User?
+        if let decoded = decoded {
+            user = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? User
+        }
+        
+        if user != nil {
+            window?.rootViewController = MainTabViewController()
+        }
+        else {
+            window?.rootViewController = AuthViewController()
+        }
+        window!.makeKeyAndVisible()
+    }
+
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

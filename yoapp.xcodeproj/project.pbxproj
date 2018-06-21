@@ -12,10 +12,15 @@
 		7C1CDFD720D7AB5100A90E16 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CDFD620D7AB5100A90E16 /* MessageViewController.swift */; };
 		7C1D3FB720D6BA8E007037D9 /* ContactsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D3FB620D6BA8E007037D9 /* ContactsCollectionViewCell.swift */; };
 		7C1D3FB920D6D7B7007037D9 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1D3FB820D6D7B7007037D9 /* SectionHeader.swift */; };
-		7C1ECE7F20D8B81E00879650 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ECE7E20D8B81E00879650 /* MessageTableViewCell.swift */; };
+		7C1ECE8320D97BC800879650 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ECE8220D97BC800879650 /* MainTabViewController.swift */; };
+		7C1ECE8920D9887900879650 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ECE8820D9887900879650 /* SettingsViewController.swift */; };
+		7C26365A20DA048A008D34E1 /* MyContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C26365920DA048A008D34E1 /* MyContactsTableViewCell.swift */; };
 		7C910C4A20D6AAF90072A673 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C910C4920D6AAF90072A673 /* AppDelegate.swift */; };
 		7C910C5120D6AAFC0072A673 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C910C5020D6AAFC0072A673 /* Assets.xcassets */; };
 		7C910C5C20D6B2E50072A673 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C910C5B20D6B2E50072A673 /* ContactsViewController.swift */; };
+		7CC4E13420DA37850094F6CD /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC4E13320DA37850094F6CD /* MessageCollectionViewCell.swift */; };
+		7CC4E13620DA586D0094F6CD /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC4E13520DA586D0094F6CD /* AuthViewController.swift */; };
+		7CC4E13920DA5A400094F6CD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC4E13820DA5A400094F6CD /* User.swift */; };
 		99055EB520DB540300EB201F /* ImageSwypeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99055EB420DB540300EB201F /* ImageSwypeStruct.swift */; };
 		99055EB920DB561D00EB201F /* ImageSwypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99055EB820DB561D00EB201F /* ImageSwypeCell.swift */; };
 		993387CA20D90E200038D0AE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993387C920D90E200038D0AE /* LoginViewController.swift */; };
@@ -29,12 +34,17 @@
 		7C1CDFD620D7AB5100A90E16 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		7C1D3FB620D6BA8E007037D9 /* ContactsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsCollectionViewCell.swift; sourceTree = "<group>"; };
 		7C1D3FB820D6D7B7007037D9 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
-		7C1ECE7E20D8B81E00879650 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		7C1ECE8220D97BC800879650 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		7C1ECE8820D9887900879650 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		7C26365920DA048A008D34E1 /* MyContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactsTableViewCell.swift; sourceTree = "<group>"; };
 		7C910C4620D6AAF90072A673 /* yoapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yoapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C910C4920D6AAF90072A673 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C910C5020D6AAFC0072A673 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C910C5520D6AAFC0072A673 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C910C5B20D6B2E50072A673 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		7CC4E13320DA37850094F6CD /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
+		7CC4E13520DA586D0094F6CD /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		7CC4E13820DA5A400094F6CD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		99055EB420DB540300EB201F /* ImageSwypeStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSwypeStruct.swift; sourceTree = "<group>"; };
 		99055EB820DB561D00EB201F /* ImageSwypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSwypeCell.swift; sourceTree = "<group>"; };
 		993387C920D90E200038D0AE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +144,7 @@
 		7C1CDFD220D7A97D00A90E16 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7C26365920DA048A008D34E1 /* MyContactsTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -151,7 +162,7 @@
 		7C1ECE7B20D8B7EC00879650 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7C1ECE7E20D8B81E00879650 /* MessageTableViewCell.swift */,
+				7CC4E13320DA37850094F6CD /* MessageCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -174,12 +185,45 @@
 		7C1ECE8120D8C9A400879650 /* Green */ = {
 			isa = PBXGroup;
 			children = (
+				7C1ECE8420D9883E00879650 /* Settings Page */,
 				993C862420D8F89C006DABF9 /* Login */,
 				7C1CDFD520D7AB2500A90E16 /* Message Page */,
 				7C1CDFCF20D7A93000A90E16 /* My Contacts Page */,
 				7C1CDFCC20D7808D00A90E16 /* Contacts Page */,
 			);
 			path = Green;
+			sourceTree = "<group>";
+		};
+		7C1ECE8420D9883E00879650 /* Settings Page */ = {
+			isa = PBXGroup;
+			children = (
+				7C1ECE8720D9886700879650 /* Models */,
+				7C1ECE8620D9885E00879650 /* Controllers */,
+				7C1ECE8520D9885400879650 /* Views */,
+			);
+			path = "Settings Page";
+			sourceTree = "<group>";
+		};
+		7C1ECE8520D9885400879650 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7C1ECE8620D9885E00879650 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7C1ECE8820D9887900879650 /* SettingsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		7C1ECE8720D9886700879650 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		7C910C3D20D6AAF90072A673 = {
@@ -203,6 +247,9 @@
 		7C910C4820D6AAF90072A673 /* yoapp */ = {
 			isa = PBXGroup;
 			children = (
+				7C1ECE8220D97BC800879650 /* MainTabViewController.swift */,
+				7CC4E13520DA586D0094F6CD /* AuthViewController.swift */,
+				7CC4E13820DA5A400094F6CD /* User.swift */,
 				7C1ECE8120D8C9A400879650 /* Green */,
 				7C1CDFCB20D7807500A90E16 /* Supporting */,
 				7C1CDFC820D7632B00A90E16 /* Extensions.swift */,
@@ -280,6 +327,11 @@
 				TargetAttributes = {
 					7C910C4520D6AAF90072A673 = {
 						CreatedOnToolsVersion = 9.4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -374,17 +426,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CC4E13920DA5A400094F6CD /* User.swift in Sources */,
 				993387CA20D90E200038D0AE /* LoginViewController.swift in Sources */,
 				7C1CDFC920D7632B00A90E16 /* Extensions.swift in Sources */,
 				7C1D3FB920D6D7B7007037D9 /* SectionHeader.swift in Sources */,
 				7C910C4A20D6AAF90072A673 /* AppDelegate.swift in Sources */,
 				99055EB520DB540300EB201F /* ImageSwypeStruct.swift in Sources */,
+				7C1ECE8920D9887900879650 /* SettingsViewController.swift in Sources */,
+				7CC4E13620DA586D0094F6CD /* AuthViewController.swift in Sources */,
+				7C26365A20DA048A008D34E1 /* MyContactsTableViewCell.swift in Sources */,
 				7C910C5C20D6B2E50072A673 /* ContactsViewController.swift in Sources */,
 				99055EB920DB561D00EB201F /* ImageSwypeCell.swift in Sources */,
 				7C1D3FB720D6BA8E007037D9 /* ContactsCollectionViewCell.swift in Sources */,
-				7C1ECE7F20D8B81E00879650 /* MessageTableViewCell.swift in Sources */,
 				7C1CDFD420D7A9A000A90E16 /* MyContactsViewController.swift in Sources */,
 				7C1CDFD720D7AB5100A90E16 /* MessageViewController.swift in Sources */,
+				7CC4E13420DA37850094F6CD /* MessageCollectionViewCell.swift in Sources */,
+				7C1ECE8320D97BC800879650 /* MainTabViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
