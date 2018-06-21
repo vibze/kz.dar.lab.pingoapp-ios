@@ -24,15 +24,7 @@ class ContactsCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
     }
 
-    let contactImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 68 / 2
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.masksToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "contactPlaceholder")
-        return imageView
-    }()
+    let contactImageView = ImageView(radius: 68 / 2)
 
     let contactNameLabel: UILabel = {
         let label = UILabel()
