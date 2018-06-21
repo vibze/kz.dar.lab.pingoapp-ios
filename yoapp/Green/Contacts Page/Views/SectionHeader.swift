@@ -14,8 +14,8 @@ class SectionHeader: UICollectionReusableView {
         super.init(frame: frame)
         addSubview(categoryTitleLabel)
         categoryTitleLabel.snp.makeConstraints { (constraint) in
-            constraint.left.equalTo(20)
-            constraint.top.equalTo(3)
+            constraint.left.equalToSuperview().offset(20)
+            constraint.top.equalToSuperview().offset(3)
         }
     }
     

@@ -45,12 +45,12 @@ class MyContactsViewController: UIViewController {
         tableView.register(MyContactsTableViewCell.self, forCellReuseIdentifier: Constants.myContactCell)
 
         searchTextField.snp.makeConstraints {
-            $0.top.left.equalTo(20)
+            $0.top.left.equalToSuperview().offset(20)
             $0.height.equalTo(48)
-            $0.width.equalTo(self.view.frame.width - 2 * 20)
+            $0.width.equalToSuperview().inset(20)
         }
         tableView.snp.makeConstraints {
-            $0.bottom.left.right.equalTo(0)
+            $0.bottom.left.right.equalToSuperview().offset(0)
             $0.top.equalTo(searchTextField.snp.bottom).offset(12)
         }
     }

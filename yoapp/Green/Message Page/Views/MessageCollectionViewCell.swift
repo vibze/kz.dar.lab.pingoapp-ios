@@ -34,7 +34,7 @@ class MessageCollectionViewCell: UICollectionViewCell {
     func setupViews() {
         addSubview(textLabel)
         textLabel.snp.makeConstraints { (contraint) in
-            contraint.top.left.equalTo(15)
+            contraint.top.left.equalToSuperview().offset(15)
         }
     }
     

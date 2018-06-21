@@ -127,26 +127,26 @@ class MessageViewController: UIViewController {
     
         blockButton.snp.makeConstraints {
             $0.top.equalTo(writeButton.snp.bottom).offset(16)
-            $0.left.equalTo(32)
-            $0.width.equalTo(self.view.frame.width - 2 * 32)
+            $0.left.equalToSuperview().offset(32)
+            $0.width.equalToSuperview().inset(32)
             $0.height.equalTo(50)
         }
         
         messageTitleLabel.snp.makeConstraints {
             $0.top.equalTo(collectionView.snp.bottom).offset(24)
-            $0.left.equalTo(32)
+            $0.left.equalToSuperview().offset(32)
         }
     
         collectionView.snp.makeConstraints {
-            $0.left.equalTo(32)
-            $0.width.equalTo(self.view.frame.width - 2 * 32)
+            $0.left.equalToSuperview().offset(32)
+            $0.width.equalToSuperview().inset(32)
             $0.height.equalTo(120)
             $0.top.equalTo(basePhrasesTitleLabel.snp.bottom).offset(14)
         }
         
         basePhrasesTitleLabel.snp.makeConstraints {
             $0.top.equalTo(phoneNumberLabel.snp.bottom).offset(22)
-            $0.left.equalTo(32)
+            $0.left.equalToSuperview().offset(32)
         }
         
         phoneNumberLabel.snp.makeConstraints {
@@ -155,8 +155,8 @@ class MessageViewController: UIViewController {
         }
         writeButton.snp.makeConstraints {
             $0.top.equalTo(messageTitleLabel.snp.bottom).offset(22)
-            $0.left.equalTo(32)
-            $0.width.equalTo(self.view.frame.width - 2 * 32)
+            $0.left.equalToSuperview().offset(32)
+            $0.width.equalToSuperview().inset(32)
             $0.height.equalTo(50)
         }
         userNameLabel.snp.makeConstraints {
@@ -174,7 +174,7 @@ class MessageViewController: UIViewController {
             $0.centerX.equalTo(self.view.center)
         }
         backButton.snp.makeConstraints {
-            $0.left.top.equalTo(32)
+            $0.left.top.equalToSuperview().offset(32)
             $0.width.height.equalTo(24)
         }
     }

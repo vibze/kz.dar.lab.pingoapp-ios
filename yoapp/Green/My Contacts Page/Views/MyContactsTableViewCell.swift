@@ -44,12 +44,12 @@ class MyContactsTableViewCell: UITableViewCell {
         }
         
         contactImageView.snp.makeConstraints {
-            $0.top.equalTo(16)
-            $0.left.equalTo(20)
+            $0.top.equalToSuperview().offset(16)
+            $0.left.equalToSuperview().offset(20)
             $0.width.height.equalTo(50)
         }
         contactNameLabel.snp.makeConstraints {
-            $0.top.equalTo(21)
+            $0.top.equalToSuperview().offset(21)
             $0.left.equalTo(contactImageView.snp.right).offset(20)
         }
         phoneNumberLabel.snp.makeConstraints {
