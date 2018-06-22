@@ -36,6 +36,11 @@ extension UIColor {
         let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
         return String(format:"#%06x", rgb)
     }
+    
+    static let myPurple = UIColor(hexString: "9C4572")
+    static let myOrange = UIColor(hexString: "FB984B")
+    static let myYellow = UIColor(hexString: "FFB934")
+   
 }
 
 extension UIViewController {
