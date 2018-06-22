@@ -20,6 +20,7 @@
 		7C1ECE8320D97BC800879650 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ECE8220D97BC800879650 /* MainTabViewController.swift */; };
 		7C1ECE8920D9887900879650 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1ECE8820D9887900879650 /* SettingsViewController.swift */; };
 		7C26365A20DA048A008D34E1 /* MyContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C26365920DA048A008D34E1 /* MyContactsTableViewCell.swift */; };
+		7C33C8A120DCF38900A90398 /* PushAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C33C8A020DCF38900A90398 /* PushAlert.swift */; };
 		7C910C4A20D6AAF90072A673 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C910C4920D6AAF90072A673 /* AppDelegate.swift */; };
 		7C910C5120D6AAFC0072A673 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C910C5020D6AAFC0072A673 /* Assets.xcassets */; };
 		7C910C5C20D6B2E50072A673 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C910C5B20D6B2E50072A673 /* ContactsViewController.swift */; };
@@ -44,6 +45,7 @@
 		7C1ECE8220D97BC800879650 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		7C1ECE8820D9887900879650 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7C26365920DA048A008D34E1 /* MyContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactsTableViewCell.swift; sourceTree = "<group>"; };
+		7C33C8A020DCF38900A90398 /* PushAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAlert.swift; sourceTree = "<group>"; };
 		7C910C4620D6AAF90072A673 /* yoapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yoapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C910C4920D6AAF90072A673 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C910C5020D6AAFC0072A673 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		7C1B8DF420DBA856004BE38B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7C33C8A020DCF38900A90398 /* PushAlert.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				7C1D3FB920D6D7B7007037D9 /* SectionHeader.swift in Sources */,
 				7C910C4A20D6AAF90072A673 /* AppDelegate.swift in Sources */,
 				7C1B8DED20DB92DC004BE38B /* ImageView.swift in Sources */,
+				7C33C8A120DCF38900A90398 /* PushAlert.swift in Sources */,
 				7C1B8DE720DB6B9B004BE38B /* ActionButton.swift in Sources */,
 				7C1ECE8920D9887900879650 /* SettingsViewController.swift in Sources */,
 				7CC4E13620DA586D0094F6CD /* AuthViewController.swift in Sources */,

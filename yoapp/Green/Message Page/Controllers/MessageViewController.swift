@@ -32,6 +32,7 @@ class MessageViewController: UIViewController {
     }()
     
     let profileImageView = ImageView(radius: 100 / 2)
+    let pushAlert = PushAlert()
     
     let backButton: UIButton = {
         let backBtn = UIButton()
@@ -108,7 +109,7 @@ class MessageViewController: UIViewController {
     }
     
     func setupViews() {
-        [backButton, profileImageView, blockButton, profileImageBackgroundView, userNameLabel, writeButton, phoneNumberLabel, basePhrasesTitleLabel, messageTitleLabel].forEach { newView in
+        [backButton, profileImageView, blockButton, profileImageBackgroundView, userNameLabel, writeButton, phoneNumberLabel, basePhrasesTitleLabel, messageTitleLabel, pushAlert].forEach { newView in
             view.addSubview(newView)
         }
         
@@ -126,6 +127,10 @@ class MessageViewController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.allowsSelection = true
         view.addSubview(collectionView)
+        
+        pushAlert.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     
         blockButton.snp.makeConstraints {
             $0.top.equalTo(writeButton.snp.bottom).offset(16)
@@ -194,6 +199,9 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
         cell.textLabel.text = defaultMessages[indexPath.row]
         
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        pushAlert.isHidden = false
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

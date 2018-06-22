@@ -15,6 +15,8 @@ class ComposeViewController: UIViewController {
     }
     let profileImageView = ImageView(radius: 90 / 2)
     let composeButton = ActionButton(title: "Отправить сообщение", type: .write)
+    let alertView = PushAlert()
+
     let nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -58,7 +60,7 @@ class ComposeViewController: UIViewController {
     }
     
     @objc func composeButtonPressed() {
-        
+        alertView.isHidden = false
     }
 
     override func viewDidLoad() {
@@ -68,10 +70,13 @@ class ComposeViewController: UIViewController {
         composeButton.addTarget(self, action: #selector(composeButtonPressed), for: .touchUpInside)
         view.backgroundColor = UIColor(hexString: "6BBE90")
     }
-    
     func setupViews() {
-        [profileImageView, backButton, phoneNumberLabel, nameLabel, messageTextField].forEach {
+        [profileImageView, backButton, phoneNumberLabel, nameLabel, composeButton, messageTextField, alertView].forEach {
             view.addSubview($0)
+        }
+        
+        alertView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
         backButton.snp.makeConstraints {
