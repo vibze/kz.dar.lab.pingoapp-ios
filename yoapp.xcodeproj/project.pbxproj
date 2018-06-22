@@ -25,6 +25,19 @@
 		7CC4E13420DA37850094F6CD /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC4E13320DA37850094F6CD /* MessageCollectionViewCell.swift */; };
 		7CC4E13620DA586D0094F6CD /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC4E13520DA586D0094F6CD /* AuthViewController.swift */; };
 		7CC4E13920DA5A400094F6CD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC4E13820DA5A400094F6CD /* User.swift */; };
+		8E1D402120DC7BA300FCB0C8 /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1D402020DC7BA300FCB0C8 /* SettingHeaderView.swift */; };
+		8E1D402320DC7F4800FCB0C8 /* SettingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1D402220DC7F4800FCB0C8 /* SettingViewCell.swift */; };
+		8E1DCD5020DCA43600D3A4F6 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */; };
+		8E56776C20DB861500E65AFE /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56776B20DB861500E65AFE /* ProfileTableViewController.swift */; };
+		8E56777020DB86BD00E65AFE /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56776F20DB86BD00E65AFE /* ProfileHeaderView.swift */; };
+		8E56777920DB886000E65AFE /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56777820DB886000E65AFE /* Enum.swift */; };
+		8E56777B20DB92E800E65AFE /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56777A20DB92E800E65AFE /* ProfileViewCell.swift */; };
+		8E56777D20DB94A900E65AFE /* ProfileButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56777C20DB94A900E65AFE /* ProfileButtonView.swift */; };
+		8E56777F20DB959F00E65AFE /* InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56777E20DB959F00E65AFE /* InviteFriendsView.swift */; };
+		8E56778120DB960A00E65AFE /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778020DB960A00E65AFE /* Extension.swift */; };
+		8E56778920DBB7B500E65AFE /* CustomInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778820DBB7B500E65AFE /* CustomInviteView.swift */; };
+		8E56778B20DBBEB400E65AFE /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778A20DBBEB400E65AFE /* SettingViewController.swift */; };
+		8E56778D20DBE00600E65AFE /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */; };
 		EFC351E69DE7CCBFA1E3DF75 /* Pods_yoapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D2B93724BE3302FB56D8383 /* Pods_yoapp.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +63,22 @@
 		7CC4E13320DA37850094F6CD /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CC4E13520DA586D0094F6CD /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		7CC4E13820DA5A400094F6CD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8E1D402020DC7BA300FCB0C8 /* SettingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
+		8E1D402220DC7F4800FCB0C8 /* SettingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewCell.swift; sourceTree = "<group>"; };
+		8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
+		8E56776B20DB861500E65AFE /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		8E56776F20DB86BD00E65AFE /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		8E56777820DB886000E65AFE /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		8E56777A20DB92E800E65AFE /* ProfileViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewCell.swift; sourceTree = "<group>"; };
+		8E56777C20DB94A900E65AFE /* ProfileButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButtonView.swift; sourceTree = "<group>"; };
+		8E56777E20DB959F00E65AFE /* InviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsView.swift; sourceTree = "<group>"; };
+		8E56778020DB960A00E65AFE /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		8E56778320DB963900E65AFE /* ProximaNovaSoft-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaSoft-Bold.ttf"; sourceTree = "<group>"; };
+		8E56778420DB963A00E65AFE /* ProximaNovaSoft-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaSoft-Medium.ttf"; sourceTree = "<group>"; };
+		8E56778520DB963A00E65AFE /* ProximaNovaSoft-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaSoft-Regular.ttf"; sourceTree = "<group>"; };
+		8E56778820DBB7B500E65AFE /* CustomInviteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInviteView.swift; sourceTree = "<group>"; };
+		8E56778A20DBBEB400E65AFE /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		9F12A573C6D7B804840CCD70 /* Pods-yoapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yoapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-yoapp/Pods-yoapp.release.xcconfig"; sourceTree = "<group>"; };
 		AAAC01981428456529FBC7D0 /* Pods-yoapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yoapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yoapp/Pods-yoapp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -290,9 +319,65 @@
 				7C1ECE8120D8C9A400879650 /* Green */,
 				7C1CDFCB20D7807500A90E16 /* Supporting */,
 				7C1CDFC820D7632B00A90E16 /* Extensions.swift */,
+				8E56776A20DB765A00E65AFE /* Yellow */,
 				7C910C5520D6AAFC0072A673 /* Info.plist */,
 			);
 			path = yoapp;
+			sourceTree = "<group>";
+		};
+		8E56776A20DB765A00E65AFE /* Yellow */ = {
+			isa = PBXGroup;
+			children = (
+				8E56777720DB87BD00E65AFE /* Helpers */,
+				8E56776E20DB86AA00E65AFE /* View */,
+				8E56776D20DB86A000E65AFE /* Controller */,
+				8E56778220DB963900E65AFE /* Fonts */,
+			);
+			path = Yellow;
+			sourceTree = "<group>";
+		};
+		8E56776D20DB86A000E65AFE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8E56776B20DB861500E65AFE /* ProfileTableViewController.swift */,
+				8E56778A20DBBEB400E65AFE /* SettingViewController.swift */,
+				8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8E56776E20DB86AA00E65AFE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8E56776F20DB86BD00E65AFE /* ProfileHeaderView.swift */,
+				8E56777C20DB94A900E65AFE /* ProfileButtonView.swift */,
+				8E1D402020DC7BA300FCB0C8 /* SettingHeaderView.swift */,
+				8E1D402220DC7F4800FCB0C8 /* SettingViewCell.swift */,
+				8E56777E20DB959F00E65AFE /* InviteFriendsView.swift */,
+				8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */,
+				8E56778820DBB7B500E65AFE /* CustomInviteView.swift */,
+				8E56777A20DB92E800E65AFE /* ProfileViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8E56777720DB87BD00E65AFE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8E56777820DB886000E65AFE /* Enum.swift */,
+				8E56778020DB960A00E65AFE /* Extension.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		8E56778220DB963900E65AFE /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8E56778320DB963900E65AFE /* ProximaNovaSoft-Bold.ttf */,
+				8E56778420DB963A00E65AFE /* ProximaNovaSoft-Medium.ttf */,
+				8E56778520DB963A00E65AFE /* ProximaNovaSoft-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -411,20 +496,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C1B8DF120DB9A23004BE38B /* TabBarButton.swift in Sources */,
+				8E56776C20DB861500E65AFE /* ProfileTableViewController.swift in Sources */,
 				7CC4E13920DA5A400094F6CD /* User.swift in Sources */,
 				7C1CDFC920D7632B00A90E16 /* Extensions.swift in Sources */,
 				7C1D3FB920D6D7B7007037D9 /* SectionHeader.swift in Sources */,
 				7C910C4A20D6AAF90072A673 /* AppDelegate.swift in Sources */,
 				7C1B8DED20DB92DC004BE38B /* ImageView.swift in Sources */,
 				7C1B8DE720DB6B9B004BE38B /* ActionButton.swift in Sources */,
+				8E56778920DBB7B500E65AFE /* CustomInviteView.swift in Sources */,
 				7C1ECE8920D9887900879650 /* SettingsViewController.swift in Sources */,
 				7CC4E13620DA586D0094F6CD /* AuthViewController.swift in Sources */,
+				8E56777020DB86BD00E65AFE /* ProfileHeaderView.swift in Sources */,
+				8E1D402320DC7F4800FCB0C8 /* SettingViewCell.swift in Sources */,
 				7C26365A20DA048A008D34E1 /* MyContactsTableViewCell.swift in Sources */,
+				8E56777B20DB92E800E65AFE /* ProfileViewCell.swift in Sources */,
 				7C910C5C20D6B2E50072A673 /* ContactsViewController.swift in Sources */,
+				8E56777920DB886000E65AFE /* Enum.swift in Sources */,
+				8E56778B20DBBEB400E65AFE /* SettingViewController.swift in Sources */,
 				7C1D3FB720D6BA8E007037D9 /* ContactsCollectionViewCell.swift in Sources */,
+				8E1DCD5020DCA43600D3A4F6 /* SettingsFooterView.swift in Sources */,
 				7C1CDFD420D7A9A000A90E16 /* MyContactsViewController.swift in Sources */,
 				7C1CDFD720D7AB5100A90E16 /* MessageViewController.swift in Sources */,
+				8E56778120DB960A00E65AFE /* Extension.swift in Sources */,
+				8E56778D20DBE00600E65AFE /* AboutAppViewController.swift in Sources */,
 				7CC4E13420DA37850094F6CD /* MessageCollectionViewCell.swift in Sources */,
+				8E1D402120DC7BA300FCB0C8 /* SettingHeaderView.swift in Sources */,
+				8E56777D20DB94A900E65AFE /* ProfileButtonView.swift in Sources */,
+				8E56777F20DB959F00E65AFE /* InviteFriendsView.swift in Sources */,
 				7C1ECE8320D97BC800879650 /* MainTabViewController.swift in Sources */,
 				7C1B8DEF20DB9650004BE38B /* SearchTextField.swift in Sources */,
 			);
