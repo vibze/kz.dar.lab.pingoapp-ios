@@ -24,19 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func checkStorage() {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let userDefaults = UserDefaults.standard
-        let decoded  = userDefaults.object(forKey: "user") as? Data
-        
-        var user: User?
-        if let decoded = decoded {
-            user = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? User
-        }
+        let user = User.current()
         
         if user != nil {
             window?.rootViewController = MainTabViewController()
         }
         else {
-            window?.rootViewController = AuthViewController()
+            window?.rootViewController = MainTabViewController() // AuthViewController() -- Это временно, пока не сделаем авторизацию
         }
         window!.makeKeyAndVisible()
     }
