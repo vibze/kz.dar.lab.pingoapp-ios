@@ -77,6 +77,11 @@ class MessageViewController: UIViewController {
     }()
     
     @objc func blockBtnPressed() {
+        
+    }
+    
+    @objc func writeBtnPressed() {
+        self.present(ComposeViewController(), animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -89,9 +94,6 @@ class MessageViewController: UIViewController {
     func setupButtons() {
         writeButton.addTarget(self, action: #selector(writeBtnPressed), for: .touchUpInside)
         blockButton.addTarget(self, action: #selector(blockBtnPressed), for: .touchUpInside)
-    }
-    
-    @objc func writeBtnPressed() {
     }
     
     override func viewWillAppear(_ animated: Bool) {

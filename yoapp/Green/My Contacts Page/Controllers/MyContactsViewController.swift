@@ -66,6 +66,7 @@ extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let containerView = UIView()
         let headerView = UIView()
         headerView.backgroundColor = UIColor.init(hexString: "81E2AA")
         let headerLabel = UILabel()
@@ -73,9 +74,22 @@ extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource {
         headerLabel.font = UIFont.systemFont(ofSize: 16)
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         headerLabel.text = "Все контакты"
-        
         headerView.addSubview(headerLabel)
-        return headerView
+        containerView.addSubview(headerView)
+        
+        headerView.snp.makeConstraints {
+            $0.top.equalTo(containerView.snp.top).offset(5)
+            $0.left.equalTo(containerView.snp.left).offset(0)
+            $0.width.equalTo(containerView.snp.width)
+            $0.height.equalTo(25)
+        }
+        headerLabel.snp.makeConstraints {
+            $0.top.equalTo(containerView.snp.top).offset(5)
+            $0.left.equalTo(containerView.snp.left).offset(20)
+            $0.width.equalTo(containerView.snp.width)
+            $0.height.equalTo(25)
+        }
+        return containerView
     }
 }
 

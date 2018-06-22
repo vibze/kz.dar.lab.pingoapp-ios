@@ -19,7 +19,7 @@ class SearchTexField: UITextField {
             NSAttributedStringKey.foregroundColor: UIColor.white,
         ]
         
-        self.attributedPlaceholder = NSAttributedString(string: " Поиск", attributes: attributes)
+        self.attributedPlaceholder = NSAttributedString(string: "Поиск", attributes: attributes)
         
         self.layer.cornerRadius = 10
         self.layer.borderWidth = 2
@@ -28,9 +28,9 @@ class SearchTexField: UITextField {
         self.layer.sublayerTransform = CATransform3DMakeTranslation(16, 0, 0)
         
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 18, height: 18))
-        let image = #imageLiteral(resourceName: "search")
-        imageView.image = image
+        imageView.image = #imageLiteral(resourceName: "search")
         self.leftView = imageView
+        self.leftView?.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 30)
         self.leftViewMode = UITextFieldViewMode.always
         self.leftViewMode = .always
     }
