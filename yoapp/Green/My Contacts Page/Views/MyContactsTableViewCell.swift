@@ -10,7 +10,7 @@ import UIKit
 
 class MyContactsTableViewCell: UITableViewCell {
 
-    let contactImageView = ImageView(radius: 50 / 2)
+    let contactImageView = ImageView(radius: 55 / 2)
     
     let contactNameLabel: UILabel = {
         let label = UILabel()
@@ -46,7 +46,7 @@ class MyContactsTableViewCell: UITableViewCell {
         contactImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(16)
             $0.left.equalToSuperview().offset(20)
-            $0.width.height.equalTo(50)
+            $0.width.height.equalTo(55)
         }
         contactNameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(21)

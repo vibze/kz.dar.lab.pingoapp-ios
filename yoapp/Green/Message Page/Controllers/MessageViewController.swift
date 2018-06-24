@@ -109,9 +109,6 @@ class MessageViewController: UIViewController {
     }
     
     func setupViews() {
-        [backButton, profileImageView, blockButton, profileImageBackgroundView, userNameLabel, writeButton, phoneNumberLabel, basePhrasesTitleLabel, messageTitleLabel, pushAlert].forEach { newView in
-            view.addSubview(newView)
-        }
         
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -127,6 +124,10 @@ class MessageViewController: UIViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.allowsSelection = true
         view.addSubview(collectionView)
+        
+        [backButton, profileImageView, blockButton, profileImageBackgroundView, userNameLabel, writeButton, phoneNumberLabel, basePhrasesTitleLabel, messageTitleLabel, pushAlert].forEach { newView in
+            view.addSubview(newView)
+        }
         
         pushAlert.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -181,7 +182,8 @@ class MessageViewController: UIViewController {
             $0.centerX.equalTo(self.view.center)
         }
         backButton.snp.makeConstraints {
-            $0.left.top.equalToSuperview().offset(32)
+            $0.top.equalTo(topLayoutGuide.snp.bottom).offset(32)
+            $0.left.equalToSuperview().offset(32)
             $0.width.height.equalTo(24)
         }
     }
@@ -204,7 +206,7 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
         pushAlert.isHidden = false
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+
         let width = defaultMessages[indexPath.row].count;
         return CGSize(width: width * 5 + 60, height: 50)
     }

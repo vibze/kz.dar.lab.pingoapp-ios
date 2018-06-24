@@ -34,7 +34,7 @@ class MainTabViewController: UIViewController {
     
 //    let activeImg = [#imageLiteral(resourceName: "contactsSelected"), #imageLiteral(resourceName: "homeSelected"), #imageLiteral(resourceName: "profileSelected")]
 //    let inactiveImg = [#imageLiteral(resourceName: "contacts"), #imageLiteral(resourceName: "home"), #imageLiteral(resourceName: "profile")]
-    let controllers = [MyContactsViewController(), ContactsViewController(), SettingsViewController()]
+    let controllers = [MyContactsViewController(), ContactsViewController(), ProfileTableViewController()]
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -20,13 +20,13 @@ class MyContactsViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.allowsSelection = true
         tableView.separatorColor = UIColor(hexString: "58AD7E")
-        tableView.rowHeight = 87
+        tableView.rowHeight = 82
         tableView.tableFooterView = UIView()
 
         return tableView
     }()
     
-    let searchTextField = SearchTexField()
+    let searchTextField = SearchTextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +62,7 @@ extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.myContactCell, for: indexPath) as! MyContactsTableViewCell
+        cell.selectionStyle = .none
         return cell
     }
 
@@ -98,6 +99,7 @@ extension MyContactsViewController: UITextFieldDelegate {
         textField.leftViewMode = UITextFieldViewMode.never
         textField.leftViewMode = .never
         self.hideKeyboard()
+        textField.placeholder = ""
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -105,6 +107,10 @@ extension MyContactsViewController: UITextFieldDelegate {
             if text.count == 0 {
                 textField.leftViewMode = UITextFieldViewMode.always
                 textField.leftViewMode = .always
+                let attributes = [
+                    NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                ]
+                textField.attributedPlaceholder = NSAttributedString(string: "Поиск", attributes: attributes)
             }
         }
     }

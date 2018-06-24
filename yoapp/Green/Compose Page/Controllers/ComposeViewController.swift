@@ -20,7 +20,7 @@ class ComposeViewController: UIViewController {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        label.text = "asasdasdas"
+        label.text = "Steve"
         label.font = UIFont(name: "Avenir Next", size: 20)
         return label
     }()
@@ -28,7 +28,7 @@ class ComposeViewController: UIViewController {
     let phoneNumberLabel: UILabel = {
         let label = UILabel()
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        label.text = "870707007070"
+        label.text = "87070700707"
         label.font = UIFont(name: "Avenir Next", size: 16)
         return label
     }()
@@ -80,7 +80,8 @@ class ComposeViewController: UIViewController {
         }
         
         backButton.snp.makeConstraints {
-            $0.top.left.equalToSuperview().offset(32)
+            $0.top.equalTo(topLayoutGuide.snp.bottom).offset(32)
+            $0.left.equalToSuperview().offset(32)
             $0.height.width.equalTo(24)
         }
         profileImageView.snp.makeConstraints {
