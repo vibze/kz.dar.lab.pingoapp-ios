@@ -7,20 +7,11 @@
 //
 
 import UIKit
+import Contacts
 
 class MyContactsTableViewCell: UITableViewCell {
 
-    let contactImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 50 / 2
-        imageView.layer.borderColor = UIColor(hexString: "E36980").cgColor
-        imageView.layer.borderWidth = 3
-        imageView.image = #imageLiteral(resourceName: "contactPlaceholder")
-        imageView.contentMode = .scaleAspectFill
-        
-        return imageView
-    }()
+    let contactImageView = ImageView(radius: 55 / 2)
     
     let contactNameLabel: UILabel = {
         let label = UILabel()
@@ -41,6 +32,13 @@ class MyContactsTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
+        self.selectionStyle = .none
+        self.backgroundColor = .clear
+    }
+    
+    func setupValues(contact: CNContact) {
+        contactNameLabel.text = "\(contact.givenName) \(contact.familyName)"
+        phoneNumberLabel.text = contact.phoneNumbers.first?.value.stringValue ?? ""
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,22 +46,22 @@ class MyContactsTableViewCell: UITableViewCell {
     }
     
     func setupViews() {
-        [contactImageView, phoneNumberLabel, contactNameLabel].forEach { (newView) in
-            addSubview(newView)
+        [contactImageView, phoneNumberLabel, contactNameLabel].forEach {
+            addSubview($0)
         }
         
-        contactImageView.snp.makeConstraints { (constraint) in
-            constraint.top.equalTo(16)
-            constraint.left.equalTo(20)
-            constraint.width.height.equalTo(50)
+        contactImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(16)
+            $0.left.equalToSuperview().offset(20)
+            $0.width.height.equalTo(55)
         }
-        contactNameLabel.snp.makeConstraints { (constraint) in
-            constraint.top.equalTo(21)
-            constraint.left.equalTo(contactImageView.snp.right).offset(20)
+        contactNameLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(21)
+            $0.left.equalTo(contactImageView.snp.right).offset(20)
         }
-        phoneNumberLabel.snp.makeConstraints { (constraint) in
-            constraint.top.equalTo(contactNameLabel.snp.bottom)
-            constraint.left.equalTo(contactImageView.snp.right).offset(20)
+        phoneNumberLabel.snp.makeConstraints {
+            $0.top.equalTo(contactNameLabel.snp.bottom)
+            $0.left.equalTo(contactImageView.snp.right).offset(20)
         }
     }
 

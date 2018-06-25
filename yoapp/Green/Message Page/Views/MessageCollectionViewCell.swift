@@ -21,10 +21,11 @@ class MessageCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
+        
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.15)
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = 8
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -33,8 +34,9 @@ class MessageCollectionViewCell: UICollectionViewCell {
     
     func setupViews() {
         addSubview(textLabel)
-        textLabel.snp.makeConstraints { (contraint) in
-            contraint.top.left.equalTo(15)
+        textLabel.snp.makeConstraints {
+            $0.center.equalTo(self.snp.center)
+            $0.height.equalTo(22)
         }
     }
     
