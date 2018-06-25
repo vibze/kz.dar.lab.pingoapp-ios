@@ -15,7 +15,7 @@ private struct Constants {
 
 class MyContactsViewController: UIViewController {
     
-    var contacts: [CNContact] = []
+    var myContacts: [ContactsService] = []
 
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -40,12 +40,12 @@ class MyContactsViewController: UIViewController {
     }
     
     func fetchContacts() {
-        MyContacts.fetchContacts { (contactsData, message) in
+        ContactsService.syncContacts { (contactsData, message) in
             if let message = message {
                 print(message)
                 return
             }
-            self.contacts = contactsData!
+            self.myContacts = contactsData!
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -73,40 +73,30 @@ class MyContactsViewController: UIViewController {
     }
 }
 
-extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource {
+extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contacts.count
+        return myContacts.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.myContactCell, for: indexPath) as! MyContactsTableViewCell
-        cell.setupValues(contact: contacts[indexPath.row])
+        if let contact = myContacts[indexPath.row].contact {
+            cell.setupValues(contact: contact)
+        }
         return cell
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return SectionHeaderView()
     }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.dismissKeyboard()
+    }
 }
 
 extension MyContactsViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.leftViewMode = UITextFieldViewMode.never
-        textField.leftViewMode = .never
         self.hideKeyboard()
-        textField.placeholder = ""
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text {
-            if text.count == 0 {
-                textField.leftViewMode = UITextFieldViewMode.always
-                textField.leftViewMode = .always
-                let attributes = [
-                    NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                ]
-                textField.attributedPlaceholder = NSAttributedString(string: "Поиск", attributes: attributes)
-            }
-        }
     }
 }
 

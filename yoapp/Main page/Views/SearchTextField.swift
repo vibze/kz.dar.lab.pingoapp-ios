@@ -12,7 +12,6 @@ import UIKit
 class SearchTextField: UITextField {
     
     private let padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 0)
-    private let paddingActive: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 
     required init() {
         super.init(frame: .zero)
@@ -43,6 +42,12 @@ class SearchTextField: UITextField {
     }
     
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds, padding)
     }
 }

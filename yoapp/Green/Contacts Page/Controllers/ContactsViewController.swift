@@ -15,10 +15,14 @@ private struct Constants {
 }
 
 class ContactsViewController: UIViewController {
-
     var collectionView: UICollectionView!
-
     let sectionLabels = ["Недавние", "Все, кто в теме"]
+    
+//    let blurEffect: UIBlurEffect = {
+//        let blur = UIBlurEffect()
+//
+//        return blur
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +69,7 @@ class ContactsViewController: UIViewController {
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.allowsSelection = true
+        collectionView.alwaysBounceVertical = true
         
         self.view.addSubview(collectionView)
         
@@ -75,7 +80,7 @@ class ContactsViewController: UIViewController {
     }
 }
 
-extension ContactsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ContactsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sectionLabels.count
     }
@@ -90,7 +95,7 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 10
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.contactsCell, for: indexPath) as! ContactsCollectionViewCell
@@ -102,27 +107,14 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
         vc.contact = "Hello"
         self.present(vc, animated: true, completion: nil)
     }
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.dismissKeyboard()
+    }
 }
 
 extension ContactsViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.leftViewMode = UITextFieldViewMode.never
-        textField.leftViewMode = .never
         self.hideKeyboard()
-        textField.placeholder = ""
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text {
-            if text.count == 0 {
-                textField.leftViewMode = UITextFieldViewMode.always
-                textField.leftViewMode = .always
-                let attributes = [
-                    NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                ]
-                textField.attributedPlaceholder = NSAttributedString(string: "Поиск", attributes: attributes)
-            }
-        }
     }
 }
 

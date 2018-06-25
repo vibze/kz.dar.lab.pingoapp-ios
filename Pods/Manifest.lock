@@ -1,16 +1,20 @@
 PODS:
+  - CoreStore (5.1.1)
   - SnapKit (4.0.0)
 
 DEPENDENCIES:
+  - CoreStore
   - SnapKit
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
+    - CoreStore
     - SnapKit
 
 SPEC CHECKSUMS:
+  CoreStore: 40c48542f6d48b825326fbc3a6f5934e3353533b
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: a7e39c17b18a36254883461172f71d7a1978caa4
+PODFILE CHECKSUM: 6362223f5ddb47b4d022186cdde02bfcba6259ce
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

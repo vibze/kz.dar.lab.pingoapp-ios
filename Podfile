@@ -7,5 +7,6 @@ target 'yoapp' do
 
   # Pods for yoapp
   pod 'SnapKit'
+  pod 'CoreStore'
 
 end
