@@ -29,16 +29,21 @@
 		8E1D402120DC7BA300FCB0C8 /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1D402020DC7BA300FCB0C8 /* SettingHeaderView.swift */; };
 		8E1D402320DC7F4800FCB0C8 /* SettingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1D402220DC7F4800FCB0C8 /* SettingViewCell.swift */; };
 		8E1DCD5020DCA43600D3A4F6 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */; };
+		8E1DCD5220DCBBA500D3A4F6 /* BlackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */; };
+		8E1DCD5420DCBD9B00D3A4F6 /* BlockUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD5320DCBD9B00D3A4F6 /* BlockUserCell.swift */; };
+		8E3B73B320E0B01A00DD3366 /* ProfileFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B73B220E0B01A00DD3366 /* ProfileFooterView.swift */; };
 		8E56776C20DB861500E65AFE /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56776B20DB861500E65AFE /* ProfileTableViewController.swift */; };
 		8E56777020DB86BD00E65AFE /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56776F20DB86BD00E65AFE /* ProfileHeaderView.swift */; };
 		8E56777920DB886000E65AFE /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56777820DB886000E65AFE /* Enum.swift */; };
 		8E56777B20DB92E800E65AFE /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56777A20DB92E800E65AFE /* ProfileViewCell.swift */; };
-		8E56777D20DB94A900E65AFE /* ProfileButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56777C20DB94A900E65AFE /* ProfileButtonView.swift */; };
 		8E56777F20DB959F00E65AFE /* InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56777E20DB959F00E65AFE /* InviteFriendsView.swift */; };
 		8E56778120DB960A00E65AFE /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778020DB960A00E65AFE /* Extension.swift */; };
 		8E56778920DBB7B500E65AFE /* CustomInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778820DBB7B500E65AFE /* CustomInviteView.swift */; };
 		8E56778B20DBBEB400E65AFE /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778A20DBBEB400E65AFE /* SettingViewController.swift */; };
 		8E56778D20DBE00600E65AFE /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */; };
+		8E59AD9320E072E2003CA5CC /* BlockUserLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E59AD9220E072E2003CA5CC /* BlockUserLabelView.swift */; };
+		8EC7F28920E09A2000C4BFE7 /* FavouriteWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */; };
+		8EC7F28D20E0AA0C00C4BFE7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */; };
 		EFC351E69DE7CCBFA1E3DF75 /* Pods_yoapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D2B93724BE3302FB56D8383 /* Pods_yoapp.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +73,9 @@
 		8E1D402020DC7BA300FCB0C8 /* SettingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
 		8E1D402220DC7F4800FCB0C8 /* SettingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewCell.swift; sourceTree = "<group>"; };
 		8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
+		8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListViewController.swift; sourceTree = "<group>"; };
+		8E1DCD5320DCBD9B00D3A4F6 /* BlockUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserCell.swift; sourceTree = "<group>"; };
+		8E3B73B220E0B01A00DD3366 /* ProfileFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileFooterView.swift; path = ../../../../../Desktop/Yellow/View/ProfileFooterView.swift; sourceTree = "<group>"; };
 		8E56776B20DB861500E65AFE /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		8E56776F20DB86BD00E65AFE /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		8E56777820DB886000E65AFE /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
@@ -81,6 +89,9 @@
 		8E56778820DBB7B500E65AFE /* CustomInviteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInviteView.swift; sourceTree = "<group>"; };
 		8E56778A20DBBEB400E65AFE /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
+		8E59AD9220E072E2003CA5CC /* BlockUserLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserLabelView.swift; sourceTree = "<group>"; };
+		8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteWordViewController.swift; sourceTree = "<group>"; };
+		8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9F12A573C6D7B804840CCD70 /* Pods-yoapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yoapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-yoapp/Pods-yoapp.release.xcconfig"; sourceTree = "<group>"; };
 		AAAC01981428456529FBC7D0 /* Pods-yoapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yoapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yoapp/Pods-yoapp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,16 +167,8 @@
 			children = (
 				7C1B8DF520DBA85E004BE38B /* Controllers */,
 				7C1B8DF420DBA856004BE38B /* Views */,
-				7C1B8DF320DBA84E004BE38B /* Models */,
 			);
 			path = "Compose Page";
-			sourceTree = "<group>";
-		};
-		7C1B8DF320DBA84E004BE38B /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		7C1B8DF420DBA856004BE38B /* Views */ = {
@@ -224,16 +227,8 @@
 			children = (
 				7C1CDFD220D7A97D00A90E16 /* Views */,
 				7C1CDFD120D7A97500A90E16 /* Controllers */,
-				7C1CDFD020D7A96900A90E16 /* Models */,
 			);
 			path = "My Contacts Page";
-			sourceTree = "<group>";
-		};
-		7C1CDFD020D7A96900A90E16 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		7C1CDFD120D7A97500A90E16 /* Controllers */ = {
@@ -256,7 +251,6 @@
 			isa = PBXGroup;
 			children = (
 				7C1ECE7D20D8B7FD00879650 /* Controllers */,
-				7C1ECE7C20D8B7F300879650 /* Models */,
 				7C1ECE7B20D8B7EC00879650 /* Views */,
 			);
 			path = "Message Page";
@@ -268,13 +262,6 @@
 				7CC4E13320DA37850094F6CD /* MessageCollectionViewCell.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		7C1ECE7C20D8B7F300879650 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		7C1ECE7D20D8B7FD00879650 /* Controllers */ = {
@@ -299,10 +286,12 @@
 		7C910C3D20D6AAF90072A673 = {
 			isa = PBXGroup;
 			children = (
+				8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */,
 				7C910C4820D6AAF90072A673 /* yoapp */,
 				7C910C4720D6AAF90072A673 /* Products */,
 				1F57069D07C931BBE158F4A3 /* Pods */,
 				7A844B2440E7CC4A730E159E /* Frameworks */,
+				8EC7F28B20E0A9C500C4BFE7 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -343,7 +332,9 @@
 			isa = PBXGroup;
 			children = (
 				8E56776B20DB861500E65AFE /* ProfileTableViewController.swift */,
+				8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */,
 				8E56778A20DBBEB400E65AFE /* SettingViewController.swift */,
+				8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */,
 				8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */,
 			);
 			path = Controller;
@@ -353,13 +344,15 @@
 			isa = PBXGroup;
 			children = (
 				8E56776F20DB86BD00E65AFE /* ProfileHeaderView.swift */,
-				8E56777C20DB94A900E65AFE /* ProfileButtonView.swift */,
+				8E56777A20DB92E800E65AFE /* ProfileViewCell.swift */,
+				8E3B73B220E0B01A00DD3366 /* ProfileFooterView.swift */,
+				8E56777E20DB959F00E65AFE /* InviteFriendsView.swift */,
+				8E59AD9220E072E2003CA5CC /* BlockUserLabelView.swift */,
 				8E1D402020DC7BA300FCB0C8 /* SettingHeaderView.swift */,
 				8E1D402220DC7F4800FCB0C8 /* SettingViewCell.swift */,
-				8E56777E20DB959F00E65AFE /* InviteFriendsView.swift */,
 				8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */,
+				8E1DCD5320DCBD9B00D3A4F6 /* BlockUserCell.swift */,
 				8E56778820DBB7B500E65AFE /* CustomInviteView.swift */,
-				8E56777A20DB92E800E65AFE /* ProfileViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -381,6 +374,14 @@
 				8E56778520DB963A00E65AFE /* ProximaNovaSoft-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		8EC7F28B20E0A9C500C4BFE7 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				8E56777C20DB94A900E65AFE /* ProfileButtonView.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,6 +450,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C910C5120D6AAFC0072A673 /* Assets.xcassets in Resources */,
+				8EC7F28D20E0AA0C00C4BFE7 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,15 +519,19 @@
 				7C910C5C20D6B2E50072A673 /* ContactsViewController.swift in Sources */,
 				8E56777920DB886000E65AFE /* Enum.swift in Sources */,
 				8E56778B20DBBEB400E65AFE /* SettingViewController.swift in Sources */,
+				8E3B73B320E0B01A00DD3366 /* ProfileFooterView.swift in Sources */,
 				7C1D3FB720D6BA8E007037D9 /* ContactsCollectionViewCell.swift in Sources */,
 				8E1DCD5020DCA43600D3A4F6 /* SettingsFooterView.swift in Sources */,
 				7C1CDFD420D7A9A000A90E16 /* MyContactsViewController.swift in Sources */,
 				7C1CDFD720D7AB5100A90E16 /* MessageViewController.swift in Sources */,
+				8E1DCD5220DCBBA500D3A4F6 /* BlackListViewController.swift in Sources */,
 				8E56778120DB960A00E65AFE /* Extension.swift in Sources */,
+				8E59AD9320E072E2003CA5CC /* BlockUserLabelView.swift in Sources */,
+				8E1DCD5420DCBD9B00D3A4F6 /* BlockUserCell.swift in Sources */,
 				8E56778D20DBE00600E65AFE /* AboutAppViewController.swift in Sources */,
 				7CC4E13420DA37850094F6CD /* MessageCollectionViewCell.swift in Sources */,
+				8EC7F28920E09A2000C4BFE7 /* FavouriteWordViewController.swift in Sources */,
 				8E1D402120DC7BA300FCB0C8 /* SettingHeaderView.swift in Sources */,
-				8E56777D20DB94A900E65AFE /* ProfileButtonView.swift in Sources */,
 				8E56777F20DB959F00E65AFE /* InviteFriendsView.swift in Sources */,
 				7C1ECE8320D97BC800879650 /* MainTabViewController.swift in Sources */,
 				7C1B8DEF20DB9650004BE38B /* SearchTextField.swift in Sources */,
@@ -676,7 +682,7 @@
 			baseConfigurationReference = 9F12A573C6D7B804840CCD70 /* Pods-yoapp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = R87MWZ88KR;
 				INFOPLIST_FILE = yoapp/Info.plist;
@@ -687,8 +693,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = kz.dar.lab.pingoapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "347b0987-7eb4-4cc8-989b-bb3a43f9bffa";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore kz.dar.lab.pingoapp";
+				PROVISIONING_PROFILE = "b76961f7-16d9-4d30-9cf2-5e06a95efc3c";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development kz.dar.lab.pingoapp";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

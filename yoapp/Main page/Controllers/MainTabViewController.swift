@@ -32,6 +32,10 @@ class MainTabViewController: UIViewController {
     let homeButton = TabBarButton(tag: 1, image:  #imageLiteral(resourceName: "home"))
     let profileButton = TabBarButton(tag: 2, image: #imageLiteral(resourceName: "profile"))
     
+ 
+    let activeImg = [#imageLiteral(resourceName: "contactsSelected"), #imageLiteral(resourceName: "homeSelected"), #imageLiteral(resourceName: "profileSelected")]
+    let inactiveImg = [#imageLiteral(resourceName: "contacts"), #imageLiteral(resourceName: "home"), #imageLiteral(resourceName: "profile"),]
+
 //    let activeImg = [#imageLiteral(resourceName: "contactsSelected"), #imageLiteral(resourceName: "homeSelected"), #imageLiteral(resourceName: "profileSelected")]
 //    let inactiveImg = [#imageLiteral(resourceName: "contacts"), #imageLiteral(resourceName: "home"), #imageLiteral(resourceName: "profile")]
     let controllers = [MyContactsViewController(), ContactsViewController(), ProfileTableViewController()]
