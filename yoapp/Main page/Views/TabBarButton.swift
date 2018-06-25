@@ -10,30 +10,36 @@ import Foundation
 import UIKit
 
 class TabBarButton: UIButton {
-    enum TabBarButtonType {
-        case home
-        case contacts
-        case profile
-        
-        var image: UIImage {
-            switch self {
-            case .home:
-                return #imageLiteral(resourceName: "homeSelected")
-            case .contacts:
-                return #imageLiteral(resourceName: "contacts")
-            case .profile:
-                return #imageLiteral(resourceName: "profile")
-            }
-        }
-    }
     
-    required init(tag: Int, type: TabBarButtonType) {
+    let underline = CALayer()
+    
+    required init(tag: Int, image: UIImage) {
         super.init(frame: .zero)
         self.tag = tag
-        setImage(type.image, for: .normal)
+        setImage(image, for: .normal)
+        imageView?.contentMode = .scaleAspectFill
+        underline.backgroundColor = UIColor.white.cgColor
+        underline.isHidden = true
+        layer.addSublayer(underline)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            underline.isHidden = !isSelected
+            layoutIfNeeded()
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        underline.frame = CGRect(x: 0, y: frame.height - 3, width: frame.width, height: 3)
+        imageView?.transform = isSelected ? CGAffineTransform(scaleX: 1.2, y: 1.2) :
+            CGAffineTransform(scaleX: 1, y: 1)
+        
     }
 }
