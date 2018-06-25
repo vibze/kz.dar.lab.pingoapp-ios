@@ -8,10 +8,10 @@
 import UIKit
 
 class ProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,
-UINavigationControllerDelegate {
+                                    UINavigationControllerDelegate {
     
-    let headerView =  ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 230))
-    let footerView = InviteFriendsView(frame: CGRect(x: 0, y: 0, width: 307, height: 105))
+    let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 230))
+    let footerView = ProfileFooterView (frame: CGRect(x: 0, y: 0, width: 307, height: 105))
     let imagePicker = UIImagePickerController()
     var profileCell = "profileCell"
     var settingsType = ["Настройки","О приложении","Выход"]
@@ -27,7 +27,6 @@ UINavigationControllerDelegate {
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.rowHeight = 50
         tableView.tableHeaderView = headerView
         tableView.tableFooterView = footerView
         tableView.register(ProfileViewCell.self, forCellReuseIdentifier: profileCell)
@@ -57,7 +56,6 @@ extension ProfileTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: profileCell, for: indexPath) as! ProfileViewCell
-        cell.backgroundColor = .clear
         cell.settingLabel.text = settingsType[indexPath.row]
         return cell
     }
@@ -84,9 +82,6 @@ extension ProfileTableViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    func openViewController(viewController: UIViewController){
-        let vc = viewController
-        self.present(vc, animated: true, completion: nil)
-    }
+   
     
 }

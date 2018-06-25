@@ -26,8 +26,20 @@ extension UIView {
 extension UITableViewController {
     
     @objc func bactToVC() {
+//        self.navigationController?.popViewController(animated: true)
         if((self.presentingViewController) != nil){
             self.dismiss(animated: false, completion: nil)
         }
+    }
+    
+    func openViewController(viewController: UIViewController){
+//        let vc = UINavigationController(rootViewController: viewController)
+//        print(viewController)
+//        navigationController?.pushViewController(vc, animated: true)
+//        navigationController?.popToViewController(vc, animated: true)
+//        navigationController?.present(vc, animated: true, completion: nil)
+//        navigationController?.show(vc, sender: nil)
+        let vc = viewController
+        self.present(vc, animated: true, completion: nil)
     }
 }

@@ -43,6 +43,7 @@ class SettingViewCell: UITableViewCell {
         
         labelName.snp.makeConstraints{
             $0.top.equalTo(separateView1.snp.bottom).offset(14)
+//            $0.height.equalTo(48)
             $0.left.equalToSuperview().offset(32)
         }
         

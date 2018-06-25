@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InviteFriendsView : UIView {
+class ProfileFooterView : UIView {
     
     var friendLabel: UILabel = {
         let label = UILabel()
@@ -72,6 +72,13 @@ class InviteFriendsView : UIView {
             $0.bottom.equalToSuperview().offset(-5)
         }
         stackViewConfig()
+        touchDetect()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        telegramView.roundCorners(corners: [.topLeft, .bottomLeft], radius: 10)
+        messengerView.roundCorners(corners: [.topRight, .bottomRight], radius: 10)
     }
     
     func stackViewConfig(){
@@ -79,8 +86,6 @@ class InviteFriendsView : UIView {
         whatsUpView.viewData(icon: #imageLiteral(resourceName: "whatsAppIcon"), name: "Whatapp")
         messengerView.viewData(icon: #imageLiteral(resourceName: "messengerIcon"), name: "Messenger")
         
-        telegramView.roundCorners(corners: [.topLeft, .bottomLeft], radius: 10)
-        messengerView.roundCorners(corners: [.topRight, .bottomRight], radius: 10)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -95,6 +100,64 @@ class InviteFriendsView : UIView {
         telegramView.translatesAutoresizingMaskIntoConstraints = false
         whatsUpView.translatesAutoresizingMaskIntoConstraints = false
         messengerView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    func touchDetect(){
+        let openTelegramGesture = UITapGestureRecognizer(target: self, action: #selector(openTelegram))
+        telegramView.addGestureRecognizer(openTelegramGesture)
+        let openWhatsAppGesture = UITapGestureRecognizer(target: self, action: #selector(openWhatsApp))
+        whatsUpView.addGestureRecognizer(openWhatsAppGesture)
+        let openMessengerGesture = UITapGestureRecognizer(target: self, action: #selector(openMessenger))
+        messengerView.addGestureRecognizer(openMessengerGesture)
+    }
+    
+//    org.telegram.messenger
+    
+    @objc func openTelegram(){
+        let msg = "Hello"
+        let urlWhats = "tg://send?text=\(msg)"
+        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            if let whatsappURL = NSURL(string: urlString) {
+                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
+                    UIApplication.shared.openURL(whatsappURL as URL)
+                } else {
+                    print("ERror")
+                }
+            }
+        }
+    }
+    
+    @objc func openWhatsApp(){
+        let msg = "Hello"
+        let urlWhats = "whatsapp://send?text=\(msg)"
+        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            if let whatsappURL = NSURL(string: urlString) {
+                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
+                    UIApplication.shared.openURL(whatsappURL as URL)
+                } else {
+                    print("ERror")
+                    
+                }
+            }
+        }
+    }
+//    fb-messenger
+//    fb-messenger://user-thread/%d
+//    /user/
+//    fb-messenger://share/?link
+    @objc func openMessenger(){
+        let msg = "Hello"
+        let urlWhats = "fb-messenger:/user/\(msg)"
+        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            if let whatsappURL = NSURL(string: urlString) {
+                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
+                    UIApplication.shared.openURL(whatsappURL as URL)
+                } else {
+                    print("ERror")
+                    
+                }
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
