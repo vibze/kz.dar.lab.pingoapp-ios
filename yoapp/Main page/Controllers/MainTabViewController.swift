@@ -32,17 +32,15 @@ class MainTabViewController: UIViewController {
     let homeButton = TabBarButton(tag: 1, image:  #imageLiteral(resourceName: "home"))
     let profileButton = TabBarButton(tag: 2, image: #imageLiteral(resourceName: "profile"))
     
-//    let activeImg = [#imageLiteral(resourceName: "contactsSelected"), #imageLiteral(resourceName: "homeSelected"), #imageLiteral(resourceName: "profileSelected")]
-//    let inactiveImg = [#imageLiteral(resourceName: "contacts"), #imageLiteral(resourceName: "home"), #imageLiteral(resourceName: "profile")]
     let controllers = [MyContactsViewController(), ContactsViewController(), ProfileTableViewController()]
+    let vcBackgroundColors = [#colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), #colorLiteral(red: 0.9960784314, green: 0.7882352941, blue: 0.3725490196, alpha: 1)]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupButtons()
         view.backgroundColor = UIColor(hexString: "6BBE90")
-        moveToViewController(index: 1)
-        homeButton.isSelected = true
+        tabBarBtnPressed(sender: homeButton)
     }
     
     @objc func tabBarBtnPressed(sender: TabBarButton) {
@@ -56,6 +54,7 @@ class MainTabViewController: UIViewController {
     func moveToViewController(index: Int) {
         let controller = controllers[index]
         addChildViewController(controller)
+        view.backgroundColor = vcBackgroundColors[index]
         containerView.addSubview(controller.view)
         controller.didMove(toParentViewController: self)
         controller.view.snp.makeConstraints{

@@ -37,7 +37,7 @@ class TabBarButton: UIButton {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        underline.frame = CGRect(x: 0, y: frame.height - 3, width: frame.width, height: 3)
+        underline.frame = CGRect(x: 10, y: frame.height - 3, width: frame.width - 20, height: 3)
         imageView?.transform = isSelected ? CGAffineTransform(scaleX: 1.2, y: 1.2) :
             CGAffineTransform(scaleX: 1, y: 1)
         
