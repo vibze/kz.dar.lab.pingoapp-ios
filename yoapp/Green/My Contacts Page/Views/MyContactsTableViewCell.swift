@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Contacts
 
 class MyContactsTableViewCell: UITableViewCell {
 
@@ -31,7 +32,13 @@ class MyContactsTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
+        self.selectionStyle = .none
         self.backgroundColor = .clear
+    }
+    
+    func setupValues(contact: CNContact) {
+        contactNameLabel.text = "\(contact.givenName) \(contact.familyName)"
+        phoneNumberLabel.text = contact.phoneNumbers.first?.value.stringValue ?? ""
     }
     
     required init?(coder aDecoder: NSCoder) {

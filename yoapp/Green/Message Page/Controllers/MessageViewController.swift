@@ -14,7 +14,7 @@ private struct Constants {
 
 class MessageViewController: UIViewController {
 
-    let defaultMessages = ["Привет", "Как дела?", "Что делаешь?", "Привет", "Как дела?", "Что делаешь?"]
+    let defaultMessages = ["Привет", "Как дела?", "Что делаешь?", "Привет", "Как дела?", "Что?", "Привет", "Как дела?", "Что делаешь?", "Привет", "Как дела?", "Что?"]
     var contact: String?
     var collectionView: UICollectionView!
     
@@ -57,7 +57,7 @@ class MessageViewController: UIViewController {
         phoneNum.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         return phoneNum
     }()
-    
+
     let writeButton = ActionButton(title: "Написать сообщение", type: .write)
     let blockButton = ActionButton(title: "Заблокировать контакт", type: .block)
     
@@ -111,9 +111,8 @@ class MessageViewController: UIViewController {
     func setupViews() {
         
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.itemSize = CGSize(width: 100, height: 50)
         layout.scrollDirection = .horizontal
+        layout.estimatedItemSize = CGSize(width: 1, height: 1)
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -205,9 +204,9 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         pushAlert.isHidden = false
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
         let width = defaultMessages[indexPath.row].count;
-        return CGSize(width: width * 5 + 60, height: 50)
+        return CGSize(width: width * 8 + 30, height: 50)
     }
 }

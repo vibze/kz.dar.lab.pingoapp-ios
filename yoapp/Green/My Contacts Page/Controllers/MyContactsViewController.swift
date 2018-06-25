@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Contacts
 
 private struct Constants {
     static let myContactCell = "myContactCell"
 }
 
 class MyContactsViewController: UIViewController {
+    
+    var contacts: [CNContact] = []
 
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -22,7 +25,7 @@ class MyContactsViewController: UIViewController {
         tableView.separatorColor = UIColor(hexString: "58AD7E")
         tableView.rowHeight = 82
         tableView.tableFooterView = UIView()
-
+        
         return tableView
     }()
     
@@ -33,6 +36,20 @@ class MyContactsViewController: UIViewController {
 
         view.backgroundColor = UIColor(hexString: "6BBE90")
         setupViews()
+        fetchContacts()
+    }
+    
+    func fetchContacts() {
+        MyContacts.fetchContacts { (contactsData, message) in
+            if let message = message {
+                print(message)
+                return
+            }
+            self.contacts = contactsData!
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     func setupViews() {
@@ -58,39 +75,16 @@ class MyContactsViewController: UIViewController {
 
 extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return contacts.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.myContactCell, for: indexPath) as! MyContactsTableViewCell
-        cell.selectionStyle = .none
+        cell.setupValues(contact: contacts[indexPath.row])
         return cell
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let containerView = UIView()
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.init(hexString: "81E2AA")
-        let headerLabel = UILabel()
-        headerLabel.textColor = UIColor.init(hexString: "308757")
-        headerLabel.font = UIFont.systemFont(ofSize: 16)
-        headerLabel.translatesAutoresizingMaskIntoConstraints = false
-        headerLabel.text = "Все контакты"
-        headerView.addSubview(headerLabel)
-        containerView.addSubview(headerView)
-        
-        headerView.snp.makeConstraints {
-            $0.top.equalTo(containerView.snp.top).offset(5)
-            $0.left.equalTo(containerView.snp.left).offset(0)
-            $0.width.equalTo(containerView.snp.width)
-            $0.height.equalTo(25)
-        }
-        headerLabel.snp.makeConstraints {
-            $0.top.equalTo(containerView.snp.top).offset(5)
-            $0.left.equalTo(containerView.snp.left).offset(20)
-            $0.width.equalTo(containerView.snp.width)
-            $0.height.equalTo(25)
-        }
-        return containerView
+        return SectionHeaderView()
     }
 }
 

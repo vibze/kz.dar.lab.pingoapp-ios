@@ -40,19 +40,18 @@ class ComposeViewController: UIViewController {
         return button
     }()
     
-    let messageTextField: UITextField = {
-        let textField = UITextField()
-        textField.layer.masksToBounds = true
-        textField.layer.cornerRadius = 10
-        textField.isUserInteractionEnabled = true
-        textField.layer.borderColor = UIColor(hexString: "5AA079").cgColor
-        textField.layer.borderWidth = 5
-        textField.borderStyle = .none
-        textField.font = UIFont(name: "Avenir Next", size: 18)
-        textField.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        textField.layer.sublayerTransform = CATransform3DMakeTranslation(16, 0, 0)
+    let messageTextView: UITextView = {
+        let textView = UITextView()
+        textView.layer.masksToBounds = true
+        textView.layer.cornerRadius = 10
+        textView.isUserInteractionEnabled = true
+        textView.layer.borderColor = UIColor(hexString: "5AA079").cgColor
+        textView.layer.borderWidth = 5
+        textView.font = UIFont(name: "Avenir Next", size: 18)
+        textView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        textView.layer.sublayerTransform = CATransform3DMakeTranslation(8, 0, 0)
         
-        return textField
+        return textView
     }()
     
     @objc func backButtonPressed() {
@@ -66,12 +65,12 @@ class ComposeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        self.messageTextField.delegate = self
+        messageTextView.delegate = self
         composeButton.addTarget(self, action: #selector(composeButtonPressed), for: .touchUpInside)
         view.backgroundColor = UIColor(hexString: "6BBE90")
     }
     func setupViews() {
-        [profileImageView, backButton, phoneNumberLabel, nameLabel, composeButton, messageTextField, alertView].forEach {
+        [profileImageView, backButton, phoneNumberLabel, nameLabel, composeButton, messageTextView, alertView].forEach {
             view.addSubview($0)
         }
         
@@ -96,14 +95,14 @@ class ComposeViewController: UIViewController {
             $0.top.equalTo(nameLabel.snp.bottom).offset(4)
             $0.centerX.equalTo(self.view.center)
         }
-        messageTextField.snp.makeConstraints {
+        messageTextView.snp.makeConstraints {
             $0.top.equalTo(phoneNumberLabel.snp.bottom).offset(24)
             $0.left.equalToSuperview().offset(32)
             $0.width.equalToSuperview().inset(32)
             $0.height.equalTo(100)
         }
         composeButton.snp.makeConstraints {
-            $0.top.equalTo(messageTextField.snp.bottom).offset(24)
+            $0.top.equalTo(messageTextView.snp.bottom).offset(24)
             $0.left.equalToSuperview().offset(32)
             $0.width.equalToSuperview().inset(32)
             $0.height.equalTo(50)
@@ -111,20 +110,9 @@ class ComposeViewController: UIViewController {
     }
 }
 
-extension ComposeViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.leftViewMode = UITextFieldViewMode.never
-        textField.leftViewMode = .never
+extension ComposeViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
         self.hideKeyboard()
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text {
-            if text.count == 0 {
-                textField.leftViewMode = UITextFieldViewMode.always
-                textField.leftViewMode = .always
-            }
-        }
     }
 }
 

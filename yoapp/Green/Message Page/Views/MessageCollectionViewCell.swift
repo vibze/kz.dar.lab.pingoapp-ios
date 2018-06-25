@@ -22,6 +22,7 @@ class MessageCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         setupViews()
         
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.15)
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 8
@@ -33,8 +34,9 @@ class MessageCollectionViewCell: UICollectionViewCell {
     
     func setupViews() {
         addSubview(textLabel)
-        textLabel.snp.makeConstraints { (contraint) in
-            contraint.top.left.equalToSuperview().offset(15)
+        textLabel.snp.makeConstraints {
+            $0.center.equalTo(self.snp.center)
+            $0.height.equalTo(22)
         }
     }
     
