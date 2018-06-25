@@ -28,27 +28,33 @@ class MainTabViewController: UIViewController {
         return stackView
     }()
     
-    let contactsButton = TabBarButton(tag: 0, type: .contacts)
-    let homeButton = TabBarButton(tag: 1, type: .home)
-    let profileButton = TabBarButton(tag: 2, type: .profile)
+    let contactsButton = TabBarButton(tag: 0, image: #imageLiteral(resourceName: "contacts"))
+    let homeButton = TabBarButton(tag: 1, image:  #imageLiteral(resourceName: "home"))
+    let profileButton = TabBarButton(tag: 2, image: #imageLiteral(resourceName: "profile"))
     
+ 
     let activeImg = [#imageLiteral(resourceName: "contactsSelected"), #imageLiteral(resourceName: "homeSelected"), #imageLiteral(resourceName: "profileSelected")]
     let inactiveImg = [#imageLiteral(resourceName: "contacts"), #imageLiteral(resourceName: "home"), #imageLiteral(resourceName: "profile"),]
+
+//    let activeImg = [#imageLiteral(resourceName: "contactsSelected"), #imageLiteral(resourceName: "homeSelected"), #imageLiteral(resourceName: "profileSelected")]
+//    let inactiveImg = [#imageLiteral(resourceName: "contacts"), #imageLiteral(resourceName: "home"), #imageLiteral(resourceName: "profile")]
     let controllers = [MyContactsViewController(), ContactsViewController(), ProfileTableViewController()]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupButtons()
+        view.backgroundColor = UIColor(hexString: "6BBE90")
         moveToViewController(index: 1)
+        homeButton.isSelected = true
     }
     
-    @objc func tabBarBtnPressed(sender: UIButton) {
-        [profileButton, contactsButton, homeButton].forEach {
-            $0.setImage(inactiveImg[$0.tag], for: .normal)
-        }
-        sender.setImage(activeImg[sender.tag], for: .normal)
+    @objc func tabBarBtnPressed(sender: TabBarButton) {
         moveToViewController(index: sender.tag)
+        [profileButton, contactsButton, homeButton].forEach {
+            $0.isSelected = false
+        }
+        sender.isSelected = true
     }
     
     func moveToViewController(index: Int) {
@@ -73,11 +79,13 @@ class MainTabViewController: UIViewController {
             view.addSubview($0)
         }
         containerView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(topLayoutGuide.snp.bottom)
+            $0.bottom.equalTo(bottomLayoutGuide.snp.top)
         }
         stackView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(24)
-            $0.bottom.equalToSuperview().inset(10)
+            $0.bottom.equalTo(bottomLayoutGuide.snp.top)
             $0.height.equalTo(60)
             $0.width.equalToSuperview().inset(24)
         }

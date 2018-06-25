@@ -18,6 +18,7 @@ class SettingViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+ 
 //        self.navigationController?.isNavigationBarHidden = false
         configTableView()
     }
@@ -26,6 +27,8 @@ class SettingViewController: UITableViewController {
         tableView.backgroundColor = UIColor(hexString: "FEC95F")
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
+        tableView.rowHeight = UITableViewAutomaticDimension
+
         tableView.rowHeight = 50
         headerView.titleName(title: "Настройки")
         tableView.tableHeaderView = headerView
@@ -48,6 +51,7 @@ extension SettingViewController{
         return cell
     }
     
+ 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
@@ -58,5 +62,4 @@ extension SettingViewController{
             break
         }
     }
-    
 }

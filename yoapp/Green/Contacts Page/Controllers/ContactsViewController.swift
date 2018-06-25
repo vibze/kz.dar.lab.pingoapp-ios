@@ -36,7 +36,7 @@ class ContactsViewController: UIViewController {
         return true
     }
     
-    let searchTextField = SearchTexField()
+    let searchTextField = SearchTextField()
     
     func textFieldSetup() {
         self.view.addSubview(searchTextField)
@@ -50,7 +50,7 @@ class ContactsViewController: UIViewController {
     
     func collectionViewSetup() {
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 25, left: 21, bottom: 36, right: 21)
+        layout.sectionInset = UIEdgeInsets(top: 12, left: 21, bottom: 12, right: 21)
         layout.itemSize = CGSize(width: 68, height: 98)
 
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
@@ -109,6 +109,7 @@ extension ContactsViewController: UITextFieldDelegate {
         textField.leftViewMode = UITextFieldViewMode.never
         textField.leftViewMode = .never
         self.hideKeyboard()
+        textField.placeholder = ""
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -116,6 +117,10 @@ extension ContactsViewController: UITextFieldDelegate {
             if text.count == 0 {
                 textField.leftViewMode = UITextFieldViewMode.always
                 textField.leftViewMode = .always
+                let attributes = [
+                    NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                ]
+                textField.attributedPlaceholder = NSAttributedString(string: "Поиск", attributes: attributes)
             }
         }
     }

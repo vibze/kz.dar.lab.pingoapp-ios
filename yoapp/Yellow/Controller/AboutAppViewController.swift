@@ -9,7 +9,7 @@
 import UIKit
 
 class AboutAppViewController: UITableViewController {
-    
+ 
     let headerView = SettingHeaderView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 80))
     
     let appNameLabel: UILabel = {
@@ -39,17 +39,21 @@ class AboutAppViewController: UITableViewController {
         setUpViews()
     }
     
-    func configTableView(){
+ func configTableView(){
         tableView.backgroundColor = UIColor(hexString: "FEC95F")
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.rowHeight = 50
+ 
         headerView.titleName(title: "О приложении")
+
+         headerView.titleName(title: "О приложении")
         tableView.tableHeaderView = headerView
         headerView.backButton.addTarget(self, action: #selector(bactToVC), for: .touchUpInside)
     }
     
+ 
     func setUpViews(){
         tableView.addSubview(appNameLabel)
         tableView.addSubview(textLabel)

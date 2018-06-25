@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      
         UIApplication.shared.statusBarStyle = .lightContent
         
+ 
 //        window = UIWindow(frame: UIScreen.main.bounds)
 //        window?.rootViewController = ProfileTableViewController()
 //        window!.makeKeyAndVisible()

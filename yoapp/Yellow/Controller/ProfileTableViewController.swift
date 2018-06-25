@@ -8,7 +8,7 @@
 import UIKit
 
 class ProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,
-                                    UINavigationControllerDelegate {
+UINavigationControllerDelegate {
     
     let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 230))
     let footerView = ProfileFooterView (frame: CGRect(x: 0, y: 0, width: 307, height: 105))
@@ -82,6 +82,6 @@ extension ProfileTableViewController {
         dismiss(animated: true, completion: nil)
     }
     
-   
+    
     
 }

@@ -8,9 +8,8 @@
 
 import UIKit
 
-
 class ProfileViewCell: UITableViewCell {
-
+    
     var hiddenView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
@@ -65,7 +64,7 @@ class ProfileViewCell: UITableViewCell {
             $0.centerY.equalToSuperview()
         }
     }
-   
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -75,5 +74,5 @@ class ProfileViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-
+    
 }
