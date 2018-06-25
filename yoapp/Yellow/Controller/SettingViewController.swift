@@ -18,6 +18,8 @@ class SettingViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+ 
+//        self.navigationController?.isNavigationBarHidden = false
         configTableView()
     }
 
@@ -26,6 +28,7 @@ class SettingViewController: UITableViewController {
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
         tableView.rowHeight = UITableViewAutomaticDimension
+
         tableView.rowHeight = 50
         headerView.titleName(title: "Настройки")
         tableView.tableHeaderView = headerView
@@ -33,9 +36,6 @@ class SettingViewController: UITableViewController {
         tableView.register(SettingViewCell.self, forCellReuseIdentifier: settingCell)
         headerView.backButton.addTarget(self, action: #selector(bactToVC), for: .touchUpInside)
     }
-    
- 
-    
 }
 
 extension SettingViewController{
@@ -51,4 +51,15 @@ extension SettingViewController{
         return cell
     }
     
+ 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            openViewController(viewController: BlackListViewController())
+        case 1:
+             openViewController(viewController: FavouriteWordViewController())
+        default:
+            break
+        }
+    }
 }

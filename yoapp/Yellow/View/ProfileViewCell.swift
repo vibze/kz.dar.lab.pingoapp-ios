@@ -8,9 +8,13 @@
 
 import UIKit
 
-
 class ProfileViewCell: UITableViewCell {
-
+    
+    var hiddenView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
     
     var backView: UIView = {
         let view = UIView()
@@ -31,21 +35,28 @@ class ProfileViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        
+        self.backgroundColor = .clear
         setUpView()
     }
     
- 
-    
     func setUpView(){
-        self.addSubview(backView)
+        self.addSubview(hiddenView)
+        hiddenView.addSubview(backView)
         backView.addSubview(settingLabel)
+        
+        hiddenView.snp.makeConstraints{
+            $0.top.equalToSuperview().offset(0)
+            $0.left.equalToSuperview().offset(0)
+            $0.right.equalToSuperview().offset(0)
+            $0.height.equalTo(70)
+            $0.bottom.equalToSuperview().offset(0)
+        }
         
         backView.snp.makeConstraints{
             $0.top.equalToSuperview().offset(0)
             $0.left.equalToSuperview().offset(32)
             $0.right.equalToSuperview().offset(-32)
-            $0.bottom.equalToSuperview().offset(0)
+            $0.height.equalTo(50)
         }
         
         settingLabel.snp.makeConstraints{
@@ -54,7 +65,6 @@ class ProfileViewCell: UITableViewCell {
         }
     }
     
-   
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -64,5 +74,5 @@ class ProfileViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-
+    
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class SettingViewCell: UITableViewCell {
-
+    
     let separateView1 = UIView()
     let separateView2 = UIView()
     
@@ -43,6 +43,7 @@ class SettingViewCell: UITableViewCell {
         
         labelName.snp.makeConstraints{
             $0.top.equalTo(separateView1.snp.bottom).offset(14)
+            //            $0.height.equalTo(48)
             $0.left.equalToSuperview().offset(32)
         }
         
@@ -63,5 +64,5 @@ class SettingViewCell: UITableViewCell {
     }
     
     
-
+    
 }
