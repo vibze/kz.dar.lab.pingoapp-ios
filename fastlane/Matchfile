@@ -1,4 +1,4 @@
-git_url "git clone git@bitbucket.org:dareco-frontend/dar-certs.git"
+git_url "git@bitbucket.org:dareco-frontend/dar-certs.git"
 
 type "appstore", "development"
 
