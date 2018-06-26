@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import CoreStore
 
 @available(iOS 10.0, *)
 @UIApplicationMain
@@ -19,12 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
      
         UIApplication.shared.statusBarStyle = .lightContent
-        
- 
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = ProfileTableViewController()
-//        window!.makeKeyAndVisible()
+    
         checkStorage()
+        Store.initCoreStore()
         
         return true
     }

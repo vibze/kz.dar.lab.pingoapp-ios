@@ -8,15 +8,39 @@
 
 import Foundation
 import Contacts
-import CoreStore
 
 struct ContactsService {
-    var contact: CNContact?
+    var contact: CNContact!
     var isRegistered: Bool = false
     
-    static func syncContacts(_ completion: @escaping ([ContactsService]?, String?) -> Void) {
+    static func getContacts(_ completion: @escaping ([MyContact]?, String?) -> Void) {
+        Store.fetchFromCoreStore({ (data, message) in
+            if let message = message {
+                print(message)
+                syncContacts({ (contacts, message) in
+                    if let message = message {
+                        print (message)
+                        completion(nil, message)
+                    }
+                    else {
+                        if let contacts = contacts {
+                            Store.writeToCoreStore(contacts)
+                            completion(contacts, nil)
+                        }
+                    }
+                })
+            }
+            else {
+                if let data = data {
+                    completion(data, nil)
+                }
+            }
+        })
+    }
+    
+    private static func syncContacts(_ completion: @escaping ([MyContact]?, String?) -> Void) {
         let store = CNContactStore()
-        var contacts: [ContactsService] = []
+        var contacts: [MyContact] = []
         store.requestAccess(for: .contacts) { (granted, error) in
             if let error = error {
                 completion(nil, error as? String)
@@ -27,7 +51,9 @@ struct ContactsService {
                 let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
                 do {
                     try store.enumerateContacts(with: request, usingBlock: { (contact, sd) in
-                        contacts.append(ContactsService(contact: contact, isRegistered: false))
+                        let fetchedContact = MyContact(name: contact.givenName,
+                                                       phoneNumber: contact.phoneNumbers.first?.value.stringValue)
+                        contacts.append(fetchedContact)
                     })
                 } catch let error {
                     completion(nil, error as? String)
@@ -39,24 +65,4 @@ struct ContactsService {
             completion(contacts, nil)
         }
     }
-    
-//    private static func writeToCoreData(_ contact: CNContact) {
-//        CoreStore.defaultStack = DataStack(
-//            xcodeModelName: "app",
-//            migrationChain: []
-//        )
-//        CoreStore.perform(
-//            asynchronous: { (transaction) -> Void in
-////                let person = transaction.create(Into<MyPersonEntity>())
-//                person.name = "John Smith"
-//                person.age = 42
-//        },
-//            completion: { (result) -> Void in
-//                switch result {
-//                case .success: print("success!")
-//                case .failure(let error): print(error)
-//                }
-//            }
-//        )
-//    }
 }
