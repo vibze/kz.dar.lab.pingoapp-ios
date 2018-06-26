@@ -8,10 +8,17 @@
 
 import Foundation
 import Contacts
+import CoreStore
+
 
 struct ContactsService {
-    var contact: CNContact!
-    var isRegistered: Bool = false
+//    static var contactsMonitor: ListMonitor<Contact> {
+//        let monitor = CoreStore.monitorList(
+//            From<Contact>()
+//        )
+//
+//        monitor[indexPath]
+//    }
     
     static func getContacts(_ completion: @escaping ([MyContact]?, String?) -> Void) {
         Store.fetchFromCoreStore({ (data, message) in
