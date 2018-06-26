@@ -1,20 +1,28 @@
 PODS:
   - AccountKit (4.31.0)
+  - Alamofire (4.7.2)
   - SnapKit (4.0.0)
+  - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
   - AccountKit
+  - Alamofire
   - SnapKit
+  - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AccountKit
+    - Alamofire
     - SnapKit
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   AccountKit: f3e48047e6fb1c433dff37c61158fd32bbc482cf
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 331f1d7cdaebc96fc974e8b96b19e7669af3a51c
+PODFILE CHECKSUM: 85a1fb98d2d9bdfbbac58e0751afd242c4d299b2
 
 COCOAPODS: 1.5.3

@@ -14,15 +14,18 @@ class ActionButton: UIButton {
     /**
      Write - yellow button (MessageVC)
      Block - green button (MessageVC)
+     Rgstr - registration button
      */
     enum ActionButtonType {
         case write
         case block
+        case rgstr
         
         var backgroundColor: UIColor {
             switch self {
             case .write: return UIColor(hexString: "FFC65B")
             case .block: return UIColor(red: 1, green: 1, blue: 1, alpha: 0.2)
+            case .rgstr: return UIColor(hexString: "FEC157")
             }
         }
         
@@ -30,6 +33,7 @@ class ActionButton: UIButton {
             switch self {
             case .write: return UIColor(hexString: "308757")
             case .block: return UIColor(hexString: "AA4778")
+            case .rgstr: return UIColor(hexString: "A83C4C")
             }
         }
     }

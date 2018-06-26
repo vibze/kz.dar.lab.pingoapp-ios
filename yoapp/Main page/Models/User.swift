@@ -9,10 +9,10 @@
 import Foundation
 
 class User: NSObject, NSCoding {
+    
     var name: String
     var url: String
     var password: String
-    
     
     init(name: String, url: String, password: String) {
         self.name = name

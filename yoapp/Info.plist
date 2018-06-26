@@ -14,7 +14,7 @@
 		</dict>
 	</array>
 	<key>AccountKitClientToken</key>
-	<string>f09f5a7740de0c6850bfa2f8184c8621</string>
+	<string>ff61509066f0b18bb5132a414b95503d</string>
 	<key>FacebookAppID</key>
 	<string>419210478560821</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -66,11 +66,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>whatsapp</string>
-        <string>tg</string>
-        <string>fb-messenger</string>
-    </array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>whatsapp</string>
+		<string>tg</string>
+		<string>fb-messenger</string>
+	</array>
 </dict>
 </plist>
