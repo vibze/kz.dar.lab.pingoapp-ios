@@ -8,5 +8,7 @@ target 'yoapp' do
   # Pods for yoapp
   pod 'SnapKit'
   pod 'AccountKit'
+  pod 'Alamofire'
+  pod 'SwiftyJSON'
 
 end

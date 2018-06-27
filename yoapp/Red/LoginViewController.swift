@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import AccountKit
 
 class LoginViewController: UIViewController,
     UICollectionViewDelegate,
     UICollectionViewDataSource,
-UICollectionViewDelegateFlowLayout {
+    UICollectionViewDelegateFlowLayout,
+AKFViewControllerDelegate {
     
     let swypePage = ["preview","preview","preview"]
+    
+    var accountKit: AKFAccountKit!
+    var bottomControllView = UIStackView()
+    
+    let errorMessageAlert = UIAlertController(title: "Ошибка!", message: "Ошибка авторизации", preferredStyle: .alert)
     
     let firstImageView: UIView = {
         let imageView = UIView()
@@ -29,13 +36,55 @@ UICollectionViewDelegateFlowLayout {
         return pc
     }()
     
+    let nameApp: UILabel = {
+        let lTA = UILabel()
+        lTA.text = "Ping App"
+        lTA.textColor = .white
+        lTA.font = UIFont(name: "Helvetica", size: 24)
+        return lTA
+    }()
+    
     let smallBubbleImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "login_screen_small_bubble")
         return iv
     }()
     
-    var bottomControllView = UIStackView()
+    let biggestOvalImageView: UIImageView = {
+        let ov = UIImageView()
+        ov.image = #imageLiteral(resourceName: "Oval 2")
+        return ov
+    }()
+    
+    let bigOvalImageView: UIImageView = {
+        let ov = UIImageView()
+        ov.image = #imageLiteral(resourceName: "Oval 2 Copy")
+        return ov
+    }()
+    
+    let smallOvalImageView: UIImageView = {
+        let ov = UIImageView()
+        ov.image = #imageLiteral(resourceName: "Oval 2 Copy 2")
+        return ov
+    }()
+    
+    let registrationButton = ActionButton(title: "Зарегистрироваться", type: .rgstr)
+    
+    let descriptionLabel: UILabel = {
+        let dA = UILabel()
+        dA.numberOfLines = 0
+        dA.lineBreakMode = .byWordWrapping
+        dA.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been."
+        dA.textColor = .white
+        dA.font = UIFont(name: "Helvetica", size: 16)
+        return dA
+    }()
+    
+    let bigBubbleImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.image = #imageLiteral(resourceName: "Oval")
+        return iv
+    }()
     
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.CVLayout)
@@ -43,7 +92,7 @@ UICollectionViewDelegateFlowLayout {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(ImageSwypeCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.register(ImageSwipeCell.self, forCellWithReuseIdentifier: "Cell")
         return collectionView
     }()
     
@@ -58,32 +107,80 @@ UICollectionViewDelegateFlowLayout {
         view.backgroundColor = UIColor(red: 237/255, green: 95/255, blue: 117/255, alpha: 1)
         setupBottomControls()
         setupCollectionView()
-        collectionView.register(ImageSwypeCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.register(ImageSwipeCell.self, forCellWithReuseIdentifier: "Cell")
+        registrationButton.addTarget(self, action: #selector(loginBtnPressed), for: .touchUpInside)
         collectionView.isPagingEnabled = true
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        if accountKit == nil {
+            self.accountKit = AKFAccountKit(responseType: .accessToken)
+        }
+        
     }
     
     func setupCollectionView(){
         view.addSubview(collectionView)
+        view.addSubview(smallBubbleImageView)
+        view.addSubview(nameApp)
+        view.addSubview(descriptionLabel)
+        view.addSubview(bigBubbleImageView)
+        view.addSubview(biggestOvalImageView)
+        view.addSubview(bigOvalImageView)
+        view.addSubview(smallOvalImageView)
+        view.addSubview(registrationButton)
+        
+        registrationButton.layer.borderColor = UIColor(red: 168/255, green: 60/255, blue: 76/255, alpha: 0.5).cgColor
         collectionView.layer.borderWidth = 4
         collectionView.layer.cornerRadius = 12
         collectionView.layer.borderColor = UIColor(red: 168/255, green: 60/255, blue: 76/255, alpha: 0.5).cgColor
+        
         collectionView.snp.makeConstraints{
             $0.top.equalTo(75)
             $0.left.equalTo(32)
             $0.right.equalTo(-32)
             $0.bottom.equalTo(bottomControllView.snp.top).offset(-32)
         }
+        nameApp.snp.makeConstraints{
+            $0.top.equalTo(bottomControllView.snp.bottom).offset(25)
+            $0.centerX.equalToSuperview("bottomControllView")
+        }
         
-//        veiw.addSubview(smallBubbleImageView)
-//        smallBubbleImageView.snp.makeConstraints{
-//            $0.top.equalTo(bottomControllView.snp.bottom).offset(32)
-//            $0.centerX.equalToSuperview(bottomControllView)
-//        }
+        smallBubbleImageView.snp.makeConstraints{
+            $0.center.equalTo(nameApp)
+            $0.edges.equalTo(nameApp).inset(UIEdgeInsets(top: 0, left: -20, bottom: 0, right: -15))
+        }
         
+        descriptionLabel.snp.makeConstraints{
+            $0.top.equalTo(nameApp.snp.bottom).offset(25)
+            $0.left.equalTo(34)
+            $0.right.equalTo(-32)
+        }
+        
+        bigBubbleImageView.snp.makeConstraints{
+            $0.center.equalTo(descriptionLabel)
+            $0.edges.equalTo(descriptionLabel).inset(UIEdgeInsets(top: 5, left: -20, bottom: -10, right: -15))
+        }
+        
+        biggestOvalImageView.snp.makeConstraints{
+            $0.top.equalTo(bigBubbleImageView.snp.bottom).offset(14.5)
+            $0.centerX.equalToSuperview("bottomControllView")
+        }
+        
+        bigOvalImageView.snp.makeConstraints{
+            $0.top.equalTo(biggestOvalImageView.snp.bottom).offset(7)
+            $0.centerX.equalToSuperview("bottomControllView")
+        }
+        
+        smallOvalImageView.snp.makeConstraints{
+            $0.top.equalTo(bigOvalImageView.snp.bottom).offset(7)
+            $0.centerX.equalToSuperview("bottomControllView")
+        }
+        
+        registrationButton.snp.makeConstraints{
+            $0.top.equalTo(smallOvalImageView.snp.bottom).offset(10)
+            $0.width.equalTo(300)
+            $0.height.equalTo(50)
+            $0.left.equalTo(37)
+            $0.right.equalTo(-37)
+        }
     }
     
     func setupBottomControls() {
@@ -95,6 +192,37 @@ UICollectionViewDelegateFlowLayout {
             $0.width.equalTo(50)
             $0.height.equalTo(10)
         }
+    }
+    
+    func prepareLoginViewController(_ loginViewController: AKFViewController) {
+        loginViewController.delegate = self
+        loginViewController.setAdvancedUIManager(nil)
+        loginViewController.defaultCountryCode = "KZ"
+        
+        let theme = AKFTheme.default()
+        theme.statusBarStyle = .lightContent
+        theme.inputTextColor = .white
+        theme.textColor = .white
+        theme.headerBackgroundColor = UIColor(red: 237/255, green: 95/255, blue: 117/255, alpha: 1)
+        theme.backgroundColor = UIColor(red: 237/255, green: 95/255, blue: 117/255, alpha: 1)
+        theme.headerTextColor = .white
+        theme.iconColor = UIColor(red: 237/255, green: 95/255, blue: 117/255, alpha: 1)
+        theme.inputBorderColor = .white
+        theme.inputBackgroundColor = UIColor(red: 237/255, green: 95/255, blue: 117/255, alpha: 1)
+        theme.buttonBorderColor = UIColor(red: 168/255, green: 60/255, blue: 76/255, alpha: 0.5)
+        theme.buttonBackgroundColor = UIColor(red: 254/255, green: 193/255, blue: 87/255, alpha: 1)
+        theme.buttonTextColor = UIColor(red: 168/255, green: 60/255, blue: 76/255, alpha: 1)
+        theme.titleColor = UIColor(red: 0.247, green: 0.247, blue: 0.247, alpha: 1)
+        
+        loginViewController.setTheme(theme)
+    }
+    
+    @objc func loginBtnPressed() {
+        let inputState = UUID().uuidString
+        let viewController = accountKit.viewControllerForPhoneLogin(with: nil, state: inputState) as AKFViewController
+        viewController.enableSendToFacebook = true
+        self.prepareLoginViewController(viewController)
+        self.present(viewController as! UIViewController, animated: true, completion: nil)
     }
     
     @objc func handlePrev() {
@@ -126,13 +254,25 @@ UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImageSwypeCell
-        cell.firstImageView.image = UIImage(named: swypePage[indexPath.row])
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImageSwipeCell
+        cell.firstImageView.image = UIImage(named: swypePage[indexPath.row])   
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return collectionView.frame.size
+    }
+    
+    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
+        
+        SessionsApi.createSession(token: accessToken.tokenString, success: { profile in
+            // Write to user defaults
+            Profile.addToUserDefaults(profile)
+            let vc = ContactsViewController()
+            self.present(vc, animated: true, completion: nil)
+        }) { errorMessage in
+            // Notify user about error
+            self.present(self.errorMessageAlert, animated: true, completion: nil)
+        }
     }
 }
