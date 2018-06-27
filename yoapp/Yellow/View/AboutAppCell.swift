@@ -10,27 +10,9 @@ import UIKit
 
 class AboutAppCell: UITableViewCell {
     
-    let appNameLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
-        label.textColor = .myPurple
-        label.text = "YoApp"
-        return label
-    }()
-    
+    let appNameLabel = UILabel.basic(textColor: .myPurple, fontSize: 20)
     var aboutBackgroundView = UIView()
-    
-    var aboutLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .myYellow
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        return label
-    }()
+    let aboutLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 18)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -43,6 +25,7 @@ class AboutAppCell: UITableViewCell {
     }
     
     func setUpView(){
+        appNameLabel.text = "YoApp"
         appNameLabel.snp.makeConstraints{
             $0.top.equalToSuperview().offset(4)
             $0.centerX.equalToSuperview()

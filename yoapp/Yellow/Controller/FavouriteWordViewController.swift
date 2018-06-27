@@ -32,8 +32,8 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
-        CustomNavBarView.addNavCon(vc: self, backgrounColor: .backgroundYellow, title: "Избранные фразы")
-        CustomNavBarView.addRightBtutton(vc: self, action: #selector(addFavourWordAction))
+        addNavCon(backgrounColor: .backgroundYellow, title: "Избранные фразы")
+        addRightBtutton(action: #selector(addFavourWordAction))
         configTableView()
     }
     
@@ -96,11 +96,7 @@ extension FavouriteWordViewController {
         addWordView.cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         addWordView.addButton.addTarget(self, action: #selector(addAction), for: .touchUpInside)
     }
-    
-    @objc func bactToVC() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
+  
     @objc func cancelAction(){
         addWordView.inputWord.text = " "
         addWordView.removeFromSuperview()

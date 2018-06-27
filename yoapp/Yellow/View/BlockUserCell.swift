@@ -22,19 +22,8 @@ class BlockUserCell: UITableViewCell {
         return image
     }()
     
-    var nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "ProximaNovaSoft-Bold", size: 16)
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        return label
-    }()
-    
-    var phoneLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "ProximaNovaSoft-Regular", size: 14)
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        return label
-    }()
+    let nameLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 16)
+    let phoneLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 14)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

@@ -10,14 +10,8 @@ import UIKit
 
 class ProfileFooterView : UIView {
     
-    var friendLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .myPurple
-        label.font = UIFont(name: "ProximaNovaSoft-Bold", size: 16)
-        label.text = "Пригласить друзей в Ping App"
-        return label
-    }()
-    
+    var friendLabel = UILabel.basic(textColor: .myPurple, fontSize: 16)
+ 
     var telegramView: CustomInviteView = {
         let view = CustomInviteView()
         view.backgroundColor = .myPurple
@@ -52,9 +46,10 @@ class ProfileFooterView : UIView {
         self.addSubview(friendLabel)
         self.addSubview(backStackView)
         backStackView.addSubview(stackView)
+        friendLabel.text = "Пригласить друзей в Ping App"
         
         friendLabel.snp.makeConstraints{(make) in
-            make.top.equalToSuperview().offset(30)
+            make.top.equalToSuperview().offset(0)
             make.centerX.equalToSuperview()
         }
         
@@ -62,7 +57,7 @@ class ProfileFooterView : UIView {
             $0.top.equalTo(friendLabel.snp.bottom).offset(16)
             $0.left.equalToSuperview().offset(27)
             $0.right.equalToSuperview().offset(-27)
-            $0.bottom.equalToSuperview().offset(30)
+            $0.bottom.equalToSuperview().offset(-5)
         }
         
         stackView.snp.makeConstraints{
@@ -90,8 +85,8 @@ class ProfileFooterView : UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.alignment = .fill
-        stackView.distribution = .equalCentering
-        stackView.spacing = 1
+        stackView.distribution = .fillEqually
+        stackView.spacing = 2
         
         stackView.addArrangedSubview(telegramView)
         stackView.addArrangedSubview(whatsUpView)
@@ -111,7 +106,7 @@ class ProfileFooterView : UIView {
         messengerView.addGestureRecognizer(openMessengerGesture)
     }
     
-//    org.telegram.messenger
+    //    org.telegram.messenger
     
     @objc func openTelegram(){
         let msg = "Hello"
@@ -141,10 +136,10 @@ class ProfileFooterView : UIView {
             }
         }
     }
-//    fb-messenger
-//    fb-messenger://user-thread/%d
-//    /user/
-//    fb-messenger://share/?link
+    //    fb-messenger
+    //    fb-messenger://user-thread/%d
+    //    /user/
+    //    fb-messenger://share/?link
     @objc func openMessenger(){
         let msg = "Hello"
         let urlWhats = "fb-messenger:/user/\(msg)"

@@ -10,13 +10,7 @@ import UIKit
 
 class InviteFriendsView : UIView {
     
-    var friendLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .myPurple
-        label.font = UIFont(name: "ProximaNovaSoft-Bold", size: 16)
-        label.text = "Пригласить друзей в Ping App"
-        return label
-    }()
+    let friendLabel = UILabel.basic(textColor: .myPurple, fontSize: 16)
     
     var telegramView: CustomInviteView = {
         let view = CustomInviteView()
@@ -52,6 +46,7 @@ class InviteFriendsView : UIView {
         self.addSubview(friendLabel)
         self.addSubview(backStackView)
         backStackView.addSubview(stackView)
+        friendLabel.text = "Пригласить друзей в Ping App"
         
         friendLabel.snp.makeConstraints{(make) in
             make.top.equalToSuperview().offset(30)

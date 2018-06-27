@@ -10,16 +10,8 @@ import UIKit
 
 class FavouriteAddView: UIView, UITextViewDelegate {
     
-    var aboutLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .clear
-        label.textAlignment = .center
-        label.text = "Ваша избранная фраза"
-        label.font = UIFont(name: "ProximaNovaSoft-Bold", size: 18)
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        return label
-    }()
-    
+    let aboutLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 18)
+  
     var inputWord: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -55,8 +47,6 @@ class FavouriteAddView: UIView, UITextViewDelegate {
         self.addSubview(aboutLabel)
         self.addSubview(inputWord)
         self.addSubview(stackView)
-//        self.addSubview(cancelButton)
-//        self.addSubview(addButton)
         
         self.layer.cornerRadius = 10
         self.backgroundColor = UIColor(hexString: "FEC95F")
@@ -73,6 +63,7 @@ class FavouriteAddView: UIView, UITextViewDelegate {
     
     
     func setUpViews(){
+         aboutLabel.text = "Ваша избранная фраза"
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         let flexible = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)

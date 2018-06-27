@@ -54,6 +54,25 @@ extension UIViewController {
         view.gestureRecognizers?.removeAll()
         view.endEditing(true)
     }
+    
+    func addNavCon(backgrounColor: UIColor, title: String){
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        navigationItem.title = title
+        navigationController?.navigationBar.barTintColor = backgrounColor
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Helvetica-Bold", size: 18)!,NSAttributedStringKey.foregroundColor: UIColor.white]
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "left-arrow"), style: .plain, target: self, action: #selector(bactToVC))
+        
+    }
+    
+    @objc func bactToVC() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func addRightBtutton( action:Selector?) {
+        let button = UIBarButtonItem(image: #imageLiteral(resourceName: "add_icon"), style: .plain, target: self, action: action)
+        navigationItem.rightBarButtonItem = button
+    }
 }
 
 extension UIView {
@@ -72,35 +91,20 @@ extension UIView {
 }
 
 extension UITableViewController {
-    
-    @objc func bactToVC() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     func openViewController(viewController: UIViewController){
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
-extension UINavigationController {
-    /*
-    func tempChanges(backgrounColor: UIColor, title: String){
-        self.navigationBar.frame = CGRect(x: 0, y: 0, width: screenWidth, height: 150)
-        self.navigationBar.barTintColor = backgrounColor
-        self.navigationBar.topItem?.title = title
-        self.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Bold", size: 20)!,NSAttributedStringKey.foregroundColor: UIColor.white]
+extension UILabel {
+    static func basic(textColor: UIColor, fontSize: CGFloat) -> UILabel{
+        let label = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: fontSize)
+        label.textColor = textColor
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "left-arrow"), style: .plain, target: self, action: #selector(bactToVC))
-        navigationController?.navigationBar.isTranslucent = false
-    }*/
-}
-
-
-extension UIView {
-    func basic(backgroundColor: UIColor) -> UIView{
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.backgroundColor = backgroundColor
-        return view
+        return label
     }
 }

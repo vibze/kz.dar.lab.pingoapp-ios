@@ -25,12 +25,7 @@ class ProfileViewCell: UITableViewCell {
         return view
     }()
     
-    var settingLabel: UILabel = {
-        var label = UILabel()
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        label.font = UIFont(name: "ProximaNovaSoft-Bold", size: 18)
-        return label
-    }()
+    let settingLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 18)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

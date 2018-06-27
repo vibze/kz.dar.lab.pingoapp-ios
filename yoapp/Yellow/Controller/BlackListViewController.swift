@@ -15,7 +15,7 @@ class BlackListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        CustomNavBarView.addNavCon(vc: self, backgrounColor: .backgroundYellow, title: "Черный список")
+        addNavCon(backgrounColor: .backgroundYellow, title: "Черный список")
         configTableView()
     }
     

@@ -10,13 +10,7 @@ import UIKit
 
 class SettingsFooterView: UIView {
     
-    var notificationLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .myPurple
-        label.font = UIFont(name: "ProximaNovaSoft-Medium", size: 20)
-        label.text = "Отлючить уведомления"
-        return label
-    }()
+    let notificationLabel = UILabel.basic(textColor: .myPurple, fontSize: 20)
     
     var notificationSwitcher: UISwitch = {
         let switcher = UISwitch()
@@ -35,12 +29,14 @@ class SettingsFooterView: UIView {
     }
     
     func setUpView(){
+        notificationLabel.text = "Отлючить уведомления"
+        
         notificationLabel.snp.makeConstraints{
             $0.top.equalToSuperview().offset(30)
             $0.left.equalToSuperview().offset(15)
             $0.height.equalTo(30)
         }
-     
+        
         notificationSwitcher.snp.makeConstraints{
             $0.top.equalTo(notificationLabel)
             $0.right.equalToSuperview().offset(-15)

@@ -9,57 +9,17 @@
 import UIKit
 
 class AboutAppViewController: UITableViewController {
- 
+    
     var aboutCell = "aboutCell"
-    
-    let appNameLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
-        label.textColor = .myPurple
-        label.text = "YoApp"
-        return label
-    }()
-    
-    var textLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .myYellow
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        return label
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
-        CustomNavBarView.addNavCon(vc: self, backgrounColor: .backgroundYellow, title: "О приложении")
+        addNavCon(backgrounColor: .backgroundYellow, title: "О приложении")
         configTableView()
-        setUpViews()
     }
     
-    func setUpViews(){
-        tableView.addSubview(appNameLabel)
-        tableView.addSubview(textLabel)
-        
-        appNameLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(90)
-            $0.centerX.equalToSuperview()
-        }
-        
-        textLabel.snp.makeConstraints{
-            $0.top.equalTo(appNameLabel.snp.bottom).offset(24)
-            $0.left.equalToSuperview().offset(0)
-            $0.right.equalToSuperview().offset(0)
-            $0.height.equalTo(150)
-        }
-        
-        textLabel.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been."
-    }
-    
- func configTableView(){
+    func configTableView(){
         tableView.backgroundColor = .backgroundYellow
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false

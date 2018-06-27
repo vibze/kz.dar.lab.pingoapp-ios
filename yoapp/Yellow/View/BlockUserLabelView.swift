@@ -10,22 +10,15 @@ import UIKit
 
 class BlockUserLabelView: UIView {
     
-    var titleLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .myPurple
-        label.font = UIFont(name: "ProximaNovaSoft-Medium", size: 12)
-        label.text = "Заблокированные контакты"
-        return label
-    }()
-    
-    
+    let titleLabel = UILabel.basic(textColor: .myPurple, fontSize: 12)
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor(hexString: "FED88B")
         self.addSubview(titleLabel)
+        titleLabel.text = "Заблокированные контакты"
         
         titleLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(5)
+            $0.top.equalToSuperview().offset(10)
             $0.left.equalToSuperview().offset(20)
         }
     }
