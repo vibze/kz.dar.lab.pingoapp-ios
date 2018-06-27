@@ -92,7 +92,7 @@ AKFViewControllerDelegate {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(ImageSwypeCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.register(ImageSwipeCell.self, forCellWithReuseIdentifier: "Cell")
         return collectionView
     }()
     
@@ -107,7 +107,7 @@ AKFViewControllerDelegate {
         view.backgroundColor = UIColor(red: 237/255, green: 95/255, blue: 117/255, alpha: 1)
         setupBottomControls()
         setupCollectionView()
-        collectionView.register(ImageSwypeCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.register(ImageSwipeCell.self, forCellWithReuseIdentifier: "Cell")
         registrationButton.addTarget(self, action: #selector(loginBtnPressed), for: .touchUpInside)
         collectionView.isPagingEnabled = true
         if accountKit == nil {
@@ -254,7 +254,7 @@ AKFViewControllerDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImageSwypeCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImageSwipeCell
         cell.firstImageView.image = UIImage(named: swypePage[indexPath.row])   
         return cell
     }

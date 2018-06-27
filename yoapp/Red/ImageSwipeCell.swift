@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ImageSwypeCell: UICollectionViewCell {
-    var page: ImageSwypeStruct? {
+class ImageSwipeCell: UICollectionViewCell {
+    var page: ImageSwipeStruct? {
         didSet {
             guard let unwrappedPage = page else { return }
             firstImageView.image = UIImage(named: unwrappedPage.imageName)
