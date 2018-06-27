@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+import CoreStore
 
 private struct Constants {
     static let myContactCell = "myContactCell"
@@ -42,31 +43,23 @@ class MyContactsViewController: UIViewController {
         effect.isHidden = true
         return effect
     }()
+
     
     let searchTextField = SearchTextField()
+    let monitor = ContactsService.contactsMonitor
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        monitor.addObserver(self)
+        
         view.backgroundColor = UIColor(hexString: "6BBE90")
         setupViews()
         fetchContacts()
     }
     
     func fetchContacts() {
-        ContactsService.getContacts { (contactsData, message) in
-            if let message = message {
-                print(message)
-            }
-            else {
-                if let contactsData = contactsData {
-                    self.myContacts = contactsData
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
-            }
-        }
+        ContactsService().syncContacts()
     }
     
     func setupViews() {
@@ -80,6 +73,7 @@ class MyContactsViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(MyContactsTableViewCell.self, forCellReuseIdentifier: Constants.myContactCell)
         tableView.tableHeaderView = UIView()
+        tableView.keyboardDismissMode = .interactive
         tableView.tableHeaderView?.snp.makeConstraints {
             $0.top.left.right.equalToSuperview()
             $0.height.equalTo(80)
@@ -106,21 +100,17 @@ class MyContactsViewController: UIViewController {
 
 extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myContacts.count
+        return monitor.numberOfObjects()
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.myContactCell, for: indexPath) as! MyContactsTableViewCell
         
-        cell.setupValues(contact: myContacts[indexPath.row])
+        cell.contact = monitor[indexPath]
         return cell
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return SectionHeaderView()
-    }
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.dismissKeyboard()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -143,4 +133,14 @@ extension MyContactsViewController: UITextFieldDelegate {
         self.hideKeyboard()
     }
 }
+
+extension MyContactsViewController: ListObserver {
+    func listMonitorDidChange(_ monitor: ListMonitor<Contact>) {
+        print("AS")
+    }
+    func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {
+        print("asdasd")
+    }
+}
+
 

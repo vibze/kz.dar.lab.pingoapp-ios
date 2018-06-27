@@ -10,6 +10,13 @@ import UIKit
 import Contacts
 
 class MyContactsTableViewCell: UITableViewCell {
+    
+    var contact: Contact? {
+        didSet {
+            guard let contact = contact else { return }
+            contactDidUpdate(contact)
+        }
+    }
 
     let contactImageView = ImageView(radius: 55 / 2)
     
@@ -36,7 +43,7 @@ class MyContactsTableViewCell: UITableViewCell {
         self.backgroundColor = .clear
     }
     
-    func setupValues(contact: MyContact) {
+    func contactDidUpdate(_ contact: Contact) {
         contactNameLabel.text = contact.name ?? ""
         phoneNumberLabel.text = contact.phoneNumber ?? ""
     }
