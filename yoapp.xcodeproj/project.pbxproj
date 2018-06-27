@@ -66,8 +66,9 @@
 		7C1D3FB820D6D7B7007037D9 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		7C1F174920E0BA9A0060AC70 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		7C26365920DA048A008D34E1 /* MyContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactsTableViewCell.swift; sourceTree = "<group>"; };
-		7C314C1920E1FE79005928B5 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
-		7C314C2120E242C5005928B5 /* MyContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContact.swift; sourceTree = "<group>"; };
+		7C314C2420E2525E005928B5 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		7C314C2520E2525E005928B5 /* MyContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyContact.swift; sourceTree = "<group>"; };
+		7C314C2620E2525E005928B5 /* ContactsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsService.swift; sourceTree = "<group>"; };
 		7C33C8A020DCF38900A90398 /* PushAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAlert.swift; sourceTree = "<group>"; };
 		7C910C4620D6AAF90072A673 /* yoapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yoapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C910C4920D6AAF90072A673 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -240,7 +241,7 @@
 		7C1CDFCF20D7A93000A90E16 /* My Contacts Page */ = {
 			isa = PBXGroup;
 			children = (
-				7C1F174B20E0BAA10060AC70 /* Models */,
+				7C314C2320E2525E005928B5 /* Models */,
 				7C1CDFD220D7A97D00A90E16 /* Views */,
 				7C1CDFD120D7A97500A90E16 /* Controllers */,
 			);
@@ -300,15 +301,14 @@
 			path = Green;
 			sourceTree = "<group>";
 		};
-		7C1F174B20E0BAA10060AC70 /* Models */ = {
+		7C314C2320E2525E005928B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				7C1F174920E0BA9A0060AC70 /* Contact.swift */,
 				7C314C1920E1FE79005928B5 /* Store.swift */,
 				7C314C2120E242C5005928B5 /* MyContact.swift */,
 			);
-			name = Models;
-			path = "New Group";
+			path = Models;
 			sourceTree = "<group>";
 		};
 		7C910C3D20D6AAF90072A673 = {
