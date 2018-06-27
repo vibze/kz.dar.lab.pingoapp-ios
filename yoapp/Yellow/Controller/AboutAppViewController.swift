@@ -40,6 +40,25 @@ class AboutAppViewController: UITableViewController {
         setUpViews()
     }
     
+    func setUpViews(){
+        tableView.addSubview(appNameLabel)
+        tableView.addSubview(textLabel)
+        
+        appNameLabel.snp.makeConstraints{
+            $0.top.equalToSuperview().offset(90)
+            $0.centerX.equalToSuperview()
+        }
+        
+        textLabel.snp.makeConstraints{
+            $0.top.equalTo(appNameLabel.snp.bottom).offset(24)
+            $0.left.equalToSuperview().offset(0)
+            $0.right.equalToSuperview().offset(0)
+            $0.height.equalTo(150)
+        }
+        
+        textLabel.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been."
+    }
+    
  func configTableView(){
         tableView.backgroundColor = .backgroundYellow
         tableView.separatorStyle = .none

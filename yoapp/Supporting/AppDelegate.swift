@@ -31,14 +31,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func checkStorage() {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        
+        /*
         if user != nil {
             let vc = CustomNavBarView(rootViewController: MainTabViewController())
             window?.rootViewController = vc
         } else {
             let vc = CustomNavBarView(rootViewController: MainTabViewController())
             window?.rootViewController = vc
-        }
+        }*/
+        
+        let vc = CustomNavBarView(rootViewController: MainTabViewController())
+        window?.rootViewController = vc
         window!.makeKeyAndVisible()
     }
     
