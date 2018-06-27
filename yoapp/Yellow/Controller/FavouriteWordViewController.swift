@@ -8,46 +8,63 @@
 
 import UIKit
 
-class FavouriteWordViewController: UITableViewController {
+class FavouriteWordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let headerView = SettingHeaderView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 80))
     var favourCell = "FavouriteCell"
     var array = ["Привет, как дела?","Привет","Что делаешь?","Привет, как дела?","Привет","Что делаешь?"]
+   
+    let backgroundView = UIView()
+    
+    var addWordView: FavouriteAddView = {
+        let view = FavouriteAddView()
+        return view
+    }()
+    
+    var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .backgroundYellow
+        tableView.separatorStyle = .none
+        tableView.isScrollEnabled = false
+        tableView.rowHeight = 50
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(tableView)
+        CustomNavBarView.addNavCon(vc: self, backgrounColor: .backgroundYellow, title: "Избранные фразы")
+        CustomNavBarView.addRightBtutton(vc: self, action: #selector(addFavourWordAction))
         configTableView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     func configTableView(){
-        tableView.backgroundColor = UIColor(hexString: "FEC95F")
-        tableView.separatorStyle = .none
-        tableView.isScrollEnabled = false
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.rowHeight = 50
-        headerView.titleName(title: "Избранные фразы")
-        tableView.tableHeaderView = headerView
-        headerView.backButton.addTarget(self, action: #selector(bactToVC), for: .touchUpInside)
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.register(SettingViewCell.self, forCellReuseIdentifier: favourCell)
+        tableView.snp.makeConstraints{
+            $0.top.left.right.bottom.equalToSuperview().offset(0)
+        }
     }
 }
 
 extension FavouriteWordViewController {
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return array.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: favourCell, for: indexPath) as! SettingViewCell
-//        cell.backgroundColor = .myYellow
-//        cell.textLabel?.text = array[indexPath.row]
-//        cell.textLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         cell.textName(text: array[indexPath.row])
         
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteButton = UITableViewRowAction(style: .default, title: "Удалить") { (action, indexPath) in
             self.tableView.dataSource?.tableView!(self.tableView, commit: .delete, forRowAt: indexPath)
             return
@@ -55,10 +72,47 @@ extension FavouriteWordViewController {
         return [deleteButton]
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.array.remove(at: indexPath.row)
+            array.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
+    }
+    
+    @objc func addFavourWordAction(){
+        backgroundView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        view.addSubview(backgroundView)
+        backgroundView.addSubview(addWordView)
+        backgroundView.snp.makeConstraints{
+            $0.top.left.right.bottom.equalToSuperview().offset(0)
+        }
+        
+        addWordView.snp.makeConstraints{
+            $0.top.equalTo(180)
+            $0.left.equalTo(24)
+            $0.right.equalTo(-24)
+            $0.height.equalTo(220)
+        }
+        addWordView.cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
+        addWordView.addButton.addTarget(self, action: #selector(addAction), for: .touchUpInside)
+    }
+    
+    @objc func bactToVC() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func cancelAction(){
+        addWordView.inputWord.text = " "
+        addWordView.removeFromSuperview()
+        backgroundView.removeFromSuperview()
+    }
+    
+    @objc func addAction(){
+        let word = addWordView.inputWord.text
+        array.append(word!)
+        addWordView.inputWord.text = " "
+        tableView.reloadData()
+        addWordView.removeFromSuperview()
+        backgroundView.removeFromSuperview()
     }
 }

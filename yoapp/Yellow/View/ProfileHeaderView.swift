@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView{
+class ProfileHeaderView: UIView {
     
     var backgorunCircle: UIView = {
         let view = UIView()
@@ -55,7 +55,7 @@ class ProfileHeaderView: UIView{
         self.addSubview(nameLabel)
         
         backgorunCircle.snp.makeConstraints{(make) in
-            make.top.equalTo(50)
+            make.top.equalToSuperview().offset(20)
             make.centerX.equalTo(self)
             make.width.height.equalTo(110)
         }

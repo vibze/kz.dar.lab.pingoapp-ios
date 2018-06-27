@@ -44,6 +44,7 @@ class MainTabViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupButtons()
+        self.navigationController?.isNavigationBarHidden = true
         view.backgroundColor = UIColor(hexString: "6BBE90")
         moveToViewController(index: 1)
         homeButton.isSelected = true

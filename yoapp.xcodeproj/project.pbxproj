@@ -32,18 +32,20 @@
 		8E1DCD5220DCBBA500D3A4F6 /* BlackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */; };
 		8E1DCD5420DCBD9B00D3A4F6 /* BlockUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD5320DCBD9B00D3A4F6 /* BlockUserCell.swift */; };
 		8E3B73B320E0B01A00DD3366 /* ProfileFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B73B220E0B01A00DD3366 /* ProfileFooterView.swift */; };
+		8E3B73B520E0B91500DD3366 /* AboutAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B73B420E0B91500DD3366 /* AboutAppCell.swift */; };
 		8E56776C20DB861500E65AFE /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56776B20DB861500E65AFE /* ProfileTableViewController.swift */; };
 		8E56777020DB86BD00E65AFE /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56776F20DB86BD00E65AFE /* ProfileHeaderView.swift */; };
 		8E56777920DB886000E65AFE /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56777820DB886000E65AFE /* Enum.swift */; };
 		8E56777B20DB92E800E65AFE /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56777A20DB92E800E65AFE /* ProfileViewCell.swift */; };
 		8E56777F20DB959F00E65AFE /* InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56777E20DB959F00E65AFE /* InviteFriendsView.swift */; };
-		8E56778120DB960A00E65AFE /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778020DB960A00E65AFE /* Extension.swift */; };
 		8E56778920DBB7B500E65AFE /* CustomInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778820DBB7B500E65AFE /* CustomInviteView.swift */; };
 		8E56778B20DBBEB400E65AFE /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778A20DBBEB400E65AFE /* SettingViewController.swift */; };
 		8E56778D20DBE00600E65AFE /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */; };
 		8E59AD9320E072E2003CA5CC /* BlockUserLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E59AD9220E072E2003CA5CC /* BlockUserLabelView.swift */; };
+		8E87093F20E2066600C877C4 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E87093E20E2066600C877C4 /* CustomNavBarView.swift */; };
 		8EC7F28920E09A2000C4BFE7 /* FavouriteWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */; };
 		8EC7F28D20E0AA0C00C4BFE7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */; };
+		8EFB4EE720E199CA00F0037B /* FavouriteAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB4EE620E199CA00F0037B /* FavouriteAddView.swift */; };
 		EFC351E69DE7CCBFA1E3DF75 /* Pods_yoapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D2B93724BE3302FB56D8383 /* Pods_yoapp.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,13 +78,13 @@
 		8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListViewController.swift; sourceTree = "<group>"; };
 		8E1DCD5320DCBD9B00D3A4F6 /* BlockUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserCell.swift; sourceTree = "<group>"; };
 		8E3B73B220E0B01A00DD3366 /* ProfileFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileFooterView.swift; path = ../../../../../Desktop/Yellow/View/ProfileFooterView.swift; sourceTree = "<group>"; };
+		8E3B73B420E0B91500DD3366 /* AboutAppCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppCell.swift; sourceTree = "<group>"; };
 		8E56776B20DB861500E65AFE /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		8E56776F20DB86BD00E65AFE /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		8E56777820DB886000E65AFE /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		8E56777A20DB92E800E65AFE /* ProfileViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewCell.swift; sourceTree = "<group>"; };
 		8E56777C20DB94A900E65AFE /* ProfileButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButtonView.swift; sourceTree = "<group>"; };
 		8E56777E20DB959F00E65AFE /* InviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsView.swift; sourceTree = "<group>"; };
-		8E56778020DB960A00E65AFE /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		8E56778320DB963900E65AFE /* ProximaNovaSoft-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaSoft-Bold.ttf"; sourceTree = "<group>"; };
 		8E56778420DB963A00E65AFE /* ProximaNovaSoft-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaSoft-Medium.ttf"; sourceTree = "<group>"; };
 		8E56778520DB963A00E65AFE /* ProximaNovaSoft-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaSoft-Regular.ttf"; sourceTree = "<group>"; };
@@ -90,8 +92,10 @@
 		8E56778A20DBBEB400E65AFE /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		8E59AD9220E072E2003CA5CC /* BlockUserLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserLabelView.swift; sourceTree = "<group>"; };
+		8E87093E20E2066600C877C4 /* CustomNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarView.swift; sourceTree = "<group>"; };
 		8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteWordViewController.swift; sourceTree = "<group>"; };
 		8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		8EFB4EE620E199CA00F0037B /* FavouriteAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAddView.swift; sourceTree = "<group>"; };
 		9F12A573C6D7B804840CCD70 /* Pods-yoapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yoapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-yoapp/Pods-yoapp.release.xcconfig"; sourceTree = "<group>"; };
 		AAAC01981428456529FBC7D0 /* Pods-yoapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yoapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yoapp/Pods-yoapp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -332,8 +336,8 @@
 			isa = PBXGroup;
 			children = (
 				8E56776B20DB861500E65AFE /* ProfileTableViewController.swift */,
-				8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */,
 				8E56778A20DBBEB400E65AFE /* SettingViewController.swift */,
+				8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */,
 				8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */,
 				8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */,
 			);
@@ -346,6 +350,9 @@
 				8E56776F20DB86BD00E65AFE /* ProfileHeaderView.swift */,
 				8E56777A20DB92E800E65AFE /* ProfileViewCell.swift */,
 				8E3B73B220E0B01A00DD3366 /* ProfileFooterView.swift */,
+				8EFB4EE620E199CA00F0037B /* FavouriteAddView.swift */,
+				8E3B73B420E0B91500DD3366 /* AboutAppCell.swift */,
+				8E87093E20E2066600C877C4 /* CustomNavBarView.swift */,
 				8E56777E20DB959F00E65AFE /* InviteFriendsView.swift */,
 				8E59AD9220E072E2003CA5CC /* BlockUserLabelView.swift */,
 				8E1D402020DC7BA300FCB0C8 /* SettingHeaderView.swift */,
@@ -361,7 +368,6 @@
 			isa = PBXGroup;
 			children = (
 				8E56777820DB886000E65AFE /* Enum.swift */,
-				8E56778020DB960A00E65AFE /* Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -524,8 +530,10 @@
 				8E1DCD5020DCA43600D3A4F6 /* SettingsFooterView.swift in Sources */,
 				7C1CDFD420D7A9A000A90E16 /* MyContactsViewController.swift in Sources */,
 				7C1CDFD720D7AB5100A90E16 /* MessageViewController.swift in Sources */,
+				8EFB4EE720E199CA00F0037B /* FavouriteAddView.swift in Sources */,
+				8E87093F20E2066600C877C4 /* CustomNavBarView.swift in Sources */,
 				8E1DCD5220DCBBA500D3A4F6 /* BlackListViewController.swift in Sources */,
-				8E56778120DB960A00E65AFE /* Extension.swift in Sources */,
+				8E3B73B520E0B91500DD3366 /* AboutAppCell.swift in Sources */,
 				8E59AD9320E072E2003CA5CC /* BlockUserLabelView.swift in Sources */,
 				8E1DCD5420DCBD9B00D3A4F6 /* BlockUserCell.swift in Sources */,
 				8E56778D20DBE00600E65AFE /* AboutAppViewController.swift in Sources */,

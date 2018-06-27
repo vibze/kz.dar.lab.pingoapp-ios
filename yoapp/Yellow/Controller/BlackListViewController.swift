@@ -10,26 +10,20 @@ import UIKit
 
 class BlackListViewController: UITableViewController {
     
-    let headerView = SettingHeaderView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 80))
-    let titleHeaderView = BlockUserLabelView(frame: CGRect(x: 0, y: 60, width: screenWidth, height: 100))
+    let titleHeaderView = BlockUserLabelView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 30))
     var userBlockCell = "userBlockCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-         self.navigationController?.isNavigationBarHidden = false
+        CustomNavBarView.addNavCon(vc: self, backgrounColor: .backgroundYellow, title: "Черный список")
         configTableView()
     }
     
     func configTableView(){
         self.tableView = UITableView(frame: self.tableView.frame, style: .plain)
-        tableView.backgroundColor = UIColor(hexString: "FEC95F")
+        tableView.backgroundColor = .backgroundYellow
         tableView.separatorStyle = .none
-        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.rowHeight = 75
-//        tableView.isScrollEnabled = false
-        headerView.titleName(title: "Черный список")
-        tableView.tableHeaderView = headerView
-        headerView.backButton.addTarget(self, action: #selector(bactToVC), for: .touchUpInside)
         tableView.register(BlockUserCell.self, forCellReuseIdentifier: userBlockCell)
     }
 }
@@ -42,21 +36,30 @@ extension BlackListViewController {
         return view
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 40
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: userBlockCell, for: indexPath) as! BlockUserCell
         cell.data(image: #imageLiteral(resourceName: "cameraPhoto"), name: "Kamila", phone: "+77014849741")
-//        cell.accessibilityScroll(.down)
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        showBlockUser(user_id: "\(indexPath.row)")
+    }
+    
+    func showBlockUser(user_id: String){
+        let vc = MessageViewController()
+        self.present(vc, animated: true, completion: nil)
+    }
 }

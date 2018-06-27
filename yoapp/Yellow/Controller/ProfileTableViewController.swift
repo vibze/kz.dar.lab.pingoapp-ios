@@ -10,7 +10,7 @@ import UIKit
 class ProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
     
-    let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 230))
+    let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 200))
     let footerView = ProfileFooterView (frame: CGRect(x: 0, y: 0, width: 307, height: 105))
     let imagePicker = UIImagePickerController()
     var profileCell = "profileCell"
@@ -18,14 +18,16 @@ UINavigationControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
+        
         configTableView()
         viewData()
     }
     
     func configTableView(){
-        tableView.backgroundColor = UIColor(hexString: "FEC95F")
+        tableView.backgroundColor = .backgroundYellow
         tableView.separatorStyle = .none
-        tableView.isScrollEnabled = false
+        tableView.isScrollEnabled = true
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableHeaderView = headerView
         tableView.tableFooterView = footerView
@@ -57,6 +59,10 @@ extension ProfileTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: profileCell, for: indexPath) as! ProfileViewCell
         cell.settingLabel.text = settingsType[indexPath.row]
+        if indexPath.row == 2{
+            cell.backView.layer.borderColor = UIColor.myPurple.withAlphaComponent(0.5).cgColor
+            cell.settingLabel.textColor = .myPurple
+        }
         return cell
     }
     
@@ -81,7 +87,4 @@ extension ProfileTableViewController {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    
 }

@@ -17,11 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
      
         UIApplication.shared.statusBarStyle = .lightContent
-        
- 
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = ProfileTableViewController()
-//        window!.makeKeyAndVisible()
         checkStorage()
         
         return true
@@ -32,10 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let user = User.current()
         
         if user != nil {
-            window?.rootViewController = MainTabViewController()
-        }
-        else {
-            window?.rootViewController = MainTabViewController() // AuthViewController() -- Это временно, пока не сделаем авторизацию
+            let vc = CustomNavBarView(rootViewController: MainTabViewController())
+            window?.rootViewController = vc
+        } else {
+            let vc = CustomNavBarView(rootViewController: MainTabViewController())
+            window?.rootViewController = vc
         }
         window!.makeKeyAndVisible()
     }

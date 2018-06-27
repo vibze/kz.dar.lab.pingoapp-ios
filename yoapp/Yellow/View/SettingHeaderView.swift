@@ -16,7 +16,7 @@ class SettingHeaderView: UIView {
         label.clipsToBounds = true
         label.layer.cornerRadius = 20
         label.textAlignment = .center
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 16)
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         return label
     }()
@@ -29,10 +29,18 @@ class SettingHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = UIColor(hexString: "FEC95F")
         self.addSubview(topLabel)
         self.addSubview(backButton)
+        self.addSubview(addButton)
         setUpViews()
     }
+    
+    var addButton: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
+        return btn
+    }()
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -41,14 +49,20 @@ class SettingHeaderView: UIView {
     func setUpViews(){
         topLabel.snp.makeConstraints{
             $0.top.equalToSuperview().offset(24)
-            $0.left.equalToSuperview().offset(84)
-            $0.right.equalToSuperview().offset(-84)
+            $0.left.equalTo(84)
+            $0.right.equalTo(-84)
             $0.height.equalTo(40)
         }
         
         backButton.snp.makeConstraints{
             $0.top.equalToSuperview().offset(32)
             $0.left.equalToSuperview().offset(24)
+            $0.width.equalTo(28)
+            $0.height.equalTo(24)
+        }
+        addButton.snp.makeConstraints{
+            $0.top.equalToSuperview().offset(32)
+            $0.right.equalToSuperview().offset(-24)
             $0.width.equalTo(28)
             $0.height.equalTo(24)
         }

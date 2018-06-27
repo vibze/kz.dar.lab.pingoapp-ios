@@ -26,15 +26,15 @@ class SettingViewCell: UITableViewCell {
         
         self.backgroundColor = .myYellow
         self.addSubview(separateView1)
-        self.addSubview(labelName)
         self.addSubview(separateView2)
+        self.addSubview(labelName)
         
         setUpView()
     }
     
     func setUpView(){
         separateView1.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        separateView2.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        separateView2.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
         separateView1.snp.makeConstraints{
             $0.top.left.right.equalToSuperview().offset(0)
@@ -43,16 +43,15 @@ class SettingViewCell: UITableViewCell {
         
         labelName.snp.makeConstraints{
             $0.top.equalTo(separateView1.snp.bottom).offset(14)
-            //            $0.height.equalTo(48)
             $0.left.equalToSuperview().offset(32)
         }
         
         separateView2.snp.makeConstraints{
             $0.top.equalTo(labelName.snp.bottom).offset(14)
-            $0.left.right.equalToSuperview().offset(0)
+            $0.left.right.equalTo(0)
             $0.height.equalTo(1)
+            $0.bottom.equalToSuperview().offset(0)
         }
-        
     }
     
     func textName(text: String){
