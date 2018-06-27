@@ -17,14 +17,7 @@ class CustomInviteView: UIView {
         return image
     }()
     
-    var nameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        label.clipsToBounds = true
-        label.textAlignment = .center
-        label.font = UIFont(name: "ProximaNovaSoft-Regular", size: 14)
-        return label
-    }()
+    let nameLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 14)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,7 +30,7 @@ class CustomInviteView: UIView {
         self.addSubview(iconImage)
         
         iconImage.snp.makeConstraints{(make) in
-            make.top.equalToSuperview().offset(4)
+            make.top.equalToSuperview().offset(7)
             make.height.width.equalTo(20)
             make.centerX.equalTo(self)
         }

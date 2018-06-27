@@ -27,10 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let user = User.current()
         
         if user != nil {
-            let vc = CustomNavBarView(rootViewController: MainTabViewController())
+            let vc = UINavigationController(rootViewController: MainTabViewController())
             window?.rootViewController = vc
         } else {
-            let vc = CustomNavBarView(rootViewController: MainTabViewController())
+            let vc = UINavigationController(rootViewController: MainTabViewController())
             window?.rootViewController = vc
         }
         window!.makeKeyAndVisible()
