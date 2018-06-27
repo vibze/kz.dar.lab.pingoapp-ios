@@ -55,7 +55,7 @@ class MyContactsViewController: UIViewController {
         
         view.backgroundColor = UIColor(hexString: "6BBE90")
         setupViews()
-        //fetchContacts()
+        fetchContacts()
     }
     
     func fetchContacts() {
@@ -137,6 +137,7 @@ extension MyContactsViewController: UITextFieldDelegate {
 extension MyContactsViewController: ListObserver {
     func listMonitorDidChange(_ monitor: ListMonitor<Contact>) {
         print("AS")
+        tableView.reloadData()
     }
     func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {
         print("asdasd")
