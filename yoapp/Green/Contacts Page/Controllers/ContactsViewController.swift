@@ -15,10 +15,22 @@ private struct Constants {
 }
 
 class ContactsViewController: UIViewController {
-
     var collectionView: UICollectionView!
-
     let sectionLabels = ["Недавние", "Все, кто в теме"]
+    
+    let searchBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hexString: "6BBE90")
+        return view
+    }()
+    
+    let blurEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let effect = UIVisualEffectView(effect: blurEffect)
+        effect.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        effect.isHidden = true
+        return effect
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,12 +51,19 @@ class ContactsViewController: UIViewController {
     let searchTextField = SearchTextField()
     
     func textFieldSetup() {
-        self.view.addSubview(searchTextField)
+        self.view.addSubview(searchBackgroundView)
+        searchBackgroundView.addSubview(blurEffectView)
+        searchBackgroundView.addSubview(searchTextField)
+    
         searchTextField.delegate = self
-        searchTextField.snp.makeConstraints { (constraint) in
-            constraint.top.left.equalTo(20)
-            constraint.height.equalTo(48)
-            constraint.width.equalTo(self.view.frame.width - 2 * 20)
+        searchBackgroundView.snp.makeConstraints {
+            $0.top.left.right.equalToSuperview()
+            $0.height.equalTo(80)
+        }
+        searchTextField.snp.makeConstraints {
+            $0.top.left.equalTo(20)
+            $0.height.equalTo(48)
+            $0.width.equalToSuperview().inset(20)
         }
     }
     
@@ -61,21 +80,23 @@ class ContactsViewController: UIViewController {
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.sectionHeader)
         let flow = self.collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
         flow.headerReferenceSize = CGSize(width: self.view.frame.width, height: 25)
-
+        
+        
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.allowsSelection = true
+        collectionView.alwaysBounceVertical = true
         
         self.view.addSubview(collectionView)
         
-        collectionView.snp.makeConstraints { (constraint) in
-            constraint.left.right.bottom.equalToSuperview()
-            constraint.top.equalToSuperview().offset(87)
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(80)
+            $0.left.bottom.right.equalToSuperview()
         }
     }
 }
 
-extension ContactsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ContactsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sectionLabels.count
     }
@@ -84,13 +105,12 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
         
         let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.sectionHeader, for: indexPath) as! SectionHeader
         sectionHeader.categoryTitleLabel.text = sectionLabels[indexPath.section]
-        sectionHeader.backgroundColor = UIColor.init(hexString: "81E2AA")
-        
+    
         return sectionHeader
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 10
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.contactsCell, for: indexPath) as! ContactsCollectionViewCell
@@ -102,27 +122,26 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
         vc.contact = "Hello"
         self.present(vc, animated: true, completion: nil)
     }
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.dismissKeyboard()
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 0 {
+            blurEffectView.isHidden = false
+            searchBackgroundView.backgroundColor = .clear
+            searchTextField.backgroundColor = UIColor(hexString: "58AD7E", alpha: 0.2)
+        }
+        else {
+            blurEffectView.isHidden = true
+            searchBackgroundView.backgroundColor = UIColor(hexString: "6BBE90")
+            searchTextField.backgroundColor = UIColor(hexString: "58AD7E")
+        }
+    }
 }
 
 extension ContactsViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.leftViewMode = UITextFieldViewMode.never
-        textField.leftViewMode = .never
         self.hideKeyboard()
-        textField.placeholder = ""
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text {
-            if text.count == 0 {
-                textField.leftViewMode = UITextFieldViewMode.always
-                textField.leftViewMode = .always
-                let attributes = [
-                    NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                ]
-                textField.attributedPlaceholder = NSAttributedString(string: "Поиск", attributes: attributes)
-            }
-        }
     }
 }
 

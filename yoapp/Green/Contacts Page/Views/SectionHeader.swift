@@ -12,6 +12,7 @@ import SnapKit
 class SectionHeader: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = UIColor(hexString: "81E2AA")
         addSubview(categoryTitleLabel)
         categoryTitleLabel.snp.makeConstraints { (constraint) in
             constraint.left.equalToSuperview().offset(20)

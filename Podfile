@@ -10,5 +10,6 @@ target 'yoapp' do
   pod 'AccountKit'
   pod 'Alamofire'
   pod 'SwiftyJSON'
+  pod 'CoreStore'
 
 end

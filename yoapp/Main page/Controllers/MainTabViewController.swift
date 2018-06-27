@@ -57,7 +57,7 @@ class MainTabViewController: UIViewController {
         view.backgroundColor = vcBackgroundColors[index]
         containerView.addSubview(controller.view)
         controller.didMove(toParentViewController: self)
-        controller.view.snp.makeConstraints{
+        controller.view.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }

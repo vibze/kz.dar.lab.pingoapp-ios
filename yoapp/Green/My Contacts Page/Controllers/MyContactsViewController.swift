@@ -15,7 +15,7 @@ private struct Constants {
 
 class MyContactsViewController: UIViewController {
     
-    var contacts: [CNContact] = []
+    var myContacts: [MyContact] = []
 
     let tableView: UITableView = {
         let tableView = UITableView()
@@ -29,6 +29,20 @@ class MyContactsViewController: UIViewController {
         return tableView
     }()
     
+    let searchBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hexString: "6BBE90")
+        return view
+    }()
+    
+    let blurEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let effect = UIVisualEffectView(effect: blurEffect)
+        effect.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        effect.isHidden = true
+        return effect
+    }()
+    
     let searchTextField = SearchTextField()
     
     override func viewDidLoad() {
@@ -39,74 +53,94 @@ class MyContactsViewController: UIViewController {
         //fetchContacts()
     }
     
-//    func fetchContacts() {
-//        MyContacts.fetchContacts { (contactsData, message) in
-//            if let message = message {
-//                print(message)
-//                return
-//            }
-//            self.contacts = contactsData!
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
-//    }
+    func fetchContacts() {
+        ContactsService.getContacts { (contactsData, message) in
+            if let message = message {
+                print(message)
+            }
+            else {
+                if let contactsData = contactsData {
+                    self.myContacts = contactsData
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
+    }
     
     func setupViews() {
         view.addSubview(tableView)
-        view.addSubview(searchTextField)
+        view.addSubview(searchBackgroundView)
+        searchBackgroundView.addSubview(blurEffectView)
+        searchBackgroundView.addSubview(searchTextField)
         
         searchTextField.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MyContactsTableViewCell.self, forCellReuseIdentifier: Constants.myContactCell)
+        tableView.tableHeaderView = UIView()
+        tableView.tableHeaderView?.snp.makeConstraints {
+            $0.top.left.right.equalToSuperview()
+            $0.height.equalTo(80)
+        }
+        
+        blurEffectView.snp.makeConstraints {
+            $0.edges.equalTo(searchBackgroundView.snp.edges)
+        }
 
+        searchBackgroundView.snp.makeConstraints {
+            $0.top.left.right.equalToSuperview()
+            $0.height.equalTo(80)
+        }
         searchTextField.snp.makeConstraints {
             $0.top.left.equalToSuperview().offset(20)
             $0.height.equalTo(48)
             $0.width.equalToSuperview().inset(20)
         }
         tableView.snp.makeConstraints {
-            $0.bottom.left.right.equalToSuperview().offset(0)
-            $0.top.equalTo(searchTextField.snp.bottom).offset(12)
+            $0.edges.equalToSuperview()
         }
     }
 }
 
-extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource {
+extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contacts.count
+        return myContacts.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.myContactCell, for: indexPath) as! MyContactsTableViewCell
-        cell.setupValues(contact: contacts[indexPath.row])
+        
+        cell.setupValues(contact: myContacts[indexPath.row])
         return cell
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return SectionHeaderView()
     }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.dismissKeyboard()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 0 {
+            blurEffectView.isHidden = false
+            searchBackgroundView.backgroundColor = .clear
+            searchTextField.backgroundColor = UIColor(hexString: "58AD7E", alpha: 0.2)
+            
+        }
+        else {
+            blurEffectView.isHidden = true
+            searchBackgroundView.backgroundColor = UIColor(hexString: "6BBE90")
+            searchTextField.backgroundColor = UIColor(hexString: "58AD7E")
+        }
+    }
 }
 
 extension MyContactsViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.leftViewMode = UITextFieldViewMode.never
-        textField.leftViewMode = .never
         self.hideKeyboard()
-        textField.placeholder = ""
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text {
-            if text.count == 0 {
-                textField.leftViewMode = UITextFieldViewMode.always
-                textField.leftViewMode = .always
-                let attributes = [
-                    NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                ]
-                textField.attributedPlaceholder = NSAttributedString(string: "Поиск", attributes: attributes)
-            }
-        }
     }
 }
 

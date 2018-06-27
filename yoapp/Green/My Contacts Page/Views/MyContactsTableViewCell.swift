@@ -36,9 +36,9 @@ class MyContactsTableViewCell: UITableViewCell {
         self.backgroundColor = .clear
     }
     
-    func setupValues(contact: CNContact) {
-        contactNameLabel.text = "\(contact.givenName) \(contact.familyName)"
-        phoneNumberLabel.text = contact.phoneNumbers.first?.value.stringValue ?? ""
+    func setupValues(contact: MyContact) {
+        contactNameLabel.text = contact.name ?? ""
+        phoneNumberLabel.text = contact.phoneNumber ?? ""
     }
     
     required init?(coder aDecoder: NSCoder) {

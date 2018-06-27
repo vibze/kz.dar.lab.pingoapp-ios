@@ -50,6 +50,8 @@
 		7C1D3FB820D6D7B7007037D9 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		7C1F174920E0BA9A0060AC70 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		7C26365920DA048A008D34E1 /* MyContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactsTableViewCell.swift; sourceTree = "<group>"; };
+		7C314C1920E1FE79005928B5 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		7C314C2120E242C5005928B5 /* MyContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContact.swift; sourceTree = "<group>"; };
 		7C33C8A020DCF38900A90398 /* PushAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushAlert.swift; sourceTree = "<group>"; };
 		7C910C4620D6AAF90072A673 /* yoapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yoapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C910C4920D6AAF90072A673 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -269,6 +271,8 @@
 			isa = PBXGroup;
 			children = (
 				7C1F174920E0BA9A0060AC70 /* Contact.swift */,
+				7C314C1920E1FE79005928B5 /* Store.swift */,
+				7C314C2120E242C5005928B5 /* MyContact.swift */,
 			);
 			name = Models;
 			path = "New Group";
@@ -483,12 +487,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-yoapp/Pods-yoapp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CoreStore/CoreStore.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreStore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -656,10 +662,7 @@
 				DEVELOPMENT_TEAM = R87MWZ88KR;
 				INFOPLIST_FILE = yoapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kz.dar.lab.pingoapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1445b209-e131-47ab-80dd-5a28d5e21f75";
@@ -679,10 +682,7 @@
 				DEVELOPMENT_TEAM = R87MWZ88KR;
 				INFOPLIST_FILE = yoapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kz.dar.lab.pingoapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b76961f7-16d9-4d30-9cf2-5e06a95efc3c";
