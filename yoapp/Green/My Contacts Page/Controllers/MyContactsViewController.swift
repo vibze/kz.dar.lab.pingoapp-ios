@@ -36,21 +36,21 @@ class MyContactsViewController: UIViewController {
 
         view.backgroundColor = UIColor(hexString: "6BBE90")
         setupViews()
-        fetchContacts()
+        //fetchContacts()
     }
     
-    func fetchContacts() {
-        MyContacts.fetchContacts { (contactsData, message) in
-            if let message = message {
-                print(message)
-                return
-            }
-            self.contacts = contactsData!
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
+//    func fetchContacts() {
+//        MyContacts.fetchContacts { (contactsData, message) in
+//            if let message = message {
+//                print(message)
+//                return
+//            }
+//            self.contacts = contactsData!
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
+//    }
     
     func setupViews() {
         view.addSubview(tableView)

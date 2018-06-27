@@ -1,16 +1,20 @@
 PODS:
+  - AccountKit (4.31.0)
   - SnapKit (4.0.0)
 
 DEPENDENCIES:
+  - AccountKit
   - SnapKit
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
+    - AccountKit
     - SnapKit
 
 SPEC CHECKSUMS:
+  AccountKit: f3e48047e6fb1c433dff37c61158fd32bbc482cf
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: a7e39c17b18a36254883461172f71d7a1978caa4
+PODFILE CHECKSUM: 331f1d7cdaebc96fc974e8b96b19e7669af3a51c
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3
