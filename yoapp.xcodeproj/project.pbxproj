@@ -37,6 +37,12 @@
 		843C3E0B20E38B8C004ACFB1 /* MyContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E0A20E38B8C004ACFB1 /* MyContact.swift */; };
 		843C3E0D20E38BA0004ACFB1 /* ContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E0C20E38BA0004ACFB1 /* ContactsService.swift */; };
 		843C3E0F20E38BAB004ACFB1 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E0E20E38BAB004ACFB1 /* Store.swift */; };
+		843C3E1520E38D97004ACFB1 /* CheckLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1320E38D96004ACFB1 /* CheckLoginViewController.swift */; };
+		843C3E1620E38D97004ACFB1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1420E38D96004ACFB1 /* LoginViewController.swift */; };
+		843C3E1920E38D9B004ACFB1 /* ImageSwipeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1720E38D9B004ACFB1 /* ImageSwipeStruct.swift */; };
+		843C3E1A20E38D9B004ACFB1 /* ImageSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1820E38D9B004ACFB1 /* ImageSwipeCell.swift */; };
+		843C3E1C20E38DFC004ACFB1 /* SessionsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1B20E38DFC004ACFB1 /* SessionsApi.swift */; };
+		843C3E1E20E38E0E004ACFB1 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1D20E38E0E004ACFB1 /* Profile.swift */; };
 		8E1DCD5220DCBBA500D3A4F6 /* BlackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */; };
 		8E1DCD5420DCBD9B00D3A4F6 /* BlockUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD5320DCBD9B00D3A4F6 /* BlockUserCell.swift */; };
 		8E3B73B520E0B91500DD3366 /* AboutAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B73B420E0B91500DD3366 /* AboutAppCell.swift */; };
@@ -89,6 +95,12 @@
 		843C3E0A20E38B8C004ACFB1 /* MyContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyContact.swift; path = yoapp/Models/MyContact.swift; sourceTree = SOURCE_ROOT; };
 		843C3E0C20E38BA0004ACFB1 /* ContactsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsService.swift; sourceTree = "<group>"; };
 		843C3E0E20E38BAB004ACFB1 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		843C3E1320E38D96004ACFB1 /* CheckLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckLoginViewController.swift; path = yoapp/Red/CheckLoginViewController.swift; sourceTree = SOURCE_ROOT; };
+		843C3E1420E38D96004ACFB1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = yoapp/Red/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
+		843C3E1720E38D9B004ACFB1 /* ImageSwipeStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageSwipeStruct.swift; path = yoapp/Red/ImageSwipeStruct.swift; sourceTree = SOURCE_ROOT; };
+		843C3E1820E38D9B004ACFB1 /* ImageSwipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageSwipeCell.swift; path = yoapp/Red/ImageSwipeCell.swift; sourceTree = SOURCE_ROOT; };
+		843C3E1B20E38DFC004ACFB1 /* SessionsApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsApi.swift; sourceTree = "<group>"; };
+		843C3E1D20E38E0E004ACFB1 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Profile.swift; path = "yoapp/Main page/Models/Profile.swift"; sourceTree = SOURCE_ROOT; };
 		8E1D402220DC7F4800FCB0C8 /* SettingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewCell.swift; sourceTree = "<group>"; };
 		8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
 		8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListViewController.swift; sourceTree = "<group>"; };
@@ -348,6 +360,8 @@
 		843C3DE320E37D7A004ACFB1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				843C3E1820E38D9B004ACFB1 /* ImageSwipeCell.swift */,
+				843C3E1720E38D9B004ACFB1 /* ImageSwipeStruct.swift */,
 				843C3E0220E38066004ACFB1 /* ProfileFooterView.swift */,
 				843C3E0020E38056004ACFB1 /* ProfileHeaderView.swift */,
 				843C3E0420E3806E004ACFB1 /* ProfileViewCell.swift */,
@@ -364,6 +378,7 @@
 		843C3DE620E37D92004ACFB1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				843C3E1D20E38E0E004ACFB1 /* Profile.swift */,
 				843C3E0820E3814A004ACFB1 /* User.swift */,
 				843C3E0A20E38B8C004ACFB1 /* MyContact.swift */,
 			);
@@ -383,6 +398,8 @@
 		843C3DF220E37DE9004ACFB1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				843C3E1320E38D96004ACFB1 /* CheckLoginViewController.swift */,
+				843C3E1420E38D96004ACFB1 /* LoginViewController.swift */,
 				843C3DFA20E37E5A004ACFB1 /* ProfileTableViewController.swift */,
 				843C3DF320E37DF0004ACFB1 /* MainTabViewController.swift */,
 			);
@@ -447,6 +464,7 @@
 		9941002020E227E300F18AA3 /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				843C3E1B20E38DFC004ACFB1 /* SessionsApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -594,17 +612,21 @@
 			files = (
 				843C3E0D20E38BA0004ACFB1 /* ContactsService.swift in Sources */,
 				7C1B8DF120DB9A23004BE38B /* TabBarButton.swift in Sources */,
+				843C3E1620E38D97004ACFB1 /* LoginViewController.swift in Sources */,
 				7C1CDFC920D7632B00A90E16 /* Extensions.swift in Sources */,
 				7C1D3FB920D6D7B7007037D9 /* SectionHeader.swift in Sources */,
 				7C910C4A20D6AAF90072A673 /* AppDelegate.swift in Sources */,
 				843C3E0520E3806E004ACFB1 /* ProfileViewCell.swift in Sources */,
 				843C3DE520E37D81004ACFB1 /* ImageView.swift in Sources */,
+				843C3E1520E38D97004ACFB1 /* CheckLoginViewController.swift in Sources */,
 				7C1B8DF720DBA87A004BE38B /* ComposeViewController.swift in Sources */,
 				7C26365A20DA048A008D34E1 /* MyContactsTableViewCell.swift in Sources */,
 				7C910C5C20D6B2E50072A673 /* ContactsViewController.swift in Sources */,
 				8E56777920DB886000E65AFE /* Enum.swift in Sources */,
 				8E56778B20DBBEB400E65AFE /* SettingViewController.swift in Sources */,
 				7C1D3FB720D6BA8E007037D9 /* ContactsCollectionViewCell.swift in Sources */,
+				843C3E1920E38D9B004ACFB1 /* ImageSwipeStruct.swift in Sources */,
+				843C3E1E20E38E0E004ACFB1 /* Profile.swift in Sources */,
 				843C3E0B20E38B8C004ACFB1 /* MyContact.swift in Sources */,
 				7C189F3220E015D300388DE2 /* SectionHeaderView.swift in Sources */,
 				7C1CDFD420D7A9A000A90E16 /* MyContactsViewController.swift in Sources */,
@@ -614,10 +636,12 @@
 				843C3DEC20E37DB9004ACFB1 /* PushAlert.swift in Sources */,
 				843C3E0920E3814A004ACFB1 /* User.swift in Sources */,
 				843C3DF920E37E4C004ACFB1 /* CustomInviteView.swift in Sources */,
+				843C3E1C20E38DFC004ACFB1 /* SessionsApi.swift in Sources */,
 				8EFB4EE720E199CA00F0037B /* FavouriteAddView.swift in Sources */,
 				843C3DF420E37DF0004ACFB1 /* MainTabViewController.swift in Sources */,
 				8E1DCD5220DCBBA500D3A4F6 /* BlackListViewController.swift in Sources */,
 				843C3DFD20E37EEB004ACFB1 /* SettingViewCell.swift in Sources */,
+				843C3E1A20E38D9B004ACFB1 /* ImageSwipeCell.swift in Sources */,
 				843C3DFB20E37E5A004ACFB1 /* ProfileTableViewController.swift in Sources */,
 				843C3DF720E37E3B004ACFB1 /* app.xcdatamodeld in Sources */,
 				8E3B73B520E0B91500DD3366 /* AboutAppCell.swift in Sources */,

@@ -9,6 +9,10 @@
 import UIKit
 import AccountKit
 
+
+/**
+ Сплеш-страница с интро по приложению
+ */
 class LoginViewController: UIViewController,
     UICollectionViewDelegate,
     UICollectionViewDataSource,
