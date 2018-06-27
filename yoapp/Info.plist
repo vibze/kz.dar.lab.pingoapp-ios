@@ -2,7 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleURLTypes</key>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string></string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string></string>
+	<key>UIAppFonts</key>
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
@@ -66,11 +76,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>whatsapp</string>
-		<string>tg</string>
-		<string>fb-messenger</string>
-	</array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>whatsapp</string>
+        <string>tg</string>
+        <string>fb-messenger</string>
+    </array>
 </dict>
 </plist>

@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+     
+        UIApplication.shared.statusBarStyle = .lightContent
         
         UIApplication.shared.statusBarStyle = .lightContent
     
@@ -30,15 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let profile = Profile.current()
-        
-        if profile != nil {
-            window?.rootViewController = ContactsViewController()
+        if user != nil {
+            let vc = CustomNavBarView(rootViewController: MainTabViewController())
+            window?.rootViewController = vc
+        } else {
+            let vc = CustomNavBarView(rootViewController: MainTabViewController())
+            window?.rootViewController = vc
         }
-        else {
-            window?.rootViewController = LoginViewController()
-        }
-        
         window!.makeKeyAndVisible()
     }
     

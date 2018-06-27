@@ -48,15 +48,15 @@ class ProfileViewCell: UITableViewCell {
             $0.top.equalToSuperview().offset(0)
             $0.left.equalToSuperview().offset(0)
             $0.right.equalToSuperview().offset(0)
-            $0.height.equalTo(70)
+            $0.height.equalTo(60)
             $0.bottom.equalToSuperview().offset(0)
         }
         
         backView.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(0)
+            $0.top.equalTo(hiddenView.snp.top)
             $0.left.equalToSuperview().offset(32)
             $0.right.equalToSuperview().offset(-32)
-            $0.height.equalTo(50)
+            $0.bottom.equalTo(hiddenView.snp.bottom).offset(-10)
         }
         
         settingLabel.snp.makeConstraints{
@@ -68,11 +68,5 @@ class ProfileViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
+
 }

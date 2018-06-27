@@ -8,12 +8,6 @@
 
 import UIKit
 
-enum ProfileType {
-    case settings
-    case about
-    case exit
-}
-
 let screenHeight = UIScreen.main.bounds.height
 let screenWidth = UIScreen.main.bounds.width
 let screenBounds = UIScreen.main.bounds

@@ -40,7 +40,7 @@ extension UIColor {
     static let myPurple = UIColor(hexString: "9C4572")
     static let myOrange = UIColor(hexString: "FB984B")
     static let myYellow = UIColor(hexString: "FFB934")
-   
+    static let backgroundYellow = UIColor(hexString: "FEC95F")
 }
 
 extension UIViewController {
@@ -53,5 +53,54 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.gestureRecognizers?.removeAll()
         view.endEditing(true)
+    }
+}
+
+extension UIView {
+    
+    func roundCorners(corners:UIRectCorner, radius: CGFloat) {
+        DispatchQueue.main.async {
+            let path = UIBezierPath(roundedRect: self.bounds,
+                                    byRoundingCorners: corners,
+                                    cornerRadii: CGSize(width: radius, height: radius))
+            let maskLayer = CAShapeLayer()
+            maskLayer.frame = self.bounds
+            maskLayer.path = path.cgPath
+            self.layer.mask = maskLayer
+        }
+    }
+}
+
+extension UITableViewController {
+    
+    @objc func bactToVC() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func openViewController(viewController: UIViewController){
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+extension UINavigationController {
+    /*
+    func tempChanges(backgrounColor: UIColor, title: String){
+        self.navigationBar.frame = CGRect(x: 0, y: 0, width: screenWidth, height: 150)
+        self.navigationBar.barTintColor = backgrounColor
+        self.navigationBar.topItem?.title = title
+        self.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Bold", size: 20)!,NSAttributedStringKey.foregroundColor: UIColor.white]
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "left-arrow"), style: .plain, target: self, action: #selector(bactToVC))
+        navigationController?.navigationBar.isTranslucent = false
+    }*/
+}
+
+
+extension UIView {
+    func basic(backgroundColor: UIColor) -> UIView{
+        let view = UIView()
+        view.layer.cornerRadius = 10
+        view.backgroundColor = backgroundColor
+        return view
     }
 }
