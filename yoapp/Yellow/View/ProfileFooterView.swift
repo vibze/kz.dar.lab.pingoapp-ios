@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileFooterView : UIView {
     
-    var friendLabel = UILabel.basic(textColor: .myPurple, fontSize: 16)
+    var friendLabel = UILabel.basic(textColor: .myPurple, fontSize: 16, fontType: .mySemiBold)
  
     var telegramView: CustomInviteView = {
         let view = CustomInviteView()
@@ -49,15 +49,24 @@ class ProfileFooterView : UIView {
         friendLabel.text = "Пригласить друзей в Ping App"
         
         friendLabel.snp.makeConstraints{(make) in
+            if screenBounds.height == 568{
             make.top.equalToSuperview().offset(0)
             make.centerX.equalToSuperview()
+            }else{
+                make.top.equalToSuperview().offset(30)
+                make.centerX.equalToSuperview()
+            }
         }
         
         backStackView.snp.makeConstraints{
             $0.top.equalTo(friendLabel.snp.bottom).offset(16)
             $0.left.equalToSuperview().offset(27)
             $0.right.equalToSuperview().offset(-27)
-            $0.bottom.equalToSuperview().offset(-5)
+            if screenBounds.height == 568{
+                 $0.bottom.equalToSuperview().offset(-5)
+            }else{
+                $0.bottom.equalToSuperview().offset(30)
+            }
         }
         
         stackView.snp.makeConstraints{

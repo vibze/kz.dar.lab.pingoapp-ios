@@ -10,7 +10,7 @@ import UIKit
 
 class InviteFriendsView : UIView {
     
-    let friendLabel = UILabel.basic(textColor: .myPurple, fontSize: 16)
+    let friendLabel = UILabel.basic(textColor: .myPurple, fontSize: 16, fontType: .mySemiBold)
     
     var telegramView: CustomInviteView = {
         let view = CustomInviteView()
