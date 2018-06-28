@@ -272,10 +272,7 @@ AKFViewControllerDelegate {
 //        print(accessToken.tokenString)
         SessionsApi.createSession(token: accessToken.tokenString, success: { profile in
             // Write to user defaults
-            Profile.addToUserDefaults(profile)
-            let vc = MainTabViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-//            self.present(vc, animated: true, completion: nil)
+            Application.shared.login(profile: profile)
         }) { errorMessage in
             // Notify user about error
             self.present(self.errorMessageAlert, animated: true, completion: nil)

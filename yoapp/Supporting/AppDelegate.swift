@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import CoreStore
 import UserNotifications
+import AccountKit
+
 
 @available(iOS 10.0, *)
 @UIApplicationMain
@@ -20,8 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         UIApplication.shared.statusBarStyle = .lightContent
-        
-        UIApplication.shared.statusBarStyle = .lightContent
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        Application.shared.window = window
+        window.makeKeyAndVisible()
         
         registerForRemoteNotification()
         
@@ -44,20 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func checkStorage() {
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        /*
-         if user != nil {
-         let vc = UINavigationController(rootViewController: MainTabViewController())
-         window?.rootViewController = vc
-         } else {
-         let vc = UINavigationController(rootViewController: MainTabViewController())
-         window?.rootViewController = vc
-         }*/
-        
-        let vc = UINavigationController(rootViewController: LoginViewController())
-        window?.rootViewController = vc
-        window!.makeKeyAndVisible()
+        if let profile = Profile.current() {
+            Application.shared.login(profile: profile)
+        } else {
+            Application.shared.logout()
+        }
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -141,3 +135,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+
+class Application {
+    
+    static let shared = Application()
+    
+    var window: UIWindow?
+    
+    func login(profile: Profile) {
+        Profile.addToUserDefaults(profile)
+        let vc = UINavigationController(rootViewController: MainTabViewController())
+        window?.rootViewController = vc
+    }
+    
+    func logout() {
+        AKFAccountKit(responseType: .accessToken).logOut()
+        window?.rootViewController = LoginViewController()
+    }
+}

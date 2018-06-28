@@ -36,7 +36,6 @@
 		843C3E0B20E38B8C004ACFB1 /* MyContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E0A20E38B8C004ACFB1 /* MyContact.swift */; };
 		843C3E0D20E38BA0004ACFB1 /* ContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E0C20E38BA0004ACFB1 /* ContactsService.swift */; };
 		843C3E0F20E38BAB004ACFB1 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E0E20E38BAB004ACFB1 /* Store.swift */; };
-		843C3E1520E38D97004ACFB1 /* CheckLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1320E38D96004ACFB1 /* CheckLoginViewController.swift */; };
 		843C3E1620E38D97004ACFB1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1420E38D96004ACFB1 /* LoginViewController.swift */; };
 		843C3E1920E38D9B004ACFB1 /* ImageSwipeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1720E38D9B004ACFB1 /* ImageSwipeStruct.swift */; };
 		843C3E1A20E38D9B004ACFB1 /* ImageSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1820E38D9B004ACFB1 /* ImageSwipeCell.swift */; };
@@ -94,7 +93,6 @@
 		843C3E0A20E38B8C004ACFB1 /* MyContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyContact.swift; path = yoapp/Models/MyContact.swift; sourceTree = SOURCE_ROOT; };
 		843C3E0C20E38BA0004ACFB1 /* ContactsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsService.swift; sourceTree = "<group>"; };
 		843C3E0E20E38BAB004ACFB1 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
-		843C3E1320E38D96004ACFB1 /* CheckLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckLoginViewController.swift; path = yoapp/Red/CheckLoginViewController.swift; sourceTree = SOURCE_ROOT; };
 		843C3E1420E38D96004ACFB1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = yoapp/Red/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
 		843C3E1720E38D9B004ACFB1 /* ImageSwipeStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageSwipeStruct.swift; path = yoapp/Red/ImageSwipeStruct.swift; sourceTree = SOURCE_ROOT; };
 		843C3E1820E38D9B004ACFB1 /* ImageSwipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageSwipeCell.swift; path = yoapp/Red/ImageSwipeCell.swift; sourceTree = SOURCE_ROOT; };
@@ -399,7 +397,6 @@
 		843C3DF220E37DE9004ACFB1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				843C3E1320E38D96004ACFB1 /* CheckLoginViewController.swift */,
 				843C3E1420E38D96004ACFB1 /* LoginViewController.swift */,
 				843C3DFA20E37E5A004ACFB1 /* ProfileTableViewController.swift */,
 				843C3DF320E37DF0004ACFB1 /* MainTabViewController.swift */,
@@ -623,7 +620,6 @@
 				7C910C4A20D6AAF90072A673 /* AppDelegate.swift in Sources */,
 				843C3E0520E3806E004ACFB1 /* ProfileViewCell.swift in Sources */,
 				843C3DE520E37D81004ACFB1 /* ImageView.swift in Sources */,
-				843C3E1520E38D97004ACFB1 /* CheckLoginViewController.swift in Sources */,
 				7C1B8DF720DBA87A004BE38B /* ComposeViewController.swift in Sources */,
 				7C26365A20DA048A008D34E1 /* MyContactsTableViewCell.swift in Sources */,
 				7C910C5C20D6B2E50072A673 /* ContactsViewController.swift in Sources */,

@@ -73,8 +73,7 @@ extension ProfileTableViewController {
         case 1:
             openViewController(viewController: AboutAppViewController())
         case 2:
-            break
-            //openViewController(viewController: AuthViewController())
+            Application.shared.logout()
         default:
             break
         }

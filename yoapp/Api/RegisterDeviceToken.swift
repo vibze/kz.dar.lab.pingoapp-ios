@@ -10,15 +10,19 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class RegisterDeviceToken {
-    static func getPost (token: String, success: @escaping (Profile)-> Void, failure: @escaping (String) -> Void){
+class ProfileAPI {
+    static func registerDeviceToken(token: String, success: @escaping (Profile)-> Void, failure: @escaping (String) -> Void){
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         let url = "http://178.62.123.161/api/v1/profile/register_device_token"
         
         let parameters: Parameters = ["device_token": token, "provider": "apns"]
-        
-        Alamofire.request(url, method: .post, parameters: parameters).validate().responseJSON { (response) in
-        }
+        /*
+        request(url, method: .post, parameters: parameters, success: {
+            
+        }, failure: { error in
+            
+        })
+ */
     }
 }
