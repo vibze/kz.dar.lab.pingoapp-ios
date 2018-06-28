@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class FavouriteWordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var favourCell = "FavouriteCell"
-    var array = ["Привет, как дела?","Привет","Что делаешь?","Привет, как дела?","Привет","Что делаешь?"]
+    var favoriteCell = "FavouriteCell"
+    var array: [NSManagedObject] = []
    
     let backgroundView = UIView()
     
@@ -36,15 +37,28 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate, UITabl
         addRightBtutton(action: #selector(addFavourWordAction))
         configTableView()
     }
-    
+   
     override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
+        super.viewWillAppear(animated)
+        if #available(iOS 10.0, *) {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let managedContext = appDelegate.persistentContainer.viewContext
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteWords")
+            do{
+                array = try managedContext.fetch(fetchRequest)
+            }catch let error as NSError{
+                print(error)
+            }
+            tableView.reloadData()
+        }else{
+            print("Nothing")
+        }
     }
     
     func configTableView(){
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(SettingViewCell.self, forCellReuseIdentifier: favourCell)
+        tableView.register(SettingViewCell.self, forCellReuseIdentifier: favoriteCell)
         tableView.snp.makeConstraints{
             $0.top.left.right.bottom.equalToSuperview().offset(0)
         }
@@ -58,9 +72,9 @@ extension FavouriteWordViewController {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: favourCell, for: indexPath) as! SettingViewCell
-        cell.textName(text: array[indexPath.row])
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: favoriteCell, for: indexPath) as! SettingViewCell
+        let data = array[indexPath.row]
+        cell.textName(text: (data.value(forKey: "word") as? String)!)
         return cell
     }
     
@@ -74,7 +88,17 @@ extension FavouriteWordViewController {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+             if #available(iOS 10.0, *) {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let managedContext = appDelegate.persistentContainer.viewContext
+            managedContext.delete(array[indexPath.row] as NSManagedObject)
             array.remove(at: indexPath.row)
+                do {
+                    try managedContext.save()
+                } catch let error as NSError {
+                    print(error.userInfo)
+                }
+            }
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
@@ -105,10 +129,29 @@ extension FavouriteWordViewController {
     
     @objc func addAction(){
         let word = addWordView.inputWord.text
-        array.append(word!)
+        save(favorWord: word!)
         addWordView.inputWord.text = " "
         tableView.reloadData()
         addWordView.removeFromSuperview()
         backgroundView.removeFromSuperview()
+        tableView.reloadData()
+    }
+    
+    func save(favorWord: String){
+        if #available(iOS 10.0, *) {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+            let managedContext = appDelegate.persistentContainer.viewContext
+            let entity = NSEntityDescription.entity(forEntityName: "FavoriteWords", in: managedContext)
+            let item = NSManagedObject(entity: entity!, insertInto: managedContext)
+            item.setValue(favorWord, forKey: "word")
+            do{
+                try managedContext.save()
+                array.append(item)
+            }catch let error as NSError{
+                print(error)
+            }
+        }else{
+            print("Nothing")
+        }
     }
 }
