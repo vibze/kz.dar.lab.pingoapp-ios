@@ -109,6 +109,7 @@ AKFViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 237/255, green: 95/255, blue: 117/255, alpha: 1)
+        self.navigationController?.isNavigationBarHidden = true
         setupBottomControls()
         setupCollectionView()
         collectionView.register(ImageSwipeCell.self, forCellWithReuseIdentifier: "Cell")
@@ -117,7 +118,6 @@ AKFViewControllerDelegate {
         if accountKit == nil {
             self.accountKit = AKFAccountKit(responseType: .accessToken)
         }
-        
     }
     
     func setupCollectionView(){
@@ -272,8 +272,9 @@ AKFViewControllerDelegate {
         SessionsApi.createSession(token: accessToken.tokenString, success: { profile in
             // Write to user defaults
             Profile.addToUserDefaults(profile)
-            let vc = ContactsViewController()
-            self.present(vc, animated: true, completion: nil)
+            let vc = MainTabViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+//            self.present(vc, animated: true, completion: nil)
         }) { errorMessage in
             // Notify user about error
             self.present(self.errorMessageAlert, animated: true, completion: nil)
