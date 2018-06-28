@@ -44,7 +44,11 @@ extension UIColor {
 }
 
 extension UIViewController {
-    
+ 
+@objc func dismiss(fromGesture gesture: UISwipeGestureRecognizer) {
+    //Your dismiss code
+    //Here you should implement your checks for the swipe gesture
+}
     func hideKeyboard() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -56,13 +60,16 @@ extension UIViewController {
     }
     
     func addNavCon(backgrounColor: UIColor, title: String){
-        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = backgrounColor
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         navigationItem.title = title
-        navigationController?.navigationBar.barTintColor = backgrounColor
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Helvetica-Bold", size: 18)!,NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "left-arrow"), style: .plain, target: self, action: #selector(bactToVC))
-        
+        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(bactToVC))
+        gesture.direction = .right
+        self.view.addGestureRecognizer(gesture)
     }
     
     @objc func bactToVC() {
@@ -97,12 +104,12 @@ extension UITableViewController {
 }
 
 extension UILabel {
-    static func basic(textColor: UIColor, fontSize: CGFloat) -> UILabel{
+    static func basic(textColor: UIColor, fontSize: CGFloat, fontType: FontType) -> UILabel{
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        label.font = UIFont(name: "HelveticaNeue-Bold", size: fontSize)
+        label.font = UIFont(name: fontType.rawValue, size: fontSize)
         label.textColor = textColor
         
         return label
