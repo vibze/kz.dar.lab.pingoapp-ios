@@ -268,13 +268,11 @@ AKFViewControllerDelegate {
     }
     
     func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
-        
+        print("accessToken:", accessToken.tokenString)
+//        print(accessToken.tokenString)
         SessionsApi.createSession(token: accessToken.tokenString, success: { profile in
             // Write to user defaults
-            print(accessToken.tokenString)
-            Profile.addToUserDefaults(profile)
-            let vc = MainTabViewController()
-            self.present(vc, animated: true, completion: nil)
+            Application.shared.login(profile: profile)
         }) { errorMessage in
             // Notify user about error
             self.present(self.errorMessageAlert, animated: true, completion: nil)
