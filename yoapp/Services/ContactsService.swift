@@ -15,10 +15,17 @@ import SwiftyJSON
 struct ContactsService {
     
     static var contactsMonitor: ListMonitor<Contact> = {
-        let monitor = CoreStore.monitorList(
-            From<Contact>()
-                .orderBy(.ascending(\.name))
-        )
+        let monitor = CoreStore.monitorList(From<Contact>().orderBy(.ascending(\.name)))
+        return monitor
+    }()
+    
+    static var registeredContactsMonitor: ListMonitor<Contact> = {
+        let monitor = CoreStore.monitorList(From<Contact>().orderBy(.ascending(\.name)).where(\.profileId != 0))
+        return monitor
+    }()
+    
+    static var recentlyActiveMonitor: ListMonitor<Contact> = {
+        let monitor = CoreStore.monitorList(From<Contact>().orderBy(.ascending(\.pingedAt)).where(\.profileId != 0))
         return monitor
     }()
     
@@ -83,43 +90,28 @@ struct ContactsService {
         Alamofire.request(request).responseJSON { response in
             switch response.result {
             case .success(let value):
-                break
-//                print("response json:" , value)
+                let json = JSON(value)
+                
+                CoreStore.perform(
+                    asynchronous: { (transaction) -> Void in
+                        for registered in json.arrayValue {
+                            let contact = transaction.fetchOne(From<Contact>().where(\.phoneNumber == registered["phone_number"].stringValue))
+                            contact?.profileId = Int32(registered["id"].intValue)
+                            let avatar = JSON(registered["avatar"])
+                            contact?.avatarUrl = avatar["url"].stringValue
+                        }
+                    },
+                    completion: { (result) -> Void in
+                        switch result {
+                        case .success: print("success")
+                        case .failure(let error): print(error)
+                        }
+                    }
+                )
+                
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
-    }
-    
-    func getRegisteredContacts(_ completion: @escaping ([[Contact]?]) -> Void) {
-        CoreStore.perform(
-            asynchronous: {
-                let registeredContacts = $0.fetchAll(From<Contact>().where(\.profileId != 0))
-                let lastActiveContacts = $0.fetchAll(From<Contact>().where(\.profileId != 0).orderBy(.ascending(\.pingedAt)))
-                
-                completion([lastActiveContacts, registeredContacts])
-            },
-            completion: { (result) -> Void in
-                switch result {
-                case .success: print("success")
-                case .failure(let error): print(error)
-                }
-            }
-        )
-    }
-    
-    func updateContacts() {
-        CoreStore.perform (
-            asynchronous: { (transaction) -> Void in
-                let contact = transaction.fetchOne(From<Contact>().where(\.phoneNumber == ""))
-                contact?.profileId = 13
-            },
-            completion: { (result) -> Void in
-                switch result {
-                case .success: print("success")
-                case .failure(let error): print(error)
-                }
-            }
-        )
     }
 }

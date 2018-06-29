@@ -31,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Store.initCoreStore()
         
         checkStorage()
-        
         return true
     }
     func registerForRemoteNotification() {
