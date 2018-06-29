@@ -10,9 +10,9 @@ import UIKit
 
 class AboutAppCell: UITableViewCell {
     
-    let appNameLabel = UILabel.basic(textColor: .myPurple, fontSize: 20)
+    let appNameLabel = UILabel.basic(textColor: .myPurple, fontSize: 20, fontType: .myBold)
     var aboutBackgroundView = UIView()
-    let aboutLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 18)
+    let aboutLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 18, fontType: .mySemiBold)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

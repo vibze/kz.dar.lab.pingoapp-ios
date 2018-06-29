@@ -27,11 +27,6 @@
 		843C3DEC20E37DB9004ACFB1 /* PushAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3DEB20E37DB9004ACFB1 /* PushAlert.swift */; };
 		843C3DF420E37DF0004ACFB1 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3DF320E37DF0004ACFB1 /* MainTabViewController.swift */; };
 		843C3DF720E37E3B004ACFB1 /* app.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 843C3DF520E37E3B004ACFB1 /* app.xcdatamodeld */; };
-		843C3DF920E37E4C004ACFB1 /* CustomInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3DF820E37E4C004ACFB1 /* CustomInviteView.swift */; };
-		843C3DFB20E37E5A004ACFB1 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3DFA20E37E5A004ACFB1 /* ProfileTableViewController.swift */; };
-		843C3DFD20E37EEB004ACFB1 /* SettingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3DFC20E37EEB004ACFB1 /* SettingViewCell.swift */; };
-		843C3DFF20E38045004ACFB1 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3DFE20E38045004ACFB1 /* SettingsFooterView.swift */; };
-		843C3E0120E38056004ACFB1 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E0020E38056004ACFB1 /* ProfileHeaderView.swift */; };
 		843C3E0320E38066004ACFB1 /* ProfileFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E0220E38066004ACFB1 /* ProfileFooterView.swift */; };
 		843C3E0520E3806E004ACFB1 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E0420E3806E004ACFB1 /* ProfileViewCell.swift */; };
 		843C3E0B20E38B8C004ACFB1 /* MyContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E0A20E38B8C004ACFB1 /* MyContact.swift */; };
@@ -42,6 +37,7 @@
 		843C3E1A20E38D9B004ACFB1 /* ImageSwipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1820E38D9B004ACFB1 /* ImageSwipeCell.swift */; };
 		843C3E1C20E38DFC004ACFB1 /* SessionsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1B20E38DFC004ACFB1 /* SessionsApi.swift */; };
 		843C3E1E20E38E0E004ACFB1 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1D20E38E0E004ACFB1 /* Profile.swift */; };
+		8E04FC8220E48F43004B7D29 /* FavoriteWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E04FC8120E48F43004B7D29 /* FavoriteWordModel.swift */; };
 		8E1DCD5220DCBBA500D3A4F6 /* BlackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */; };
 		8E1DCD5420DCBD9B00D3A4F6 /* BlockUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD5320DCBD9B00D3A4F6 /* BlockUserCell.swift */; };
 		8E3B73B520E0B91500DD3366 /* AboutAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B73B420E0B91500DD3366 /* AboutAppCell.swift */; };
@@ -50,6 +46,14 @@
 		8E56778B20DBBEB400E65AFE /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778A20DBBEB400E65AFE /* SettingViewController.swift */; };
 		8E56778D20DBE00600E65AFE /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */; };
 		8E59AD9320E072E2003CA5CC /* BlockUserLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E59AD9220E072E2003CA5CC /* BlockUserLabelView.swift */; };
+		8E67642820E3B207006D5652 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B8DEC20DB92DC004BE38B /* ImageView.swift */; };
+		8E67642920E3B20B006D5652 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B8DE620DB6B9B004BE38B /* ActionButton.swift */; };
+		8E67642A20E3B220006D5652 /* CustomInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56778820DBB7B500E65AFE /* CustomInviteView.swift */; };
+		8E67642B20E3B23A006D5652 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56776F20DB86BD00E65AFE /* ProfileHeaderView.swift */; };
+		8E67642C20E3B23A006D5652 /* ProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56777A20DB92E800E65AFE /* ProfileViewCell.swift */; };
+		8E67642D20E3B23A006D5652 /* SettingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1D402220DC7F4800FCB0C8 /* SettingViewCell.swift */; };
+		8E67642E20E3B23A006D5652 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */; };
+		8E67643020E3B2C0006D5652 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E67642F20E3B2C0006D5652 /* ProfileTableViewController.swift */; };
 		8EC7F28920E09A2000C4BFE7 /* FavouriteWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */; };
 		8EC7F28D20E0AA0C00C4BFE7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */; };
 		8EFB4EE720E199CA00F0037B /* FavouriteAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB4EE620E199CA00F0037B /* FavouriteAddView.swift */; };
@@ -81,11 +85,6 @@
 		843C3DEB20E37DB9004ACFB1 /* PushAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushAlert.swift; path = "yoapp/Green/Compose Page/Views/PushAlert.swift"; sourceTree = SOURCE_ROOT; };
 		843C3DF320E37DF0004ACFB1 /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabViewController.swift; path = "yoapp/Main page/Controllers/MainTabViewController.swift"; sourceTree = SOURCE_ROOT; };
 		843C3DF620E37E3B004ACFB1 /* contacts.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = contacts.xcdatamodel; sourceTree = "<group>"; };
-		843C3DF820E37E4C004ACFB1 /* CustomInviteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomInviteView.swift; path = yoapp/Yellow/View/CustomInviteView.swift; sourceTree = SOURCE_ROOT; };
-		843C3DFA20E37E5A004ACFB1 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewController.swift; path = yoapp/Yellow/Controller/ProfileTableViewController.swift; sourceTree = SOURCE_ROOT; };
-		843C3DFC20E37EEB004ACFB1 /* SettingViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingViewCell.swift; path = yoapp/Yellow/View/SettingViewCell.swift; sourceTree = SOURCE_ROOT; };
-		843C3DFE20E38045004ACFB1 /* SettingsFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsFooterView.swift; path = yoapp/Yellow/View/SettingsFooterView.swift; sourceTree = SOURCE_ROOT; };
-		843C3E0020E38056004ACFB1 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileHeaderView.swift; path = yoapp/Yellow/View/ProfileHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		843C3E0220E38066004ACFB1 /* ProfileFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileFooterView.swift; path = yoapp/Yellow/View/ProfileFooterView.swift; sourceTree = SOURCE_ROOT; };
 		843C3E0420E3806E004ACFB1 /* ProfileViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileViewCell.swift; path = yoapp/Yellow/View/ProfileViewCell.swift; sourceTree = SOURCE_ROOT; };
 		843C3E0A20E38B8C004ACFB1 /* MyContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyContact.swift; path = yoapp/Models/MyContact.swift; sourceTree = SOURCE_ROOT; };
@@ -96,12 +95,12 @@
 		843C3E1820E38D9B004ACFB1 /* ImageSwipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageSwipeCell.swift; path = yoapp/Red/ImageSwipeCell.swift; sourceTree = SOURCE_ROOT; };
 		843C3E1B20E38DFC004ACFB1 /* SessionsApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsApi.swift; sourceTree = "<group>"; };
 		843C3E1D20E38E0E004ACFB1 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Profile.swift; path = "yoapp/Main page/Models/Profile.swift"; sourceTree = SOURCE_ROOT; };
+		8E04FC8120E48F43004B7D29 /* FavoriteWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteWordModel.swift; sourceTree = "<group>"; };
 		8E1D402220DC7F4800FCB0C8 /* SettingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewCell.swift; sourceTree = "<group>"; };
 		8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
 		8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListViewController.swift; sourceTree = "<group>"; };
 		8E1DCD5320DCBD9B00D3A4F6 /* BlockUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserCell.swift; sourceTree = "<group>"; };
 		8E3B73B420E0B91500DD3366 /* AboutAppCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppCell.swift; sourceTree = "<group>"; };
-		8E56776B20DB861500E65AFE /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		8E56776F20DB86BD00E65AFE /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		8E56777820DB886000E65AFE /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		8E56777A20DB92E800E65AFE /* ProfileViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewCell.swift; sourceTree = "<group>"; };
@@ -111,6 +110,7 @@
 		8E56778A20DBBEB400E65AFE /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		8E59AD9220E072E2003CA5CC /* BlockUserLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserLabelView.swift; sourceTree = "<group>"; };
+		8E67642F20E3B2C0006D5652 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteWordViewController.swift; sourceTree = "<group>"; };
 		8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8EFB4EE620E199CA00F0037B /* FavouriteAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAddView.swift; sourceTree = "<group>"; };
@@ -147,6 +147,43 @@
 				0D2B93724BE3302FB56D8383 /* Pods_yoapp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7C1B8DE820DB6BD6004BE38B /* Main page */ = {
+			isa = PBXGroup;
+			children = (
+				7C1B8DEB20DB6BF9004BE38B /* Controllers */,
+				7C1B8DEA20DB6BEF004BE38B /* Models */,
+				7C1B8DE920DB6BE9004BE38B /* Views */,
+			);
+			path = "Main page";
+			sourceTree = "<group>";
+		};
+		7C1B8DE920DB6BE9004BE38B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7C1B8DE620DB6B9B004BE38B /* ActionButton.swift */,
+				7C1B8DEC20DB92DC004BE38B /* ImageView.swift */,
+				7C1B8DEE20DB9650004BE38B /* SearchTextField.swift */,
+				7C1B8DF020DB9A23004BE38B /* TabBarButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7C1B8DEA20DB6BEF004BE38B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				843C3E1D20E38E0E004ACFB1 /* Profile.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7C1B8DEB20DB6BF9004BE38B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				843C3DF320E37DF0004ACFB1 /* MainTabViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		7C1B8DF220DBA82C004BE38B /* Compose Page */ = {
@@ -340,19 +377,20 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		843C3DF220E37DE9004ACFB1 /* Controllers */ = {
+		8E04FC8020E48F2D004B7D29 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				843C3E1420E38D96004ACFB1 /* LoginViewController.swift */,
 				843C3DFA20E37E5A004ACFB1 /* ProfileTableViewController.swift */,
 				843C3DF320E37DF0004ACFB1 /* MainTabViewController.swift */,
 			);
-			path = Controllers;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		8E56776A20DB765A00E65AFE /* Yellow */ = {
 			isa = PBXGroup;
 			children = (
+				8E04FC8020E48F2D004B7D29 /* Model */,
 				8E56777720DB87BD00E65AFE /* Helpers */,
 				8E56776E20DB86AA00E65AFE /* View */,
 				8E56776D20DB86A000E65AFE /* Controller */,
@@ -363,9 +401,9 @@
 		8E56776D20DB86A000E65AFE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8E56776B20DB861500E65AFE /* ProfileTableViewController.swift */,
-				8E56778A20DBBEB400E65AFE /* SettingViewController.swift */,
+				8E67642F20E3B2C0006D5652 /* ProfileTableViewController.swift */,
 				8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */,
+				8E56778A20DBBEB400E65AFE /* SettingViewController.swift */,
 				8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */,
 				8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */,
 			);
@@ -375,6 +413,7 @@
 		8E56776E20DB86AA00E65AFE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				843C3E0220E38066004ACFB1 /* ProfileFooterView.swift */,
 				8E56776F20DB86BD00E65AFE /* ProfileHeaderView.swift */,
 				8E56777A20DB92E800E65AFE /* ProfileViewCell.swift */,
 				8EFB4EE620E199CA00F0037B /* FavouriteAddView.swift */,
@@ -395,6 +434,25 @@
 				8E56777820DB886000E65AFE /* Enum.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		8E67642320E3AFE3006D5652 /* Red */ = {
+			isa = PBXGroup;
+			children = (
+				843C3E1420E38D96004ACFB1 /* LoginViewController.swift */,
+				843C3E1320E38D96004ACFB1 /* CheckLoginViewController.swift */,
+				843C3E1820E38D9B004ACFB1 /* ImageSwipeCell.swift */,
+				843C3E1720E38D9B004ACFB1 /* ImageSwipeStruct.swift */,
+			);
+			path = Red;
+			sourceTree = "<group>";
+		};
+		8E67642720E3B0B3006D5652 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				843C3E0A20E38B8C004ACFB1 /* MyContact.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		8EC7F28B20E0A9C500C4BFE7 /* Recovered References */ = {
@@ -559,6 +617,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E67642B20E3B23A006D5652 /* ProfileHeaderView.swift in Sources */,
+				8E67642C20E3B23A006D5652 /* ProfileViewCell.swift in Sources */,
+				8E67642D20E3B23A006D5652 /* SettingViewCell.swift in Sources */,
+				8E67642E20E3B23A006D5652 /* SettingsFooterView.swift in Sources */,
 				843C3E0D20E38BA0004ACFB1 /* ContactsService.swift in Sources */,
 				7C1B8DF120DB9A23004BE38B /* TabBarButton.swift in Sources */,
 				843C3E1620E38D97004ACFB1 /* LoginViewController.swift in Sources */,
@@ -581,7 +643,6 @@
 				7C1CDFD420D7A9A000A90E16 /* MyContactsViewController.swift in Sources */,
 				7C1CDFD720D7AB5100A90E16 /* MessageViewController.swift in Sources */,
 				843C3E0320E38066004ACFB1 /* ProfileFooterView.swift in Sources */,
-				843C3DFF20E38045004ACFB1 /* SettingsFooterView.swift in Sources */,
 				843C3DEC20E37DB9004ACFB1 /* PushAlert.swift in Sources */,
 				9929205220E4906E00F87149 /* RegisterDeviceToken.swift in Sources */,
 				843C3DF920E37E4C004ACFB1 /* CustomInviteView.swift in Sources */,
@@ -590,19 +651,18 @@
 				8EFB4EE720E199CA00F0037B /* FavouriteAddView.swift in Sources */,
 				843C3DF420E37DF0004ACFB1 /* MainTabViewController.swift in Sources */,
 				8E1DCD5220DCBBA500D3A4F6 /* BlackListViewController.swift in Sources */,
-				843C3DFD20E37EEB004ACFB1 /* SettingViewCell.swift in Sources */,
 				843C3E1A20E38D9B004ACFB1 /* ImageSwipeCell.swift in Sources */,
-				843C3DFB20E37E5A004ACFB1 /* ProfileTableViewController.swift in Sources */,
 				843C3DF720E37E3B004ACFB1 /* app.xcdatamodeld in Sources */,
 				8E3B73B520E0B91500DD3366 /* AboutAppCell.swift in Sources */,
+				8E67642820E3B207006D5652 /* ImageView.swift in Sources */,
 				8E59AD9320E072E2003CA5CC /* BlockUserLabelView.swift in Sources */,
 				8E1DCD5420DCBD9B00D3A4F6 /* BlockUserCell.swift in Sources */,
-				843C3E0120E38056004ACFB1 /* ProfileHeaderView.swift in Sources */,
 				8E56778D20DBE00600E65AFE /* AboutAppViewController.swift in Sources */,
 				843C3E0F20E38BAB004ACFB1 /* Store.swift in Sources */,
 				7CC4E13420DA37850094F6CD /* MessageCollectionViewCell.swift in Sources */,
 				8EC7F28920E09A2000C4BFE7 /* FavouriteWordViewController.swift in Sources */,
 				8E56777F20DB959F00E65AFE /* InviteFriendsView.swift in Sources */,
+				8E04FC8220E48F43004B7D29 /* FavoriteWordModel.swift in Sources */,
 				7C1B8DEF20DB9650004BE38B /* SearchTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -741,8 +801,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = kz.dar.lab.pingoapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1445b209-e131-47ab-80dd-5a28d5e21f75";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development kz.dar.lab.pingoapp 1529907977";
+				PROVISIONING_PROFILE = "b76961f7-16d9-4d30-9cf2-5e06a95efc3c";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development kz.dar.lab.pingoapp";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

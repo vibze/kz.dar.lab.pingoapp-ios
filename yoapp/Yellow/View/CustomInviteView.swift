@@ -17,7 +17,7 @@ class CustomInviteView: UIView {
         return image
     }()
     
-    let nameLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 14)
+    let nameLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 14, fontType: .mySemiBold)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -73,7 +73,13 @@ class ProfileHeaderView: UIView {
             make.height.equalTo(40)
         }
         
-        profileImg.image = #imageLiteral(resourceName: "cameraPhoto")
+        if profileImg.image != nil {
+            print("Nil")
+            let data = UserDefaults.standard.object(forKey: "profileImage")
+            profileImg.image = UIImage(data: data as! Data)
+        }else{
+            profileImg.image = #imageLiteral(resourceName: "cameraPhoto")
+        }
     }
 }
 

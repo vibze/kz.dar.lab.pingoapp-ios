@@ -109,6 +109,7 @@ AKFViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 237/255, green: 95/255, blue: 117/255, alpha: 1)
+        self.navigationController?.isNavigationBarHidden = true
         setupBottomControls()
         setupCollectionView()
         collectionView.register(ImageSwipeCell.self, forCellWithReuseIdentifier: "Cell")
@@ -117,7 +118,6 @@ AKFViewControllerDelegate {
         if accountKit == nil {
             self.accountKit = AKFAccountKit(responseType: .accessToken)
         }
-        
     }
     
     func setupCollectionView(){
