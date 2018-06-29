@@ -39,9 +39,11 @@ class MainTabViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupButtons()
+        ContactsService().syncContacts()
         self.navigationController?.isNavigationBarHidden = true
         view.backgroundColor = UIColor(hexString: "6BBE90")
         tabBarBtnPressed(sender: homeButton)
+//        Store.cleanCoreStore()
     }
     
     override func viewWillAppear(_ animated: Bool) {

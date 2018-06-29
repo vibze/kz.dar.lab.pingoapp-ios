@@ -73,8 +73,10 @@ extension ProfileTableViewController {
         case 1:
             openViewController(viewController: AboutAppViewController())
         case 2:
-            break
-            //openViewController(viewController: AuthViewController())
+            if let bundleID = Bundle.main.bundleIdentifier {
+                UserDefaults.standard.removePersistentDomain(forName: bundleID)
+            }
+//            openViewController(viewController: AuthViewController())
         default:
             break
         }
