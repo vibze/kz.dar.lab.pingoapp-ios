@@ -566,8 +566,6 @@
 				7C1D3FB920D6D7B7007037D9 /* SectionHeader.swift in Sources */,
 				7C910C4A20D6AAF90072A673 /* AppDelegate.swift in Sources */,
 				843C3E0520E3806E004ACFB1 /* ProfileViewCell.swift in Sources */,
-				843C3DE520E37D81004ACFB1 /* ImageView.swift in Sources */,
-				843C3E1520E38D97004ACFB1 /* CheckLoginViewController.swift in Sources */,
 				7C1B8DF720DBA87A004BE38B /* ComposeViewController.swift in Sources */,
 				7CF5950420E48CCF00C641A7 /* Urls.swift in Sources */,
 				7C26365A20DA048A008D34E1 /* MyContactsTableViewCell.swift in Sources */,
@@ -743,8 +741,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = kz.dar.lab.pingoapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b76961f7-16d9-4d30-9cf2-5e06a95efc3c";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development kz.dar.lab.pingoapp";
+				PROVISIONING_PROFILE = "1445b209-e131-47ab-80dd-5a28d5e21f75";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development kz.dar.lab.pingoapp 1529907977";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -767,8 +765,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = kz.dar.lab.pingoapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b76961f7-16d9-4d30-9cf2-5e06a95efc3c";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development kz.dar.lab.pingoapp";
+				PROVISIONING_PROFILE = "1445b209-e131-47ab-80dd-5a28d5e21f75";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development kz.dar.lab.pingoapp 1529907977";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
