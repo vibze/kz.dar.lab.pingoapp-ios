@@ -33,13 +33,6 @@ class ComposeViewController: UIViewController {
         return label
     }()
     
-    let backButton: UIButton = {
-        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "left-arrow"), for: .normal)
-        button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
-        return button
-    }()
-    
     let messageTextView: UITextView = {
         let textView = UITextView()
         textView.layer.masksToBounds = true
@@ -65,12 +58,14 @@ class ComposeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        addNavCon(backgrounColor: #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), title: "")
         messageTextView.delegate = self
         composeButton.addTarget(self, action: #selector(composeButtonPressed), for: .touchUpInside)
         view.backgroundColor = UIColor(hexString: "6BBE90")
     }
+    
     func setupViews() {
-        [profileImageView, backButton, phoneNumberLabel, nameLabel, composeButton, messageTextView, alertView].forEach {
+        [profileImageView, phoneNumberLabel, nameLabel, composeButton, messageTextView, alertView].forEach {
             view.addSubview($0)
         }
         
@@ -78,13 +73,8 @@ class ComposeViewController: UIViewController {
             $0.edges.equalToSuperview()
         }
         
-        backButton.snp.makeConstraints {
-            $0.top.equalTo(topLayoutGuide.snp.bottom).offset(32)
-            $0.left.equalToSuperview().offset(32)
-            $0.height.width.equalTo(24)
-        }
         profileImageView.snp.makeConstraints {
-            $0.top.equalTo(backButton.snp.bottom).offset(14)
+            $0.top.equalToSuperview().offset(14)
             $0.centerX.equalTo(self.view.center)
         }
         nameLabel.snp.makeConstraints {

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 extension UIColor {
     convenience init(hexString: String, alpha: CGFloat = 1.0) {
@@ -55,6 +56,9 @@ extension UIViewController {
         view.endEditing(true)
     }
     
+    func openViewController(viewController: UIViewController){
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
     func addNavCon(backgrounColor: UIColor, title: String){
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -62,7 +66,6 @@ extension UIViewController {
         navigationController?.navigationBar.barTintColor = backgrounColor
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "Helvetica-Bold", size: 18)!,NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "left-arrow"), style: .plain, target: self, action: #selector(bactToVC))
-        
     }
     
     @objc func bactToVC() {
@@ -91,13 +94,11 @@ extension UIView {
 }
 
 extension UITableViewController {
-    func openViewController(viewController: UIViewController){
-        self.navigationController?.pushViewController(viewController, animated: true)
-    }
+    
 }
 
 extension UILabel {
-    static func basic(textColor: UIColor, fontSize: CGFloat) -> UILabel{
+    static func basic(textColor: UIColor, fontSize: CGFloat) -> UILabel {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -108,3 +109,12 @@ extension UILabel {
         return label
     }
 }
+
+extension String: ParameterEncoding {
+    public func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
+        var request = try urlRequest.asURLRequest()
+        request.httpBody = data(using: .utf8, allowLossyConversion: false)
+        return request
+    }
+}
+

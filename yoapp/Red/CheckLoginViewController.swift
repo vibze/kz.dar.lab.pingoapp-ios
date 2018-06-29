@@ -56,8 +56,7 @@ class CheckLoginViewController: UIViewController {
                     self.phoneLabel.text = account!.phoneNumber?.stringRepresentation()
                     self.logOutBotton.addTarget(self, action: #selector(self.logOutBtnPressed), for: .touchUpInside)
                 }
-                }
-            )
+            })
         }
     }
     

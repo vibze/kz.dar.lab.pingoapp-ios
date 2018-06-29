@@ -15,6 +15,18 @@ class ContactsCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         addViews()
     }
+    
+    var contact: Contact? {
+        didSet {
+            guard let contact = contact else { return }
+            contactDidUpdate(contact)
+        }
+    }
+    
+    func contactDidUpdate(_ contact: Contact) {
+        guard let contactName = contact.name else { return }
+        contactNameLabel.text = contactName
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

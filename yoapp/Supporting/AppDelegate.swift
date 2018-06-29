@@ -20,8 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      
         UIApplication.shared.statusBarStyle = .lightContent
         
-        UIApplication.shared.statusBarStyle = .lightContent
-    
         Store.initCoreStore()
         
         checkStorage()
@@ -32,17 +30,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func checkStorage() {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        /*
+        let user = Profile.current()
         if user != nil {
             let vc = UINavigationController(rootViewController: MainTabViewController())
             window?.rootViewController = vc
         } else {
-            let vc = UINavigationController(rootViewController: MainTabViewController())
+            let vc = UINavigationController(rootViewController: MainTabViewController()) // should be LoginViewController()
             window?.rootViewController = vc
-        }*/
+        }
         
-        let vc = UINavigationController(rootViewController: MainTabViewController())
-        window?.rootViewController = vc
         window!.makeKeyAndVisible()
     }
     

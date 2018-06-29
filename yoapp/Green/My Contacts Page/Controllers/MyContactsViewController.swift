@@ -16,8 +16,6 @@ private struct Constants {
 
 class MyContactsViewController: UIViewController {
     
-    var myContacts: [MyContact] = []
-
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
@@ -25,10 +23,11 @@ class MyContactsViewController: UIViewController {
         tableView.allowsSelection = true
         tableView.separatorColor = UIColor(hexString: "58AD7E")
         tableView.rowHeight = 82
-        tableView.tableFooterView = UIView()
         
         return tableView
     }()
+    
+    var listOfContacts: [Contact] = []
     
     let searchBackgroundView: UIView = {
         let view = UIView()
@@ -50,16 +49,22 @@ class MyContactsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        monitor.addObserver(self)
         
-        view.backgroundColor = UIColor(hexString: "6BBE90")
+        searchTextField.addTarget(self, action: #selector(handleTextFieldChange), for: .editingChanged)
+        monitor.addObserver(self)
+        listOfContacts = monitor.objectsInAllSections()
+        
+        view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
+        
         setupViews()
-        fetchContacts()
+        ContactsService().syncContacts()
     }
     
-    func fetchContacts() {
-        ContactsService().syncContacts()
+    @objc func handleTextFieldChange(textField: UITextField) {
+        let text = textField.text
+        if let text = text {
+            searchForContact(text)
+        }
     }
     
     func setupViews() {
@@ -72,17 +77,13 @@ class MyContactsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MyContactsTableViewCell.self, forCellReuseIdentifier: Constants.myContactCell)
-        tableView.tableHeaderView = UIView()
-        tableView.keyboardDismissMode = .interactive
-        tableView.tableHeaderView?.snp.makeConstraints {
-            $0.top.left.right.equalToSuperview()
-            $0.height.equalTo(80)
-        }
+        
+        tableView.keyboardDismissMode = .onDrag
+        tableView.contentInset = UIEdgeInsets(top: 75, left: 0, bottom: 60, right: 0)
         
         blurEffectView.snp.makeConstraints {
             $0.edges.equalTo(searchBackgroundView.snp.edges)
         }
-
         searchBackgroundView.snp.makeConstraints {
             $0.top.left.right.equalToSuperview()
             $0.height.equalTo(80)
@@ -100,12 +101,12 @@ class MyContactsViewController: UIViewController {
 
 extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return monitor.numberOfObjects()
+        return listOfContacts.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.myContactCell, for: indexPath) as! MyContactsTableViewCell
         
-        cell.contact = monitor[indexPath]
+        cell.contact = listOfContacts[indexPath.row]
         return cell
     }
 
@@ -118,7 +119,6 @@ extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource, 
             blurEffectView.isHidden = false
             searchBackgroundView.backgroundColor = .clear
             searchTextField.backgroundColor = UIColor(hexString: "58AD7E", alpha: 0.2)
-            
         }
         else {
             blurEffectView.isHidden = true
@@ -136,11 +136,29 @@ extension MyContactsViewController: UITextFieldDelegate {
 
 extension MyContactsViewController: ListObserver {
     func listMonitorDidChange(_ monitor: ListMonitor<Contact>) {
-        print("AS")
-        tableView.reloadData()
+        listOfContacts = monitor.objectsInAllSections()
+        self.tableView.reloadData()
     }
     func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {
-        print("asdasd")
+    }
+    
+    func searchForContact(_ searchText: String) {
+        var allContacts = monitor.objectsInAllSections()
+        if searchText.count > 0 {
+            allContacts = allContacts.filter {
+                guard let name = $0.name,
+                let phoneNumber = $0.phoneNumber else { return false }
+                if name.lowercased().range(of: searchText.lowercased()) != nil || phoneNumber.range(of: searchText) != nil {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        }
+        listOfContacts = allContacts
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 
