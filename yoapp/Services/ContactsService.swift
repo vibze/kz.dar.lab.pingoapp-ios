@@ -63,7 +63,7 @@ struct ContactsService {
         }
     }
     
-    func requestAccessToContacts(_ completion: @escaping (CNContactStore) -> Void) {
+    private func requestAccessToContacts(_ completion: @escaping (CNContactStore) -> Void) {
         let store = CNContactStore()
         store.requestAccess(for: .contacts) { (granted, error) in
             if let error = error {
@@ -76,7 +76,7 @@ struct ContactsService {
         }
     }
     
-    func checkPhoneNubmersForRegistration(phoneNumbers: [String]) {
+    private func checkPhoneNubmersForRegistration(phoneNumbers: [String]) {
         let url = Urls.getUrl(.buddies)
         let tokenTest = "Bearer EMAWdQD4ISxKG6BXvYjcsOxVz8BbehjDuc29QAnOxRUnRU0AmKyhrajLZAaHklyIO5inpMDaui9Tamq1gFJOaX0J5pJIZBCQMsejiA9RpAZDZD"
         
@@ -91,27 +91,29 @@ struct ContactsService {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                
-                CoreStore.perform(
-                    asynchronous: { (transaction) -> Void in
-                        for registered in json.arrayValue {
-                            let contact = transaction.fetchOne(From<Contact>().where(\.phoneNumber == registered["phone_number"].stringValue))
-                            contact?.profileId = Int32(registered["id"].intValue)
-                            let avatar = JSON(registered["avatar"])
-                            contact?.avatarUrl = avatar["url"].stringValue
-                        }
-                    },
-                    completion: { (result) -> Void in
-                        switch result {
-                        case .success: print("success")
-                        case .failure(let error): print(error)
-                        }
-                    }
-                )
-                
+                self.updateContactsIfNeeded(json: json)
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
-}
+    
+    private func updateContactsIfNeeded(json: JSON) {
+        CoreStore.perform(
+            asynchronous: { (transaction) -> Void in
+                for registered in json.arrayValue {
+                    let contact = transaction.fetchOne(From<Contact>().where(\.phoneNumber == registered["phone_number"].stringValue))
+                    contact?.profileId = Int32(registered["id"].intValue)
+                    let avatar = JSON(registered["avatar"])
+                    contact?.avatarUrl = avatar["url"].stringValue
+                }
+            },
+            completion: { (result) -> Void in
+                switch result {
+                case .success: print("success")
+                case .failure(let error): print(error)
+                }
+            }
+        )
+    }
+ }

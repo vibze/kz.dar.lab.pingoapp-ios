@@ -120,7 +120,7 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.contactsCell, for: indexPath) as! ContactsCollectionViewCell
         
-        cell.contact = indexPath.section == 0 ? recentlyActiveMonitor[indexPath] : registeredContactsMonitor[indexPath]
+        cell.contact = indexPath.section == 0 ? recentlyActiveMonitor[indexPath.row] : registeredContactsMonitor[indexPath.row]
         
         return cell
     }

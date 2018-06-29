@@ -23,6 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Store.initCoreStore()
         
         checkStorage()
+        
+        ContactsService().syncContacts()
+
         return true
     }
     
