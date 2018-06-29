@@ -33,7 +33,7 @@ struct ContactsService {
         let keys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey]
         let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
         var phoneNumbers: [String] = []
-    
+        
         requestAccessToContacts { store in
             CoreStore.perform(
                 asynchronous: { (transaction) -> Void in
