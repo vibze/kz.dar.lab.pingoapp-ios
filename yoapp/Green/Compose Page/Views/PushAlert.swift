@@ -39,7 +39,7 @@ class PushAlert: UIView {
     
     required init() {
         super.init(frame: .zero)
-        backgroundColor = UIColor(hexString: "000000", alpha: 0.6)
+        backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.6)
         isHidden = true
         
         submitButton.addTarget(self, action: #selector(submitButtonPressed), for: .touchUpInside)

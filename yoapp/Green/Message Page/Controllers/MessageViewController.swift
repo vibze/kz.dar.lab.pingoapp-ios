@@ -18,10 +18,6 @@ class MessageViewController: UIViewController {
     var contact: String?
     var collectionView: UICollectionView!
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
     let profileImageBackgroundView: UIView = {
         let view = UIView()
         view.layer.masksToBounds = true
@@ -33,13 +29,6 @@ class MessageViewController: UIViewController {
     
     let profileImageView = ImageView(radius: 100 / 2)
     let pushAlert = PushAlert()
-    
-    let backButton: UIButton = {
-        let backBtn = UIButton()
-        backBtn.addTarget(self, action: #selector(backBtnPressed), for: .touchUpInside)
-        backBtn.setImage(#imageLiteral(resourceName: "left-arrow"), for: .normal)
-        return backBtn
-    }()
     
     let userNameLabel: UILabel = {
         let username = UILabel()
@@ -73,7 +62,7 @@ class MessageViewController: UIViewController {
         let label = UILabel()
         label.text = "Или напишите собеседнику"
         label.font = UIFont(name: "Avenir Next", size: 16)
-        label.textColor = UIColor(hexString: "308757")
+        label.textColor = #colorLiteral(red: 0.1882352941, green: 0.5294117647, blue: 0.3411764706, alpha: 1)
         return label
     }()
     
@@ -82,12 +71,14 @@ class MessageViewController: UIViewController {
     }
     
     @objc func writeBtnPressed() {
-        self.present(ComposeViewController(), animated: true, completion: nil)
+        let vc = ComposeViewController()
+        openViewController(viewController: vc)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(hexString: "6BBE90")
+        addNavCon(backgrounColor: #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), title: "")
+        view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
         setupViews()
         setupButtons()
     }
@@ -98,10 +89,11 @@ class MessageViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillAppear(animated)    
         if let contact = contact {
             userNameLabel.text = contact
         }
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     @objc func backBtnPressed() {
@@ -124,7 +116,7 @@ class MessageViewController: UIViewController {
         collectionView.allowsSelection = true
         view.addSubview(collectionView)
         
-        [backButton, profileImageView, blockButton, profileImageBackgroundView, userNameLabel, writeButton, phoneNumberLabel, basePhrasesTitleLabel, messageTitleLabel, pushAlert].forEach { newView in
+        [profileImageView, blockButton, profileImageBackgroundView, userNameLabel, writeButton, phoneNumberLabel, basePhrasesTitleLabel, messageTitleLabel, pushAlert].forEach { newView in
             view.addSubview(newView)
         }
         
@@ -171,19 +163,14 @@ class MessageViewController: UIViewController {
             $0.centerX.equalTo(self.view.center)
         }
         profileImageBackgroundView.snp.makeConstraints {
-            $0.top.equalTo(backButton.snp.bottom).offset(5)
+            $0.top.equalToSuperview().offset(5)
             $0.height.width.equalTo(110)
             $0.centerX.equalTo(self.view.center)
         }
         profileImageView.snp.makeConstraints {
-            $0.top.equalTo(backButton.snp.bottom).offset(10)
+            $0.top.equalToSuperview().offset(10)
             $0.height.width.equalTo(100)
             $0.centerX.equalTo(self.view.center)
-        }
-        backButton.snp.makeConstraints {
-            $0.top.equalTo(topLayoutGuide.snp.bottom).offset(32)
-            $0.left.equalToSuperview().offset(32)
-            $0.width.height.equalTo(24)
         }
     }
 }

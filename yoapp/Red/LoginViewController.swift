@@ -271,8 +271,9 @@ AKFViewControllerDelegate {
         
         SessionsApi.createSession(token: accessToken.tokenString, success: { profile in
             // Write to user defaults
+            print(accessToken.tokenString)
             Profile.addToUserDefaults(profile)
-            let vc = ContactsViewController()
+            let vc = MainTabViewController()
             self.present(vc, animated: true, completion: nil)
         }) { errorMessage in
             // Notify user about error
