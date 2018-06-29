@@ -114,22 +114,4 @@ struct ContactsService {
             }
         }
     }
-    
-    func getRegisteredContacts(_ completion: @escaping ([[Contact]?]) -> Void) {
-        CoreStore.perform(
-            asynchronous: {
-                let registeredContacts = $0.fetchAll(From<Contact>().where(\.profileId != 0))
-                let lastActiveContacts = $0.fetchAll(From<Contact>().where(\.profileId != 0).orderBy(.ascending(\.pingedAt)))
-                
-                completion([lastActiveContacts, registeredContacts])
-            },
-            completion: { (result) -> Void in
-                switch result {
-                case .success: print("success")
-                case .failure(let error): print(error)
-                }
-            }
-        )
-    }
-    
 }
