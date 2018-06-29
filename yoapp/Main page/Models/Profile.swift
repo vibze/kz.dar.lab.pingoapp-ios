@@ -30,19 +30,16 @@ class Profile: NSObject, NSCoding  {
     }
     
     static func current() -> Profile? {
-        let userDefaults = UserDefaults.standard
-        let decoded  = userDefaults.object(forKey: "user") as? Data
-        var user: Profile? 
-        if let decoded = decoded {
-            user = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? Profile
+        if let decoded = UserDefaults.standard.object(forKey: "CurrentProfile") as? Data {
+            return NSKeyedUnarchiver.unarchiveObject(with: decoded) as? Profile
         }
-        return user
+        return nil
     }
     
     static func addToUserDefaults(_ user: Profile) {
         let userDefaults = UserDefaults.standard
         let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: user)
-        userDefaults.set(encodedData, forKey: "user")
+        userDefaults.set(encodedData, forKey: "CurrentProfile")
         userDefaults.synchronize()
     }
 
