@@ -274,7 +274,7 @@ AKFViewControllerDelegate {
             Profile.addToUserDefaults(profile)
             let vc = MainTabViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-//            self.present(vc, animated: true, completion: nil)
+            Token.shared.accessToken = accessToken
         }) { errorMessage in
             // Notify user about error
             self.present(self.errorMessageAlert, animated: true, completion: nil)

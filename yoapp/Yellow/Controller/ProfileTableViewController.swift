@@ -7,6 +7,8 @@
 //
 import UIKit
 import Alamofire
+import AccountKit
+import SwiftyJSON
 
 class ProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
@@ -87,39 +89,39 @@ extension ProfileTableViewController {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let avatarImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         headerView.profileImg.image = avatarImage
-        uploadImage(avatar: avatarImage, success: {
-            debugPrint("OKKK")
+        uploadImage(avatar: avatarImage, success: { response in
+            debugPrint("OKKK", response)
         }) { (error) in
             debugPrint("Bad ERror... \(error)")
         }
-//        if let imageURL = info[UIImagePickerControllerReferenceURL]{
-//            Alamofire.upload(imageURL, with: nil).responseData { response in
-//                if let data = response.result.value {
-//                    self.headerView.profileImg.image = UIImage(data: data)
-//                     UserDefaults.standard.set(data, forKey: "profileImage")
-//                }
-//            }
-//            Alamofire.upload(imageURL, to: "")
-//        }
         dismiss(animated: true, completion: nil)
+        
     }
     
-    func uploadImage(avatar: UIImage, success: @escaping () -> Void, failure: @escaping (Error) -> Void){
-        guard let imageData = UIImageJPEGRepresentation(avatar, 1.0),
+    func uploadImage(avatar: UIImage, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void){
+        guard
+            let imageData = UIImageJPEGRepresentation(avatar, 1.0),
             let url = URL(string: "http://178.62.123.161/api/v1/profile/avatar") else {
-                debugPrint("Error ")
+            debugPrint("Error ")
             return
         }
-//        let header = ["": ""]
+        
+        let header = ["Content-Type": "application/x-www-form-urlencoded",
+                      "Authorization": "Bearer \(Token.shared.accessToken!.tokenString)",
+                      "Accept":"application/json"]
         
         Alamofire.upload(multipartFormData: { data in
-            data.append(imageData, withName: "file")
-        }, to: url, method: .post) { result in
+            data.append(imageData, withName: "file", fileName: "myImage.png", mimeType: "image/png")
+        }, to: url, method: .post, headers: header) { result in
             switch result {
             case .success(request: let uploadRequest, streamingFromDisk: _, streamFileURL: _):
-                uploadRequest.validate().responseString(completionHandler: { dataResponse in
+                uploadRequest.validate(statusCode: 200..<600).responseJSON(completionHandler: {dataResponse in
                     if dataResponse.result.isSuccess {
-                        success()
+                        let json = JSON(dataResponse.result.value)
+//                        success(dataResponse.result.value)
+                        
+                        let statusCode = dataResponse.response!.statusCode
+                        self.handleError(with: statusCode)
                     } else {
                         guard let error = dataResponse.error else { return }
                         failure(error)
@@ -128,7 +130,6 @@ extension ProfileTableViewController {
             case .failure(let error):
                 failure(error)
             }
-            
         }
     }
     

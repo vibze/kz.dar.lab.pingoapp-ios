@@ -45,10 +45,6 @@ extension UIColor {
 
 extension UIViewController {
  
-@objc func dismiss(fromGesture gesture: UISwipeGestureRecognizer) {
-    //Your dismiss code
-    //Here you should implement your checks for the swipe gesture
-}
     func hideKeyboard() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -80,6 +76,28 @@ extension UIViewController {
         let button = UIBarButtonItem(image: #imageLiteral(resourceName: "add_icon"), style: .plain, target: self, action: action)
         navigationItem.rightBarButtonItem = button
     }
+    
+    func openViewController(viewController: UIViewController){
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func handleError(with statusCode: Int) {
+        switch statusCode {
+        case 404:
+            showErrorAlert(title: "Failed", message: "Try again")
+        default:
+            break
+        }
+        
+    }
+    
+    func showErrorAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ОК", style: .cancel, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
 
 extension UIView {
@@ -94,12 +112,6 @@ extension UIView {
             maskLayer.path = path.cgPath
             self.layer.mask = maskLayer
         }
-    }
-}
-
-extension UITableViewController {
-    func openViewController(viewController: UIViewController){
-        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
