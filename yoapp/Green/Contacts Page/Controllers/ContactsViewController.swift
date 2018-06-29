@@ -8,17 +8,17 @@
 
 import UIKit
 import SnapKit
-import CoreStore
 
 private struct Constants {
     static let contactsCell = "contactsCell"
     static let sectionHeader = "sectionHeader"
 }
 
-
 class ContactsViewController: UIViewController {
     var collectionView: UICollectionView!
     let sectionLabels = ["Недавние", "Все, кто в теме"]
+    
+    var registeredContactsList: [[Contact]] = []
     
     let searchBackgroundView: UIView = {
         let view = UIView()
@@ -34,15 +34,26 @@ class ContactsViewController: UIViewController {
         return effect
     }()
     
-    let registeredContactsMonitor = ContactsService.registeredContactsMonitor
-    let recentlyActiveMonitor = ContactsService.recentlyActiveMonitor
+    func getRegisteredContacts() {
+        ContactsService().getRegisteredContacts { (registeredContacts) in
+            for contacts in registeredContacts {
+                if let contacts = contacts {
+                    self.registeredContactsList.append(contacts)
+                }
+            }
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
-        registeredContactsMonitor.addObserver(self)
-        recentlyActiveMonitor.addObserver(self)
         
+//        if let bundleID = Bundle.main.bundleIdentifier {
+//            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+//        }
+        getRegisteredContacts()
         view.backgroundColor = UIColor(hexString: "6BBE90")
         collectionViewSetup()
         textFieldSetup()
@@ -70,14 +81,13 @@ class ContactsViewController: UIViewController {
             $0.width.equalToSuperview().inset(20)
         }
     }
-
     
     func collectionViewSetup() {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 12, left: 21, bottom: 12, right: 21)
         layout.itemSize = CGSize(width: 68, height: 98)
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        
+
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -110,17 +120,17 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
         
         let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.sectionHeader, for: indexPath) as! SectionHeader
         sectionHeader.categoryTitleLabel.text = sectionLabels[indexPath.section]
-
+    
         return sectionHeader
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? recentlyActiveMonitor.numberOfObjects() : registeredContactsMonitor.numberOfObjects()
+        return registeredContactsList[section].count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.contactsCell, for: indexPath) as! ContactsCollectionViewCell
         
-        cell.contact = indexPath.section == 0 ? recentlyActiveMonitor[indexPath] : registeredContactsMonitor[indexPath]
+        cell.contact = registeredContactsList[indexPath.section][indexPath.row]
         
         return cell
     }
@@ -134,6 +144,7 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
             setBlur(false, .clear, UIColor(hexString: "58AD7E", alpha: 0.2)) :
             setBlur(true, UIColor(hexString: "6BBE90"), UIColor(hexString: "58AD7E"))
     }
+    
     func setBlur(_ isHidden: Bool, _ backColor: UIColor, _ textColor: UIColor) {
         blurEffectView.isHidden = isHidden
         searchBackgroundView.backgroundColor = backColor
@@ -143,16 +154,11 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
 
 extension ContactsViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        
         self.hideKeyboard()
     }
 }
 
-extension ContactsViewController: ListObserver {
-    func listMonitorDidChange(_ monitor: ListMonitor<Contact>) {
-        collectionView.reloadData()
-    }
-    func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {
-    }
-}
+
 
 
