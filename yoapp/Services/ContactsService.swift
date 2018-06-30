@@ -76,6 +76,7 @@ struct ContactsService {
     
     private func checkPhoneNubmersForRegistration(phoneNumbers: [String]) {
         let request = getRequest(phoneNumbers)
+        handleDeletedContacts(phoneNumbers: phoneNumbers)
         
         Alamofire.request(request).responseJSON { response in
             switch response.result {
@@ -86,6 +87,33 @@ struct ContactsService {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    private func handleDeletedContacts(phoneNumbers: [String]) {
+        CoreStore.perform(
+            asynchronous: { (transaction) -> Void in
+                let allContacts = transaction.fetchAll(From<Contact>())
+                guard let myContacts = allContacts else { return }
+                for contact in myContacts {
+                    var isDeletedContactFound = true
+                    for number in phoneNumbers {
+                        if contact.phoneNumber == number {
+                            isDeletedContactFound = false
+                            break
+                        }
+                    }
+                    if isDeletedContactFound {
+                        transaction.delete(contact)
+                    }
+                }
+            },
+            completion: { (result) -> Void in
+                switch result {
+                case .success: print("success")
+                case .failure(let error): print(error)
+                }
+            }
+        )
     }
     
     private func updateContactsIfNeeded(json: JSON) {
