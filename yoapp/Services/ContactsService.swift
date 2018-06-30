@@ -14,21 +14,6 @@ import SwiftyJSON
 
 struct ContactsService {
     
-    static var contactsMonitor: ListMonitor<Contact> = {
-        let monitor = CoreStore.monitorList(From<Contact>().orderBy(.ascending(\.name)))
-        return monitor
-    }()
-    
-    static var registeredContactsMonitor: ListMonitor<Contact> = {
-        let monitor = CoreStore.monitorList(From<Contact>().orderBy(.ascending(\.name)).where(\.profileId != 0))
-        return monitor
-    }()
-    
-    static var recentlyActiveMonitor: ListMonitor<Contact> = {
-        let monitor = CoreStore.monitorList(From<Contact>().orderBy(.ascending(\.pingedAt)).where(\.profileId != 0))
-        return monitor
-    }()
-    
     func syncContacts() {
         let keys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey]
         let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
@@ -76,7 +61,7 @@ struct ContactsService {
         }
     }
     
-    private func checkPhoneNubmersForRegistration(phoneNumbers: [String]) {
+    private func getRequest(_ body: [String]) -> URLRequest {
         let url = Urls.getUrl(.buddies)
         let tokenTest = "Bearer EMAWdQD4ISxKG6BXvYjcsOxVz8BbehjDuc29QAnOxRUnRU0AmKyhrajLZAaHklyIO5inpMDaui9Tamq1gFJOaX0J5pJIZBCQMsejiA9RpAZDZD"
         
@@ -85,7 +70,12 @@ struct ContactsService {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(tokenTest, forHTTPHeaderField: "Authorization")
         
-        request.httpBody = try! JSONSerialization.data(withJSONObject: phoneNumbers)
+        request.httpBody = try! JSONSerialization.data(withJSONObject: body)
+        return request
+    }
+    
+    private func checkPhoneNubmersForRegistration(phoneNumbers: [String]) {
+        let request = getRequest(phoneNumbers)
         
         Alamofire.request(request).responseJSON { response in
             switch response.result {

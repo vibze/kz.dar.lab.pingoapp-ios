@@ -45,7 +45,7 @@ class MyContactsViewController: UIViewController {
 
     
     let searchTextField = SearchTextField()
-    let monitor = ContactsService.contactsMonitor
+    let monitor = Monitor.contactsMonitor
     
     override func viewDidLoad() {
         super.viewDidLoad()

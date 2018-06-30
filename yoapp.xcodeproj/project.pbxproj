@@ -23,6 +23,7 @@
 		7C910C5120D6AAFC0072A673 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C910C5020D6AAFC0072A673 /* Assets.xcassets */; };
 		7C910C5C20D6B2E50072A673 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C910C5B20D6B2E50072A673 /* ContactsViewController.swift */; };
 		7CC4E13420DA37850094F6CD /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC4E13320DA37850094F6CD /* MessageCollectionViewCell.swift */; };
+		7CE4E8BA20E7537900936833 /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE4E8B920E7537900936833 /* Monitor.swift */; };
 		7CF5950420E48CCF00C641A7 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF5950320E48CCF00C641A7 /* Urls.swift */; };
 		843C3DEC20E37DB9004ACFB1 /* PushAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3DEB20E37DB9004ACFB1 /* PushAlert.swift */; };
 		843C3DF420E37DF0004ACFB1 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3DF320E37DF0004ACFB1 /* MainTabViewController.swift */; };
@@ -77,6 +78,7 @@
 		7C910C5520D6AAFC0072A673 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C910C5B20D6B2E50072A673 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		7CC4E13320DA37850094F6CD /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
+		7CE4E8B920E7537900936833 /* Monitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monitor.swift; sourceTree = "<group>"; };
 		7CF5950320E48CCF00C641A7 /* Urls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
 		843C3DEB20E37DB9004ACFB1 /* PushAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushAlert.swift; path = "yoapp/Green/Compose Page/Views/PushAlert.swift"; sourceTree = SOURCE_ROOT; };
 		843C3DF320E37DF0004ACFB1 /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabViewController.swift; path = "yoapp/Main page/Controllers/MainTabViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -334,6 +336,7 @@
 			children = (
 				843C3E0E20E38BAB004ACFB1 /* Store.swift */,
 				843C3E0C20E38BA0004ACFB1 /* ContactsService.swift */,
+				7CE4E8B920E7537900936833 /* Monitor.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				7C1CDFD720D7AB5100A90E16 /* MessageViewController.swift in Sources */,
 				843C3E0320E38066004ACFB1 /* ProfileFooterView.swift in Sources */,
 				843C3DFF20E38045004ACFB1 /* SettingsFooterView.swift in Sources */,
+				7CE4E8BA20E7537900936833 /* Monitor.swift in Sources */,
 				843C3DEC20E37DB9004ACFB1 /* PushAlert.swift in Sources */,
 				843C3DF920E37E4C004ACFB1 /* CustomInviteView.swift in Sources */,
 				843C3E1C20E38DFC004ACFB1 /* SessionsApi.swift in Sources */,

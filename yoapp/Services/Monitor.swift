@@ -1,0 +1,27 @@
+//
+//  Monitor.swift
+//  yoapp
+//
+//  Created by Kurnmanbay Ayan on 6/30/18.
+//  Copyright © 2018 Kurmanbay Ayan. All rights reserved.
+//
+
+import Foundation
+import CoreStore
+
+struct Monitor {
+    static var contactsMonitor: ListMonitor<Contact> = {
+        let monitor = CoreStore.monitorList(From<Contact>().orderBy(.ascending(\.name)))
+        return monitor
+    }()
+    
+    static var registeredContactsMonitor: ListMonitor<Contact> = {
+        let monitor = CoreStore.monitorList(From<Contact>().orderBy(.ascending(\.name)).where(\.profileId != 0))
+        return monitor
+    }()
+    
+    static var recentlyActiveMonitor: ListMonitor<Contact> = {
+        let monitor = CoreStore.monitorList(From<Contact>().orderBy(.ascending(\.pingedAt)).where(\.profileId != 0))
+        return monitor
+    }()
+}

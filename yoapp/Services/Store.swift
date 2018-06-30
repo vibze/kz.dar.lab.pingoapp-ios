@@ -18,27 +18,26 @@ class Store {
             bundle: Bundle.main,
             migrationChain: []
         )
-        try? CoreStore.addStorageAndWait()
-    }
-    
-    // Clean core store
-    static func cleanCoreStore() {
         do {
             try CoreStore.addStorageAndWait()
-            CoreStore.perform(
-                asynchronous: {
-                    $0.deleteAll(From<Contact>())
-                },
-                completion: { (result) -> Void in
-                    switch result {
-                    case .success: print("success!")
-                    case .failure(let error): print(error)
-                    }
-                }
-            )
         }
         catch let error {
             print(error)
         }
+    }
+    
+    // Clean core store
+    static func cleanCoreStore() {
+        CoreStore.perform(
+            asynchronous: {
+                $0.deleteAll(From<Contact>())
+            },
+            completion: { (result) -> Void in
+                switch result {
+                case .success: print("success!")
+                case .failure(let error): print(error)
+                }
+            }
+        )
     }
 }

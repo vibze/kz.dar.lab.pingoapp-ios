@@ -34,8 +34,8 @@ class ContactsViewController: UIViewController {
         return effect
     }()
     
-    let registeredContactsMonitor = ContactsService.registeredContactsMonitor
-    let recentlyActiveMonitor = ContactsService.recentlyActiveMonitor
+    let registeredContactsMonitor = Monitor.registeredContactsMonitor
+    let recentlyActiveMonitor = Monitor.recentlyActiveMonitor
     
     override func viewDidLoad() {
         super.viewDidLoad()
