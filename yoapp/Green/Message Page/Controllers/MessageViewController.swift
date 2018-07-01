@@ -15,7 +15,7 @@ private struct Constants {
 class MessageViewController: UIViewController {
 
     let defaultMessages = ["Привет", "Как дела?", "Что делаешь?", "Привет", "Как дела?", "Что?", "Привет", "Как дела?", "Что делаешь?", "Привет", "Как дела?", "Что?"]
-    var contact: String?
+    var contact: Contact?
     var collectionView: UICollectionView!
     
     let profileImageBackgroundView: UIView = {
@@ -81,6 +81,11 @@ class MessageViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
         setupViews()
         setupButtons()
+        
+        if let contact = contact {
+            userNameLabel.text = contact.name
+            phoneNumberLabel.text = contact.phoneNumber
+        }
     }
     
     func setupButtons() {
@@ -89,10 +94,7 @@ class MessageViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)    
-        if let contact = contact {
-            userNameLabel.text = contact
-        }
+        super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
     }
     

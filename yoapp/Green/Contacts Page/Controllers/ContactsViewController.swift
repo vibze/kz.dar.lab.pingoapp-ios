@@ -36,20 +36,18 @@ class ContactsViewController: UIViewController {
     
     let registeredContactsMonitor = Monitor.registeredContactsMonitor
     let recentlyActiveMonitor = Monitor.recentlyActiveMonitor
+    var registeredContacts: [Contact] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+        
         registeredContactsMonitor.addObserver(self)
         recentlyActiveMonitor.addObserver(self)
+        registeredContacts = registeredContactsMonitor.objectsInAllSections()
         
         view.backgroundColor = UIColor(hexString: "6BBE90")
         collectionViewSetup()
         textFieldSetup()
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
     }
     
     let searchTextField = SearchTextField()
@@ -58,6 +56,7 @@ class ContactsViewController: UIViewController {
         self.view.addSubview(searchBackgroundView)
         searchBackgroundView.addSubview(blurEffectView)
         searchBackgroundView.addSubview(searchTextField)
+        searchTextField.addTarget(self, action: #selector(handleTextFieldChange), for: .editingChanged)
     
         searchTextField.delegate = self
         searchBackgroundView.snp.makeConstraints {
@@ -70,7 +69,13 @@ class ContactsViewController: UIViewController {
             $0.width.equalToSuperview().inset(20)
         }
     }
-
+    
+    @objc func handleTextFieldChange(textField: UITextField) {
+        self.registeredContacts = SearchContact.searchFor(monitor: registeredContactsMonitor, text: textField.text)
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
     
     func collectionViewSetup() {
         let layout = UICollectionViewFlowLayout()
@@ -115,24 +120,26 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? recentlyActiveMonitor.numberOfObjects() : registeredContactsMonitor.numberOfObjects()
+        return section == 0 ? recentlyActiveMonitor.numberOfObjects() : registeredContacts.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.contactsCell, for: indexPath) as! ContactsCollectionViewCell
         
-        cell.contact = indexPath.section == 0 ? recentlyActiveMonitor[indexPath.row] : registeredContactsMonitor[indexPath.row]
+        let row = indexPath.row
+        cell.contact = indexPath.section == 0 ? recentlyActiveMonitor[row] : registeredContacts[row]
         
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = MessageViewController()
-        vc.contact = "Arnold"
+        let monitor = indexPath.section == 0 ? recentlyActiveMonitor : registeredContactsMonitor
+        vc.contact = monitor[indexPath.row]
         openViewController(viewController: vc)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollView.contentOffset.y > -80 ?
-            setBlur(false, .clear, UIColor(hexString: "58AD7E", alpha: 0.2)) :
-            setBlur(true, UIColor(hexString: "6BBE90"), UIColor(hexString: "58AD7E"))
+            setBlur(false, .clear, #colorLiteral(red: 0.3450980392, green: 0.6784313725, blue: 0.4941176471, alpha: 0.2)) :
+            setBlur(true, #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), #colorLiteral(red: 0.3450980392, green: 0.6784313725, blue: 0.4941176471, alpha: 1))
     }
     func setBlur(_ isHidden: Bool, _ backColor: UIColor, _ textColor: UIColor) {
         blurEffectView.isHidden = isHidden

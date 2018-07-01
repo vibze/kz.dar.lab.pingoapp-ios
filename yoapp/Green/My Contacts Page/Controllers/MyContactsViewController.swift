@@ -60,9 +60,9 @@ class MyContactsViewController: UIViewController {
     }
     
     @objc func handleTextFieldChange(textField: UITextField) {
-        let text = textField.text
-        if let text = text {
-            searchForContact(text)
+        self.listOfContacts = SearchContact.searchFor(monitor: monitor, text: textField.text)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
     
@@ -139,25 +139,6 @@ extension MyContactsViewController: ListObserver {
         self.tableView.reloadData()
     }
     func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {
-    }
-    
-    func searchForContact(_ searchText: String) {
-        var allContacts = monitor.objectsInAllSections()
-        if searchText.count > 0 {
-            allContacts = allContacts.filter {
-                guard let name = $0.name,
-                let phoneNumber = $0.phoneNumber else { return false }
-                if name.lowercased().range(of: searchText.lowercased()) != nil || phoneNumber.range(of: searchText) != nil {
-                    return true
-                } else {
-                    return false
-                }
-            }
-        }
-        listOfContacts = allContacts
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
     }
 }
 

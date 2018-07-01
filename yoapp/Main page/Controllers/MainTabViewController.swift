@@ -10,10 +10,6 @@ import UIKit
 
 class MainTabViewController: UIViewController {
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-
     let containerView: UIView = {
         let view = UIView()
         return view
@@ -39,8 +35,7 @@ class MainTabViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupButtons()
-        self.navigationController?.isNavigationBarHidden = true
-        view.backgroundColor = UIColor(hexString: "6BBE90")
+    
         tabBarBtnPressed(sender: homeButton)
     }
     
@@ -64,7 +59,6 @@ class MainTabViewController: UIViewController {
         controller.view.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
         view.backgroundColor = vcBackgroundColors[index]
     }
     

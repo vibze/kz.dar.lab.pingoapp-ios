@@ -52,7 +52,7 @@ struct ContactsService {
         let store = CNContactStore()
         store.requestAccess(for: .contacts) { (granted, error) in
             if let error = error {
-                debugPrint(error)
+                print(error)
                 return
             }
             if granted {
