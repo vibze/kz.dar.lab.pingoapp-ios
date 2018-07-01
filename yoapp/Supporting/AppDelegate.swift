@@ -20,8 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      
         UIApplication.shared.statusBarStyle = .lightContent
         
-        UIApplication.shared.statusBarStyle = .lightContent
-    
         Store.initCoreStore()
         
         checkStorage()

@@ -1,4 +1,4 @@
-//
+
 //  ProfileTableViewController.swift
 //  yoapp
 //
@@ -24,12 +24,13 @@ UINavigationControllerDelegate {
         self.navigationController?.isNavigationBarHidden = true
         configTableView()
         viewData()
+        touchDetect()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
-}
+    }
     
     func configTableView(){
         tableView.backgroundColor = .backgroundYellow
@@ -65,7 +66,7 @@ extension ProfileTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: profileCell, for: indexPath) as! ProfileViewCell
-           cell.settingLabel.text = settingsType[indexPath.row]
+        cell.settingLabel.text = settingsType[indexPath.row]
         if indexPath.row == 2{
             cell.backView.layer.borderColor = UIColor.myPurple.withAlphaComponent(0.5).cgColor
             cell.settingLabel.textColor = .myPurple
@@ -102,13 +103,12 @@ extension ProfileTableViewController {
         guard
             let imageData = UIImageJPEGRepresentation(avatar, 1.0),
             let url = URL(string: "http://178.62.123.161/api/v1/profile/avatar") else {
-            debugPrint("Error ")
-            return
+                return
         }
         
         let header = ["Content-Type": "application/x-www-form-urlencoded",
                       "Authorization": "Bearer \(Token.shared.accessToken!.tokenString)",
-                      "Accept":"application/json"]
+            "Accept":"application/json"]
         
         Alamofire.upload(multipartFormData: { data in
             data.append(imageData, withName: "file", fileName: "myImage.png", mimeType: "image/png")
@@ -117,9 +117,8 @@ extension ProfileTableViewController {
             case .success(request: let uploadRequest, streamingFromDisk: _, streamFileURL: _):
                 uploadRequest.validate(statusCode: 200..<600).responseJSON(completionHandler: {dataResponse in
                     if dataResponse.result.isSuccess {
-                        let json = JSON(dataResponse.result.value)
-//                        success(dataResponse.result.value)
-                        
+//                        let json = JSON(dataResponse.result.value)
+//                        success(dataResponse.result.value as! JSON)
                         let statusCode = dataResponse.response!.statusCode
                         self.handleError(with: statusCode)
                     } else {
@@ -136,4 +135,63 @@ extension ProfileTableViewController {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+    
+    func touchDetect(){
+        let openTelegramGesture = UITapGestureRecognizer(target: self, action: #selector(openTelegram))
+        
+        footerView.telegramView.addGestureRecognizer(openTelegramGesture)
+        let openWhatsAppGesture = UITapGestureRecognizer(target: self, action: #selector(openWhatsApp))
+        footerView.whatsUpView.addGestureRecognizer(openWhatsAppGesture)
+        let openMessengerGesture = UITapGestureRecognizer(target: self, action: #selector(openMessenger))
+        footerView.messengerView.addGestureRecognizer(openMessengerGesture)
+    }
+    
+    //    org.telegram.messenger
+    
+    @objc func openTelegram(){
+        let msg = "Hello"
+        let urlWhats = "tg://send?text=\(msg)"
+        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            if let whatsappURL = NSURL(string: urlString) {
+                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
+                    UIApplication.shared.openURL(whatsappURL as URL)
+                } else {
+                    showErrorAlert(title: "Install App", message: "after try again")
+                    print("ERror")
+                }
+            }
+        }
+    }
+    
+    @objc func openWhatsApp(){
+        let msg = "Hello"
+        let urlWhats = "whatsapp://send?text=\(msg)"
+        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            if let whatsappURL = NSURL(string: urlString) {
+                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
+                    UIApplication.shared.openURL(whatsappURL as URL)
+                } else {
+                    showErrorAlert(title: "Install App", message: "after try again")
+                }
+            }
+        }
+    }
+    //    fb-messenger
+    //    fb-messenger://user-thread/%d
+    //    /user/
+    //    fb-messenger://share/?link
+    @objc func openMessenger(){
+        let msg = "Hello"
+        let urlWhats = "fb-messenger:/user/\(msg)"
+        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            if let whatsappURL = NSURL(string: urlString) {
+                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
+                    UIApplication.shared.openURL(whatsappURL as URL)
+                } else {
+                    showErrorAlert(title: "Install App", message: "after try again")
+                }
+            }
+        }
+    }
+    
 }

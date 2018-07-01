@@ -11,7 +11,7 @@ import UIKit
 class ProfileFooterView : UIView {
     
     var friendLabel = UILabel.basic(textColor: .myPurple, fontSize: 16, fontType: .mySemiBold)
- 
+    
     var telegramView: CustomInviteView = {
         let view = CustomInviteView()
         view.backgroundColor = .myPurple
@@ -50,8 +50,8 @@ class ProfileFooterView : UIView {
         
         friendLabel.snp.makeConstraints{(make) in
             if screenBounds.height == 568{
-            make.top.equalToSuperview().offset(0)
-            make.centerX.equalToSuperview()
+                make.top.equalToSuperview().offset(0)
+                make.centerX.equalToSuperview()
             }else{
                 make.top.equalToSuperview().offset(30)
                 make.centerX.equalToSuperview()
@@ -63,7 +63,7 @@ class ProfileFooterView : UIView {
             $0.left.equalToSuperview().offset(27)
             $0.right.equalToSuperview().offset(-27)
             if screenBounds.height == 568{
-                 $0.bottom.equalToSuperview().offset(-5)
+                $0.bottom.equalToSuperview().offset(-5)
             }else{
                 $0.bottom.equalToSuperview().offset(30)
             }
@@ -76,7 +76,7 @@ class ProfileFooterView : UIView {
             $0.bottom.equalToSuperview().offset(-5)
         }
         stackViewConfig()
-        touchDetect()
+
     }
     
     override func layoutSubviews() {
@@ -89,7 +89,6 @@ class ProfileFooterView : UIView {
         telegramView.viewData(icon: #imageLiteral(resourceName: "telegramIcon"), name: "Telegram")
         whatsUpView.viewData(icon: #imageLiteral(resourceName: "whatsAppIcon"), name: "Whatapp")
         messengerView.viewData(icon: #imageLiteral(resourceName: "messengerIcon"), name: "Messenger")
-        
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -105,7 +104,7 @@ class ProfileFooterView : UIView {
         whatsUpView.translatesAutoresizingMaskIntoConstraints = false
         messengerView.translatesAutoresizingMaskIntoConstraints = false
     }
-    
+    /*
     func touchDetect(){
         let openTelegramGesture = UITapGestureRecognizer(target: self, action: #selector(openTelegram))
         telegramView.addGestureRecognizer(openTelegramGesture)
@@ -140,7 +139,6 @@ class ProfileFooterView : UIView {
                     UIApplication.shared.openURL(whatsappURL as URL)
                 } else {
                     print("ERror")
-                    
                 }
             }
         }
@@ -163,6 +161,7 @@ class ProfileFooterView : UIView {
             }
         }
     }
+    */
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

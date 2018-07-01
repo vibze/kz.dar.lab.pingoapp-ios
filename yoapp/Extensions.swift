@@ -84,20 +84,19 @@ extension UIViewController {
     func handleError(with statusCode: Int) {
         switch statusCode {
         case 404:
-            showErrorAlert(title: "Failed", message: "Try again")
+            showErrorAlert(title: "Failed Error 404", message: "Try again")
         default:
             break
         }
-        
     }
     
     func showErrorAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.view.tintColor = .myYellow
         let okAction = UIAlertAction(title: "ОК", style: .cancel, handler: nil)
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
-    
 }
 
 extension UIView {
@@ -123,7 +122,6 @@ extension UILabel {
         label.lineBreakMode = .byWordWrapping
         label.font = UIFont(name: fontType.rawValue, size: fontSize)
         label.textColor = textColor
-        
         return label
     }
 }
