@@ -12,9 +12,9 @@ import CoreData
 class FavouriteWordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var favoriteCell = "FavouriteCell"
-    var array: [NSManagedObject] = []
-   
+    var array = [FavoriteWordModel]()
     let backgroundView = UIView()
+    var number = 0
     
     var addWordView: FavouriteAddView = {
         let view = FavouriteAddView()
@@ -25,7 +25,7 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate, UITabl
         let tableView = UITableView()
         tableView.backgroundColor = .backgroundYellow
         tableView.separatorStyle = .none
-        tableView.isScrollEnabled = false
+        tableView.isScrollEnabled = true
         tableView.rowHeight = 50
         return tableView
     }()
@@ -36,23 +36,13 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate, UITabl
         addNavCon(backgrounColor: .backgroundYellow, title: "Избранные фразы")
         addRightBtutton(action: #selector(addFavourWordAction))
         configTableView()
+        fetchFromCoreStore()
     }
-   
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if #available(iOS 10.0, *) {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let managedContext = appDelegate.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "FavoriteWords")
-            do{
-                array = try managedContext.fetch(fetchRequest)
-            }catch let error as NSError{
-                print(error)
-            }
-            tableView.reloadData()
-        }else{
-            print("Nothing")
-        }
+        fetchFromCoreStore()
+        self.tableView.reloadData()
     }
     
     func configTableView(){
@@ -73,8 +63,7 @@ extension FavouriteWordViewController {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: favoriteCell, for: indexPath) as! SettingViewCell
-        let data = array[indexPath.row]
-        cell.textName(text: (data.value(forKey: "word") as? String)!)
+        cell.textName(text: array[indexPath.row].word!)
         return cell
     }
     
@@ -88,17 +77,8 @@ extension FavouriteWordViewController {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-             if #available(iOS 10.0, *) {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let managedContext = appDelegate.persistentContainer.viewContext
-            managedContext.delete(array[indexPath.row] as NSManagedObject)
-            array.remove(at: indexPath.row)
-                do {
-                    try managedContext.save()
-                } catch let error as NSError {
-                    print(error.userInfo)
-                }
-            }
+            deleteFromCoreStore(index: (array[indexPath.row].index)!)
+            array.remove(at: array[indexPath.row].index!)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
@@ -120,7 +100,7 @@ extension FavouriteWordViewController {
         addWordView.cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         addWordView.addButton.addTarget(self, action: #selector(addAction), for: .touchUpInside)
     }
-  
+    
     @objc func cancelAction(){
         addWordView.inputWord.text = " "
         addWordView.removeFromSuperview()
@@ -129,7 +109,8 @@ extension FavouriteWordViewController {
     
     @objc func addAction(){
         let word = addWordView.inputWord.text
-        save(favorWord: word!)
+        number += 1
+        addToWord(index: number, word: word!)
         addWordView.inputWord.text = " "
         tableView.reloadData()
         addWordView.removeFromSuperview()
@@ -137,21 +118,19 @@ extension FavouriteWordViewController {
         tableView.reloadData()
     }
     
-    func save(favorWord: String){
-        if #available(iOS 10.0, *) {
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-            let managedContext = appDelegate.persistentContainer.viewContext
-            let entity = NSEntityDescription.entity(forEntityName: "FavoriteWords", in: managedContext)
-            let item = NSManagedObject(entity: entity!, insertInto: managedContext)
-            item.setValue(favorWord, forKey: "word")
-            do{
-                try managedContext.save()
-                array.append(item)
-            }catch let error as NSError{
-                print(error)
-            }
-        }else{
-            print("Nothing")
-        }
+    func addToWord(index:Int,word:String){
+        FavoriteWordModel.addToCore(index: index, word: word)
+        fetchFromCoreStore()
+    }
+    
+    func fetchFromCoreStore(){
+        FavoriteWordModel.fetchFromCore(completionHandler: {(some) in
+            self.array = some
+        })
+    }
+
+    func deleteFromCoreStore(index: Int){
+        print(index, "Some2")
+         FavoriteWordModel.deleteFromCore(index: index)
     }
 }

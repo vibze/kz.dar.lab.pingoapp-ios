@@ -31,7 +31,6 @@ struct ContactsService {
                     do {
                         try store.enumerateContacts(with: request, usingBlock: { (contact, sd) in
                             // phoneNumbers.append(contact.phoneNumbers.)
-                            
                             guard let phoneNumber = contact.phoneNumbers.first?.value.stringValue, transaction.fetchOne(From<Contact>().where(\.phoneNumber == phoneNumber)) == nil else {
                                 return
                             }
