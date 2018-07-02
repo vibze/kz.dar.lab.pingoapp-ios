@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class SessionsApi {
+class SessionsApi: BaseAPI {
     
     static func createSession (token: String, success: @escaping(Profile)->Void, failure: @escaping (String) -> Void){
         UIApplication.shared.isNetworkActivityIndicatorVisible = true

@@ -15,7 +15,6 @@ private struct Constants {
     static let sectionHeader = "sectionHeader"
 }
 
-
 class ContactsViewController: UIViewController {
     var collectionView: UICollectionView!
     let sectionLabels = ["Недавние", "Все, кто в теме"]
@@ -156,6 +155,7 @@ extension ContactsViewController: UITextFieldDelegate {
 
 extension ContactsViewController: ListObserver {
     func listMonitorDidChange(_ monitor: ListMonitor<Contact>) {
+        registeredContacts = registeredContactsMonitor.objectsInAllSections()
         collectionView.reloadData()
     }
     func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {

@@ -35,7 +35,6 @@ class MainTabViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupButtons()
-    
         tabBarBtnPressed(sender: homeButton)
     }
     

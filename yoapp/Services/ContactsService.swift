@@ -25,12 +25,13 @@ struct ContactsService {
                     do {
                         try store.enumerateContacts(with: request, usingBlock: { (contact, sd) in
                             if let phoneNumber = contact.phoneNumbers.first?.value.stringValue {
-                                if transaction.fetchOne(From<Contact>().where(\.phoneNumber == phoneNumber)) == nil {
+                                let normalizedPhoneNumber = self.changeNumberType(phoneNumber)
+                                if transaction.fetchOne(From<Contact>().where(\.phoneNumber == normalizedPhoneNumber)) == nil {
                                     let newContact = transaction.create(Into<Contact>())
-                                    newContact.phoneNumber = phoneNumber
+                                    newContact.phoneNumber = normalizedPhoneNumber
                                     newContact.name = contact.givenName
                                 }
-                                phoneNumbers.append(phoneNumber)
+                                phoneNumbers.append(normalizedPhoneNumber)
                             }
                         })
                     } catch let error {
@@ -46,6 +47,20 @@ struct ContactsService {
                 }
             )
         }
+    }
+    
+    private func changeNumberType(_ number: String) -> String {
+        var redeclaredNumber = ""
+        for char in number {
+            if char >= "0" && char <= "9" {
+                redeclaredNumber += String(char)
+            }
+        }
+        if redeclaredNumber.first == "8" {
+            redeclaredNumber.removeFirst()
+            return "7" + redeclaredNumber
+        }
+        return redeclaredNumber
     }
     
     private func requestAccessToContacts(_ completion: @escaping (CNContactStore) -> Void) {
@@ -119,7 +134,7 @@ struct ContactsService {
     private func updateContactsIfNeeded(json: JSON) {
         CoreStore.perform(
             asynchronous: { (transaction) -> Void in
-                for registered in json.arrayValue {
+                for registered in json.arrayValue {    
                     let contact = transaction.fetchOne(From<Contact>().where(\.phoneNumber == registered["phone_number"].stringValue))
                     contact?.profileId = Int32(registered["id"].intValue)
                     let avatar = JSON(registered["avatar"])

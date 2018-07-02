@@ -53,6 +53,7 @@ class MyContactsViewController: UIViewController {
         searchTextField.addTarget(self, action: #selector(handleTextFieldChange), for: .editingChanged)
         monitor.addObserver(self)
         listOfContacts = monitor.objectsInAllSections()
+//        print(listOfContacts)
         
         view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
         
