@@ -97,6 +97,12 @@ extension UIViewController {
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
+    
+    func showAlert(errorType: String, image: UIImage){
+        let alertView = AlertViewController()
+        alertView.errorView(errorType: errorType, image: image)
+        self.present(alertView, animated: false, completion: nil)
+    }
 }
 
 extension UIView {

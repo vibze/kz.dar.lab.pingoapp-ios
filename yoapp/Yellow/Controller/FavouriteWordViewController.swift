@@ -7,20 +7,21 @@
 //
 
 import UIKit
-import CoreData
+import CoreStore
 
-class FavouriteWordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FavouriteWordViewController: UIViewController, UITableViewDelegate,
+                                   UITableViewDataSource {
     
     var favoriteCell = "FavouriteCell"
     var array = [FavoriteWordModel]()
     let backgroundView = UIView()
-    var number = 0
+    let monitor = FavoriteWordModel.wordsMonitor
     
     var addWordView: FavouriteAddView = {
         let view = FavouriteAddView()
         return view
     }()
-    
+  
     var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .backgroundYellow
@@ -35,6 +36,7 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate, UITabl
         view.addSubview(tableView)
         addNavCon(backgrounColor: .backgroundYellow, title: "Избранные фразы")
         addRightBtutton(action: #selector(addFavourWordAction))
+//        monitor.addObserver(self)
         configTableView()
         fetchFromCoreStore()
     }
@@ -44,6 +46,14 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate, UITabl
         fetchFromCoreStore()
         self.tableView.reloadData()
     }
+    /*
+    func listMonitorDidChange(monitor: ListMonitor<FavoriteWords>) {
+        tableView.reloadData()
+    }
+    
+    func listMonitorDidRefetch(monitor: ListMonitor<FavoriteWords>) {
+        tableView.reloadData()
+    }*/
     
     func configTableView(){
         tableView.delegate = self
@@ -77,8 +87,8 @@ extension FavouriteWordViewController {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            deleteFromCoreStore(index: (array[indexPath.row].index)!)
-            array.remove(at: array[indexPath.row].index!)
+            deleteFromCoreStore(word: (array[indexPath.row].word)!)
+            array.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
@@ -109,8 +119,7 @@ extension FavouriteWordViewController {
     
     @objc func addAction(){
         let word = addWordView.inputWord.text
-        number += 1
-        addToWord(index: number, word: word!)
+        addToWord(index: 1, word: word!)
         addWordView.inputWord.text = " "
         tableView.reloadData()
         addWordView.removeFromSuperview()
@@ -129,8 +138,8 @@ extension FavouriteWordViewController {
         })
     }
 
-    func deleteFromCoreStore(index: Int){
-        print(index, "Some2")
-         FavoriteWordModel.deleteFromCore(index: index)
+    func deleteFromCoreStore(word: String){
+         FavoriteWordModel.deleteFromCore(word: word)
     }
 }
+
