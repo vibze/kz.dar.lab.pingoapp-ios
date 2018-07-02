@@ -40,7 +40,11 @@ class ProfileViewCell: UITableViewCell {
         backView.addSubview(settingLabel)
         
         hiddenView.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(0)
+            if screenBounds.height < 670{
+              $0.top.equalToSuperview().offset(0)
+            }
+            
+            $0.top.equalToSuperview().offset(10)
             $0.left.equalToSuperview().offset(0)
             $0.right.equalToSuperview().offset(0)
             $0.height.equalTo(60)

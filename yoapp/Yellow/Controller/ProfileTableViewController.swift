@@ -117,8 +117,6 @@ extension ProfileTableViewController {
             case .success(request: let uploadRequest, streamingFromDisk: _, streamFileURL: _):
                 uploadRequest.validate(statusCode: 200..<600).responseJSON(completionHandler: {dataResponse in
                     if dataResponse.result.isSuccess {
-//                        let json = JSON(dataResponse.result.value)
-//                        success(dataResponse.result.value as! JSON)
                         let statusCode = dataResponse.response!.statusCode
                         self.handleError(with: statusCode)
                     } else {
@@ -138,7 +136,6 @@ extension ProfileTableViewController {
     
     func touchDetect(){
         let openTelegramGesture = UITapGestureRecognizer(target: self, action: #selector(openTelegram))
-        
         footerView.telegramView.addGestureRecognizer(openTelegramGesture)
         let openWhatsAppGesture = UITapGestureRecognizer(target: self, action: #selector(openWhatsApp))
         footerView.whatsUpView.addGestureRecognizer(openWhatsAppGesture)
@@ -146,49 +143,31 @@ extension ProfileTableViewController {
         footerView.messengerView.addGestureRecognizer(openMessengerGesture)
     }
     
-    //    org.telegram.messenger
-    
     @objc func openTelegram(){
-        let msg = "Hello"
-        let urlWhats = "tg://send?text=\(msg)"
-        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            if let whatsappURL = NSURL(string: urlString) {
-                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
-                    UIApplication.shared.openURL(whatsappURL as URL)
-                } else {
-                    showErrorAlert(title: "Install App", message: "after try again")
-                    print("ERror")
-                }
-            }
-        }
+        openMessengerView(urlApp: "tg://send?text=") //    org.telegram.messenger
     }
     
     @objc func openWhatsApp(){
-        let msg = "Hello"
-        let urlWhats = "whatsapp://send?text=\(msg)"
-        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            if let whatsappURL = NSURL(string: urlString) {
-                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
-                    UIApplication.shared.openURL(whatsappURL as URL)
-                } else {
-                    showErrorAlert(title: "Install App", message: "after try again")
-                }
-            }
-        }
+        openMessengerView(urlApp: "whatsapp://send?text=")
     }
     //    fb-messenger
     //    fb-messenger://user-thread/%d
     //    /user/
     //    fb-messenger://share/?link
     @objc func openMessenger(){
-        let msg = "Hello"
-        let urlWhats = "fb-messenger:/user/\(msg)"
+        openMessengerView(urlApp: "fb-messenger:/user/")
+    }
+    
+    func openMessengerView(urlApp: String){
+        let msg = "Install YoApp"
+        let urlWhats = "\(urlApp)\(msg)"
+        
         if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             if let whatsappURL = NSURL(string: urlString) {
                 if UIApplication.shared.canOpenURL(whatsappURL as URL) {
                     UIApplication.shared.openURL(whatsappURL as URL)
                 } else {
-                    showErrorAlert(title: "Install App", message: "after try again")
+                    showAlert(errorType: "У вас не установленно это приложение", image: #imageLiteral(resourceName: "errorIcon"))
                 }
             }
         }

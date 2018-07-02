@@ -95,6 +95,7 @@ class ProfileFooterView : UIView {
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.spacing = 2
+        stackView.isUserInteractionEnabled = true
         
         stackView.addArrangedSubview(telegramView)
         stackView.addArrangedSubview(whatsUpView)
@@ -104,64 +105,6 @@ class ProfileFooterView : UIView {
         whatsUpView.translatesAutoresizingMaskIntoConstraints = false
         messengerView.translatesAutoresizingMaskIntoConstraints = false
     }
-    /*
-    func touchDetect(){
-        let openTelegramGesture = UITapGestureRecognizer(target: self, action: #selector(openTelegram))
-        telegramView.addGestureRecognizer(openTelegramGesture)
-        let openWhatsAppGesture = UITapGestureRecognizer(target: self, action: #selector(openWhatsApp))
-        whatsUpView.addGestureRecognizer(openWhatsAppGesture)
-        let openMessengerGesture = UITapGestureRecognizer(target: self, action: #selector(openMessenger))
-        messengerView.addGestureRecognizer(openMessengerGesture)
-    }
-    
-    //    org.telegram.messenger
-    
-    @objc func openTelegram(){
-        let msg = "Hello"
-        let urlWhats = "tg://send?text=\(msg)"
-        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            if let whatsappURL = NSURL(string: urlString) {
-                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
-                    UIApplication.shared.openURL(whatsappURL as URL)
-                } else {
-                    print("ERror")
-                }
-            }
-        }
-    }
-    
-    @objc func openWhatsApp(){
-        let msg = "Hello"
-        let urlWhats = "whatsapp://send?text=\(msg)"
-        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            if let whatsappURL = NSURL(string: urlString) {
-                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
-                    UIApplication.shared.openURL(whatsappURL as URL)
-                } else {
-                    print("ERror")
-                }
-            }
-        }
-    }
-    //    fb-messenger
-    //    fb-messenger://user-thread/%d
-    //    /user/
-    //    fb-messenger://share/?link
-    @objc func openMessenger(){
-        let msg = "Hello"
-        let urlWhats = "fb-messenger:/user/\(msg)"
-        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            if let whatsappURL = NSURL(string: urlString) {
-                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
-                    UIApplication.shared.openURL(whatsappURL as URL)
-                } else {
-                    print("ERror")
-                    
-                }
-            }
-        }
-    }
-    */
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
