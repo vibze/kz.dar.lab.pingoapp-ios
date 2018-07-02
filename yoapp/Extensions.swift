@@ -118,3 +118,13 @@ extension String: ParameterEncoding {
     }
 }
 
+extension String {
+    func crop(begin: Int, end: Int) -> String {
+        let lowerBound = index(self.startIndex, offsetBy: begin)
+        let upperBound = index(self.startIndex, offsetBy: end)
+        let mySubstring = String(self[lowerBound..<upperBound])
+        
+        return mySubstring
+    }
+}
+
