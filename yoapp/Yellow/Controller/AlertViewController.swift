@@ -31,10 +31,15 @@ class AlertViewController: UIViewController {
     
     func configView(){
         alertView.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(190)
+            $0.centerY.equalToSuperview()
+            if screenHeight == 568{
+                $0.height.equalTo(195)
+            }else{
+                 $0.height.equalTo(225)
+            }
             $0.left.equalToSuperview().offset(24)
             $0.right.equalToSuperview().offset(-24)
-            $0.bottom.equalToSuperview().offset(-250)
+         
         }
         
         alertView.okButton.addTarget(self, action: #selector(okAction), for: .touchUpInside)
@@ -46,6 +51,6 @@ class AlertViewController: UIViewController {
     }
     
     @objc func okAction(){
-    dismiss(animated: true, completion: nil)
+    dismiss(animated: false, completion: nil)
     }
 }

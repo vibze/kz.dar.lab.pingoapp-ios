@@ -38,7 +38,6 @@ class FavoriteWordModel {
             }
             completionHandler(fetchArray)
         },completion: {(result) -> Void in
-            debugPrint(result)
         })
     }
     
@@ -52,7 +51,6 @@ class FavoriteWordModel {
             }
             completionHandler(array)
         },completion: {(result) -> Void in
-            debugPrint(result)
         })
     }
     

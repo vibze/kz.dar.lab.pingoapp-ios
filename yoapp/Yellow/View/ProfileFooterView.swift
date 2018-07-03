@@ -62,7 +62,7 @@ class ProfileFooterView : UIView {
             $0.top.equalTo(friendLabel.snp.bottom).offset(16)
             $0.left.equalToSuperview().offset(27)
             $0.right.equalToSuperview().offset(-27)
-            if screenBounds.height == 568{
+            if screenHeight == 568{
                 $0.bottom.equalToSuperview().offset(-5)
             }else{
                 $0.bottom.equalToSuperview().offset(30)

@@ -42,16 +42,16 @@ class AlertView: UIView {
     func configView(){
         imgView.snp.makeConstraints{
             $0.top.equalToSuperview().offset(30)
-            $0.left.equalToSuperview().offset(116)
-            $0.right.equalToSuperview().offset(-116)
-            $0.height.equalTo(78)
+            $0.left.equalToSuperview().offset(88)
+            $0.right.equalToSuperview().offset(-88)
+            $0.bottom.equalTo(-115)
         }
         
         errorTypeLabel.snp.makeConstraints{
             $0.top.equalTo(imgView.snp.bottom).offset(10)
-//            $0.centerX.equalToSuperview()
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
+            $0.bottom.equalTo(okButton.snp.top)
         }
         
         okButton.snp.makeConstraints{
