@@ -40,8 +40,7 @@ struct ContactsService {
                             newContact.name = contact.givenName
                         })
                     } catch let error {
-                        //completion(nil, error as? String)
-                    }
+                 }
                 },
                 completion: { (result) -> Void in
                     switch result {

@@ -15,7 +15,6 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate,
     var favoriteCell = "FavouriteCell"
     var array = [FavoriteWordModel]()
     let backgroundView = UIView()
-    let monitor = FavoriteWordModel.wordsMonitor
     
     var addWordView: FavouriteAddView = {
         let view = FavouriteAddView()
@@ -36,7 +35,6 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate,
         view.addSubview(tableView)
         addNavCon(backgrounColor: .backgroundYellow, title: "Избранные фразы")
         addRightBtutton(action: #selector(addFavourWordAction))
-//        monitor.addObserver(self)
         configTableView()
         fetchFromCoreStore()
     }
@@ -46,14 +44,6 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate,
         fetchFromCoreStore()
         self.tableView.reloadData()
     }
-    /*
-    func listMonitorDidChange(monitor: ListMonitor<FavoriteWords>) {
-        tableView.reloadData()
-    }
-    
-    func listMonitorDidRefetch(monitor: ListMonitor<FavoriteWords>) {
-        tableView.reloadData()
-    }*/
     
     func configTableView(){
         tableView.delegate = self
@@ -66,7 +56,7 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate,
 }
 
 extension FavouriteWordViewController {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return array.count
     }
@@ -74,6 +64,7 @@ extension FavouriteWordViewController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: favoriteCell, for: indexPath) as! SettingViewCell
         cell.textName(text: array[indexPath.row].word!)
+        
         return cell
     }
     
@@ -119,7 +110,7 @@ extension FavouriteWordViewController {
     
     @objc func addAction(){
         let word = addWordView.inputWord.text
-        addToWord(index: 1, word: word!)
+        addToWord(index: array.count + 1, word: word!)
         addWordView.inputWord.text = " "
         tableView.reloadData()
         addWordView.removeFromSuperview()
@@ -128,13 +119,14 @@ extension FavouriteWordViewController {
     }
     
     func addToWord(index:Int,word:String){
-        FavoriteWordModel.addToCore(index: index, word: word)
-        fetchFromCoreStore()
+        FavoriteWordModel.addToCore(index: index, word: word){(fetch) in
+            self.array = fetch
+        }
     }
     
     func fetchFromCoreStore(){
-        FavoriteWordModel.fetchFromCore(completionHandler: {(some) in
-            self.array = some
+        FavoriteWordModel.fetchFromCore(completionHandler: {(fetch) in
+            self.array = fetch
         })
     }
 
@@ -142,4 +134,3 @@ extension FavouriteWordViewController {
          FavoriteWordModel.deleteFromCore(word: word)
     }
 }
-

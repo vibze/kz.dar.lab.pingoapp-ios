@@ -9,8 +9,6 @@
 import UIKit
 import CoreStore
 
-
-
 class FavoriteWordModel {
     var index: Int?
     var word: String?
@@ -20,26 +18,25 @@ class FavoriteWordModel {
         self.word = word
     }
     
-    static var wordsMonitor: ListMonitor<FavoriteWords> = {
-        let monitor = CoreStore.monitorList(
-            From<FavoriteWords>()
-                .orderBy(.descending(\.index))
-        )
-        return monitor
-    }()
-    
-    static func addToCore(index: Int,word: String){
+    static func addToCore(index: Int,word: String,completionHandler: @escaping([FavoriteWordModel]) -> ()){
         var array = [FavoriteWordModel]()
+        var fetchArray = [FavoriteWordModel]()
         CoreStore.perform(asynchronous: {(transaction) -> Void in
             guard transaction.fetchOne(From<FavoriteWords>().where(\.word == word)) == nil else {
                 return
             }
-            
             let addfavorWords = transaction.create(Into<FavoriteWords>())
             addfavorWords.word = word
             addfavorWords.index = Int16(index)
             let cat = FavoriteWordModel(index: index, word: word)
             array.append(cat)
+            
+            let fetching = transaction.fetchAll(From<FavoriteWords>().orderBy(.descending(\.index)))
+            for index in fetching!{
+                let types = FavoriteWordModel(index: Int(index.index), word: index.word!)
+                fetchArray.append(types)
+            }
+            completionHandler(fetchArray)
         },completion: {(result) -> Void in
             debugPrint(result)
         })
@@ -48,8 +45,8 @@ class FavoriteWordModel {
     static func fetchFromCore(completionHandler: @escaping([FavoriteWordModel]) -> ()){
         var array = [FavoriteWordModel]()
         CoreStore.perform(asynchronous: {(transaction) -> Void in
-            let temp = transaction.fetchAll(From<FavoriteWords>().orderBy(.descending(\.index)))
-            for index in temp!{
+            let fetching = transaction.fetchAll(From<FavoriteWords>().orderBy(.descending(\.index)))
+            for index in fetching!{
                 let cat = FavoriteWordModel(index: Int(index.index), word: index.word!)
                 array.append(cat)
             }
