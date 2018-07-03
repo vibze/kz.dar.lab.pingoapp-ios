@@ -36,6 +36,7 @@
 		843C3E1C20E38DFC004ACFB1 /* SessionsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1B20E38DFC004ACFB1 /* SessionsApi.swift */; };
 		843C3E1E20E38E0E004ACFB1 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E1D20E38E0E004ACFB1 /* Profile.swift */; };
 		8E04FC8220E48F43004B7D29 /* FavoriteWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E04FC8120E48F43004B7D29 /* FavoriteWordModel.swift */; };
+		8E11E59620E9DCC200849568 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E11E59520E9DCC200849568 /* AlertView.swift */; };
 		8E1DCD5220DCBBA500D3A4F6 /* BlackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */; };
 		8E1DCD5420DCBD9B00D3A4F6 /* BlockUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD5320DCBD9B00D3A4F6 /* BlockUserCell.swift */; };
 		8E3B73B520E0B91500DD3366 /* AboutAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B73B420E0B91500DD3366 /* AboutAppCell.swift */; };
@@ -52,6 +53,7 @@
 		8E67642D20E3B23A006D5652 /* SettingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1D402220DC7F4800FCB0C8 /* SettingViewCell.swift */; };
 		8E67642E20E3B23A006D5652 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */; };
 		8E67643020E3B2C0006D5652 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E67642F20E3B2C0006D5652 /* ProfileTableViewController.swift */; };
+		8E67E71020E9B9DE007EB870 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E67E70F20E9B9DE007EB870 /* AlertViewController.swift */; };
 		8EC7F28920E09A2000C4BFE7 /* FavouriteWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */; };
 		8EC7F28D20E0AA0C00C4BFE7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */; };
 		8EE3841420E4FE55002343B3 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE3841320E4FE55002343B3 /* Token.swift */; };
@@ -95,6 +97,7 @@
 		843C3E1B20E38DFC004ACFB1 /* SessionsApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsApi.swift; sourceTree = "<group>"; };
 		843C3E1D20E38E0E004ACFB1 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Profile.swift; path = "yoapp/Main page/Models/Profile.swift"; sourceTree = SOURCE_ROOT; };
 		8E04FC8120E48F43004B7D29 /* FavoriteWordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteWordModel.swift; sourceTree = "<group>"; };
+		8E11E59520E9DCC200849568 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		8E1D402220DC7F4800FCB0C8 /* SettingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewCell.swift; sourceTree = "<group>"; };
 		8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
 		8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +113,7 @@
 		8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		8E59AD9220E072E2003CA5CC /* BlockUserLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserLabelView.swift; sourceTree = "<group>"; };
 		8E67642F20E3B2C0006D5652 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		8E67E70F20E9B9DE007EB870 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteWordViewController.swift; sourceTree = "<group>"; };
 		8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8EE3841320E4FE55002343B3 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -390,6 +394,7 @@
 				8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */,
 				8E56778A20DBBEB400E65AFE /* SettingViewController.swift */,
 				8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */,
+				8E67E70F20E9B9DE007EB870 /* AlertViewController.swift */,
 				8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */,
 			);
 			path = Controller;
@@ -407,6 +412,7 @@
 				8E59AD9220E072E2003CA5CC /* BlockUserLabelView.swift */,
 				8E1D402220DC7F4800FCB0C8 /* SettingViewCell.swift */,
 				8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */,
+				8E11E59520E9DCC200849568 /* AlertView.swift */,
 				8E1DCD5320DCBD9B00D3A4F6 /* BlockUserCell.swift */,
 				8E56778820DBB7B500E65AFE /* CustomInviteView.swift */,
 			);
@@ -620,6 +626,7 @@
 				843C3E0B20E38B8C004ACFB1 /* MyContact.swift in Sources */,
 				7C189F3220E015D300388DE2 /* SectionHeaderView.swift in Sources */,
 				8EE3841420E4FE55002343B3 /* Token.swift in Sources */,
+				8E11E59620E9DCC200849568 /* AlertView.swift in Sources */,
 				7C1CDFD420D7A9A000A90E16 /* MyContactsViewController.swift in Sources */,
 				7C1CDFD720D7AB5100A90E16 /* MessageViewController.swift in Sources */,
 				843C3E0320E38066004ACFB1 /* ProfileFooterView.swift in Sources */,
@@ -640,6 +647,7 @@
 				843C3E0F20E38BAB004ACFB1 /* Store.swift in Sources */,
 				7CC4E13420DA37850094F6CD /* MessageCollectionViewCell.swift in Sources */,
 				8EC7F28920E09A2000C4BFE7 /* FavouriteWordViewController.swift in Sources */,
+				8E67E71020E9B9DE007EB870 /* AlertViewController.swift in Sources */,
 				8E56777F20DB959F00E65AFE /* InviteFriendsView.swift in Sources */,
 				8E04FC8220E48F43004B7D29 /* FavoriteWordModel.swift in Sources */,
 				7C1B8DEF20DB9650004BE38B /* SearchTextField.swift in Sources */,
