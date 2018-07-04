@@ -54,9 +54,9 @@
 		8EC7F28920E09A2000C4BFE7 /* FavouriteWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */; };
 		8EC7F28D20E0AA0C00C4BFE7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */; };
 		8EFB4EE720E199CA00F0037B /* FavouriteAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB4EE620E199CA00F0037B /* FavouriteAddView.swift */; };
+		9929205220E4906E00F87149 /* RegisterDeviceToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929205120E4906E00F87149 /* RegisterDeviceToken.swift */; };
 		9956F13420ECD30E000820AC /* ProfileApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9956F13320ECD30D000820AC /* ProfileApi.swift */; };
 		9956F13720ECDA82000820AC /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9956F13620ECDA82000820AC /* Token.swift */; };
-		9929205220E4906E00F87149 /* RegisterDeviceToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929205120E4906E00F87149 /* RegisterDeviceToken.swift */; };
 		EFC351E69DE7CCBFA1E3DF75 /* Pods_yoapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D2B93724BE3302FB56D8383 /* Pods_yoapp.framework */; };
 /* End PBXBuildFile section */
 
@@ -114,10 +114,10 @@
 		8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteWordViewController.swift; sourceTree = "<group>"; };
 		8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8EFB4EE620E199CA00F0037B /* FavouriteAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAddView.swift; sourceTree = "<group>"; };
+		9929205120E4906E00F87149 /* RegisterDeviceToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDeviceToken.swift; sourceTree = "<group>"; };
 		9956F13320ECD30D000820AC /* ProfileApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileApi.swift; sourceTree = "<group>"; };
 		9956F13520ECD51A000820AC /* yoapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = yoapp.entitlements; sourceTree = "<group>"; };
 		9956F13620ECDA82000820AC /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
-		9929205120E4906E00F87149 /* RegisterDeviceToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDeviceToken.swift; sourceTree = "<group>"; };
 		9F12A573C6D7B804840CCD70 /* Pods-yoapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yoapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-yoapp/Pods-yoapp.release.xcconfig"; sourceTree = "<group>"; };
 		AAAC01981428456529FBC7D0 /* Pods-yoapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yoapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yoapp/Pods-yoapp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -419,7 +419,6 @@
 			children = (
 				843C3E1B20E38DFC004ACFB1 /* SessionsApi.swift */,
 				7CF5950320E48CCF00C641A7 /* Urls.swift */,
-				7C32188D20EA1F67004F55E0 /* BaseAPI.swift */,
 				9956F13320ECD30D000820AC /* ProfileApi.swift */,
 				9929205120E4906E00F87149 /* RegisterDeviceToken.swift */,
 			);
@@ -597,9 +596,6 @@
 				7C1CDFD420D7A9A000A90E16 /* MyContactsViewController.swift in Sources */,
 				7C1CDFD720D7AB5100A90E16 /* MessageViewController.swift in Sources */,
 				843C3E0320E38066004ACFB1 /* ProfileFooterView.swift in Sources */,
-				843C3DFF20E38045004ACFB1 /* SettingsFooterView.swift in Sources */,
-				7CE4E8BA20E7537900936833 /* Monitor.swift in Sources */,
-				7CE4E8BD20E9580200936833 /* SearchContact.swift in Sources */,
 				9956F13420ECD30E000820AC /* ProfileApi.swift in Sources */,
 				843C3DEC20E37DB9004ACFB1 /* PushAlert.swift in Sources */,
 				9929205220E4906E00F87149 /* RegisterDeviceToken.swift in Sources */,
@@ -758,8 +754,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = kz.dar.lab.pingoapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1445b209-e131-47ab-80dd-5a28d5e21f75";
-				PROVISIONING_PROFILE_SPECIFIER = "match Development kz.dar.lab.pingoapp 1529907977";
+				PROVISIONING_PROFILE = "097f09b4-b6e2-401b-a508-721095ae9b00";
+				PROVISIONING_PROFILE_SPECIFIER = "match Development kz.dar.lab.pingoapp";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

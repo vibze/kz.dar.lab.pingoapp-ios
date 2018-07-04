@@ -59,12 +59,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func registerForRemoteNotification() {
-        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
-        UIApplication.shared.registerForRemoteNotifications()
-    }
-    
-    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         Token.shared.deviceToken = deviceTokenString
