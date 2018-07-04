@@ -42,6 +42,11 @@ class MainTabViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         view.backgroundColor = UIColor(hexString: "6BBE90")
         tabBarBtnPressed(sender: homeButton)
+        ProfileApi().uploadDeviceToken(success: { (JSON) in
+            print("success")
+        }) { (Error) in
+            print("error")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,4 +96,5 @@ class MainTabViewController: UIViewController {
             $0.width.equalToSuperview().inset(24)
         }
     }
+    
 }

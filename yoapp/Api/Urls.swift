@@ -14,11 +14,13 @@ struct Urls {
     static func getUrl(_ tail: Tail) -> String {
         switch tail {
         case .buddies:
-            return base + "/buddies"
+            return base + "buddies"
+        case .register_device_token:
+            return base + "register_device_token"
         }
     }
 }
 
 enum Tail {
-    case buddies
+    case buddies, register_device_token
 }

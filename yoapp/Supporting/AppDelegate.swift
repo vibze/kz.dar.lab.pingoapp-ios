@@ -16,6 +16,7 @@ import AccountKit
 @available(iOS 10.0, *)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+  
     
     var window: UIWindow?
     
@@ -31,6 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Store.initCoreStore()
         
         checkStorage()
+        
+        ContactsService().syncContacts()
+        
+        registerForRemoteNotification()
         
         return true
     }
@@ -54,13 +59,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func registerForRemoteNotification() {
+        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
+        UIApplication.shared.registerForRemoteNotifications()
+    }
+    
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        print("apns device token: \(deviceTokenString)")
+        Token.shared.deviceToken = deviceTokenString
+        print("APNs device token: \(deviceTokenString)")
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("apns registration failed: \(error)")
+        print("APNs registration failed: \(error)")
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {

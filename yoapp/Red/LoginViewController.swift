@@ -271,6 +271,7 @@ AKFViewControllerDelegate {
         print("accessToken:", accessToken.tokenString)
 //        print(accessToken.tokenString)
         SessionsApi.createSession(token: accessToken.tokenString, success: { profile in
+            Token.shared.accessToken = accessToken.tokenString
             // Write to user defaults
             Application.shared.login(profile: profile)
         }) { errorMessage in
