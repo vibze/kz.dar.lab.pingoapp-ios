@@ -27,8 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Application.shared.window = window
         window.makeKeyAndVisible()
         
-        registerForRemoteNotification()
-        
         Store.initCoreStore()
         
         checkStorage()

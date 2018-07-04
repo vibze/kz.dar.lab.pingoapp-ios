@@ -19,3 +19,4 @@ enum FontType: String {
     case myRegular = "NelveticaNeue-Regular"
     case mySemiBold = "NelveticaNeue-Semibold"
 }
+

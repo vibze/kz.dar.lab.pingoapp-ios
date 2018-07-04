@@ -46,10 +46,6 @@ extension UIColor {
 
 extension UIViewController {
  
-@objc func dismiss(fromGesture gesture: UISwipeGestureRecognizer) {
-    //Your dismiss code
-    //Here you should implement your checks for the swipe gesture
-}
     func hideKeyboard() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -84,6 +80,21 @@ extension UIViewController {
         let button = UIBarButtonItem(image: #imageLiteral(resourceName: "add_icon"), style: .plain, target: self, action: action)
         navigationItem.rightBarButtonItem = button
     }
+    
+    func handleError(with statusCode: Int) {
+        switch statusCode {
+        case 404:
+            showAlert(errorType: "Failed Error 404", image: #imageLiteral(resourceName: "errorIcon"))
+        default:
+            break
+        }
+    }
+    
+    func showAlert(errorType: String, image: UIImage){
+        let alertView = AlertViewController()
+        alertView.errorView(errorType: errorType, image: image)
+        self.present(alertView, animated: false, completion: nil)
+    }
 }
 
 extension UIView {
@@ -101,10 +112,6 @@ extension UIView {
     }
 }
 
-extension UITableViewController {
-    
-}
-
 extension UILabel {
     static func basic(textColor: UIColor, fontSize: CGFloat, fontType: FontType) -> UILabel{
         let label = UILabel()
@@ -113,7 +120,6 @@ extension UILabel {
         label.lineBreakMode = .byWordWrapping
         label.font = UIFont(name: fontType.rawValue, size: fontSize)
         label.textColor = textColor
-        
         return label
     }
 }
