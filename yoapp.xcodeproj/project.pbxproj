@@ -54,6 +54,8 @@
 		8EC7F28920E09A2000C4BFE7 /* FavouriteWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */; };
 		8EC7F28D20E0AA0C00C4BFE7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */; };
 		8EFB4EE720E199CA00F0037B /* FavouriteAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB4EE620E199CA00F0037B /* FavouriteAddView.swift */; };
+		9956F13420ECD30E000820AC /* ProfileApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9956F13320ECD30D000820AC /* ProfileApi.swift */; };
+		9956F13720ECDA82000820AC /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9956F13620ECDA82000820AC /* Token.swift */; };
 		9929205220E4906E00F87149 /* RegisterDeviceToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929205120E4906E00F87149 /* RegisterDeviceToken.swift */; };
 		EFC351E69DE7CCBFA1E3DF75 /* Pods_yoapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D2B93724BE3302FB56D8383 /* Pods_yoapp.framework */; };
 /* End PBXBuildFile section */
@@ -112,7 +114,9 @@
 		8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteWordViewController.swift; sourceTree = "<group>"; };
 		8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8EFB4EE620E199CA00F0037B /* FavouriteAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAddView.swift; sourceTree = "<group>"; };
-		9907DF4220E4A9AF00873E67 /* yoapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = yoapp.entitlements; sourceTree = "<group>"; };
+		9956F13320ECD30D000820AC /* ProfileApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileApi.swift; sourceTree = "<group>"; };
+		9956F13520ECD51A000820AC /* yoapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = yoapp.entitlements; sourceTree = "<group>"; };
+		9956F13620ECDA82000820AC /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		9929205120E4906E00F87149 /* RegisterDeviceToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDeviceToken.swift; sourceTree = "<group>"; };
 		9F12A573C6D7B804840CCD70 /* Pods-yoapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yoapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-yoapp/Pods-yoapp.release.xcconfig"; sourceTree = "<group>"; };
 		AAAC01981428456529FBC7D0 /* Pods-yoapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yoapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-yoapp/Pods-yoapp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -283,8 +287,9 @@
 		7C910C4820D6AAF90072A673 /* yoapp */ = {
 			isa = PBXGroup;
 			children = (
+				9956F13520ECD51A000820AC /* yoapp.entitlements */,
+				9956F13620ECDA82000820AC /* Token.swift */,
 				843C3E2520E6484C004ACFB1 /* Controllers */,
-				9907DF4220E4A9AF00873E67 /* yoapp.entitlements */,
 				9941002020E227E300F18AA3 /* Api */,
 				843C3DED20E37DCB004ACFB1 /* Services */,
 				843C3DE620E37D92004ACFB1 /* Models */,
@@ -414,6 +419,8 @@
 			children = (
 				843C3E1B20E38DFC004ACFB1 /* SessionsApi.swift */,
 				7CF5950320E48CCF00C641A7 /* Urls.swift */,
+				7C32188D20EA1F67004F55E0 /* BaseAPI.swift */,
+				9956F13320ECD30D000820AC /* ProfileApi.swift */,
 				9929205120E4906E00F87149 /* RegisterDeviceToken.swift */,
 			);
 			path = Api;
@@ -581,6 +588,7 @@
 				8E56777920DB886000E65AFE /* Enum.swift in Sources */,
 				8E56778B20DBBEB400E65AFE /* SettingViewController.swift in Sources */,
 				7C1D3FB720D6BA8E007037D9 /* ContactsCollectionViewCell.swift in Sources */,
+				9956F13720ECDA82000820AC /* Token.swift in Sources */,
 				7C48C3A620E3972200396466 /* ImageView.swift in Sources */,
 				843C3E1920E38D9B004ACFB1 /* ImageSwipeStruct.swift in Sources */,
 				843C3E1E20E38E0E004ACFB1 /* Profile.swift in Sources */,
@@ -589,6 +597,10 @@
 				7C1CDFD420D7A9A000A90E16 /* MyContactsViewController.swift in Sources */,
 				7C1CDFD720D7AB5100A90E16 /* MessageViewController.swift in Sources */,
 				843C3E0320E38066004ACFB1 /* ProfileFooterView.swift in Sources */,
+				843C3DFF20E38045004ACFB1 /* SettingsFooterView.swift in Sources */,
+				7CE4E8BA20E7537900936833 /* Monitor.swift in Sources */,
+				7CE4E8BD20E9580200936833 /* SearchContact.swift in Sources */,
+				9956F13420ECD30E000820AC /* ProfileApi.swift in Sources */,
 				843C3DEC20E37DB9004ACFB1 /* PushAlert.swift in Sources */,
 				9929205220E4906E00F87149 /* RegisterDeviceToken.swift in Sources */,
 				843C3E1C20E38DFC004ACFB1 /* SessionsApi.swift in Sources */,
