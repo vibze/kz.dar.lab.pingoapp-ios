@@ -84,18 +84,10 @@ extension UIViewController {
     func handleError(with statusCode: Int) {
         switch statusCode {
         case 404:
-            showErrorAlert(title: "Failed Error 404", message: "Try again")
+            showAlert(errorType: "Failed Error 404", image: #imageLiteral(resourceName: "errorIcon"))
         default:
             break
         }
-    }
-    
-    func showErrorAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.view.tintColor = .myYellow
-        let okAction = UIAlertAction(title: "ОК", style: .cancel, handler: nil)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
     }
     
     func showAlert(errorType: String, image: UIImage){
