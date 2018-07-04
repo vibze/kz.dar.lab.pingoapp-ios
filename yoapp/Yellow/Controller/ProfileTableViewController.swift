@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import AccountKit
 import SwiftyJSON
+import CoreStore
 
 class ProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
@@ -18,6 +19,7 @@ UINavigationControllerDelegate {
     let imagePicker = UIImagePickerController()
     var profileCell = "profileCell"
     var settingsType = ["Настройки","О приложении","Выход"]
+    var myItems = [[String:Any]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,7 @@ UINavigationControllerDelegate {
         configTableView()
         viewData()
         touchDetect()
+        fetchAllProfile()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,12 +94,11 @@ extension ProfileTableViewController {
         let avatarImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         headerView.profileImg.image = avatarImage
         uploadImage(avatar: avatarImage, success: { response in
-            debugPrint("OKKK", response)
+            print("OKKK", response)
         }) { (error) in
-            debugPrint("Bad ERror... \(error)")
+            print("Bad ERror... \(error)")
         }
         dismiss(animated: true, completion: nil)
-        
     }
     
     func uploadImage(avatar: UIImage, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void){
@@ -109,14 +111,16 @@ extension ProfileTableViewController {
         let header = ["Content-Type": "application/x-www-form-urlencoded",
                       "Authorization": "Bearer \(Token.shared.accessToken!.tokenString)",
             "Accept":"application/json"]
+        print(Token.shared.accessToken!.tokenString)
         
         Alamofire.upload(multipartFormData: { data in
             data.append(imageData, withName: "file", fileName: "myImage.png", mimeType: "image/png")
         }, to: url, method: .post, headers: header) { result in
             switch result {
-            case .success(request: let uploadRequest, streamingFromDisk: _, streamFileURL: _):
+            case .success(request: let uploadRequest, _, _):
                 uploadRequest.validate(statusCode: 200..<600).responseJSON(completionHandler: {dataResponse in
                     if dataResponse.result.isSuccess {
+                        print(dataResponse, "RESPONSE!!")
                         let statusCode = dataResponse.response!.statusCode
                         self.handleError(with: statusCode)
                     } else {
@@ -144,7 +148,7 @@ extension ProfileTableViewController {
     }
     
     @objc func openTelegram(){
-        openMessengerView(urlApp: "tg://send?text=") //    org.telegram.messenger
+        openMessengerView(urlApp: "tg://msg?text=")
     }
     
     @objc func openWhatsApp(){
@@ -160,8 +164,7 @@ extension ProfileTableViewController {
     
     func openMessengerView(urlApp: String){
         let msg = "Install YoApp"
-        let urlWhats = "\(urlApp)\(msg)"
-        
+        let urlWhats = urlApp + msg
         if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             if let whatsappURL = NSURL(string: urlString) {
                 if UIApplication.shared.canOpenURL(whatsappURL as URL) {
@@ -173,4 +176,15 @@ extension ProfileTableViewController {
         }
     }
     
+    func fetchAllProfile(){
+        CoreStore.perform(
+            asynchronous: { (transaction) -> Void in
+                let person = transaction.fetchAll(From<Contact>().where(\.profileId == 0))
+                for some in person! {
+                    print(some.phoneNumber!, "Phone Number")
+                }
+        },
+            completion: { _ in }
+        )
+    }
 }
