@@ -115,15 +115,16 @@ extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource, 
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 0 {
-            blurEffectView.isHidden = false
-            searchBackgroundView.backgroundColor = .clear
-            searchTextField.backgroundColor = UIColor(hexString: "58AD7E", alpha: 0.2)
-        }
-        else {
-            blurEffectView.isHidden = true
-            searchBackgroundView.backgroundColor = UIColor(hexString: "6BBE90")
-            searchTextField.backgroundColor = UIColor(hexString: "58AD7E")
+        scrollView.contentOffset.y > 0 ?
+            setBlur(false, .clear, #colorLiteral(red: 0.3450980392, green: 0.6784313725, blue: 0.4941176471, alpha: 0.2)) :
+            setBlur(true, #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), #colorLiteral(red: 0.3450980392, green: 0.6784313725, blue: 0.4941176471, alpha: 1))
+    }
+    
+    func setBlur(_ isHidden: Bool, _ backColor: UIColor, _ textColor: UIColor) {
+        UIView.animate(withDuration: (isHidden ? 0 : 0.5)) {
+            self.blurEffectView.isHidden = isHidden
+            self.searchBackgroundView.backgroundColor = backColor
+            self.searchTextField.backgroundColor = textColor
         }
     }
 }

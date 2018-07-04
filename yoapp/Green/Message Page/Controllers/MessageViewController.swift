@@ -10,6 +10,8 @@ import UIKit
 
 private struct Constants {
     static let messageCell = "messageCell"
+    static let blockContact = "Заблокировать контакт"
+    static let unblockContact = "Разблокировать контакт"
 }
 
 class MessageViewController: UIViewController {
@@ -67,7 +69,16 @@ class MessageViewController: UIViewController {
     }()
     
     @objc func blockBtnPressed() {
-        
+        guard let isBlacklisted = contact?.isBlacklisted else { return }
+        Message().performBlock(profileId: contact!.profileId, isBlacklisted: isBlacklisted) { (message) in
+            if let message = message {
+                print(message)
+            }
+            else {
+                let blockButtonTitle = isBlacklisted ? Constants.blockContact : Constants.unblockContact
+                self.blockButton.setTitle(blockButtonTitle, for: .normal)
+            }
+        }
     }
     
     @objc func writeBtnPressed() {
@@ -89,6 +100,9 @@ class MessageViewController: UIViewController {
     }
     
     func setupButtons() {
+        let blockButtonTitle = contact!.isBlacklisted ? Constants.unblockContact : Constants.blockContact
+        blockButton.setTitle(blockButtonTitle, for: .normal)
+        
         writeButton.addTarget(self, action: #selector(writeBtnPressed), for: .touchUpInside)
         blockButton.addTarget(self, action: #selector(blockBtnPressed), for: .touchUpInside)
     }
