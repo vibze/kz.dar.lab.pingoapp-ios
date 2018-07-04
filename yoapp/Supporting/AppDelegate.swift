@@ -28,26 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.makeKeyAndVisible()
         
         Store.initCoreStore()
-        
         checkStorage()
-        
-        ContactsService().syncContacts()
-        
-        registerForRemoteNotification()
         
         return true
     }
-    func registerForRemoteNotification() {
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
-            if granted {
-                DispatchQueue.main.async(execute: {
-                    UIApplication.shared.registerForRemoteNotifications()
-                })
-            }
-        }
-    }
-    
     
     func checkStorage() {
         if let profile = Profile.current() {
@@ -59,8 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        Token.shared.deviceToken = deviceTokenString
         print("APNs device token: \(deviceTokenString)")
+        ProfileApi().uploadDeviceToken(deviceToken: deviceTokenString, success: { _ in }, failure: { _ in })
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -150,10 +134,23 @@ class Application {
         Profile.addToUserDefaults(profile)
         let vc = UINavigationController(rootViewController: MainTabViewController())
         window?.rootViewController = vc
+        registerForRemoteNotification()
+        ContactsService().syncContacts()
     }
     
     func logout() {
         AKFAccountKit(responseType: .accessToken).logOut()
         window?.rootViewController = LoginViewController()
+    }
+    
+    private func registerForRemoteNotification() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+            if granted {
+                DispatchQueue.main.async(execute: {
+                    UIApplication.shared.registerForRemoteNotifications()
+                })
+            }
+        }
     }
 }

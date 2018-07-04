@@ -60,7 +60,6 @@
 		8EC7F28920E09A2000C4BFE7 /* FavouriteWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */; };
 		8EC7F28D20E0AA0C00C4BFE7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */; };
 		8EFB4EE720E199CA00F0037B /* FavouriteAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB4EE620E199CA00F0037B /* FavouriteAddView.swift */; };
-		9929205220E4906E00F87149 /* RegisterDeviceToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929205120E4906E00F87149 /* RegisterDeviceToken.swift */; };
 		9956F13420ECD30E000820AC /* ProfileApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9956F13320ECD30D000820AC /* ProfileApi.swift */; };
 		9956F13720ECDA82000820AC /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9956F13620ECDA82000820AC /* Token.swift */; };
 		EFC351E69DE7CCBFA1E3DF75 /* Pods_yoapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D2B93724BE3302FB56D8383 /* Pods_yoapp.framework */; };
@@ -128,7 +127,6 @@
 		8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8EE3841320E4FE55002343B3 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		8EFB4EE620E199CA00F0037B /* FavouriteAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAddView.swift; sourceTree = "<group>"; };
-		9929205120E4906E00F87149 /* RegisterDeviceToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDeviceToken.swift; sourceTree = "<group>"; };
 		9956F13320ECD30D000820AC /* ProfileApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileApi.swift; sourceTree = "<group>"; };
 		9956F13520ECD51A000820AC /* yoapp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = yoapp.entitlements; sourceTree = "<group>"; };
 		9956F13620ECDA82000820AC /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -442,7 +440,6 @@
 				843C3E1B20E38DFC004ACFB1 /* SessionsApi.swift */,
 				7CF5950320E48CCF00C641A7 /* Urls.swift */,
 				9956F13320ECD30D000820AC /* ProfileApi.swift */,
-				9929205120E4906E00F87149 /* RegisterDeviceToken.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -624,7 +621,6 @@
 				843C3E0320E38066004ACFB1 /* ProfileFooterView.swift in Sources */,
 				9956F13420ECD30E000820AC /* ProfileApi.swift in Sources */,
 				843C3DEC20E37DB9004ACFB1 /* PushAlert.swift in Sources */,
-				9929205220E4906E00F87149 /* RegisterDeviceToken.swift in Sources */,
 				843C3E1C20E38DFC004ACFB1 /* SessionsApi.swift in Sources */,
 				7C48C3A720E3972200396466 /* ActionButton.swift in Sources */,
 				8EFB4EE720E199CA00F0037B /* FavouriteAddView.swift in Sources */,
@@ -775,7 +771,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = R87MWZ88KR;
 				INFOPLIST_FILE = yoapp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -799,7 +795,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = R87MWZ88KR;
 				INFOPLIST_FILE = yoapp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
