@@ -14,31 +14,24 @@ import SwiftyJSON
 
 struct ContactsService {
     
-    static var contactsMonitor: ListMonitor<Contact> = {
-        let monitor = CoreStore.monitorList(
-            From<Contact>()
-                .orderBy(.ascending(\.name))
-        )
-        return monitor
-    }()
-    
     func syncContacts() {
         let keys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneNumbersKey]
         let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
         var phoneNumbers: [String] = []
-    
+        
         requestAccessToContacts { store in
             CoreStore.perform(
                 asynchronous: { (transaction) -> Void in
                     do {
                         try store.enumerateContacts(with: request, usingBlock: { (contact, sd) in
                             if let phoneNumber = contact.phoneNumbers.first?.value.stringValue {
-                                if transaction.fetchOne(From<Contact>().where(\.phoneNumber == phoneNumber)) == nil {
+                                let normalizedPhoneNumber = self.changeNumberType(phoneNumber)
+                                if transaction.fetchOne(From<Contact>().where(\.phoneNumber == normalizedPhoneNumber)) == nil {
                                     let newContact = transaction.create(Into<Contact>())
-                                    newContact.phoneNumber = phoneNumber
+                                    newContact.phoneNumber = normalizedPhoneNumber
                                     newContact.name = contact.givenName
                                 }
-                                phoneNumbers.append(phoneNumber)
+                                phoneNumbers.append(normalizedPhoneNumber)
                             }
                         })
                     } catch let error {
@@ -56,11 +49,25 @@ struct ContactsService {
         }
     }
     
-    func requestAccessToContacts(_ completion: @escaping (CNContactStore) -> Void) {
+    private func changeNumberType(_ number: String) -> String {
+        var redeclaredNumber = ""
+        for char in number {
+            if char >= "0" && char <= "9" {
+                redeclaredNumber += String(char)
+            }
+        }
+        if redeclaredNumber.first == "8" {
+            redeclaredNumber.removeFirst()
+            return "7" + redeclaredNumber
+        }
+        return redeclaredNumber
+    }
+    
+    private func requestAccessToContacts(_ completion: @escaping (CNContactStore) -> Void) {
         let store = CNContactStore()
         store.requestAccess(for: .contacts) { (granted, error) in
             if let error = error {
-                debugPrint(error)
+                print(error)
                 return
             }
             if granted {
@@ -69,7 +76,7 @@ struct ContactsService {
         }
     }
     
-    func checkPhoneNubmersForRegistration(phoneNumbers: [String]) {
+    private func getRequest(_ body: [String]) -> URLRequest {
         let url = Urls.getUrl(.buddies)
         let tokenTest = "Bearer EMAWdQD4ISxKG6BXvYjcsOxVz8BbehjDuc29QAnOxRUnRU0AmKyhrajLZAaHklyIO5inpMDaui9Tamq1gFJOaX0J5pJIZBCQMsejiA9RpAZDZD"
         
@@ -78,26 +85,42 @@ struct ContactsService {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(tokenTest, forHTTPHeaderField: "Authorization")
         
-        request.httpBody = try! JSONSerialization.data(withJSONObject: phoneNumbers)
+        request.httpBody = try! JSONSerialization.data(withJSONObject: body)
+        return request
+    }
+    
+    private func checkPhoneNubmersForRegistration(phoneNumbers: [String]) {
+        let request = getRequest(phoneNumbers)
+        handleDeletedContacts(phoneNumbers: phoneNumbers)
         
         Alamofire.request(request).responseJSON { response in
             switch response.result {
             case .success(let value):
-                break
-//                print("response json:" , value)
+                let json = JSON(value)
+                self.updateContactsIfNeeded(json: json)
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
     
-    func getRegisteredContacts(_ completion: @escaping ([[Contact]?]) -> Void) {
+    private func handleDeletedContacts(phoneNumbers: [String]) {
         CoreStore.perform(
-            asynchronous: {
-                let registeredContacts = $0.fetchAll(From<Contact>().where(\.profileId != 0))
-                let lastActiveContacts = $0.fetchAll(From<Contact>().where(\.profileId != 0).orderBy(.ascending(\.pingedAt)))
-                
-                completion([lastActiveContacts, registeredContacts])
+            asynchronous: { (transaction) -> Void in
+                let allContacts = transaction.fetchAll(From<Contact>())
+                guard let myContacts = allContacts else { return }
+                for contact in myContacts {
+                    var isDeletedContactFound = true
+                    for number in phoneNumbers {
+                        if contact.phoneNumber == number {
+                            isDeletedContactFound = false
+                            break
+                        }
+                    }
+                    if isDeletedContactFound {
+                        transaction.delete(contact)
+                    }
+                }
             },
             completion: { (result) -> Void in
                 switch result {
@@ -108,11 +131,15 @@ struct ContactsService {
         )
     }
     
-    func updateContacts() {
-        CoreStore.perform (
+    private func updateContactsIfNeeded(json: JSON) {
+        CoreStore.perform(
             asynchronous: { (transaction) -> Void in
-                let contact = transaction.fetchOne(From<Contact>().where(\.phoneNumber == ""))
-                contact?.profileId = 13
+                for registered in json.arrayValue {    
+                    let contact = transaction.fetchOne(From<Contact>().where(\.phoneNumber == registered["phone_number"].stringValue))
+                    contact?.profileId = Int32(registered["id"].intValue)
+                    let avatar = JSON(registered["avatar"])
+                    contact?.avatarUrl = avatar["url"].stringValue
+                }
             },
             completion: { (result) -> Void in
                 switch result {
@@ -122,4 +149,4 @@ struct ContactsService {
             }
         )
     }
-}
+ }

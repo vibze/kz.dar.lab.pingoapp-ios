@@ -45,7 +45,7 @@ class MyContactsViewController: UIViewController {
 
     
     let searchTextField = SearchTextField()
-    let monitor = ContactsService.contactsMonitor
+    let monitor = Monitor.contactsMonitor
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +53,7 @@ class MyContactsViewController: UIViewController {
         searchTextField.addTarget(self, action: #selector(handleTextFieldChange), for: .editingChanged)
         monitor.addObserver(self)
         listOfContacts = monitor.objectsInAllSections()
+//        print(listOfContacts)
         
         view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
         
@@ -61,9 +62,9 @@ class MyContactsViewController: UIViewController {
     }
     
     @objc func handleTextFieldChange(textField: UITextField) {
-        let text = textField.text
-        if let text = text {
-            searchForContact(text)
+        self.listOfContacts = SearchContact.searchFor(monitor: monitor, text: textField.text)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
     
@@ -115,15 +116,16 @@ extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource, 
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > 0 {
-            blurEffectView.isHidden = false
-            searchBackgroundView.backgroundColor = .clear
-            searchTextField.backgroundColor = UIColor(hexString: "58AD7E", alpha: 0.2)
-        }
-        else {
-            blurEffectView.isHidden = true
-            searchBackgroundView.backgroundColor = UIColor(hexString: "6BBE90")
-            searchTextField.backgroundColor = UIColor(hexString: "58AD7E")
+        scrollView.contentOffset.y > 0 ?
+            setBlur(false, .clear, #colorLiteral(red: 0.3450980392, green: 0.6784313725, blue: 0.4941176471, alpha: 0.2)) :
+            setBlur(true, #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), #colorLiteral(red: 0.3450980392, green: 0.6784313725, blue: 0.4941176471, alpha: 1))
+    }
+    
+    func setBlur(_ isHidden: Bool, _ backColor: UIColor, _ textColor: UIColor) {
+        UIView.animate(withDuration: (isHidden ? 0 : 0.5)) {
+            self.blurEffectView.isHidden = isHidden
+            self.searchBackgroundView.backgroundColor = backColor
+            self.searchTextField.backgroundColor = textColor
         }
     }
 }
@@ -140,25 +142,6 @@ extension MyContactsViewController: ListObserver {
         self.tableView.reloadData()
     }
     func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {
-    }
-    
-    func searchForContact(_ searchText: String) {
-        var allContacts = monitor.objectsInAllSections()
-        if searchText.count > 0 {
-            allContacts = allContacts.filter {
-                guard let name = $0.name,
-                let phoneNumber = $0.phoneNumber else { return false }
-                if name.lowercased().range(of: searchText.lowercased()) != nil || phoneNumber.range(of: searchText) != nil {
-                    return true
-                } else {
-                    return false
-                }
-            }
-        }
-        listOfContacts = allContacts
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
     }
 }
 

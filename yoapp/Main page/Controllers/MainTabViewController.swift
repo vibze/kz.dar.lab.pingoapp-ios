@@ -10,10 +10,6 @@ import UIKit
 
 class MainTabViewController: UIViewController {
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-
     let containerView: UIView = {
         let view = UIView()
         return view
@@ -27,6 +23,19 @@ class MainTabViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+
+    let stackViewBackground: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    let blurEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let effect = UIVisualEffectView(effect: blurEffect)
+        effect.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        return effect
+    }()
     
     let contactsButton = TabBarButton(tag: 0, image: #imageLiteral(resourceName: "contacts"))
     let homeButton = TabBarButton(tag: 1, image:  #imageLiteral(resourceName: "home"))
@@ -34,19 +43,13 @@ class MainTabViewController: UIViewController {
 
     let controllers = [MyContactsViewController(), ContactsViewController(), ProfileTableViewController()]
     let vcBackgroundColors = [#colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), #colorLiteral(red: 0.9960784314, green: 0.7882352941, blue: 0.3725490196, alpha: 1)]
+    let stackViewHidden = [false, false, true]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupButtons()
-        self.navigationController?.isNavigationBarHidden = true
-        view.backgroundColor = UIColor(hexString: "6BBE90")
         tabBarBtnPressed(sender: homeButton)
-        ProfileApi().uploadDeviceToken(success: { (JSON) in
-            print("success")
-        }) { (Error) in
-            print("error")
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,8 +72,8 @@ class MainTabViewController: UIViewController {
         controller.view.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
         view.backgroundColor = vcBackgroundColors[index]
+        blurEffectView.isHidden = stackViewHidden[index]
     }
     
     func setupButtons() {
@@ -81,8 +84,16 @@ class MainTabViewController: UIViewController {
     }
     
     func setupViews() {
-        [containerView, homeButton, profileButton, contactsButton, stackView].forEach {
+        [containerView, homeButton, profileButton, contactsButton, stackViewBackground, stackView].forEach {
             view.addSubview($0)
+        }
+        
+        stackViewBackground.addSubview(blurEffectView)
+        
+        stackViewBackground.snp.makeConstraints {
+            $0.bottom.equalTo(bottomLayoutGuide.snp.top)
+            $0.height.equalTo(60)
+            $0.left.right.equalToSuperview()
         }
         containerView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()

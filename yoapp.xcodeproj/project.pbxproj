@@ -40,6 +40,10 @@
 		843C3E2420E647F0004ACFB1 /* FavoriteWordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E2320E647F0004ACFB1 /* FavoriteWordModel.swift */; };
 		843C3E2720E64857004ACFB1 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E2620E64857004ACFB1 /* ProfileTableViewController.swift */; };
 		843C3E2920E64866004ACFB1 /* CustomInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3E2820E64866004ACFB1 /* CustomInviteView.swift */; };
+		845D6FF720ECE60200562447 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D6FF620ECE60200562447 /* BaseAPI.swift */; };
+		845D6FF920ECE62C00562447 /* SearchContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D6FF820ECE62C00562447 /* SearchContact.swift */; };
+		845D6FFB20ECE64B00562447 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D6FFA20ECE64A00562447 /* Message.swift */; };
+		845D6FFD20ECE65700562447 /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D6FFC20ECE65700562447 /* Monitor.swift */; };
 		8E1DCD5220DCBBA500D3A4F6 /* BlackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */; };
 		8E1DCD5420DCBD9B00D3A4F6 /* BlockUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD5320DCBD9B00D3A4F6 /* BlockUserCell.swift */; };
 		8E3B73B520E0B91500DD3366 /* AboutAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B73B420E0B91500DD3366 /* AboutAppCell.swift */; };
@@ -97,6 +101,10 @@
 		843C3E2320E647F0004ACFB1 /* FavoriteWordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FavoriteWordModel.swift; path = yoapp/Yellow/Model/FavoriteWordModel.swift; sourceTree = SOURCE_ROOT; };
 		843C3E2620E64857004ACFB1 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewController.swift; path = yoapp/Yellow/Controller/ProfileTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		843C3E2820E64866004ACFB1 /* CustomInviteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomInviteView.swift; path = yoapp/Yellow/View/CustomInviteView.swift; sourceTree = SOURCE_ROOT; };
+		845D6FF620ECE60200562447 /* BaseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
+		845D6FF820ECE62C00562447 /* SearchContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchContact.swift; sourceTree = "<group>"; };
+		845D6FFA20ECE64A00562447 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		845D6FFC20ECE65700562447 /* Monitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monitor.swift; sourceTree = "<group>"; };
 		8E1D402220DC7F4800FCB0C8 /* SettingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewCell.swift; sourceTree = "<group>"; };
 		8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFooterView.swift; sourceTree = "<group>"; };
 		8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListViewController.swift; sourceTree = "<group>"; };
@@ -334,8 +342,11 @@
 		843C3DED20E37DCB004ACFB1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				845D6FFC20ECE65700562447 /* Monitor.swift */,
+				845D6FFA20ECE64A00562447 /* Message.swift */,
 				843C3E0E20E38BAB004ACFB1 /* Store.swift */,
 				843C3E0C20E38BA0004ACFB1 /* ContactsService.swift */,
+				845D6FF820ECE62C00562447 /* SearchContact.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -417,6 +428,7 @@
 		9941002020E227E300F18AA3 /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				845D6FF620ECE60200562447 /* BaseAPI.swift */,
 				843C3E1B20E38DFC004ACFB1 /* SessionsApi.swift */,
 				7CF5950320E48CCF00C641A7 /* Urls.swift */,
 				9956F13320ECD30D000820AC /* ProfileApi.swift */,
@@ -572,7 +584,9 @@
 				8E67642B20E3B23A006D5652 /* ProfileHeaderView.swift in Sources */,
 				8E67642D20E3B23A006D5652 /* SettingViewCell.swift in Sources */,
 				8E67642E20E3B23A006D5652 /* SettingsFooterView.swift in Sources */,
+				845D6FFB20ECE64B00562447 /* Message.swift in Sources */,
 				843C3E0D20E38BA0004ACFB1 /* ContactsService.swift in Sources */,
+				845D6FF920ECE62C00562447 /* SearchContact.swift in Sources */,
 				7C1B8DF120DB9A23004BE38B /* TabBarButton.swift in Sources */,
 				843C3E1620E38D97004ACFB1 /* LoginViewController.swift in Sources */,
 				7C1CDFC920D7632B00A90E16 /* Extensions.swift in Sources */,
@@ -607,6 +621,7 @@
 				843C3E1A20E38D9B004ACFB1 /* ImageSwipeCell.swift in Sources */,
 				843C3DF720E37E3B004ACFB1 /* app.xcdatamodeld in Sources */,
 				8E3B73B520E0B91500DD3366 /* AboutAppCell.swift in Sources */,
+				845D6FFD20ECE65700562447 /* Monitor.swift in Sources */,
 				8E59AD9320E072E2003CA5CC /* BlockUserLabelView.swift in Sources */,
 				843C3E2720E64857004ACFB1 /* ProfileTableViewController.swift in Sources */,
 				8E1DCD5420DCBD9B00D3A4F6 /* BlockUserCell.swift in Sources */,
@@ -617,6 +632,7 @@
 				843C3E2420E647F0004ACFB1 /* FavoriteWordModel.swift in Sources */,
 				8E56777F20DB959F00E65AFE /* InviteFriendsView.swift in Sources */,
 				7C1B8DEF20DB9650004BE38B /* SearchTextField.swift in Sources */,
+				845D6FF720ECE60200562447 /* BaseAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
