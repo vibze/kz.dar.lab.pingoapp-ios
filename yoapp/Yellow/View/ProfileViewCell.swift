@@ -25,7 +25,7 @@ class ProfileViewCell: UITableViewCell {
         return view
     }()
     
-    let settingLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 18)
+    let settingLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 18, fontType: .mySemiBold)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -40,7 +40,11 @@ class ProfileViewCell: UITableViewCell {
         backView.addSubview(settingLabel)
         
         hiddenView.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(0)
+            if screenBounds.height < 670{
+              $0.top.equalToSuperview().offset(0)
+            }
+            
+            $0.top.equalToSuperview().offset(10)
             $0.left.equalToSuperview().offset(0)
             $0.right.equalToSuperview().offset(0)
             $0.height.equalTo(60)

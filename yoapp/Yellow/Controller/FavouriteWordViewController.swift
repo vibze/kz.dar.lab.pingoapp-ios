@@ -7,24 +7,25 @@
 //
 
 import UIKit
+import CoreStore
 
-class FavouriteWordViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FavouriteWordViewController: UIViewController, UITableViewDelegate,
+                                   UITableViewDataSource {
     
-    var favourCell = "FavouriteCell"
-    var array = ["Привет, как дела?","Привет","Что делаешь?","Привет, как дела?","Привет","Что делаешь?"]
-   
+    var favoriteCell = "FavouriteCell"
+    var array = [FavoriteWordModel]()
     let backgroundView = UIView()
     
     var addWordView: FavouriteAddView = {
         let view = FavouriteAddView()
         return view
     }()
-    
+  
     var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .backgroundYellow
         tableView.separatorStyle = .none
-        tableView.isScrollEnabled = false
+        tableView.isScrollEnabled = true
         tableView.rowHeight = 50
         return tableView
     }()
@@ -35,16 +36,19 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate, UITabl
         addNavCon(backgrounColor: .backgroundYellow, title: "Избранные фразы")
         addRightBtutton(action: #selector(addFavourWordAction))
         configTableView()
+        fetchFromCoreStore()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
+        super.viewWillAppear(animated)
+        fetchFromCoreStore()
+        self.tableView.reloadData()
     }
     
     func configTableView(){
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(SettingViewCell.self, forCellReuseIdentifier: favourCell)
+        tableView.register(SettingViewCell.self, forCellReuseIdentifier: favoriteCell)
         tableView.snp.makeConstraints{
             $0.top.left.right.bottom.equalToSuperview().offset(0)
         }
@@ -52,14 +56,14 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate, UITabl
 }
 
 extension FavouriteWordViewController {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return array.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: favourCell, for: indexPath) as! SettingViewCell
-        cell.textName(text: array[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: favoriteCell, for: indexPath) as! SettingViewCell
+        cell.textName(text: array[indexPath.row].word!)
         
         return cell
     }
@@ -74,6 +78,7 @@ extension FavouriteWordViewController {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            deleteFromCoreStore(word: (array[indexPath.row].word)!)
             array.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -96,7 +101,7 @@ extension FavouriteWordViewController {
         addWordView.cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         addWordView.addButton.addTarget(self, action: #selector(addAction), for: .touchUpInside)
     }
-  
+    
     @objc func cancelAction(){
         addWordView.inputWord.text = " "
         addWordView.removeFromSuperview()
@@ -105,10 +110,27 @@ extension FavouriteWordViewController {
     
     @objc func addAction(){
         let word = addWordView.inputWord.text
-        array.append(word!)
+        addToWord(index: array.count + 1, word: word!)
         addWordView.inputWord.text = " "
         tableView.reloadData()
         addWordView.removeFromSuperview()
         backgroundView.removeFromSuperview()
+        tableView.reloadData()
+    }
+    
+    func addToWord(index:Int,word:String){
+        FavoriteWordModel.addToCore(index: index, word: word){(fetch) in
+            self.array = fetch
+        }
+    }
+    
+    func fetchFromCoreStore(){
+        FavoriteWordModel.fetchFromCore(completionHandler: {(fetch) in
+            self.array = fetch
+        })
+    }
+
+    func deleteFromCoreStore(word: String){
+         FavoriteWordModel.deleteFromCore(word: word)
     }
 }

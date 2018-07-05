@@ -58,6 +58,7 @@ class MyContactsViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
         
         setupViews()
+        ContactsService().syncContacts()
     }
     
     @objc func handleTextFieldChange(textField: UITextField) {

@@ -60,6 +60,6 @@ extension BlackListViewController {
     
     func showBlockUser(user_id: String){
         let vc = MessageViewController()
-        self.present(vc, animated: true, completion: nil)
+        openViewController(viewController: vc)
     }
 }

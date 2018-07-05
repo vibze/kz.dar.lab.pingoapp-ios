@@ -12,6 +12,8 @@
 	<string></string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Select</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>ProximaNovaSoft-Regular.ttf</string>

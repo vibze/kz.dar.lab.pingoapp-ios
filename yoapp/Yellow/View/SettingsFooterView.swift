@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsFooterView: UIView {
     
-    let notificationLabel = UILabel.basic(textColor: .myPurple, fontSize: 20)
+    let notificationLabel = UILabel.basic(textColor: .myPurple, fontSize: 20, fontType: .mySemiBold)
     
     var notificationSwitcher: UISwitch = {
         let switcher = UISwitch()

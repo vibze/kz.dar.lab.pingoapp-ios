@@ -57,9 +57,10 @@ class ContactsViewController: UIViewController {
         searchBackgroundView.addSubview(blurEffectView)
         searchBackgroundView.addSubview(searchTextField)
         searchTextField.addTarget(self, action: #selector(handleTextFieldChange), for: .editingChanged)
-    
+        
         searchTextField.delegate = self
         searchBackgroundView.snp.makeConstraints {
+            $0.top.left.right.equalToSuperview()
             $0.top.left.right.equalToSuperview()
             $0.height.equalTo(80)
         }
@@ -110,12 +111,12 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sectionLabels.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.sectionHeader, for: indexPath) as! SectionHeader
         sectionHeader.categoryTitleLabel.text = sectionLabels[indexPath.section]
-
+        
         return sectionHeader
     }
     
@@ -164,5 +165,4 @@ extension ContactsViewController: ListObserver {
     func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {
     }
 }
-
 

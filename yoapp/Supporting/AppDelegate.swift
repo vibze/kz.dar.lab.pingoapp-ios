@@ -9,39 +9,50 @@
 import UIKit
 import CoreData
 import CoreStore
+import UserNotifications
+import AccountKit
+
 
 @available(iOS 10.0, *)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+  
     
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-     
+        
         UIApplication.shared.statusBarStyle = .lightContent
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        Application.shared.window = window
+        window.makeKeyAndVisible()
         
         Store.initCoreStore()
-        
         checkStorage()
         
-        ContactsService().syncContacts()
-
         return true
     }
     
     func checkStorage() {
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        let user = Profile.current()
-        if user != nil {
-            let vc = UINavigationController(rootViewController: MainTabViewController())
-            window?.rootViewController = vc
+        if let profile = Profile.current() {
+            Application.shared.login(profile: profile)
         } else {
-            let vc = UINavigationController(rootViewController: MainTabViewController()) // should be LoginViewController()
-            window?.rootViewController = vc
+            Application.shared.logout()
         }
-        
-        window!.makeKeyAndVisible()
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        print("APNs device token: \(deviceTokenString)")
+        ProfileApi().uploadDeviceToken(deviceToken: deviceTokenString, success: { _ in }, failure: { _ in })
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("APNs registration failed: \(error)")
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        completionHandler(UIBackgroundFetchResult.noData)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -65,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
     // MARK: - Core Data stack
     
     lazy var persistentContainer: NSPersistentContainer = {
@@ -110,7 +121,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
-
 }
 
+
+class Application {
+    
+    static let shared = Application()
+    
+    var window: UIWindow?
+    
+    func login(profile: Profile) {
+        Profile.addToUserDefaults(profile)
+        let vc = UINavigationController(rootViewController: MainTabViewController())
+        window?.rootViewController = vc
+        registerForRemoteNotification()
+        ContactsService().syncContacts()
+    }
+    
+    func logout() {
+        AKFAccountKit(responseType: .accessToken).logOut()
+        window?.rootViewController = LoginViewController()
+    }
+    
+    private func registerForRemoteNotification() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+            if granted {
+                DispatchQueue.main.async(execute: {
+                    UIApplication.shared.registerForRemoteNotifications()
+                })
+            }
+        }
+    }
+}

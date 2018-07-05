@@ -10,8 +10,8 @@ import UIKit
 
 class ProfileFooterView : UIView {
     
-    var friendLabel = UILabel.basic(textColor: .myPurple, fontSize: 16)
- 
+    var friendLabel = UILabel.basic(textColor: .myPurple, fontSize: 16, fontType: .mySemiBold)
+    
     var telegramView: CustomInviteView = {
         let view = CustomInviteView()
         view.backgroundColor = .myPurple
@@ -49,15 +49,24 @@ class ProfileFooterView : UIView {
         friendLabel.text = "Пригласить друзей в Ping App"
         
         friendLabel.snp.makeConstraints{(make) in
-            make.top.equalToSuperview().offset(0)
-            make.centerX.equalToSuperview()
+            if screenBounds.height == 568{
+                make.top.equalToSuperview().offset(0)
+                make.centerX.equalToSuperview()
+            }else{
+                make.top.equalToSuperview().offset(30)
+                make.centerX.equalToSuperview()
+            }
         }
         
         backStackView.snp.makeConstraints{
             $0.top.equalTo(friendLabel.snp.bottom).offset(16)
             $0.left.equalToSuperview().offset(27)
             $0.right.equalToSuperview().offset(-27)
-            $0.bottom.equalToSuperview().offset(-5)
+            if screenHeight == 568{
+                $0.bottom.equalToSuperview().offset(-5)
+            }else{
+                $0.bottom.equalToSuperview().offset(30)
+            }
         }
         
         stackView.snp.makeConstraints{
@@ -67,7 +76,7 @@ class ProfileFooterView : UIView {
             $0.bottom.equalToSuperview().offset(-5)
         }
         stackViewConfig()
-        touchDetect()
+
     }
     
     override func layoutSubviews() {
@@ -81,12 +90,12 @@ class ProfileFooterView : UIView {
         whatsUpView.viewData(icon: #imageLiteral(resourceName: "whatsAppIcon"), name: "Whatapp")
         messengerView.viewData(icon: #imageLiteral(resourceName: "messengerIcon"), name: "Messenger")
         
-        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.spacing = 2
+        stackView.isUserInteractionEnabled = true
         
         stackView.addArrangedSubview(telegramView)
         stackView.addArrangedSubview(whatsUpView)
@@ -95,64 +104,6 @@ class ProfileFooterView : UIView {
         telegramView.translatesAutoresizingMaskIntoConstraints = false
         whatsUpView.translatesAutoresizingMaskIntoConstraints = false
         messengerView.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    func touchDetect(){
-        let openTelegramGesture = UITapGestureRecognizer(target: self, action: #selector(openTelegram))
-        telegramView.addGestureRecognizer(openTelegramGesture)
-        let openWhatsAppGesture = UITapGestureRecognizer(target: self, action: #selector(openWhatsApp))
-        whatsUpView.addGestureRecognizer(openWhatsAppGesture)
-        let openMessengerGesture = UITapGestureRecognizer(target: self, action: #selector(openMessenger))
-        messengerView.addGestureRecognizer(openMessengerGesture)
-    }
-    
-    //    org.telegram.messenger
-    
-    @objc func openTelegram(){
-        let msg = "Hello"
-        let urlWhats = "tg://send?text=\(msg)"
-        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            if let whatsappURL = NSURL(string: urlString) {
-                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
-                    UIApplication.shared.openURL(whatsappURL as URL)
-                } else {
-                    print("ERror")
-                }
-            }
-        }
-    }
-    
-    @objc func openWhatsApp(){
-        let msg = "Hello"
-        let urlWhats = "whatsapp://send?text=\(msg)"
-        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            if let whatsappURL = NSURL(string: urlString) {
-                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
-                    UIApplication.shared.openURL(whatsappURL as URL)
-                } else {
-                    print("ERror")
-                    
-                }
-            }
-        }
-    }
-    //    fb-messenger
-    //    fb-messenger://user-thread/%d
-    //    /user/
-    //    fb-messenger://share/?link
-    @objc func openMessenger(){
-        let msg = "Hello"
-        let urlWhats = "fb-messenger:/user/\(msg)"
-        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            if let whatsappURL = NSURL(string: urlString) {
-                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
-                    UIApplication.shared.openURL(whatsappURL as URL)
-                } else {
-                    print("ERror")
-                    
-                }
-            }
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
