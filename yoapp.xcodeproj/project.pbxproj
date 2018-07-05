@@ -391,10 +391,10 @@
 			children = (
 				8E67642F20E3B2C0006D5652 /* ProfileTableViewController.swift */,
 				8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */,
+				8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */,
 				8E56778A20DBBEB400E65AFE /* SettingViewController.swift */,
 				8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */,
 				8E67E70F20E9B9DE007EB870 /* AlertViewController.swift */,
-				8E56778C20DBE00600E65AFE /* AboutAppViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

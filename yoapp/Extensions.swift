@@ -113,6 +113,7 @@ extension UIView {
 }
 
 extension UILabel {
+    
     static func basic(textColor: UIColor, fontSize: CGFloat, fontType: FontType) -> UILabel{
         let label = UILabel()
         label.textAlignment = .center
@@ -122,6 +123,20 @@ extension UILabel {
         label.textColor = textColor
         return label
     }
+    
+    static func rounded(textColor: UIColor, fontSize: CGFloat, fontType: FontType, backgroundColor:UIColor) -> UILabel{
+        let label = UILabel()
+        label.textAlignment = .center
+        label.layer.masksToBounds = true
+        label.numberOfLines = 0
+        label.backgroundColor = backgroundColor
+        label.layer.cornerRadius = 10
+        label.lineBreakMode = .byWordWrapping
+        label.font = UIFont(name: fontType.rawValue, size: fontSize)
+        label.textColor = textColor
+        return label
+    }
+
 }
 
 extension String: ParameterEncoding {

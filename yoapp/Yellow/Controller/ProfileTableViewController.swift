@@ -7,19 +7,17 @@
 //
 import UIKit
 import Alamofire
-import AccountKit
 import SwiftyJSON
 import CoreStore
+
 
 class ProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
     
     let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 200))
     let footerView = ProfileFooterView(frame: CGRect(x: 0, y: 0, width: 307, height: 105))
-    let imagePicker = UIImagePickerController()
     var profileCell = "profileCell"
     var settingsType = ["Настройки","О приложении","Выход"]
-    var myItems = [[String:Any]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +25,7 @@ UINavigationControllerDelegate {
         configTableView()
         viewData()
         touchDetect()
-        fetchAllProfile()
+//        fetchAllProfile()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,17 +44,9 @@ UINavigationControllerDelegate {
     }
     
     func viewData(){
+        headerView.phoneNumberLabel.text = "+7701-48-49-741"
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addImageProfile))
-        imagePicker.delegate = self
-        
         headerView.profileImg.addGestureRecognizer(tapGestureRecognizer)
-        headerView.nameLabel.text = "Kamila Kusainova"
-    }
-    
-    @objc func addImageProfile(){
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
     }
 }
 
@@ -88,6 +78,63 @@ extension ProfileTableViewController {
         default:
             break
         }
+    }
+    
+    func touchDetect(){
+        let openTelegramGesture = UITapGestureRecognizer(target: self, action: #selector(openTelegram))
+        footerView.telegramView.addGestureRecognizer(openTelegramGesture)
+        let openWhatsAppGesture = UITapGestureRecognizer(target: self, action: #selector(openWhatsApp))
+        footerView.whatsUpView.addGestureRecognizer(openWhatsAppGesture)
+        let openMessengerGesture = UITapGestureRecognizer(target: self, action: #selector(openMessenger))
+        footerView.messengerView.addGestureRecognizer(openMessengerGesture)
+    }
+    
+    @objc func openTelegram(){
+        openMessengerView(urlApp: "tg://msg?text=")
+    }
+    
+    @objc func openWhatsApp(){
+        openMessengerView(urlApp: "whatsapp://send?text=")
+    }
+ 
+    @objc func openMessenger(){
+        openMessengerView(urlApp: "fb-messenger:/user/")
+    }
+    
+    func openMessengerView(urlApp: String){
+        let msg = "Install YoApp"
+        let urlWhats = urlApp + msg
+        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            if let whatsappURL = NSURL(string: urlString) {
+                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
+                    UIApplication.shared.openURL(whatsappURL as URL)
+                } else {
+                    showAlert(errorType: "У вас не установленно это приложение", image: #imageLiteral(resourceName: "errorIcon"))
+                }
+            }
+        }
+    }
+    
+    @objc func addImageProfile(){
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        let actionSheet = UIAlertController(title: "Сменить фото", message: "", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Камера", style: .default, handler:
+            { (action:UIAlertAction) in
+                if UIImagePickerController.isSourceTypeAvailable(.camera){
+                    imagePicker.sourceType = .camera
+                    self.present(imagePicker, animated: true, completion: nil)
+                }else{
+                    self.showAlert(errorType: "У вас недоступна камера", image: #imageLiteral(resourceName: "errorIcon"))
+                }
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Галерея", style: .default, handler: { (action:UIAlertAction) in
+            imagePicker.sourceType = .photoLibrary
+            self.present(imagePicker, animated: true, completion: nil)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Отменить", style: .cancel, handler: nil))
+        self.present(actionSheet, animated: true, completion: nil)
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -136,44 +183,6 @@ extension ProfileTableViewController {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    func touchDetect(){
-        let openTelegramGesture = UITapGestureRecognizer(target: self, action: #selector(openTelegram))
-        footerView.telegramView.addGestureRecognizer(openTelegramGesture)
-        let openWhatsAppGesture = UITapGestureRecognizer(target: self, action: #selector(openWhatsApp))
-        footerView.whatsUpView.addGestureRecognizer(openWhatsAppGesture)
-        let openMessengerGesture = UITapGestureRecognizer(target: self, action: #selector(openMessenger))
-        footerView.messengerView.addGestureRecognizer(openMessengerGesture)
-    }
-    
-    @objc func openTelegram(){
-        openMessengerView(urlApp: "tg://msg?text=")
-    }
-    
-    @objc func openWhatsApp(){
-        openMessengerView(urlApp: "whatsapp://send?text=")
-    }
-    //    fb-messenger
-    //    fb-messenger://user-thread/%d
-    //    /user/
-    //    fb-messenger://share/?link
-    @objc func openMessenger(){
-        openMessengerView(urlApp: "fb-messenger:/user/")
-    }
-    
-    func openMessengerView(urlApp: String){
-        let msg = "Install YoApp"
-        let urlWhats = urlApp + msg
-        if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            if let whatsappURL = NSURL(string: urlString) {
-                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
-                    UIApplication.shared.openURL(whatsappURL as URL)
-                } else {
-                    showAlert(errorType: "У вас не установленно это приложение", image: #imageLiteral(resourceName: "errorIcon"))
-                }
-            }
-        }
     }
     
     func fetchAllProfile(){

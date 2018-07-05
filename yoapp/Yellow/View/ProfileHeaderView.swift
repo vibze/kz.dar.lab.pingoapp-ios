@@ -29,7 +29,7 @@ class ProfileHeaderView: UIView {
         return image
     }()
     
-    var nameLabel: UILabel = {
+    var phoneNumberLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .myYellow
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -52,7 +52,8 @@ class ProfileHeaderView: UIView {
     func setUpViews(){
         self.addSubview(backgorunCircle)
         self.addSubview(profileImg)
-        self.addSubview(nameLabel)
+        self.addSubview(phoneNumberLabel)
+      
         
         backgorunCircle.snp.makeConstraints{(make) in
             make.top.equalToSuperview().offset(20)
@@ -66,7 +67,7 @@ class ProfileHeaderView: UIView {
             make.centerX.equalTo(self)
         }
         
-        nameLabel.snp.makeConstraints{(make) in
+        phoneNumberLabel.snp.makeConstraints{(make) in
             make.top.equalTo(profileImg.snp.bottom).offset(16)
             make.left.equalTo(79)
             make.right.equalTo(-79)
@@ -80,6 +81,7 @@ class ProfileHeaderView: UIView {
         }else{
             profileImg.image = #imageLiteral(resourceName: "cameraPhoto")
         }
+       
     }
 }
 
