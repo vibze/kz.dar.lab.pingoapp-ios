@@ -41,8 +41,9 @@ class ContactsCollectionViewCell: UICollectionViewCell {
     }
     
     func contactDidUpdate(_ contact: Contact) {
-        guard let contactName = contact.name, let avatarUrl = contact.avatarUrl else { return }
+        guard let contactName = contact.name else { return }
         contactNameLabel.text = contactName
+        guard let avatarUrl = contact.avatarUrl else { return }
         contactSetImage(avatarUrl)
     }
 
