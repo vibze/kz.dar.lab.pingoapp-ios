@@ -23,9 +23,27 @@ class ContactsCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func contactSetImage(_ imageUrl: String) {
+        activityIndicator.startAnimating()
+        DispatchQueue.main.async {
+            Image().getProfileImage(url: imageUrl) { (data, message) in
+                if let message = message {
+                    print(message)
+                }
+                else {
+                    if let data = data {
+                        self.contactImageView.image = UIImage(data: data)
+                        self.activityIndicator.stopAnimating()
+                    }
+                }
+            }
+        }
+    }
+    
     func contactDidUpdate(_ contact: Contact) {
-        guard let contactName = contact.name else { return }
+        guard let contactName = contact.name, let avatarUrl = contact.avatarUrl else { return }
         contactNameLabel.text = contactName
+        contactSetImage(avatarUrl)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -37,6 +55,12 @@ class ContactsCollectionViewCell: UICollectionViewCell {
     }
 
     let contactImageView = ImageView(radius: 68 / 2)
+    
+    let activityIndicator: UIActivityIndicatorView = {
+        let indicatorView = UIActivityIndicatorView()
+        indicatorView.color = .red
+        return indicatorView
+    }()
 
     let contactNameLabel: UILabel = {
         let label = UILabel()
@@ -52,6 +76,11 @@ class ContactsCollectionViewCell: UICollectionViewCell {
     func addViews() {
         addSubview(contactImageView)
         addSubview(contactNameLabel)
+        contactImageView.addSubview(activityIndicator)
+        
+        activityIndicator.snp.makeConstraints {
+            $0.center.equalTo(contactImageView.snp.center)
+        }
         
         contactImageView.snp.makeConstraints { (constraint) in
             constraint.top.left.right.equalTo(0)

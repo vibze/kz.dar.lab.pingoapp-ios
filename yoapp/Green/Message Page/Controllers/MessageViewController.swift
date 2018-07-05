@@ -120,7 +120,7 @@ class MessageViewController: UIViewController {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.estimatedItemSize = CGSize(width: 1, height: 1)
+        layout.estimatedItemSize = CGSize(width: 50, height: 50)
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -151,7 +151,7 @@ class MessageViewController: UIViewController {
             $0.top.equalTo(collectionView.snp.bottom).offset(24)
             $0.left.equalToSuperview().offset(32)
         }
-    
+        
         collectionView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(32)
             $0.width.equalToSuperview().inset(32)
@@ -200,6 +200,7 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.messageCell, for: indexPath) as! MessageCollectionViewCell
+        
         cell.textLabel.text = defaultMessages[indexPath.row]
         
         return cell
@@ -209,7 +210,11 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = defaultMessages[indexPath.row].count;
-        return CGSize(width: width * 8 + 30, height: 50)
+        let width = defaultMessages[indexPath.row].size().width
+        return CGSize(width: width + 60, height: 100)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
     }
 }

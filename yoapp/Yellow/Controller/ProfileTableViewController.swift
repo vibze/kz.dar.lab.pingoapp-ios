@@ -14,7 +14,7 @@ UINavigationControllerDelegate {
     let footerView = ProfileFooterView (frame: CGRect(x: 0, y: 0, width: 307, height: 105))
     let imagePicker = UIImagePickerController()
     var profileCell = "profileCell"
-    var settingsType = ["Настройки","О приложении","Выход"]
+    var settingsType = ["Настройки", "О приложении", "Выход"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

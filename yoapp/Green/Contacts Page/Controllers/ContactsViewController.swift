@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import CoreStore
+import Alamofire
 
 private struct Constants {
     static let contactsCell = "contactsCell"

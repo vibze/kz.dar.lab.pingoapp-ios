@@ -10,7 +10,8 @@ import Foundation
 
 struct Urls {
     static let base: String = "http://178.62.123.161/api/v1/"
-
+    static let baseUrl: String = "http://178.62.123.161"
+    
     static func getUrl(_ tail: Tail) -> String {
         switch tail {
         case .buddies:
