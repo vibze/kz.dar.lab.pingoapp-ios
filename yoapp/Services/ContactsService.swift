@@ -26,10 +26,17 @@ struct ContactsService {
                         try store.enumerateContacts(with: request, usingBlock: { (contact, sd) in
                             if let phoneNumber = contact.phoneNumbers.first?.value.stringValue {
                                 let normalizedPhoneNumber = self.changeNumberType(phoneNumber)
-                                if transaction.fetchOne(From<Contact>().where(\.phoneNumber == normalizedPhoneNumber)) == nil {
+                                let myContact = transaction.fetchOne(From<Contact>().where(\.phoneNumber == normalizedPhoneNumber))
+                                if myContact == nil {
                                     let newContact = transaction.create(Into<Contact>())
                                     newContact.phoneNumber = normalizedPhoneNumber
                                     newContact.name = contact.givenName
+                                }
+                                else { // handle name change in Contacts
+                                    let nameInCore = myContact?.name ?? ""
+                                    if nameInCore != contact.givenName {
+                                        myContact?.name = contact.givenName
+                                    }
                                 }
                                 phoneNumbers.append(normalizedPhoneNumber)
                             }
@@ -138,7 +145,8 @@ struct ContactsService {
                     let contact = transaction.fetchOne(From<Contact>().where(\.phoneNumber == registered["phone_number"].stringValue))
                     contact?.profileId = Int32(registered["id"].intValue)
                     let avatar = JSON(registered["avatar"])
-                    contact?.avatarUrl = avatar["url"].stringValue
+                    let avatarUrl = avatar["url"].stringValue
+                    contact?.avatarUrl = avatarUrl != "" ? avatarUrl : nil
                 }
             },
             completion: { (result) -> Void in

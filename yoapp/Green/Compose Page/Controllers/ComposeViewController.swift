@@ -16,11 +16,11 @@ class ComposeViewController: UIViewController {
     let profileImageView = ImageView(radius: 90 / 2)
     let composeButton = ActionButton(title: "Отправить сообщение", type: .write)
     let alertView = PushAlert()
+    var contact: Contact?
 
     let nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        label.text = "Steve"
         label.font = UIFont(name: "Avenir Next", size: 20)
         return label
     }()
@@ -28,7 +28,6 @@ class ComposeViewController: UIViewController {
     let phoneNumberLabel: UILabel = {
         let label = UILabel()
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        label.text = "87070700707"
         label.font = UIFont(name: "Avenir Next", size: 16)
         return label
     }()
@@ -43,7 +42,6 @@ class ComposeViewController: UIViewController {
         textView.font = UIFont(name: "Avenir Next", size: 18)
         textView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         textView.layer.sublayerTransform = CATransform3DMakeTranslation(8, 0, 0)
-        
         return textView
     }()
     
@@ -58,10 +56,18 @@ class ComposeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        setupLabels()
         addNavCon(backgrounColor: #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), title: "")
         messageTextView.delegate = self
         composeButton.addTarget(self, action: #selector(composeButtonPressed), for: .touchUpInside)
-        view.backgroundColor = UIColor(hexString: "6BBE90")
+        view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
+    }
+    
+    func setupLabels() {
+        if let name = contact?.name {
+            nameLabel.text = name
+        }
+        phoneNumberLabel.text = contact?.phoneNumber!
     }
     
     func setupViews() {
@@ -74,7 +80,7 @@ class ComposeViewController: UIViewController {
         }
         
         profileImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(14)
+            $0.top.equalToSuperview().offset(70)
             $0.centerX.equalTo(self.view.center)
         }
         nameLabel.snp.makeConstraints {

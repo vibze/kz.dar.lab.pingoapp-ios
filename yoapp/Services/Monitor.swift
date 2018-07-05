@@ -24,4 +24,9 @@ struct Monitor {
         let monitor = CoreStore.monitorList(From<Contact>().orderBy(.ascending(\.pingedAt)).where(\.profileId != 0))
         return monitor
     }()
+    
+    static var basePhrasesMonitor: ListMonitor<FavoriteWords> = {
+        let monitor = CoreStore.monitorList(From<FavoriteWords>().orderBy(.ascending(\.word)))
+        return monitor
+    }()
 }

@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import CoreStore
+import Alamofire
 
 private struct Constants {
     static let contactsCell = "contactsCell"
@@ -158,8 +159,10 @@ extension ContactsViewController: UITextFieldDelegate {
 
 extension ContactsViewController: ListObserver {
     func listMonitorDidChange(_ monitor: ListMonitor<Contact>) {
-        registeredContacts = registeredContactsMonitor.objectsInAllSections()
-        collectionView.reloadData()
+        DispatchQueue.main.async {
+            self.registeredContacts = self.registeredContactsMonitor.objectsInAllSections()
+            self.collectionView.reloadData()
+        }
     }
     func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {
     }

@@ -12,21 +12,25 @@ class Profile: NSObject, NSCoding  {
     
     var phoneNumber: String
     var avatarImageUrl: String
+    var authorizationToken: String
     
-    init (phoneNumber: String, avatarImageUrl: String){
+    init (phoneNumber: String, avatarImageUrl: String, authorizationToken: String){
         self.phoneNumber = phoneNumber
         self.avatarImageUrl = avatarImageUrl
+        self.authorizationToken = authorizationToken
     }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(phoneNumber, forKey: "phoneNumber")
         aCoder.encode(avatarImageUrl, forKey: "avatarImageUrl")
+        aCoder.encode(authorizationToken, forKey: "authorizationToken")
     }
     
     required convenience init(coder aDecoder: NSCoder) {
         let phoneNumber = aDecoder.decodeObject(forKey: "phoneNumber") as! String
         let avatarImageUrl = aDecoder.decodeObject(forKey: "avatarImageUrl") as! String
-        self.init(phoneNumber: phoneNumber, avatarImageUrl: avatarImageUrl)
+        let authorizationToken = aDecoder.decodeObject(forKey: "authorizationToken") as! String
+        self.init(phoneNumber: phoneNumber, avatarImageUrl: avatarImageUrl, authorizationToken: authorizationToken)
     }
     
     static func current() -> Profile? {
