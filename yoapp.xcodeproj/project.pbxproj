@@ -22,7 +22,6 @@
 		7C910C4A20D6AAF90072A673 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C910C4920D6AAF90072A673 /* AppDelegate.swift */; };
 		7C910C5120D6AAFC0072A673 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C910C5020D6AAFC0072A673 /* Assets.xcassets */; };
 		7C910C5C20D6B2E50072A673 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C910C5B20D6B2E50072A673 /* ContactsViewController.swift */; };
-		7CB35DCE20ECD42500188153 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB35DCD20ECD42500188153 /* Image.swift */; };
 		7CC4E13420DA37850094F6CD /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC4E13320DA37850094F6CD /* MessageCollectionViewCell.swift */; };
 		7CF5950420E48CCF00C641A7 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF5950320E48CCF00C641A7 /* Urls.swift */; };
 		843C3DEC20E37DB9004ACFB1 /* PushAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3DEB20E37DB9004ACFB1 /* PushAlert.swift */; };
@@ -85,7 +84,6 @@
 		7C910C5020D6AAFC0072A673 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C910C5520D6AAFC0072A673 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C910C5B20D6B2E50072A673 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
-		7CB35DCD20ECD42500188153 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Image.swift; path = yoapp/Services/Image.swift; sourceTree = SOURCE_ROOT; };
 		7CC4E13320DA37850094F6CD /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7CF5950320E48CCF00C641A7 /* Urls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
 		843C3DEB20E37DB9004ACFB1 /* PushAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushAlert.swift; path = "yoapp/Green/Compose Page/Views/PushAlert.swift"; sourceTree = SOURCE_ROOT; };
@@ -341,8 +339,6 @@
 				843C3E2320E647F0004ACFB1 /* FavoriteWordModel.swift */,
 				843C3E1D20E38E0E004ACFB1 /* Profile.swift */,
 				843C3E0A20E38B8C004ACFB1 /* MyContact.swift */,
-				7CE4E8BC20E9580200936833 /* SearchContact.swift */,
-				7CB35DCD20ECD42500188153 /* Image.swift */,
 			);
 			name = Models;
 			path = "New Group";
@@ -485,7 +481,7 @@
 						CreatedOnToolsVersion = 9.4;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Push = {
 								enabled = 1;
@@ -569,6 +565,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-yoapp/Pods-yoapp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/CoreStore/CoreStore.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -576,6 +573,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreStore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -615,7 +613,6 @@
 				7C1D3FB720D6BA8E007037D9 /* ContactsCollectionViewCell.swift in Sources */,
 				9956F13720ECDA82000820AC /* Token.swift in Sources */,
 				7C48C3A620E3972200396466 /* ImageView.swift in Sources */,
-				7CB35DCE20ECD42500188153 /* Image.swift in Sources */,
 				843C3E1920E38D9B004ACFB1 /* ImageSwipeStruct.swift in Sources */,
 				843C3E1E20E38E0E004ACFB1 /* Profile.swift in Sources */,
 				843C3E0B20E38B8C004ACFB1 /* MyContact.swift in Sources */,

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreStore
 
 private struct Constants {
     static let messageCell = "messageCell"
@@ -16,7 +17,6 @@ private struct Constants {
 
 class MessageViewController: UIViewController {
 
-    let defaultMessages = ["Привет", "Как дела?", "Что делаешь?", "Привет", "Как дела?", "Что?", "Привет", "Как дела?", "Что делаешь?", "Привет", "Как дела?", "Что?"]
     var contact: Contact?
     var collectionView: UICollectionView!
     
@@ -31,6 +31,7 @@ class MessageViewController: UIViewController {
     
     let profileImageView = ImageView(radius: 100 / 2)
     let pushAlert = PushAlert()
+    let phrasesMonitor = Monitor.basePhrasesMonitor
     
     let userNameLabel: UILabel = {
         let username = UILabel()
@@ -83,6 +84,7 @@ class MessageViewController: UIViewController {
     
     @objc func writeBtnPressed() {
         let vc = ComposeViewController()
+        vc.contact = contact
         openViewController(viewController: vc)
     }
     
@@ -90,6 +92,8 @@ class MessageViewController: UIViewController {
         super.viewDidLoad()
         addNavCon(backgrounColor: #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), title: "")
         view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
+        phrasesMonitor.addObserver(self)
+        
         setupViews()
         setupButtons()
         
@@ -179,12 +183,12 @@ class MessageViewController: UIViewController {
             $0.centerX.equalTo(self.view.center)
         }
         profileImageBackgroundView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(5)
+            $0.top.equalToSuperview().offset(65)
             $0.height.width.equalTo(110)
             $0.centerX.equalTo(self.view.center)
         }
         profileImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(10)
+            $0.top.equalToSuperview().offset(70)
             $0.height.width.equalTo(100)
             $0.centerX.equalTo(self.view.center)
         }
@@ -196,12 +200,14 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return defaultMessages.count
+        return phrasesMonitor.numberOfObjects()
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.messageCell, for: indexPath) as! MessageCollectionViewCell
         
-        cell.textLabel.text = defaultMessages[indexPath.row]
+        if let phrase = phrasesMonitor[indexPath.row].word {
+            cell.textLabel.text = phrase
+        }
         
         return cell
     }
@@ -210,11 +216,18 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = defaultMessages[indexPath.row].size().width
+        guard let phrase = phrasesMonitor[indexPath.row].word else { return CGSize(width: 0, height: 0) }
+        let width = phrase.size().width
         return CGSize(width: width + 60, height: 100)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+}
+
+
+extension MessageViewController: ListObserver {
+    func listMonitorDidChange(_ monitor: ListMonitor<FavoriteWords>) {
+        self.collectionView.reloadData()
+    }
+    func listMonitorDidRefetch(_ monitor: ListMonitor<FavoriteWords>) {
+        
     }
 }

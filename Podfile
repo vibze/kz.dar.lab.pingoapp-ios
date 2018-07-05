@@ -11,5 +11,6 @@ target 'yoapp' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'CoreStore'
+  pod 'AlamofireImage'
 
 end

@@ -11,50 +11,6 @@ import SnapKit
 
 class ContactsCollectionViewCell: UICollectionViewCell {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addViews()
-    }
-    
-    var contact: Contact? {
-        didSet {
-            guard let contact = contact else { return }
-            contactDidUpdate(contact)
-        }
-    }
-    
-    func contactSetImage(_ imageUrl: String) {
-        activityIndicator.startAnimating()
-        DispatchQueue.main.async {
-            Image().getProfileImage(url: imageUrl) { (data, message) in
-                if let message = message {
-                    print(message)
-                }
-                else {
-                    if let data = data {
-                        self.contactImageView.image = UIImage(data: data)
-                        self.activityIndicator.stopAnimating()
-                    }
-                }
-            }
-        }
-    }
-    
-    func contactDidUpdate(_ contact: Contact) {
-        guard let contactName = contact.name else { return }
-        contactNameLabel.text = contactName
-        guard let avatarUrl = contact.avatarUrl else { return }
-        contactSetImage(avatarUrl)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-
     let contactImageView = ImageView(radius: 68 / 2)
     
     let activityIndicator: UIActivityIndicatorView = {
@@ -62,7 +18,7 @@ class ContactsCollectionViewCell: UICollectionViewCell {
         indicatorView.color = .red
         return indicatorView
     }()
-
+    
     let contactNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Hello"
@@ -73,6 +29,35 @@ class ContactsCollectionViewCell: UICollectionViewCell {
         
         return label
     }()
+
+    var contact: Contact? {
+        didSet {
+            guard let contact = contact else { return }
+            contactDidUpdate(contact)
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addViews()
+    }
+    
+    
+    func contactDidUpdate(_ contact: Contact) {
+        guard let contactName = contact.name else { return }
+        guard let avatarUrl = contact.avatarUrl else { return }
+        contactNameLabel.text = contactName
+        contactImageView.setContactImage(url: avatarUrl)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
 
     func addViews() {
         addSubview(contactImageView)

@@ -37,7 +37,8 @@ class SessionsApi: BaseAPI {
                 let json = JSON(value)
                 let phoneNumber = json["profile"]["phoneNumber"].stringValue
                 let avatarImageUrl = json["profile"]["avatarImageUrl"].stringValue
-                let profile = Profile(phoneNumber: phoneNumber, avatarImageUrl: avatarImageUrl)
+                let authToken = json["accessToken"].stringValue
+                let profile = Profile(phoneNumber: phoneNumber, avatarImageUrl: avatarImageUrl, authorizationToken: authToken)
                 success(profile)
             }
             else {

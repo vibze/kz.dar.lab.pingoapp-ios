@@ -8,8 +8,10 @@
 
 import Foundation
 import UIKit
+import AlamofireImage
 
 class ImageView: UIImageView {
+    
     required init(radius: CGFloat) {
         super.init(frame: .zero)
         self.layer.masksToBounds = true
@@ -22,6 +24,12 @@ class ImageView: UIImageView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setContactImage(url: String) {
+        guard let tempUrl = URL(string: Urls.baseUrl + url) else { return }
+//        af_setImage(withURL: tempUrl)
+        af_setImage(withURL: tempUrl, placeholderImage: #imageLiteral(resourceName: "contactPlaceholder"), filter: nil, progress: nil, progressQueue: DispatchQueue.main, imageTransition: .flipFromTop(1), runImageTransitionIfCached: false, completion: nil)
     }
 }
 
