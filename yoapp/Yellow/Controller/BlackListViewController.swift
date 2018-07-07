@@ -12,11 +12,17 @@ class BlackListViewController: UITableViewController {
     
     let titleHeaderView = BlockUserLabelView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 30))
     var userBlockCell = "userBlockCell"
-
+    var blackListArray = [Contact]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        addNavCon(backgrounColor: .backgroundYellow, title: "Черный список")
         configTableView()
+        fetchBlaclList()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addNavigationController(backgrounColor: .backgroundYellow, title: "Черный список")
     }
     
     func configTableView(){
@@ -25,6 +31,12 @@ class BlackListViewController: UITableViewController {
         tableView.separatorStyle = .none
         tableView.rowHeight = 75
         tableView.register(BlockUserCell.self, forCellReuseIdentifier: userBlockCell)
+    }
+    
+    func fetchBlaclList(){
+        BlackListModel.fetchBlackListContactFromCore(completionHandler: {(array) in
+            self.blackListArray = array
+        })
     }
 }
 
@@ -45,21 +57,27 @@ extension BlackListViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 40
+        return blackListArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: userBlockCell, for: indexPath) as! BlockUserCell
-        cell.data(image: #imageLiteral(resourceName: "cameraPhoto"), name: "Kamila", phone: "+77014849741")
+        let name = blackListArray[indexPath.row].name
+        let phoneNumber = blackListArray[indexPath.row].phoneNumber
+        let image = blackListArray[indexPath.row].avatarUrl
+        cell.viewData(image: image ?? "", name: name!, phone: phoneNumber!)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        showBlockUser(user_id: "\(indexPath.row)")
+        let contact = blackListArray[indexPath.row]
+        showBlockUser(for: contact)
     }
+   
     
-    func showBlockUser(user_id: String){
+    func showBlockUser(for contact: Contact){
         let vc = MessageViewController()
+        vc.contact = contact
         openViewController(viewController: vc)
     }
 }
