@@ -13,14 +13,8 @@ class FavoriteWordModel {
     var index: Int?
     var word: String?
     
-    init(index: Int,word:String){
-        self.index = index
-        self.word = word
-    }
-    
-    static func addToCore(index: Int,word: String,completionHandler: @escaping([FavoriteWordModel]) -> ()){
-        var array = [FavoriteWordModel]()
-        var fetchArray = [FavoriteWordModel]()
+    static func addFavoriteWordToCore(index: Int,word: String,completionHandler: @escaping([FavoriteWords]) -> ()){
+        
         CoreStore.perform(asynchronous: {(transaction) -> Void in
             guard transaction.fetchOne(From<FavoriteWords>().where(\.word == word)) == nil else {
                 return
@@ -28,33 +22,26 @@ class FavoriteWordModel {
             let addfavorWords = transaction.create(Into<FavoriteWords>())
             addfavorWords.word = word
             addfavorWords.index = Int16(index)
-            let cat = FavoriteWordModel(index: index, word: word)
-            array.append(cat)
             
             let fetching = transaction.fetchAll(From<FavoriteWords>().orderBy(.descending(\.index)))
-            for index in fetching!{
-                let types = FavoriteWordModel(index: Int(index.index), word: index.word!)
-                fetchArray.append(types)
-            }
-            completionHandler(fetchArray)
+//            for index in fetching!{
+//               fetchArray.append(fetching)
+//            }
+            completionHandler(fetching!)
         },completion: {(result) -> Void in
         })
     }
     
-    static func fetchFromCore(completionHandler: @escaping([FavoriteWordModel]) -> ()){
-        var array = [FavoriteWordModel]()
+    static func fetchFavoriteWordFromCore(completionHandler: @escaping([FavoriteWords]) -> ()){
         CoreStore.perform(asynchronous: {(transaction) -> Void in
-            let fetching = transaction.fetchAll(From<FavoriteWords>().orderBy(.descending(\.index)))
-            for index in fetching!{
-                let cat = FavoriteWordModel(index: Int(index.index), word: index.word!)
-                array.append(cat)
-            }
-            completionHandler(array)
+            let allFavoriteWords = transaction.fetchAll(From<FavoriteWords>()
+                                      .orderBy(.descending(\.index)))
+            completionHandler(allFavoriteWords!)
         },completion: {(result) -> Void in
         })
     }
     
-    static func deleteFromCore(word: String){
+    static func deleteFavoriteWordFromCore(word: String){
         CoreStore.perform(asynchronous: {(transaction) -> Void in
             transaction.deleteAll(From<FavoriteWords>().where(\.word == word))
         },completion: {(result) -> Void in

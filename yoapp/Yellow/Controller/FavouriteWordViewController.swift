@@ -13,7 +13,7 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate,
                                    UITableViewDataSource {
     
     var favoriteCell = "FavouriteCell"
-    var array = [FavoriteWordModel]()
+    var favoriteWordArray = [FavoriteWords]()
     let backgroundView = UIView()
     
     var addWordView: FavouriteAddView = {
@@ -33,7 +33,7 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
-        addNavCon(backgrounColor: .backgroundYellow, title: "Избранные фразы")
+        addNavigationController(backgrounColor: .backgroundYellow, title: "Избранные фразы")
         addRightBtutton(action: #selector(addFavourWordAction))
         configTableView()
         fetchFromCoreStore()
@@ -58,13 +58,12 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate,
 extension FavouriteWordViewController {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return array.count
+        return favoriteWordArray.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: favoriteCell, for: indexPath) as! SettingViewCell
-        cell.textName(text: array[indexPath.row].word!)
-        
+        cell.textName(text: favoriteWordArray[indexPath.row].word!)
         return cell
     }
     
@@ -78,8 +77,9 @@ extension FavouriteWordViewController {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            deleteFromCoreStore(word: (array[indexPath.row].word)!)
-            array.remove(at: indexPath.row)
+            print(favoriteWordArray[indexPath.row].index)
+//            deleteFavoriteWordFromCore(word: (favoriteWordArray[indexPath.row].word)!)
+            favoriteWordArray.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
@@ -93,10 +93,10 @@ extension FavouriteWordViewController {
         }
         
         addWordView.snp.makeConstraints{
-            $0.top.equalTo(180)
-            $0.left.equalTo(24)
-            $0.right.equalTo(-24)
-            $0.height.equalTo(220)
+            $0.centerY.equalToSuperview()
+            $0.left.equalTo(30)
+            $0.right.equalTo(-30)
+            $0.height.equalTo(177)
         }
         addWordView.cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         addWordView.addButton.addTarget(self, action: #selector(addAction), for: .touchUpInside)
@@ -110,27 +110,26 @@ extension FavouriteWordViewController {
     
     @objc func addAction(){
         let word = addWordView.inputWord.text
-        addToWord(index: array.count + 1, word: word!)
+        addToWord(index: favoriteWordArray.count + 1, word: word!)
         addWordView.inputWord.text = " "
-        tableView.reloadData()
         addWordView.removeFromSuperview()
         backgroundView.removeFromSuperview()
         tableView.reloadData()
     }
     
     func addToWord(index:Int,word:String){
-        FavoriteWordModel.addToCore(index: index, word: word){(fetch) in
-            self.array = fetch
+        FavoriteWordModel.addFavoriteWordToCore(index: index, word: word){(array) in
+            self.favoriteWordArray = array
         }
     }
     
     func fetchFromCoreStore(){
-        FavoriteWordModel.fetchFromCore(completionHandler: {(fetch) in
-            self.array = fetch
+        FavoriteWordModel.fetchFavoriteWordFromCore(completionHandler: {(array) in
+            self.favoriteWordArray = array
         })
     }
 
-    func deleteFromCoreStore(word: String){
-         FavoriteWordModel.deleteFromCore(word: word)
+    func deleteFavoriteWordFromCore(word: String){
+         FavoriteWordModel.deleteFavoriteWordFromCore(word: word)
     }
 }

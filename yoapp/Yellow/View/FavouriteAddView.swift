@@ -74,19 +74,20 @@ class FavouriteAddView: UIView, UITextViewDelegate {
         inputWord.inputAccessoryView = toolBar
         
         aboutLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(36)
+            $0.top.equalToSuperview().offset(30)
             $0.centerX.equalToSuperview().offset(0)
         }
         
         inputWord.snp.makeConstraints{
-            $0.top.equalTo(aboutLabel.snp.bottom).offset(24)
-            $0.height.equalTo(50)
-            $0.left.equalToSuperview().offset(16)
-            $0.right.equalToSuperview().offset(-16)
+            $0.top.equalTo(aboutLabel.snp.bottom).offset(30)
+            $0.height.equalTo(30)
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalToSuperview().offset(-20)
         }
         
         stackView.snp.makeConstraints{
-            $0.height.equalTo(inputWord)
+            $0.top.equalTo(inputWord.snp.bottom).offset(15)
+            $0.height.equalTo(50)
             $0.left.right.equalTo(0)
             $0.bottom.equalTo(0)
         }
