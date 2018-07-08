@@ -59,7 +59,7 @@ extension UIViewController {
     func openViewController(viewController: UIViewController){
         self.navigationController?.pushViewController(viewController, animated: true)
     }
-    func addNavCon(backgrounColor: UIColor, title: String){
+    func addNavigationController(backgrounColor: UIColor, title: String){
         navigationController?.navigationBar.barTintColor = backgrounColor
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -157,3 +157,34 @@ extension String {
     }
 }
 
+extension UserDefaults {
+    
+    enum UserDefaultsKeys: String {
+       case token
+    }
+    
+    func setAccessToken(value: String) {
+        setValue(value, forKey: UserDefaultsKeys.token.rawValue)
+    }
+    
+    func getAccessToken() -> String {
+        return string(forKey: UserDefaultsKeys.token.rawValue)!
+    }
+}
+
+extension UIImageView {
+    
+    func setCustomImage(_ imgURLString: String?, custom: UIImage) {
+        guard let imageURLString = imgURLString else {
+            self.image = custom
+            return
+        }
+       
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: URL(string: imageURLString)!)
+            DispatchQueue.main.async {
+                self.image = data != nil ? UIImage(data: data!) : custom
+            }
+        }
+    }
+}

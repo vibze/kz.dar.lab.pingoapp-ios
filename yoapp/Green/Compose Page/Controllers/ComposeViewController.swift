@@ -58,7 +58,7 @@ class ComposeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        addNavCon(backgrounColor: #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), title: "")
+        addNavigationController(backgrounColor: #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), title: "")
         messageTextView.delegate = self
         composeButton.addTarget(self, action: #selector(composeButtonPressed), for: .touchUpInside)
         view.backgroundColor = UIColor(hexString: "6BBE90")

@@ -269,6 +269,7 @@ AKFViewControllerDelegate {
     
     func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
         print("accessToken:", accessToken.tokenString)
+        UserDefaults().setAccessToken(value: accessToken.tokenString)
 //        print(accessToken.tokenString)
         SessionsApi.createSession(token: accessToken.tokenString, success: { profile in
             Token.shared.accessToken = accessToken.tokenString

@@ -15,7 +15,7 @@ class AboutAppViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
-        addNavCon(backgrounColor: .backgroundYellow, title: "О приложении")
+        addNavigationController(backgrounColor: .backgroundYellow, title: "О приложении")
         configTableView()
     }
     
