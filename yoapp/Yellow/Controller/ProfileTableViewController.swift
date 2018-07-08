@@ -10,7 +10,6 @@ import Alamofire
 import SwiftyJSON
 import CoreStore
 
-
 class ProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
     
@@ -25,7 +24,6 @@ UINavigationControllerDelegate {
         configTableView()
         viewData()
         touchDetect()
-//        fetchAllProfile()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,7 +42,11 @@ UINavigationControllerDelegate {
     }
     
     func viewData(){
-        headerView.phoneNumberLabel.text = "+7701-48-49-741"
+        let phoneNumber = Profile.current()?.phoneNumber
+        let profileImage = Profile.current()?.avatarImageUrl
+        headerView.viewData(image: profileImage!, phoneNumber: phoneNumber!)
+        
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addImageProfile))
         headerView.profileImg.addGestureRecognizer(tapGestureRecognizer)
     }
@@ -96,7 +98,7 @@ extension ProfileTableViewController {
     @objc func openWhatsApp(){
         openMessengerView(urlApp: "whatsapp://send?text=")
     }
- 
+    
     @objc func openMessenger(){
         openMessengerView(urlApp: "fb-messenger:/user/")
     }
@@ -106,11 +108,11 @@ extension ProfileTableViewController {
         let urlWhats = urlApp + msg
         if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             if let whatsappURL = NSURL(string: urlString) {
-                if UIApplication.shared.canOpenURL(whatsappURL as URL) {
-                    UIApplication.shared.openURL(whatsappURL as URL)
-                } else {
+                guard UIApplication.shared.canOpenURL(whatsappURL as URL) else{
                     showAlert(errorType: "У вас не установленно это приложение", image: #imageLiteral(resourceName: "errorIcon"))
+                    return
                 }
+                UIApplication.shared.openURL(whatsappURL as URL)
             }
         }
     }
@@ -121,14 +123,14 @@ extension ProfileTableViewController {
         let actionSheet = UIAlertController(title: "Сменить фото", message: "", preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Камера", style: .default, handler:
             { (action:UIAlertAction) in
-                if UIImagePickerController.isSourceTypeAvailable(.camera){
-                    imagePicker.sourceType = .camera
-                    self.present(imagePicker, animated: true, completion: nil)
-                }else{
+                guard UIImagePickerController.isSourceTypeAvailable(.camera) else{
                     self.showAlert(errorType: "У вас недоступна камера", image: #imageLiteral(resourceName: "errorIcon"))
+                    return
                 }
+                imagePicker.sourceType = .camera
+                self.present(imagePicker, animated: true, completion: nil)
         }))
-        actionSheet.addAction(UIAlertAction(title: "Галерея", style: .default, handler: { (action:UIAlertAction) in
+        actionSheet.addAction(UIAlertAction(title: "Фотопленка", style: .default, handler: { (action:UIAlertAction) in
             imagePicker.sourceType = .photoLibrary
             self.present(imagePicker, animated: true, completion: nil)
         }))
@@ -143,22 +145,21 @@ extension ProfileTableViewController {
         uploadImage(avatar: avatarImage, success: { response in
             print("OKKK", response)
         }) { (error) in
-            print("Bad ERror... \(error)")
+            self.showAlert(errorType: "Ошибка при загрузки фото", image: #imageLiteral(resourceName: "errorIcon"))
         }
         dismiss(animated: true, completion: nil)
     }
     
-    func uploadImage(avatar: UIImage, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void){
+    func uploadImage(avatar: UIImage, success: @escaping (Bool) -> Void, failure: @escaping (Error) -> Void){
         guard
             let imageData = UIImageJPEGRepresentation(avatar, 1.0),
-            let url = URL(string: "http://178.62.123.161/api/v1/profile/avatar") else {
+            let url = URL(string: Urls.getUrl(.avatarUpload)) else {
                 return
         }
-        
+        let token = UserDefaults().getAccessToken()
         let header = ["Content-Type": "application/x-www-form-urlencoded",
-                      "Authorization": "Bearer \(Token.shared.accessToken)",
+                      "Authorization": "Bearer \(token)",
             "Accept":"application/json"]
-        print(Token.shared.accessToken)
         
         Alamofire.upload(multipartFormData: { data in
             data.append(imageData, withName: "file", fileName: "myImage.png", mimeType: "image/png")
@@ -167,9 +168,7 @@ extension ProfileTableViewController {
             case .success(request: let uploadRequest, _, _):
                 uploadRequest.validate(statusCode: 200..<600).responseJSON(completionHandler: {dataResponse in
                     if dataResponse.result.isSuccess {
-                        print(dataResponse, "RESPONSE!!")
-                        let statusCode = dataResponse.response!.statusCode
-                        self.handleError(with: statusCode)
+                        success(dataResponse.result.isSuccess)
                     } else {
                         guard let error = dataResponse.error else { return }
                         failure(error)
@@ -185,15 +184,4 @@ extension ProfileTableViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    func fetchAllProfile(){
-        CoreStore.perform(
-            asynchronous: { (transaction) -> Void in
-                let person = transaction.fetchAll(From<Contact>().where(\.profileId == 0))
-                for some in person! {
-                    print(some.phoneNumber!, "Phone Number")
-                }
-        },
-            completion: { _ in }
-        )
-    }
 }

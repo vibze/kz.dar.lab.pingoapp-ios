@@ -57,14 +57,14 @@ class ProfileHeaderView: UIView {
         
         backgorunCircle.snp.makeConstraints{(make) in
             make.top.equalToSuperview().offset(20)
-            make.centerX.equalTo(self)
-            make.width.height.equalTo(110)
+            make.centerX.equalToSuperview()
+            make.size.equalTo(110)
         }
         
         profileImg.snp.makeConstraints{(make) in
             make.top.equalTo(backgorunCircle.snp.top).offset(5)
-            make.width.height.equalTo(100)
-            make.centerX.equalTo(self)
+            make.size.equalTo(100)
+            make.centerX.equalToSuperview()
         }
         
         phoneNumberLabel.snp.makeConstraints{(make) in
@@ -74,14 +74,11 @@ class ProfileHeaderView: UIView {
             make.height.equalTo(40)
         }
         
-        if profileImg.image != nil {
-            print("Nil")
-            let data = UserDefaults.standard.object(forKey: "profileImage")
-            profileImg.image = UIImage(data: data as! Data)
-        }else{
-            profileImg.image = #imageLiteral(resourceName: "cameraPhoto")
-        }
-       
+    }
+    
+    func viewData(image: String,phoneNumber: String){
+        phoneNumberLabel.text = "+\(phoneNumber)"
+        profileImg.setCustomImage("http://178.62.123.161" + image, custom: #imageLiteral(resourceName: "cameraPhoto"))
     }
 }
 

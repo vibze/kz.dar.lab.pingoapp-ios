@@ -35,13 +35,12 @@ class AlertViewController: UIViewController {
             if screenHeight == 568{
                 $0.height.equalTo(195)
             }else{
-                 $0.height.equalTo(225)
+                $0.height.equalTo(225)
             }
             $0.left.equalToSuperview().offset(24)
             $0.right.equalToSuperview().offset(-24)
-         
+            
         }
-        
         alertView.okButton.addTarget(self, action: #selector(okAction), for: .touchUpInside)
     }
     
@@ -51,6 +50,6 @@ class AlertViewController: UIViewController {
     }
     
     @objc func okAction(){
-    dismiss(animated: false, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
 }
