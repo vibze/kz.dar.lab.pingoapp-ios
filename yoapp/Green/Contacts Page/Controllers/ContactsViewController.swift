@@ -57,6 +57,7 @@ class ContactsViewController: UIViewController {
         searchBackgroundView.addSubview(blurEffectView)
         searchBackgroundView.addSubview(searchTextField)
         searchTextField.addTarget(self, action: #selector(handleTextFieldChange), for: .editingChanged)
+        (searchTextField.rightView as! UIButton).addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         
         searchTextField.delegate = self
         searchBackgroundView.snp.makeConstraints {
@@ -71,7 +72,15 @@ class ContactsViewController: UIViewController {
         }
     }
     
+    @objc func cancelButtonPressed(sender: UIButton) {
+        sender.isHidden = true
+        searchTextField.text = ""
+        handleTextFieldChange(textField: searchTextField)
+    }
+    
     @objc func handleTextFieldChange(textField: UITextField) {
+        textField.rightView?.isHidden = textField.text?.count == 0 ? true : false
+        
         self.registeredContacts = SearchContact.searchFor(monitor: registeredContactsMonitor, text: textField.text)
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -127,7 +136,6 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.contactsCell, for: indexPath) as! ContactsCollectionViewCell
         
         let row = indexPath.row
-        print(indexPath)
         cell.contact = indexPath.section == 0 ? recentlyActiveMonitor[row] : registeredContacts[row]
         return cell
     }

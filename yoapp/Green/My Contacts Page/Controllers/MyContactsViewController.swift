@@ -51,6 +51,7 @@ class MyContactsViewController: UIViewController {
         super.viewDidLoad()
         
         searchTextField.addTarget(self, action: #selector(handleTextFieldChange), for: .editingChanged)
+        (searchTextField.rightView as! UIButton).addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         monitor.addObserver(self)
         listOfContacts = monitor.objectsInAllSections()
         
@@ -59,7 +60,15 @@ class MyContactsViewController: UIViewController {
         setupViews()
     }
     
+    @objc func cancelButtonPressed(sender: UIButton) {
+        sender.isHidden = true
+        searchTextField.text = ""
+        handleTextFieldChange(textField: searchTextField)
+    }
+    
     @objc func handleTextFieldChange(textField: UITextField) {
+        textField.rightView?.isHidden = textField.text?.count == 0 ? true : false
+
         self.listOfContacts = SearchContact.searchFor(monitor: monitor, text: textField.text)
         DispatchQueue.main.async {
             self.tableView.reloadData()

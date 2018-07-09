@@ -11,7 +11,7 @@ import UIKit
 
 class SearchTextField: UITextField {
     
-    private let padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 0)
+    private let padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 70)
 
     required init() {
         super.init(frame: .zero)
@@ -35,8 +35,21 @@ class SearchTextField: UITextField {
         self.leftView?.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 30)
         self.leftViewMode = UITextFieldViewMode.always
         self.leftViewMode = .always
+        
+        
+        let button = UIButton(type: .custom)
+        button.setTitle("Cancel", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Avenir Next", size: 14)
+        button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
+        button.setTitleColor(#colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1), for: .normal)
+        button.frame = CGRect(x: CGFloat(self.frame.size.width - 25), y: CGFloat(5), width: CGFloat(100), height: CGFloat(25))
+        button.isHidden = true
+        self.rightView = button
+        self.rightViewMode = .always
+    
         self.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
