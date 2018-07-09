@@ -12,7 +12,7 @@ import UIKit
 class SearchTextField: UITextField {
     
     private let padding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 70)
-
+    
     required init() {
         super.init(frame: .zero)
         self.borderStyle = .none
@@ -35,8 +35,7 @@ class SearchTextField: UITextField {
         self.leftView?.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 30)
         self.leftViewMode = UITextFieldViewMode.always
         self.leftViewMode = .always
-        
-        
+    
         let button = UIButton(type: .custom)
         button.setTitle("Cancel", for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir Next", size: 14)
