@@ -127,8 +127,8 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.contactsCell, for: indexPath) as! ContactsCollectionViewCell
         
         let row = indexPath.row
+        print(indexPath)
         cell.contact = indexPath.section == 0 ? recentlyActiveMonitor[row] : registeredContacts[row]
-        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -39,16 +39,16 @@ class ContactsCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         addViews()
     }
     
-    
     func contactDidUpdate(_ contact: Contact) {
+        contactImageView.image = #imageLiteral(resourceName: "contactPlaceholder")
         guard let contactName = contact.name else { return }
-        guard let avatarUrl = contact.avatarUrl else { return }
         contactNameLabel.text = contactName
-        contactImageView.setContactImage(url: avatarUrl)
+        if let avatarUrl = contact.avatarUrl {
+            contactImageView.setContactImage(url: avatarUrl)
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {

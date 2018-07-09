@@ -83,21 +83,22 @@ struct ContactsService {
         }
     }
     
-    private func getRequest(_ body: [String]) -> URLRequest {
+    private func getRequest(_ body: [String]) -> URLRequest? {
         let url = Urls.getUrl(.buddies)
-        let tokenTest = "Bearer EMAWdQD4ISxKG6BXvYjcsOxVz8BbehjDuc29QAnOxRUnRU0AmKyhrajLZAaHklyIO5inpMDaui9Tamq1gFJOaX0J5pJIZBCQMsejiA9RpAZDZD"
+        guard var authToken = Profile.current()?.authorizationToken else { return nil }
+        authToken = "Bearer " + authToken
         
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(tokenTest, forHTTPHeaderField: "Authorization")
+        request.setValue(authToken, forHTTPHeaderField: "Authorization")
         
         request.httpBody = try! JSONSerialization.data(withJSONObject: body)
         return request
     }
     
     private func checkPhoneNubmersForRegistration(phoneNumbers: [String]) {
-        let request = getRequest(phoneNumbers)
+        guard let request = getRequest(phoneNumbers) else { return }
         handleDeletedContacts(phoneNumbers: phoneNumbers)
         
         Alamofire.request(request).responseJSON { response in
@@ -144,7 +145,7 @@ struct ContactsService {
                 for registered in json.arrayValue {    
                     let contact = transaction.fetchOne(From<Contact>().where(\.phoneNumber == registered["phone_number"].stringValue))
                     contact?.profileId = Int32(registered["id"].intValue)
-                    let avatar = JSON(registered["avatar"])
+                    let avatar = JSON(registered["avatar"]["thumb"])
                     let avatarUrl = avatar["url"].stringValue
                     contact?.avatarUrl = avatarUrl != "" ? avatarUrl : nil
                 }
