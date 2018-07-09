@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import CoreStore
 
 class BlackListViewController: UITableViewController {
     
     let titleHeaderView = BlockUserLabelView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 30))
     var userBlockCell = "userBlockCell"
-    var blackListArray = [Contact]()
+    let blackListMonitor = Monitor.blackListMonitor
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configTableView()
-        fetchBlaclList()
+        blackListMonitor.addObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,11 +34,7 @@ class BlackListViewController: UITableViewController {
         tableView.register(BlockUserCell.self, forCellReuseIdentifier: userBlockCell)
     }
     
-    func fetchBlaclList(){
-        BlackListModel.fetchBlackListContactFromCore(completionHandler: {(array) in
-            self.blackListArray = array
-        })
-    }
+   
 }
 
 extension BlackListViewController {
@@ -57,27 +54,36 @@ extension BlackListViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return blackListArray.count
+        return blackListMonitor.numberOfObjects()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: userBlockCell, for: indexPath) as! BlockUserCell
-        let name = blackListArray[indexPath.row].name
-        let phoneNumber = blackListArray[indexPath.row].phoneNumber
-        let image = blackListArray[indexPath.row].avatarUrl
+        let name = blackListMonitor[indexPath.row].name
+        let phoneNumber = blackListMonitor[indexPath.row].phoneNumber
+        let image = blackListMonitor[indexPath.row].avatarUrl
         cell.viewData(image: image ?? "", name: name!, phone: phoneNumber!)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let contact = blackListArray[indexPath.row]
+        let contact = blackListMonitor[indexPath.row]
         showBlockUser(for: contact)
     }
-   
     
     func showBlockUser(for contact: Contact){
         let vc = MessageViewController()
         vc.contact = contact
         openViewController(viewController: vc)
+    }
+}
+
+extension BlackListViewController: ListObserver {
+    func listMonitorDidChange(_ monitor: ListMonitor<Contact>) {
+        self.tableView.reloadData()
+    }
+    
+    func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {
+        
     }
 }
