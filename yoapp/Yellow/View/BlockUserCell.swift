@@ -63,7 +63,7 @@ class BlockUserCell: UITableViewCell {
     }
     
     func viewData(image: String, name: String,phone: String){
-        profileImage.setCustomImage(Urls.shortUrl + image, custom: #imageLiteral(resourceName: "contactPlaceholder"))
+        profileImage.setCustomImage(Urls.baseUrl + image, custom: #imageLiteral(resourceName: "contactPlaceholder"))
         nameLabel.text = name
         phoneLabel.text = "+\(phone)"
     }

@@ -36,14 +36,6 @@ struct Monitor {
         return monitor
     }()
     
-   
-    static var profileDataMonitor : ListMonitor<Contact> = {
-        let phoneNumber = Profile.current()?.phoneNumber
-        print(phoneNumber)
-        let monitor = CoreStore.monitorList(From<Contact>().where(\.phoneNumber == phoneNumber))
-        return monitor
-    }()
-    
     static var basePhrasesMonitor: ListMonitor<FavoriteWords> = {
         let monitor = CoreStore.monitorList(From<FavoriteWords>().orderBy(.ascending(\.word)))
         return monitor
