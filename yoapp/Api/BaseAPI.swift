@@ -43,11 +43,8 @@ class BaseAPI {
     }
     
     private func request(method: HTTPMethod, url: String, params: Parameters, success: @escaping (JSON) -> Void, failure: @escaping (String) -> Void) {
-        guard let token = Token.shared.accessToken else {
-            // TODO: Логаут
-            return
-        }
-
+        guard let token = Profile.current()?.authorizationToken else { return }
+        
         let headers = ["Authorization": "Bearer \(token)"]
         
         Alamofire.request(base + url, method: method, parameters: params, headers: headers).responseJSON { response in

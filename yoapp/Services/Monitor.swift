@@ -43,4 +43,9 @@ struct Monitor {
         let monitor = CoreStore.monitorList(From<Contact>().where(\.phoneNumber == phoneNumber))
         return monitor
     }()
+    
+    static var basePhrasesMonitor: ListMonitor<FavoriteWords> = {
+        let monitor = CoreStore.monitorList(From<FavoriteWords>().orderBy(.ascending(\.word)))
+        return monitor
+    }()
 }

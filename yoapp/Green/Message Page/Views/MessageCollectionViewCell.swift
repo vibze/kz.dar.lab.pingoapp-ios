@@ -12,7 +12,7 @@ class MessageCollectionViewCell: UICollectionViewCell {
     let textLabel: UILabel = {
         let label = UILabel()
         label.text = "asdasd"
-        label.font = UIFont(name: "Avenir Next", size: 16)
+        label.font = UIFont(name: "Avenir Next", size: 18)
         label.textAlignment = .center
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         return label
@@ -35,7 +35,7 @@ class MessageCollectionViewCell: UICollectionViewCell {
     func setupViews() {
         addSubview(textLabel)
         textLabel.snp.makeConstraints {
-            $0.center.equalTo(self.snp.center)
+            $0.center.equalToSuperview()
             $0.height.equalTo(22)
         }
     }

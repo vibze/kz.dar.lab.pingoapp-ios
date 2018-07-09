@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.makeKeyAndVisible()
         
         Store.initCoreStore()
+        
         checkStorage()
         
         return true
