@@ -11,7 +11,7 @@ import SwiftyJSON
 import CoreStore
 
 class ProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,
-UINavigationControllerDelegate {
+                                  UINavigationControllerDelegate {
     
     let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 200))
     let footerView = ProfileFooterView(frame: CGRect(x: 0, y: 0, width: 307, height: 105))
@@ -45,7 +45,6 @@ UINavigationControllerDelegate {
         let phoneNumber = Profile.current()?.phoneNumber
         let profileImage = Profile.current()?.avatarImageUrl
         headerView.viewData(image: profileImage!, phoneNumber: phoneNumber!)
-        
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addImageProfile))
         headerView.profileImg.addGestureRecognizer(tapGestureRecognizer)
@@ -159,7 +158,7 @@ extension ProfileTableViewController {
         let token = UserDefaults().getAccessToken()
         let header = ["Content-Type": "application/x-www-form-urlencoded",
                       "Authorization": "Bearer \(token)",
-            "Accept":"application/json"]
+                      "Accept":"application/json"]
         
         Alamofire.upload(multipartFormData: { data in
             data.append(imageData, withName: "file", fileName: "myImage.png", mimeType: "image/png")
@@ -183,5 +182,4 @@ extension ProfileTableViewController {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
 }

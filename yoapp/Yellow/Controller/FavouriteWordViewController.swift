@@ -10,11 +10,12 @@ import UIKit
 import CoreStore
 
 class FavouriteWordViewController: UIViewController, UITableViewDelegate,
-                                   UITableViewDataSource {
+                                   UITableViewDataSource, ListObserver {
     
     var favoriteCell = "FavouriteCell"
     var favoriteWordArray = [FavoriteWords]()
     let backgroundView = UIView()
+    let monitor = Monitor.favoriteWordsMonitor
     
     var addWordView: FavouriteAddView = {
         let view = FavouriteAddView()
@@ -37,8 +38,9 @@ class FavouriteWordViewController: UIViewController, UITableViewDelegate,
         addRightBtutton(action: #selector(addFavourWordAction))
         configTableView()
         fetchFromCoreStore()
+        monitor.addObserver(self)
     }
-    
+   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchFromCoreStore()
@@ -77,8 +79,7 @@ extension FavouriteWordViewController {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            print(favoriteWordArray[indexPath.row].index)
-//            deleteFavoriteWordFromCore(word: (favoriteWordArray[indexPath.row].word)!)
+            deleteFavoriteWordFromCore(word: (favoriteWordArray[indexPath.row]))
             favoriteWordArray.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -100,6 +101,21 @@ extension FavouriteWordViewController {
         }
         addWordView.cancelButton.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         addWordView.addButton.addTarget(self, action: #selector(addAction), for: .touchUpInside)
+       
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: Notification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+       if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= 100
+            }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+            if self.view.frame.origin.y != 0 {
+                self.view.frame.origin.y += 100
+            }
     }
     
     @objc func cancelAction(){
@@ -129,7 +145,16 @@ extension FavouriteWordViewController {
         })
     }
 
-    func deleteFavoriteWordFromCore(word: String){
+    func deleteFavoriteWordFromCore(word: FavoriteWords){
          FavoriteWordModel.deleteFavoriteWordFromCore(word: word)
+    }
+    
+    func listMonitorDidChange(_ monitor: ListMonitor<FavoriteWords>) {
+        favoriteWordArray = monitor.objectsInAllSections()
+        self.tableView.reloadData()
+    }
+    
+    func listMonitorDidRefetch(_ monitor: ListMonitor<FavoriteWords>) {
+        self.tableView.reloadData()
     }
 }
