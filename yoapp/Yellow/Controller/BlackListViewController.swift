@@ -34,7 +34,7 @@ class BlackListViewController: UITableViewController {
         tableView.register(BlockUserCell.self, forCellReuseIdentifier: userBlockCell)
     }
     
-   
+    
 }
 
 extension BlackListViewController {
@@ -66,15 +66,24 @@ extension BlackListViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let contact = blackListMonitor[indexPath.row]
-        showBlockUser(for: contact)
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteButton = UITableViewRowAction(style: .default, title: "Удалить") { (action, indexPath) in
+            self.tableView.dataSource?.tableView!(self.tableView, commit: .delete, forRowAt: indexPath)
+            return
+        }
+        return [deleteButton]
     }
     
-    func showBlockUser(for contact: Contact){
-        let vc = MessageViewController()
-        vc.contact = contact
-        openViewController(viewController: vc)
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let phonemNumber = blackListMonitor[indexPath.row].phoneNumber
+            CoreStore.perform(asynchronous: {(transaction) -> Void in
+                let person = transaction.fetchOne(From<Contact>().where(\.phoneNumber == phonemNumber))
+                person?.isBlacklisted = false
+            },completion: {(result) -> Void in
+                debugPrint(result)
+            })
+        }
     }
 }
 
@@ -84,6 +93,5 @@ extension BlackListViewController: ListObserver {
     }
     
     func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {
-        
     }
 }
