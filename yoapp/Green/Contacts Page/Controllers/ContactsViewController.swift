@@ -47,6 +47,7 @@ class ContactsViewController: UIViewController {
         registeredContacts = registeredContactsMonitor.objectsInAllSections()
         recentlyActiveContacts = recentlyActiveMonitor.objectsInAllSections()
         
+        
         view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
         collectionViewSetup()
         textFieldSetup()
@@ -145,7 +146,6 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
         if let searchTextCount = searchTextField.text?.count {
             sectionHeader.sectionInfo = (indexPath.section, searchTextCount)
         }
-        
         return sectionHeader
     }
     
@@ -161,8 +161,8 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = MessageViewController()
-        let monitor = indexPath.section == 0 ? recentlyActiveContacts : registeredContacts
-        vc.contact = monitor[indexPath.row]
+        let contacts = indexPath.section == 0 ? recentlyActiveContacts : registeredContacts
+        vc.contact = contacts[indexPath.row]
         openViewController(viewController: vc)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -189,6 +189,7 @@ extension ContactsViewController: ListObserver {
     func listMonitorDidChange(_ monitor: ListMonitor<Contact>) {
         DispatchQueue.main.async {
             self.registeredContacts = self.registeredContactsMonitor.objectsInAllSections()
+            self.recentlyActiveContacts = self.recentlyActiveMonitor.objectsInAllSections()
             self.collectionView.reloadData()
         }
     }
