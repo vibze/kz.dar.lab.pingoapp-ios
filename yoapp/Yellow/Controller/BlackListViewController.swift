@@ -9,7 +9,7 @@
 import UIKit
 import CoreStore
 
-class BlackListViewController: UITableViewController {
+class BlackListViewController: UITableViewController, ListObserver {
     
     let titleHeaderView = BlockUserLabelView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 30))
     var userBlockCell = "userBlockCell"
@@ -33,8 +33,6 @@ class BlackListViewController: UITableViewController {
         tableView.rowHeight = 75
         tableView.register(BlockUserCell.self, forCellReuseIdentifier: userBlockCell)
     }
-    
-    
 }
 
 extension BlackListViewController {
@@ -63,6 +61,7 @@ extension BlackListViewController {
         let phoneNumber = blackListMonitor[indexPath.row].phoneNumber
         let image = blackListMonitor[indexPath.row].avatarUrl
         cell.viewData(image: image ?? "", name: name!, phone: phoneNumber!)
+       
         return cell
     }
     
@@ -71,27 +70,31 @@ extension BlackListViewController {
             self.tableView.dataSource?.tableView!(self.tableView, commit: .delete, forRowAt: indexPath)
             return
         }
-        return [deleteButton]
+         return [deleteButton]
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let phonemNumber = blackListMonitor[indexPath.row].phoneNumber
-            CoreStore.perform(asynchronous: {(transaction) -> Void in
-                let person = transaction.fetchOne(From<Contact>().where(\.phoneNumber == phonemNumber))
-                person?.isBlacklisted = false
-            },completion: {(result) -> Void in
-                debugPrint(result)
-            })
+            removeFromBlockList(phonemNumber: phonemNumber!)
         }
     }
-}
-
-extension BlackListViewController: ListObserver {
+    
     func listMonitorDidChange(_ monitor: ListMonitor<Contact>) {
         self.tableView.reloadData()
     }
     
     func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {
     }
+    
+    func removeFromBlockList(phonemNumber: String){
+        CoreStore.perform(asynchronous: {(transaction) -> Void in
+            let person = transaction.fetchOne(From<Contact>().where(\.phoneNumber == phonemNumber))
+            person?.isBlacklisted = false
+        },completion: {(result) -> Void in
+            debugPrint(result)
+        })
+    }
+    
 }
+
