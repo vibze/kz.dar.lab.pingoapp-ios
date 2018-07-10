@@ -20,10 +20,12 @@ struct Urls {
             return base + "register_device_token"
         case .avatarUpload:
             return base + "profile/avatar"
+        case .pingsPost:
+            return base + "pings/new"
         }
     }
 }
 
 enum Tail {
-    case buddies, register_device_token, avatarUpload
+    case buddies, register_device_token, avatarUpload, pingsPost
 }

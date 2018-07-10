@@ -47,11 +47,12 @@ class BaseAPI {
         
         let headers = ["Authorization": "Bearer \(token)"]
         
-        Alamofire.request(base + url, method: method, parameters: params, headers: headers).responseJSON { response in
+        Alamofire.request(base + url, method: method, parameters: params, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 success(JSON(value))
             case .failure(let error):
+                
                 failure(error.localizedDescription)
             }
         }
