@@ -9,7 +9,14 @@
 import Foundation
 import UIKit
 
+protocol AlerViewDelegate: class {
+    func closeButtonTapped(isClosed: Bool)
+}
+
 class PushAlert: UIView {
+    
+    var delegate: AlerViewDelegate?
+    
     let submitButton = ActionButton(title: "OK", type: .write)
     
     let alertView: UIView = {
@@ -48,6 +55,7 @@ class PushAlert: UIView {
     
     @objc func submitButtonPressed() {
         isHidden = true
+        delegate?.closeButtonTapped(isClosed: true)
     }
     
     func setupViews() {

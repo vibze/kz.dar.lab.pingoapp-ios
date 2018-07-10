@@ -63,18 +63,22 @@ class ComposeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        setupLabels()
+        fillContactInfo()
         addNavigationController(backgrounColor: #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), title: "")
         messageTextView.delegate = self
         composeButton.addTarget(self, action: #selector(composeButtonPressed), for: .touchUpInside)
+        alertView.delegate = self
         view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
     }
     
-    func setupLabels() {
-        if let name = contact?.name {
-            nameLabel.text = name
+    func fillContactInfo() {
+        if let contact = contact {
+            if let avatarUrl = contact.avatarUrl {
+                profileImageView.setContactImage(url: avatarUrl)
+            }
+            nameLabel.text = contact.name
+            phoneNumberLabel.text = contact.phoneNumber
         }
-        phoneNumberLabel.text = contact?.phoneNumber!
     }
     
     func setupViews() {
@@ -88,6 +92,7 @@ class ComposeViewController: UIViewController {
         profileImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(70)
             $0.centerX.equalTo(self.view.center)
+            $0.width.height.equalTo(90)
         }
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(profileImageView.snp.bottom).offset(16)
@@ -115,6 +120,12 @@ class ComposeViewController: UIViewController {
 extension ComposeViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         self.hideKeyboard()
+    }
+}
+
+extension ComposeViewController: AlerViewDelegate {
+    func closeButtonTapped(isClosed: Bool) {
+        navigationController?.isNavigationBarHidden = false
     }
 }
 

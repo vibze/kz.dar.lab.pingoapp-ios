@@ -24,12 +24,6 @@ class ProfileFooterView : UIView {
         return view
     }()
     
-    var messengerView: CustomInviteView = {
-        let view = CustomInviteView()
-        view.backgroundColor = .myPurple
-        return view
-    }()
-    
     var backStackView: UIView = {
         let view = UIView()
         view.backgroundColor = .myOrange
@@ -76,19 +70,17 @@ class ProfileFooterView : UIView {
             $0.bottom.equalToSuperview().offset(-5)
         }
         stackViewConfig()
-
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         telegramView.roundCorners(corners: [.topLeft, .bottomLeft], radius: 10)
-        messengerView.roundCorners(corners: [.topRight, .bottomRight], radius: 10)
+        whatsUpView.roundCorners(corners: [.topRight, .bottomRight], radius: 10)
     }
     
     func stackViewConfig(){
         telegramView.viewData(icon: #imageLiteral(resourceName: "telegramIcon"), name: "Telegram")
         whatsUpView.viewData(icon: #imageLiteral(resourceName: "whatsAppIcon"), name: "Whatapp")
-        messengerView.viewData(icon: #imageLiteral(resourceName: "messengerIcon"), name: "Messenger")
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
@@ -99,11 +91,9 @@ class ProfileFooterView : UIView {
         
         stackView.addArrangedSubview(telegramView)
         stackView.addArrangedSubview(whatsUpView)
-        stackView.addArrangedSubview(messengerView)
         
         telegramView.translatesAutoresizingMaskIntoConstraints = false
         whatsUpView.translatesAutoresizingMaskIntoConstraints = false
-        messengerView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder aDecoder: NSCoder) {

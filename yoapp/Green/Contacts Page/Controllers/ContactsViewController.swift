@@ -22,7 +22,7 @@ class ContactsViewController: UIViewController {
     
     let searchBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hexString: "6BBE90")
+        view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
         return view
     }()
     
@@ -37,6 +37,7 @@ class ContactsViewController: UIViewController {
     let registeredContactsMonitor = Monitor.registeredContactsMonitor
     let recentlyActiveMonitor = Monitor.recentlyActiveMonitor
     var registeredContacts: [Contact] = []
+    var recentlyActiveContacts: [Contact] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +45,10 @@ class ContactsViewController: UIViewController {
         registeredContactsMonitor.addObserver(self)
         recentlyActiveMonitor.addObserver(self)
         registeredContacts = registeredContactsMonitor.objectsInAllSections()
+        recentlyActiveContacts = recentlyActiveMonitor.objectsInAllSections()
         
-        view.backgroundColor = UIColor(hexString: "6BBE90")
+        
+        view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
         collectionViewSetup()
         textFieldSetup()
     }
@@ -79,11 +82,26 @@ class ContactsViewController: UIViewController {
     }
     
     @objc func handleTextFieldChange(textField: UITextField) {
-        textField.rightView?.isHidden = textField.text?.count == 0 ? true : false
+        if let charCount = textField.text?.count {
+            textFieldDidBeginTyping(charCount: charCount)
+        }
         
-        self.registeredContacts = SearchContact.searchFor(monitor: registeredContactsMonitor, text: textField.text)
+        self.recentlyActiveContacts = SearchContact.searchFor(monitor: recentlyActiveMonitor, text: textField.text)
         DispatchQueue.main.async {
             self.collectionView.reloadData()
+        }
+    }
+    
+    func textFieldDidBeginTyping(charCount: Int) {
+        if charCount > 0 {
+            searchTextField.rightView?.isHidden = false
+            self.registeredContacts = []
+            self.recentlyActiveContacts = registeredContactsMonitor.objectsInAllSections()
+        }
+        else {
+            searchTextField.rightView?.isHidden = true
+            self.registeredContacts = registeredContactsMonitor.objectsInAllSections()
+            self.recentlyActiveContacts = recentlyActiveMonitor.objectsInAllSections()
         }
     }
     
@@ -125,24 +143,26 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
         
         let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.sectionHeader, for: indexPath) as! SectionHeader
         sectionHeader.categoryTitleLabel.text = sectionLabels[indexPath.section]
-        
+        if let searchTextCount = searchTextField.text?.count {
+            sectionHeader.sectionInfo = (indexPath.section, searchTextCount)
+        }
         return sectionHeader
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? recentlyActiveMonitor.numberOfObjects() : registeredContacts.count
+        return section == 0 ? recentlyActiveContacts.count : registeredContacts.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.contactsCell, for: indexPath) as! ContactsCollectionViewCell
         
         let row = indexPath.row
-        cell.contact = indexPath.section == 0 ? recentlyActiveMonitor[row] : registeredContacts[row]
+        cell.contact = indexPath.section == 0 ? recentlyActiveContacts[row] : registeredContacts[row]
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = MessageViewController()
-        let monitor = indexPath.section == 0 ? recentlyActiveMonitor : registeredContactsMonitor
-        vc.contact = monitor[indexPath.row]
+        let contacts = indexPath.section == 0 ? recentlyActiveContacts : registeredContacts
+        vc.contact = contacts[indexPath.row]
         openViewController(viewController: vc)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -169,6 +189,7 @@ extension ContactsViewController: ListObserver {
     func listMonitorDidChange(_ monitor: ListMonitor<Contact>) {
         DispatchQueue.main.async {
             self.registeredContacts = self.registeredContactsMonitor.objectsInAllSections()
+            self.recentlyActiveContacts = self.recentlyActiveMonitor.objectsInAllSections()
             self.collectionView.reloadData()
         }
     }

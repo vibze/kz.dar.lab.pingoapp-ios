@@ -92,12 +92,20 @@ class MessageViewController: UIViewController {
         super.viewDidLoad()
         addNavigationController(backgrounColor: #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), title: "")
         view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
+        
         phrasesMonitor.addObserver(self)
+        pushAlert.delegate = self
         
         setupViews()
         setupButtons()
-        
+        fillContactInfo()
+    }
+    
+    func fillContactInfo() {
         if let contact = contact {
+            if let avatarUrl = contact.avatarUrl {
+                profileImageView.setContactImage(url: avatarUrl)
+            }
             userNameLabel.text = contact.name
             phoneNumberLabel.text = contact.phoneNumber
         }
@@ -226,7 +234,6 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
 }
 
-
 extension MessageViewController: ListObserver {
     func listMonitorDidChange(_ monitor: ListMonitor<FavoriteWords>) {
         self.collectionView.reloadData()
@@ -235,3 +242,10 @@ extension MessageViewController: ListObserver {
         
     }
 }
+
+extension MessageViewController: AlerViewDelegate {
+    func closeButtonTapped(isClosed: Bool) {
+        navigationController?.isNavigationBarHidden = false
+    }
+}
+

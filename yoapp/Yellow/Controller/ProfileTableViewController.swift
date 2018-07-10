@@ -86,8 +86,6 @@ extension ProfileTableViewController {
         footerView.telegramView.addGestureRecognizer(openTelegramGesture)
         let openWhatsAppGesture = UITapGestureRecognizer(target: self, action: #selector(openWhatsApp))
         footerView.whatsUpView.addGestureRecognizer(openWhatsAppGesture)
-        let openMessengerGesture = UITapGestureRecognizer(target: self, action: #selector(openMessenger))
-        footerView.messengerView.addGestureRecognizer(openMessengerGesture)
     }
     
     @objc func openTelegram(){
@@ -96,10 +94,6 @@ extension ProfileTableViewController {
     
     @objc func openWhatsApp(){
         openMessengerView(urlApp: "whatsapp://send?text=")
-    }
-    
-    @objc func openMessenger(){
-        openMessengerView(urlApp: "fb-messenger:/user/")
     }
     
     func openMessengerView(urlApp: String){
@@ -115,6 +109,7 @@ extension ProfileTableViewController {
             }
         }
     }
+    
     
     @objc func addImageProfile(){
         let imagePicker = UIImagePickerController()
@@ -140,18 +135,20 @@ extension ProfileTableViewController {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let avatarImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
         headerView.profileImg.image = avatarImage
-        uploadImage(avatar: avatarImage, success: { response in
+       uploadImage(avatar: fixOrientation(img: avatarImage), success: { response in
             print("OKKK", response)
         }) { (error) in
             self.showAlert(errorType: "Ошибка при загрузки фото", image: #imageLiteral(resourceName: "errorIcon"))
         }
+        
         dismiss(animated: true, completion: nil)
     }
     
     func uploadImage(avatar: UIImage, success: @escaping (Bool) -> Void, failure: @escaping (Error) -> Void){
         guard
-            let imageData = UIImageJPEGRepresentation(avatar, 1.0),
+            let imageData = UIImageJPEGRepresentation(avatar,1.0),
             let url = URL(string: Urls.getUrl(.avatarUpload)) else {
                 return
         }
@@ -181,5 +178,20 @@ extension ProfileTableViewController {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+  
+    func fixOrientation(img: UIImage) -> UIImage {
+        if (img.imageOrientation == .up) {
+            return img
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(img.size, false, img.scale)
+        let rect = CGRect(x: 0, y: 0, width: img.size.width, height: img.size.height)
+        img.draw(in: rect)
+        
+        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        return normalizedImage
     }
 }
