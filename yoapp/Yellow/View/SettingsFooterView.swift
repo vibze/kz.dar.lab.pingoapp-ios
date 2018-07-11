@@ -16,8 +16,11 @@ class SettingsFooterView: UIView {
         let switcher = UISwitch()
         switcher.backgroundColor = .myPurple
         switcher.layer.cornerRadius = 20
+        let status = UserDefaults.standard.bool(forKey: "notification")
+        switcher.isOn = status
         switcher.thumbTintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         switcher.layer.borderColor = UIColor.white.cgColor
+        switcher.addTarget(self, action: #selector(onOffNotification), for: .valueChanged)
         return switcher
     }()
     
@@ -30,7 +33,6 @@ class SettingsFooterView: UIView {
     
     func setUpView(){
         notificationLabel.text = "Отлючить уведомления"
-        
         notificationLabel.snp.makeConstraints{
             $0.top.equalToSuperview().offset(30)
             $0.left.equalToSuperview().offset(15)
@@ -40,6 +42,18 @@ class SettingsFooterView: UIView {
         notificationSwitcher.snp.makeConstraints{
             $0.top.equalTo(notificationLabel)
             $0.right.equalToSuperview().offset(-15)
+        }
+    }
+    
+    @objc func onOffNotification(){
+    
+        print(UserDefaults.standard.bool(forKey: "notification"))
+        if notificationSwitcher.isOn{
+            UIApplication.shared.unregisterForRemoteNotifications()
+            UserDefaults.standard.set(true, forKey: "notification")
+        }else{
+            UIApplication.shared.registerForRemoteNotifications()
+            UserDefaults.standard.set(false, forKey: "notification")
         }
     }
     

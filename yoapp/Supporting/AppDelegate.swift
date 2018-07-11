@@ -15,17 +15,21 @@ import AccountKit
 
 @available(iOS 10.0, *)
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-  
+class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate {
+    
     
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
         UIApplication.shared.statusBarStyle = .lightContent
         let window = UIWindow(frame: UIScreen.main.bounds)
         Application.shared.window = window
         window.makeKeyAndVisible()
+        
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound,  .sound]) { (granted, error) in
+        UNUserNotificationCenter.current().delegate = self
+        }
         
         Store.initCoreStore()
         
@@ -48,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ProfileApi().uploadDeviceToken(deviceToken: deviceTokenString, success: { _ in }, failure: { _ in })
     }
     
+    
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("APNs registration failed: \(error)")
     }
@@ -56,6 +61,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler(UIBackgroundFetchResult.noData)
     }
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent: UNNotification,
+                                withCompletionHandler: @escaping (UNNotificationPresentationOptions)->()) {
+        withCompletionHandler([.alert, .sound, .badge])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive: UNNotificationResponse,
+                                withCompletionHandler: @escaping ()->()) {
+        withCompletionHandler()
+    }
+   
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -149,7 +166,12 @@ class Application {
         center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
             if granted {
                 DispatchQueue.main.async(execute: {
-                    UIApplication.shared.registerForRemoteNotifications()
+                    let getNotification = UserDefaults.standard.bool(forKey: "notification")
+                    if getNotification {
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }else{
+                         UIApplication.shared.registerForRemoteNotifications()
+                    }
                 })
             }
         }
