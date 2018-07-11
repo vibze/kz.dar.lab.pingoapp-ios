@@ -107,6 +107,7 @@ extension ProfileTableViewController {
         }
     }
 }
+
 extension ProfileTableViewController{
      // MARK: - Image properties
     
