@@ -11,7 +11,7 @@ import SwiftyJSON
 import CoreStore
 
 class ProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,
-                                  UINavigationControllerDelegate {
+UINavigationControllerDelegate {
     
     let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 200))
     let footerView = ProfileFooterView(frame: CGRect(x: 0, y: 0, width: 307, height: 105))
@@ -55,30 +55,27 @@ class ProfileTableViewController: UITableViewController,UIImagePickerControllerD
 extension ProfileTableViewController {
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingsType.count
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: profileCell, for: indexPath) as! ProfileViewCell
-        cell.settingLabel.text = settingsType[indexPath.row]
-        if indexPath.row == 2{
-            cell.backView.layer.borderColor = UIColor.myPurple.withAlphaComponent(0.5).cgColor
-            cell.settingLabel.textColor = .myPurple
-        }
+        cell.settingButton.addTarget(self, action: #selector(openSettingVC), for: .touchUpInside)
+        cell.aboutAppButton.addTarget(self, action: #selector(openAboutVC), for: .touchUpInside)
+        cell.exitButton.addTarget(self, action: #selector(openExitVC), for: .touchUpInside)
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            openViewController(viewController: SettingViewController())
-        case 1:
-            openViewController(viewController: AboutAppViewController())
-        case 2:
-            Application.shared.logout()
-        default:
-            break
-        }
+    @objc func openSettingVC(){
+        openViewController(viewController: SettingViewController())
+    }
+    
+    @objc func openAboutVC(){
+        openViewController(viewController: AboutAppViewController())
+    }
+    
+    @objc func openExitVC(){
+        Application.shared.logout()
     }
     
     func touchDetect(){
@@ -109,7 +106,9 @@ extension ProfileTableViewController {
             }
         }
     }
-    
+}
+extension ProfileTableViewController{
+     // MARK: - Image properties
     
     @objc func addImageProfile(){
         let imagePicker = UIImagePickerController()
@@ -137,7 +136,7 @@ extension ProfileTableViewController {
         let avatarImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         headerView.profileImg.image = avatarImage
-       uploadImage(avatar: fixOrientation(img: avatarImage), success: { response in
+        uploadImage(avatar: fixOrientation(img: avatarImage), success: { response in
             print("OKKK", response)
         }) { (error) in
             self.showAlert(errorType: "Ошибка при загрузки фото", image: #imageLiteral(resourceName: "errorIcon"))
@@ -155,7 +154,7 @@ extension ProfileTableViewController {
         let token = UserDefaults().getAccessToken()
         let header = ["Content-Type": "application/x-www-form-urlencoded",
                       "Authorization": "Bearer \(token)",
-                      "Accept":"application/json"]
+            "Accept":"application/json"]
         
         Alamofire.upload(multipartFormData: { data in
             data.append(imageData, withName: "file", fileName: "myImage.png", mimeType: "image/png")
@@ -179,7 +178,7 @@ extension ProfileTableViewController {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-  
+    
     func fixOrientation(img: UIImage) -> UIImage {
         if (img.imageOrientation == .up) {
             return img

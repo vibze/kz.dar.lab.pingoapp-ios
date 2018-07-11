@@ -9,21 +9,10 @@
 import UIKit
 
 class ProfileViewCell: UITableViewCell {
-    
-    var hiddenView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
-        return view
-    }()
-    
-    var backView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexString: "FEC95F")
-        view.layer.cornerRadius = 10
-        view.layer.borderColor = UIColor.white.withAlphaComponent(0.5).cgColor
-        view.layer.borderWidth = 5
-        return view
-    }()
+   
+    let settingButton = ActionButton(title: "Настройки", type: .setting)
+    let aboutAppButton = ActionButton(title: "О приложении", type: .setting)
+    let exitButton = ActionButton(title: "Выход", type: .exit)
     
     let settingLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 18, fontType: .mySemiBold)
     
@@ -35,32 +24,41 @@ class ProfileViewCell: UITableViewCell {
     }
     
     func setUpView(){
-        self.addSubview(hiddenView)
-        hiddenView.addSubview(backView)
-        backView.addSubview(settingLabel)
+        self.addSubview(settingButton)
+        self.addSubview(aboutAppButton)
+        self.addSubview(exitButton)
+        settingButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+        aboutAppButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+        exitButton.setTitleColor(#colorLiteral(red: 0.6117647059, green: 0.2705882353, blue: 0.4470588235, alpha: 1), for: .normal)
         
-        hiddenView.snp.makeConstraints{
+        settingButton.snp.makeConstraints{
             if screenBounds.height < 670{
-              $0.top.equalToSuperview().offset(0)
+                $0.top.equalToSuperview().offset(0)
             }
-            
+            if screenBounds.height == 568{
+                $0.height.equalTo(45)
+            }
             $0.top.equalToSuperview().offset(10)
-            $0.left.equalToSuperview().offset(0)
-            $0.right.equalToSuperview().offset(0)
-            $0.height.equalTo(60)
-            $0.bottom.equalToSuperview().offset(0)
-        }
-        
-        backView.snp.makeConstraints{
-            $0.top.equalTo(hiddenView.snp.top)
             $0.left.equalToSuperview().offset(32)
             $0.right.equalToSuperview().offset(-32)
-            $0.bottom.equalTo(hiddenView.snp.bottom).offset(-10)
+            $0.height.equalTo(50)
         }
         
-        settingLabel.snp.makeConstraints{
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview()
+        aboutAppButton.snp.makeConstraints{
+            if screenBounds.height == 568{
+                $0.top.equalTo(settingButton.snp.bottom).offset(10)
+            }
+            $0.top.equalTo(settingButton.snp.bottom).offset(20)
+            $0.left.right.height.equalTo(settingButton)
+        }
+        
+        exitButton.snp.makeConstraints{
+            if screenBounds.height == 568{
+                $0.top.equalTo(aboutAppButton.snp.bottom).offset(10)
+            }
+            $0.top.equalTo(aboutAppButton.snp.bottom).offset(20)
+            $0.left.right.height.equalTo(settingButton)
+            $0.bottom.equalTo(self).offset(-10)
         }
     }
     
