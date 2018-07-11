@@ -11,11 +11,6 @@ import UIKit
 import AlamofireImage
 import Alamofire
 
-let avatarImageCache = AutoPurgingImageCache(
-    memoryCapacity: 100_000_000,
-    preferredMemoryUsageAfterPurge: 60_000_000
-)
-
 class ImageView: UIImageView {
     
     var imageUrlString: String?
@@ -49,14 +44,19 @@ class ImageView: UIImageView {
     }
     
     func setContactImage(url: String) {
-        guard let tempUrl = URL(string: Urls.baseUrl + url) else { return }
-        image = #imageLiteral(resourceName: "contactPlaceholder")
+        self.image = #imageLiteral(resourceName: "contactPlaceholder")
+        
+        let url = Urls.baseUrl + url
         activityIndicator.startAnimating()
-        af_setImage(withURL: tempUrl, placeholderImage: #imageLiteral(resourceName: "contactPlaceholder"), filter: nil, progress: nil, progressQueue: .main, imageTransition: .crossDissolve(1), runImageTransitionIfCached: false) { (response) in
-            if let data = response.data {
-                avatarImageCache.add(UIImage(data: data)!, for: URLRequest(url: tempUrl))
-            }
+        Avatar.getAvatar(url: url, success: { (avatarImage) in
             self.activityIndicator.stopAnimating()
+            UIView.animate(withDuration: 0.8, animations: {
+                self.image = avatarImage
+            })
+        }) { (error) in
+            self.activityIndicator.stopAnimating()
+            guard let error = error else { return }
+            print(error)
         }
     }
 }

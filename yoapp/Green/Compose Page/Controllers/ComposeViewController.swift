@@ -50,13 +50,11 @@ class ComposeViewController: UIViewController {
     }
     
     @objc func composeButtonPressed() {
-       
         let txt = messageTextView.text
         let buddyId = contact?.profileId
         PingsApi().postPing(buddyId: buddyId!, pingText: txt!, success: { _ in
             self.alertView.isHidden = false}, failure: { _ in
             self.showAlert(errorType: "Ошибка! Сообщение не доставлено.", image: #imageLiteral(resourceName: "errorIcon")) })
-        
         print("tap&send")
     }
 

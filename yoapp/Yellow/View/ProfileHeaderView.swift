@@ -76,7 +76,7 @@ class ProfileHeaderView: UIView {
         
     }
     
-    func viewData(image: String,phoneNumber: String){
+    func viewData(image: String, phoneNumber: String){
         phoneNumberLabel.text = "+\(phoneNumber)"
         profileImg.setCustomImage("http://178.62.123.161" + image, custom: #imageLiteral(resourceName: "cameraPhoto"))
     }

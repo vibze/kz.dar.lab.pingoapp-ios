@@ -221,6 +221,8 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         pushAlert.isHidden = false
+        navigationController?.isNavigationBarHidden = true
+        
         let buddyId = contact?.profileId
         let txt = phrasesMonitor[indexPath.row].word
         PingsApi().postPing(buddyId: buddyId!, pingText: txt!, success: { _ in }, failure: { _ in })

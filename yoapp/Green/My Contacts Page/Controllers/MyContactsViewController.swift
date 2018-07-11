@@ -27,6 +27,18 @@ class MyContactsViewController: UIViewController {
         return tableView
     }()
     
+    let refreshController: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        refresh.tintColor = .white
+        refresh.addTarget(self, action: #selector(handlePullToRefresh), for: .valueChanged)
+        return refresh
+    }()
+    
+    @objc func handlePullToRefresh(_ sender: UIRefreshControl) {
+        tableView.reloadData()
+        sender.endRefreshing()
+    }
+    
     var listOfContacts: [Contact] = []
     
     let searchBackgroundView: UIView = {
@@ -80,6 +92,7 @@ class MyContactsViewController: UIViewController {
         view.addSubview(searchBackgroundView)
         searchBackgroundView.addSubview(blurEffectView)
         searchBackgroundView.addSubview(searchTextField)
+        tableView.addSubview(refreshController)
         
         searchTextField.delegate = self
         tableView.delegate = self

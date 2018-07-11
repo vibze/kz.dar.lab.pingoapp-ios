@@ -26,6 +26,18 @@ class ContactsViewController: UIViewController {
         return view
     }()
     
+    let refreshController: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        refresh.tintColor = .white
+        refresh.addTarget(self, action: #selector(handlePullToRefresh), for: .valueChanged)
+        return refresh
+    }()
+    
+    @objc func handlePullToRefresh(_ sender: UIRefreshControl) {
+        self.collectionView.reloadData()
+        sender.endRefreshing()
+    }
+    
     let blurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
         let effect = UIVisualEffectView(effect: blurEffect)
@@ -46,7 +58,6 @@ class ContactsViewController: UIViewController {
         recentlyActiveMonitor.addObserver(self)
         registeredContacts = registeredContactsMonitor.objectsInAllSections()
         recentlyActiveContacts = recentlyActiveMonitor.objectsInAllSections()
-        
         
         view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
         collectionViewSetup()
@@ -127,6 +138,7 @@ class ContactsViewController: UIViewController {
         collectionView.alwaysBounceVertical = true
         
         self.view.addSubview(collectionView)
+        collectionView.addSubview(refreshController)
         
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()

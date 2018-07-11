@@ -67,7 +67,6 @@ class ContactsCollectionViewCell: UICollectionViewCell {
         activityIndicator.snp.makeConstraints {
             $0.center.equalTo(contactImageView.snp.center)
         }
-        
         contactImageView.snp.makeConstraints { (constraint) in
             constraint.top.left.right.equalTo(0)
             constraint.width.height.equalTo(68)
