@@ -14,11 +14,13 @@ import Alamofire
 private struct Constants {
     static let contactsCell = "contactsCell"
     static let sectionHeader = "sectionHeader"
+    static let sectionLabels = ["Недавние", "Все, кто в теме"]
 }
 
 class ContactsViewController: UIViewController {
     var collectionView: UICollectionView!
-    let sectionLabels = ["Недавние", "Все, кто в теме"]
+    let blurEffectView = UIVisualEffectView.getBlurEffectView()
+    let searchTextField = SearchTextField()
     
     let searchBackgroundView: UIView = {
         let view = UIView()
@@ -26,13 +28,19 @@ class ContactsViewController: UIViewController {
         return view
     }()
     
-    let blurEffectView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
-        let effect = UIVisualEffectView(effect: blurEffect)
-        effect.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        effect.isHidden = true
-        return effect
+    let refreshController: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        refresh.tintColor = .white
+        refresh.addTarget(self, action: #selector(handlePullToRefresh), for: .valueChanged)
+        return refresh
     }()
+    
+    @objc func handlePullToRefresh(_ sender: UIRefreshControl) {
+        DispatchQueue.main.async {
+            sender.endRefreshing()
+            self.collectionView.reloadData()
+        }
+    }
     
     let registeredContactsMonitor = Monitor.registeredContactsMonitor
     let recentlyActiveMonitor = Monitor.recentlyActiveMonitor
@@ -41,19 +49,19 @@ class ContactsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         registeredContactsMonitor.addObserver(self)
         recentlyActiveMonitor.addObserver(self)
-        registeredContacts = registeredContactsMonitor.objectsInAllSections()
-        recentlyActiveContacts = recentlyActiveMonitor.objectsInAllSections()
-        
         
         view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
         collectionViewSetup()
         textFieldSetup()
+        monitorsSetup()
     }
     
-    let searchTextField = SearchTextField()
+    func monitorsSetup() {
+        registeredContacts = registeredContactsMonitor.objectsInAllSections()
+        recentlyActiveContacts = recentlyActiveMonitor.objectsInAllSections()
+    }
     
     func textFieldSetup() {
         self.view.addSubview(searchBackgroundView)
@@ -110,14 +118,14 @@ class ContactsViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 12, left: 21, bottom: 12, right: 21)
         layout.itemSize = CGSize(width: 68, height: 98)
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        let flow = self.collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
+        flow.headerReferenceSize = CGSize(width: self.view.frame.width, height: 25)
         
         collectionView.delegate = self
         collectionView.dataSource = self
         
         collectionView.register(ContactsCollectionViewCell.self, forCellWithReuseIdentifier: Constants.contactsCell)
         collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: Constants.sectionHeader)
-        let flow = self.collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
-        flow.headerReferenceSize = CGSize(width: self.view.frame.width, height: 25)
         collectionView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 60, right: 0)
         
         collectionView.keyboardDismissMode = .onDrag
@@ -127,6 +135,7 @@ class ContactsViewController: UIViewController {
         collectionView.alwaysBounceVertical = true
         
         self.view.addSubview(collectionView)
+        collectionView.addSubview(refreshController)
         
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -136,16 +145,15 @@ class ContactsViewController: UIViewController {
 
 extension ContactsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UIScrollViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return sectionLabels.count
+        return Constants.sectionLabels.count
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.sectionHeader, for: indexPath) as! SectionHeader
-        sectionHeader.categoryTitleLabel.text = sectionLabels[indexPath.section]
-        if let searchTextCount = searchTextField.text?.count {
-            sectionHeader.sectionInfo = (indexPath.section, searchTextCount)
-        }
+        sectionHeader.categoryTitleLabel.text = Constants.sectionLabels[indexPath.section]
+        sectionHeader.sectionInfo = (indexPath.section, searchTextField.text?.count)
+        
         return sectionHeader
     }
     
@@ -188,8 +196,7 @@ extension ContactsViewController: UITextFieldDelegate {
 extension ContactsViewController: ListObserver {
     func listMonitorDidChange(_ monitor: ListMonitor<Contact>) {
         DispatchQueue.main.async {
-            self.registeredContacts = self.registeredContactsMonitor.objectsInAllSections()
-            self.recentlyActiveContacts = self.recentlyActiveMonitor.objectsInAllSections()
+            self.monitorsSetup()
             self.collectionView.reloadData()
         }
     }

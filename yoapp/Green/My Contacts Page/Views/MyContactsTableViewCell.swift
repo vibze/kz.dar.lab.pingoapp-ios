@@ -20,21 +20,8 @@ class MyContactsTableViewCell: UITableViewCell {
 
     let contactImageView = ImageView(radius: 55 / 2)
     
-    let contactNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Chuck Norris"
-        label.font = UIFont(name: "Avenir Next", size: 16)
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        return label
-    }()
-    
-    let phoneNumberLabel: UILabel = {
-        let label = UILabel()
-        label.text = "+77070070204"
-        label.font = UIFont(name: "Avenir Next", size: 14)
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        return label
-    }()
+    let contactNameLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 16, fontType: .myRegular)
+    let phoneNumberLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 14, fontType: .myRegular)
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

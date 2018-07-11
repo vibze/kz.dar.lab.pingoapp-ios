@@ -10,10 +10,10 @@ import UIKit
 import SnapKit
 
 class SectionHeader: UICollectionReusableView {
-    var sectionInfo: (section: Int, charCount: Int)? {
+    var sectionInfo: (section: Int, charCount: Int?)? {
         didSet {
-            guard let section = sectionInfo else { return }
-            changeParameters(sectionIndex: section.section, charCount: section.charCount)
+            guard let section = sectionInfo, let charCount = section.charCount else { return }
+            changeParameters(sectionIndex: section.section, charCount: charCount)
         }
     }
     

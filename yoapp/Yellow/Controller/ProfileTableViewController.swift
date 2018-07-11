@@ -148,7 +148,7 @@ extension ProfileTableViewController{
     
     func uploadImage(avatar: UIImage, success: @escaping (Bool) -> Void, failure: @escaping (Error) -> Void){
         guard
-            let imageData = UIImageJPEGRepresentation(avatar,1.0),
+            let imageData = UIImageJPEGRepresentation(avatar, 0.3),
             let url = URL(string: Urls.getUrl(.avatarUpload)) else {
                 return
         }

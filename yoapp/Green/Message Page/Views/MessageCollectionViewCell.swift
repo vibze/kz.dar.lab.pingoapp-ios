@@ -9,21 +9,19 @@
 import UIKit
 
 class MessageCollectionViewCell: UICollectionViewCell {
-    let textLabel: UILabel = {
-        let label = UILabel()
-        label.text = "asdasd"
-        label.font = UIFont(name: "Avenir Next", size: 18)
-        label.textAlignment = .center
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        return label
-    }()
+    let textLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 18, fontType: .myRegular)
+    var phrase: String? {
+        didSet {
+            guard let phrase = phrase else { return }
+            textLabel.text = phrase
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
         
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.15)
+        self.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.15)
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 8
     }

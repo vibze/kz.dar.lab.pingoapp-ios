@@ -30,12 +30,7 @@ class MainTabViewController: UIViewController {
         return view
     }()
     
-    let blurEffectView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
-        let effect = UIVisualEffectView(effect: blurEffect)
-        effect.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        return effect
-    }()
+    let blurEffectView = UIVisualEffectView.getBlurEffectView()
     
     let contactsButton = TabBarButton(tag: 0, image: #imageLiteral(resourceName: "contacts"))
     let homeButton = TabBarButton(tag: 1, image:  #imageLiteral(resourceName: "home"))
@@ -46,9 +41,11 @@ class MainTabViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabBarBtnPressed(sender: homeButton)
+        blurEffectView.isHidden = false
+        
         setupViews()
         setupButtons()
-        tabBarBtnPressed(sender: homeButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
