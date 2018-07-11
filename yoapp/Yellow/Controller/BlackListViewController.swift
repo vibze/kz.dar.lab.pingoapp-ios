@@ -62,7 +62,7 @@ extension BlackListViewController {
         let phoneNumber = blackListMonitor[indexPath.row].phoneNumber
         let image = blackListMonitor[indexPath.row].avatarUrl
         cell.viewData(image: image ?? "", name: name!, phone: phoneNumber!)
-       
+        
         return cell
     }
     
@@ -71,7 +71,7 @@ extension BlackListViewController {
             self.tableView.dataSource?.tableView!(self.tableView, commit: .delete, forRowAt: indexPath)
             return
         }
-         return [deleteButton]
+        return [deleteButton]
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -96,6 +96,5 @@ extension BlackListViewController {
             debugPrint(result)
         })
     }
-    
 }
 
