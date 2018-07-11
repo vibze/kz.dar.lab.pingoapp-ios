@@ -14,11 +14,11 @@ class FavoriteWordModel {
     var word: String?
     
     static func addFavoriteWordToCore(index: Int,word: String,completionHandler: @escaping([FavoriteWords]) -> ()){
-       CoreStore.perform(asynchronous: {(transaction) -> Void in
-        if transaction.fetchOne(From<FavoriteWords>().where(\.word == word)) != nil{
-            transaction.deleteAll(From<FavoriteWords>().where(\.word == word))
-        }
-        
+        CoreStore.perform(asynchronous: {(transaction) -> Void in
+            if transaction.fetchOne(From<FavoriteWords>().where(\.word == word)) != nil{
+                transaction.deleteAll(From<FavoriteWords>().where(\.word == word))
+            }
+            
             let addfavorWords = transaction.create(Into<FavoriteWords>())
             addfavorWords.word = word
             addfavorWords.index = Int16(index)
@@ -32,7 +32,7 @@ class FavoriteWordModel {
     static func fetchFavoriteWordFromCore(completionHandler: @escaping([FavoriteWords]) -> ()){
         CoreStore.perform(asynchronous: {(transaction) -> Void in
             let allFavoriteWords = transaction.fetchAll(From<FavoriteWords>()
-                                      .orderBy(.descending(\.index)))
+                .orderBy(.descending(\.index)))
             completionHandler(allFavoriteWords!)
         },completion: {(result) -> Void in
         })
@@ -40,7 +40,6 @@ class FavoriteWordModel {
     
     static func deleteFavoriteWordFromCore(word: FavoriteWords){
         CoreStore.perform(asynchronous: {(transaction) -> Void in
-//            transaction.deleteAll(From<FavoriteWords>().where(\.word == word))
             transaction.delete(word)
         },completion: {(result) -> Void in
             debugPrint(result)
