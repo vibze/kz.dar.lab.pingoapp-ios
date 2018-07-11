@@ -40,4 +40,5 @@ struct Monitor {
         let monitor = CoreStore.monitorList(From<FavoriteWords>().orderBy(.ascending(\.word)))
         return monitor
     }()
+
 }

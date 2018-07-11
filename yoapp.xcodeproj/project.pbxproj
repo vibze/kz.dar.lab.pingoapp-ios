@@ -57,6 +57,7 @@
 		8E67642B20E3B23A006D5652 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E56776F20DB86BD00E65AFE /* ProfileHeaderView.swift */; };
 		8E67642D20E3B23A006D5652 /* SettingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1D402220DC7F4800FCB0C8 /* SettingViewCell.swift */; };
 		8E67642E20E3B23A006D5652 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */; };
+		8E9CFFC820F5B039000C5B9B /* AddFavoriteWordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CFFC720F5B039000C5B9B /* AddFavoriteWordController.swift */; };
 		8EC7F28920E09A2000C4BFE7 /* FavouriteWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */; };
 		8EC7F28D20E0AA0C00C4BFE7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */; };
 		8EFB4EE720E199CA00F0037B /* FavouriteAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFB4EE620E199CA00F0037B /* FavouriteAddView.swift */; };
@@ -124,6 +125,7 @@
 		8E59AD9220E072E2003CA5CC /* BlockUserLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockUserLabelView.swift; sourceTree = "<group>"; };
 		8E67642F20E3B2C0006D5652 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		8E67E70F20E9B9DE007EB870 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		8E9CFFC720F5B039000C5B9B /* AddFavoriteWordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavoriteWordController.swift; sourceTree = "<group>"; };
 		8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteWordViewController.swift; sourceTree = "<group>"; };
 		8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8EE3841320E4FE55002343B3 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				8E56778A20DBBEB400E65AFE /* SettingViewController.swift */,
 				8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */,
 				8E67E70F20E9B9DE007EB870 /* AlertViewController.swift */,
+				8E9CFFC720F5B039000C5B9B /* AddFavoriteWordController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -641,6 +644,7 @@
 				8E1DCD5420DCBD9B00D3A4F6 /* BlockUserCell.swift in Sources */,
 				8E56778D20DBE00600E65AFE /* AboutAppViewController.swift in Sources */,
 				843C3E0F20E38BAB004ACFB1 /* Store.swift in Sources */,
+				8E9CFFC820F5B039000C5B9B /* AddFavoriteWordController.swift in Sources */,
 				7CC4E13420DA37850094F6CD /* MessageCollectionViewCell.swift in Sources */,
 				8EC7F28920E09A2000C4BFE7 /* FavouriteWordViewController.swift in Sources */,
 				843C3E2420E647F0004ACFB1 /* FavoriteWordModel.swift in Sources */,

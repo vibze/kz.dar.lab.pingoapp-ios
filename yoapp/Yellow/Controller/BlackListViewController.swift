@@ -23,6 +23,7 @@ class BlackListViewController: UITableViewController, ListObserver {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
         addNavigationController(backgrounColor: .backgroundYellow, title: "Черный список")
     }
     
