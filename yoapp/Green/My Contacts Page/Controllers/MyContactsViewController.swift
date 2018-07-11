@@ -21,7 +21,7 @@ class MyContactsViewController: UIViewController {
         tableView.backgroundColor = .clear
         tableView.showsVerticalScrollIndicator = false
         tableView.allowsSelection = true
-        tableView.separatorColor = UIColor(hexString: "58AD7E")
+        tableView.separatorColor = #colorLiteral(red: 0.3450980392, green: 0.6784313725, blue: 0.4941176471, alpha: 1)
         tableView.rowHeight = 82
         
         return tableView
@@ -34,42 +34,27 @@ class MyContactsViewController: UIViewController {
         return refresh
     }()
     
-    @objc func handlePullToRefresh(_ sender: UIRefreshControl) {
-        tableView.reloadData()
-        sender.endRefreshing()
-    }
-    
-    var listOfContacts: [Contact] = []
-    
     let searchBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hexString: "6BBE90")
+        view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
         return view
     }()
     
-    let blurEffectView: UIVisualEffectView = {
-        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
-        let effect = UIVisualEffectView(effect: blurEffect)
-        effect.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        effect.isHidden = true
-        return effect
-    }()
-
-    
+    let blurEffectView = UIVisualEffectView.getBlurEffectView()
     let searchTextField = SearchTextField()
+    
+    var listOfContacts: [Contact] = []
     let monitor = Monitor.contactsMonitor
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
         
-        searchTextField.addTarget(self, action: #selector(handleTextFieldChange), for: .editingChanged)
-        (searchTextField.rightView as! UIButton).addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
         monitor.addObserver(self)
         listOfContacts = monitor.objectsInAllSections()
         
-        view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
-        
         setupViews()
+        setupTargets()
     }
     
     @objc func cancelButtonPressed(sender: UIButton) {
@@ -87,18 +72,30 @@ class MyContactsViewController: UIViewController {
         }
     }
     
+    @objc func handlePullToRefresh(_ sender: UIRefreshControl) {
+        tableView.reloadData()
+        sender.endRefreshing()
+    }
+    
+    func setupTargets() {
+        searchTextField.addTarget(self, action: #selector(handleTextFieldChange), for: .editingChanged)
+        (searchTextField.rightView as! UIButton).addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+    }
+    
     func setupViews() {
-        view.addSubview(tableView)
-        view.addSubview(searchBackgroundView)
-        searchBackgroundView.addSubview(blurEffectView)
-        searchBackgroundView.addSubview(searchTextField)
+        [tableView, searchBackgroundView].forEach {
+            view.addSubview($0)
+        }
+        [blurEffectView, searchTextField].forEach {
+            searchBackgroundView.addSubview($0)
+        }
         tableView.addSubview(refreshController)
         
         searchTextField.delegate = self
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MyContactsTableViewCell.self, forCellReuseIdentifier: Constants.myContactCell)
-        
         tableView.keyboardDismissMode = .onDrag
         tableView.contentInset = UIEdgeInsets(top: 75, left: 0, bottom: 60, right: 0)
         
@@ -124,9 +121,9 @@ extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listOfContacts.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.myContactCell, for: indexPath) as! MyContactsTableViewCell
-        
         cell.contact = listOfContacts[indexPath.row]
         return cell
     }

@@ -59,6 +59,7 @@ extension UIViewController {
     func openViewController(viewController: UIViewController){
         self.navigationController?.pushViewController(viewController, animated: true)
     }
+    
     func addNavigationController(backgrounColor: UIColor, title: String){
         navigationController?.navigationBar.barTintColor = backgrounColor
         navigationController?.navigationBar.isTranslucent = true
@@ -109,6 +110,16 @@ extension UIView {
             maskLayer.path = path.cgPath
             self.layer.mask = maskLayer
         }
+    }
+}
+
+extension UIVisualEffectView {
+    static func getBlurEffectView() -> UIVisualEffectView {
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+        let effect = UIVisualEffectView(effect: blurEffect)
+        effect.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        effect.isHidden = true
+        return effect
     }
 }
 

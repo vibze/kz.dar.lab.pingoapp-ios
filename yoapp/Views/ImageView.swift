@@ -50,9 +50,12 @@ class ImageView: UIImageView {
         activityIndicator.startAnimating()
         Avatar.getAvatar(url: url, success: { (avatarImage) in
             self.activityIndicator.stopAnimating()
-            UIView.animate(withDuration: 0.8, animations: {
-                self.image = avatarImage
-            })
+            UIView.transition(with: self,
+                              duration: 0.75,
+                              options: .transitionCrossDissolve,
+                              animations: { self.image = avatarImage },
+                              completion: nil)
+        
         }) { (error) in
             self.activityIndicator.stopAnimating()
             guard let error = error else { return }

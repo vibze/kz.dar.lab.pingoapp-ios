@@ -11,13 +11,16 @@ import CoreStore
 
 private struct Constants {
     static let messageCell = "messageCell"
+    
+    static let writeToContact = "Написать сообщение"
     static let blockContact = "Заблокировать контакт"
     static let unblockContact = "Разблокировать контакт"
+    static let basePhrasesHeader = "Выберите базовые фразы"
+    static let writeToFriendHeader = "Или напишите собеседнику"
 }
 
 class MessageViewController: UIViewController {
 
-    var contact: Contact?
     var collectionView: UICollectionView!
     
     let profileImageBackgroundView: UIView = {
@@ -33,41 +36,16 @@ class MessageViewController: UIViewController {
     let pushAlert = PushAlert()
     let phrasesMonitor = Monitor.basePhrasesMonitor
     
-    let userNameLabel: UILabel = {
-        let username = UILabel()
-        username.textAlignment = .center
-        username.font = UIFont(name: "Avenir Next", size: 20)
-        username.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        
-        return username
-    }()
+    let writeButton = ActionButton(title: Constants.writeToContact, type: .write)
+    let blockButton = ActionButton(title: Constants.blockContact, type: .block)
     
-    let phoneNumberLabel: UILabel = {
-        let phoneNum = UILabel()
-        phoneNum.textAlignment = .center
-        phoneNum.font = UIFont(name: "Avenir Next", size: 16)
-        phoneNum.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        return phoneNum
-    }()
-
-    let writeButton = ActionButton(title: "Написать сообщение", type: .write)
-    let blockButton = ActionButton(title: "Заблокировать контакт", type: .block)
     
-    let basePhrasesTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Выберите базовые фразы"
-        label.font = UIFont(name: "Avenir Next", size: 16)
-        label.textColor = UIColor(hexString: "308757")
-        return label
-    }()
-
-    let messageTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Или напишите собеседнику"
-        label.font = UIFont(name: "Avenir Next", size: 16)
-        label.textColor = #colorLiteral(red: 0.1882352941, green: 0.5294117647, blue: 0.3411764706, alpha: 1)
-        return label
-    }()
+    let userNameLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 20, fontType: .myRegular)
+    let phoneNumberLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 16, fontType: .myRegular)
+    let basePhrasesTitleLabel = UILabel.basic(textColor: #colorLiteral(red: 0.1882352941, green: 0.5294117647, blue: 0.3411764706, alpha: 1), fontSize: 16, fontType: .myRegular)
+    let messageTitleLabel = UILabel.basic(textColor: #colorLiteral(red: 0.1882352941, green: 0.5294117647, blue: 0.3411764706, alpha: 1), fontSize: 16, fontType: .myRegular)
+    
+    var contact: Contact?
     
     @objc func blockBtnPressed() {
         guard let isBlacklisted = contact?.isBlacklisted else { return }
@@ -98,7 +76,26 @@ class MessageViewController: UIViewController {
         
         setupViews()
         setupButtons()
+        setupLabels()
         fillContactInfo()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    func setupButtons() {
+        let blockButtonTitle = contact!.isBlacklisted ? Constants.unblockContact : Constants.blockContact
+        blockButton.setTitle(blockButtonTitle, for: .normal)
+        
+        writeButton.addTarget(self, action: #selector(writeBtnPressed), for: .touchUpInside)
+        blockButton.addTarget(self, action: #selector(blockBtnPressed), for: .touchUpInside)
+    }
+    
+    func setupLabels() {
+        basePhrasesTitleLabel.text = Constants.basePhrasesHeader
+        messageTitleLabel.text = Constants.writeToFriendHeader
     }
     
     func fillContactInfo() {
@@ -111,23 +108,6 @@ class MessageViewController: UIViewController {
         }
     }
     
-    func setupButtons() {
-        let blockButtonTitle = contact!.isBlacklisted ? Constants.unblockContact : Constants.blockContact
-        blockButton.setTitle(blockButtonTitle, for: .normal)
-        
-        writeButton.addTarget(self, action: #selector(writeBtnPressed), for: .touchUpInside)
-        blockButton.addTarget(self, action: #selector(blockBtnPressed), for: .touchUpInside)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.isNavigationBarHidden = false
-    }
-    
-    @objc func backBtnPressed() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     func setupViews() {
         
         let layout = UICollectionViewFlowLayout()
@@ -138,7 +118,6 @@ class MessageViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(MessageCollectionViewCell.self, forCellWithReuseIdentifier: Constants.messageCell)
         
-        collectionView.alwaysBounceVertical = false
         collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.allowsSelection = true
@@ -212,11 +191,7 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.messageCell, for: indexPath) as! MessageCollectionViewCell
-        
-        if let phrase = phrasesMonitor[indexPath.row].word {
-            cell.textLabel.text = phrase
-        }
-        
+        cell.phrase = phrasesMonitor[indexPath.row].word
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -238,10 +213,11 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
 
 extension MessageViewController: ListObserver {
     func listMonitorDidChange(_ monitor: ListMonitor<FavoriteWords>) {
-        self.collectionView.reloadData()
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     func listMonitorDidRefetch(_ monitor: ListMonitor<FavoriteWords>) {
-        
     }
 }
 

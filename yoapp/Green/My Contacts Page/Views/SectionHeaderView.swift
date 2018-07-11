@@ -9,26 +9,25 @@
 import Foundation
 import UIKit
 
+private struct Constants {
+    static let allContactsHeader = "Все контакты"
+}
+
 class SectionHeaderView: UIView {
     
     let headerView: UIView = {
         let headerView = UIView()
-        headerView.backgroundColor = UIColor.init(hexString: "81E2AA")
+        headerView.backgroundColor = #colorLiteral(red: 0.5058823529, green: 0.8862745098, blue: 0.6666666667, alpha: 1)
         return headerView
     }()
-    
-    let headerLabel: UILabel = {
-        let headerLabel = UILabel()
-        headerLabel.textColor = UIColor.init(hexString: "308757")
-        headerLabel.font = UIFont.systemFont(ofSize: 16)
-        headerLabel.translatesAutoresizingMaskIntoConstraints = false
-        headerLabel.text = "Все контакты"
-        return headerLabel
-    }()
+
+    let headerLabel = UILabel.basic(textColor: #colorLiteral(red: 0.1882352941, green: 0.5294117647, blue: 0.3411764706, alpha: 1), fontSize: 16, fontType: .myRegular)
     
     required init() {
         super.init(frame: .zero)
-        backgroundColor = UIColor(hexString: "6BBE90")
+        backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
+        headerLabel.text = Constants.allContactsHeader
+        headerLabel.textAlignment = .left
         setupViews()
     }
     

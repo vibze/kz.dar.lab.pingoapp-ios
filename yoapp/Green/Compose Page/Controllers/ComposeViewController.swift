@@ -10,35 +10,21 @@ import UIKit
 import UserNotifications
 
 class ComposeViewController: UIViewController {
-
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    let profileImageView = ImageView(radius: 90 / 2)
-    let composeButton = ActionButton(title: "Отправить сообщение", type: .write)
-    let alertView = PushAlert()
-    var contact: Contact?
-
-    let nameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        label.font = UIFont(name: "Avenir Next", size: 20)
-        return label
-    }()
     
-    let phoneNumberLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        label.font = UIFont(name: "Avenir Next", size: 16)
-        return label
-    }()
+    let phoneNumberLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 16, fontType: .myRegular)
+    let nameLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 20, fontType: .myRegular)
+    let composeButton = ActionButton(title: "Отправить сообщение", type: .write)
+    let profileImageView = ImageView(radius: 90 / 2)
+    let alertView = PushAlert()
+   
+    var contact: Contact?
     
     let messageTextView: UITextView = {
         let textView = UITextView()
         textView.layer.masksToBounds = true
         textView.layer.cornerRadius = 10
         textView.isUserInteractionEnabled = true
-        textView.layer.borderColor = UIColor(hexString: "5AA079").cgColor
+        textView.layer.borderColor = #colorLiteral(red: 0.3529411765, green: 0.6274509804, blue: 0.4745098039, alpha: 1).cgColor
         textView.layer.borderWidth = 5
         textView.font = UIFont(name: "Avenir Next", size: 18)
         textView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -55,10 +41,11 @@ class ComposeViewController: UIViewController {
         
         let buddyId = contact?.profileId
         PingsApi().postPing(buddyId: buddyId!, pingText: txt!, success: { _ in
-            self.alertView.isHidden = false
-            
+                self.alertView.isHidden = false
+                self.navigationController?.isNavigationBarHidden = true
             }, failure: { _ in
-            self.showAlert(errorType: "Ошибка! Сообщение не доставлено.", image: #imageLiteral(resourceName: "errorIcon")) })
+                self.showAlert(errorType: "Ошибка! Сообщение не доставлено.", image: #imageLiteral(resourceName: "errorIcon"))
+        })
         print("tap&send")
     }
 
@@ -66,20 +53,19 @@ class ComposeViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         fillContactInfo()
+        composeButton.addTarget(self, action: #selector(composeButtonPressed), for: .touchUpInside)
         addNavigationController(backgrounColor: #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), title: "")
         messageTextView.delegate = self
-        composeButton.addTarget(self, action: #selector(composeButtonPressed), for: .touchUpInside)
         alertView.delegate = self
         view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
     }
     
     func fillContactInfo() {
         if let contact = contact {
-            if let avatarUrl = contact.avatarUrl {
-                profileImageView.setContactImage(url: avatarUrl)
-            }
             nameLabel.text = contact.name
             phoneNumberLabel.text = contact.phoneNumber
+            guard let avatarUrl = contact.avatarUrl else { return }
+            profileImageView.setContactImage(url: avatarUrl)
         }
     }
     
