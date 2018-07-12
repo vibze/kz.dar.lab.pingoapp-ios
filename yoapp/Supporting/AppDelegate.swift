@@ -58,7 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        completionHandler(UIBackgroundFetchResult.noData)
+        completionHandler(UIBackgroundFetchResult.newData)
+        let aps = userInfo["aps"] as! [String: AnyObject]
+        MainTabViewController().textToVoice(aps["alert"] as? String)
+        print(aps)
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
