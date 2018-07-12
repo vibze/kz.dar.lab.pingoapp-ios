@@ -32,7 +32,7 @@ class MyContactsTableViewCell: UITableViewCell {
     
     func contactDidUpdate(_ contact: Contact) {
         contactNameLabel.text = contact.name ?? ""
-        phoneNumberLabel.text = contact.phoneNumber ?? ""
+        phoneNumberLabel.text = "+" + contact.phoneNumber!
     }
     
     required init?(coder aDecoder: NSCoder) {

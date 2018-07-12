@@ -55,7 +55,7 @@ class ComposeViewController: UIViewController {
     func fillContactInfo() {
         if let contact = contact {
             nameLabel.text = contact.name
-            phoneNumberLabel.text = contact.phoneNumber
+            phoneNumberLabel.text = "+" + contact.phoneNumber!
             guard let avatarUrl = contact.avatarUrl else { return }
             profileImageView.setContactImage(url: avatarUrl)
         }

@@ -39,7 +39,6 @@ class MessageViewController: UIViewController {
     let writeButton = ActionButton(title: Constants.writeToContact, type: .write)
     let blockButton = ActionButton(title: Constants.blockContact, type: .block)
     
-    
     let userNameLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 20, fontType: .myRegular)
     let phoneNumberLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 16, fontType: .myRegular)
     let basePhrasesTitleLabel = UILabel.basic(textColor: #colorLiteral(red: 0.1882352941, green: 0.5294117647, blue: 0.3411764706, alpha: 1), fontSize: 16, fontType: .myRegular)
@@ -104,7 +103,7 @@ class MessageViewController: UIViewController {
                 profileImageView.setContactImage(url: avatarUrl)
             }
             userNameLabel.text = contact.name
-            phoneNumberLabel.text = contact.phoneNumber
+            phoneNumberLabel.text = "+" + contact.phoneNumber!
         }
     }
     

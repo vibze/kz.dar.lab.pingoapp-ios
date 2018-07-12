@@ -57,12 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         print("APNs registration failed: \(error)")
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        completionHandler(UIBackgroundFetchResult.newData)
-        let aps = userInfo["aps"] as! [String: AnyObject]
-        MainTabViewController().textToVoice(aps["alert"] as? String)
-        print(aps)
-    }
+  
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent: UNNotification,
@@ -84,13 +79,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         }
     }
     
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        print(userInfo)
-    }
-    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-      
+       
+        let aps = userInfo["aps"] as! [String: AnyObject]
+        MainTabViewController().textToVoice(aps["alert"] as? String)
+       
         let window = UIApplication.shared.keyWindow
         switch application.applicationState {
         case .active:
