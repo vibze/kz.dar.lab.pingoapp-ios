@@ -36,13 +36,15 @@ class PushAlert: UIView {
         return imageView
     }()
     
-    let alertLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Пуш в пути"
-        label.font = UIFont(name: "Avenir Next", size: 18)
-        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        return label
-    }()
+//    let alertLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "Пуш в пути"
+//        label.font = UIFont(name: "Avenir Next", size: 18)
+//        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+//        return label
+//    }()
+    let alertLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 18, fontType: .mySemiBold)
+    
     
     required init() {
         super.init(frame: .zero)
@@ -59,32 +61,40 @@ class PushAlert: UIView {
     }
     
     func setupViews() {
+        alertLabel.text = "Пуш в Пути"
         addSubview(alertView)
         [imageView, alertLabel, submitButton].forEach {
             alertView.addSubview($0)
         }
         
         imageView.snp.makeConstraints {
-            $0.top.equalTo(alertView.snp.top).offset(12)
-            $0.centerX.equalTo(self.snp.centerX)
-            $0.width.equalTo(142)
-            $0.height.equalTo(93)
+            $0.top.equalToSuperview().offset(30)
+            $0.left.equalToSuperview().offset(88)
+            $0.right.equalToSuperview().offset(-88)
+            $0.bottom.equalTo(-115)
         }
         alertLabel.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom)
-            $0.centerX.equalTo(self.snp.centerX)
+            $0.top.equalTo(imageView.snp.bottom).offset(10)
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalToSuperview().offset(-20)
+            $0.bottom.equalTo(submitButton.snp.top)
         }
         submitButton.snp.makeConstraints {
-            $0.left.equalTo(alertView.snp.left).offset(60)
-            $0.top.equalTo(alertLabel.snp.bottom).offset(22)
-            $0.width.equalTo(alertView.snp.width).inset(60)
+            $0.bottom.equalToSuperview().offset(-12)
+            $0.left.equalToSuperview().offset(64)
+            $0.right.equalToSuperview().offset(-64)
             $0.height.equalTo(50)
         }
+        
         alertView.snp.makeConstraints {
-            $0.center.equalTo(self.snp.center)
-            $0.left.equalTo(self.snp.left).offset(32)
-            $0.width.equalTo(self.snp.width).inset(32)
-            $0.height.equalTo(226)
+                $0.centerY.equalToSuperview()
+                if screenHeight == 568{
+                    $0.height.equalTo(195)
+                }else{
+                    $0.height.equalTo(225)
+                }
+                $0.left.equalToSuperview().offset(24)
+                $0.right.equalToSuperview().offset(-24)
         }
     }
     
