@@ -32,7 +32,7 @@ class SettingsFooterView: UIView {
     }
     
     func setUpView(){
-        notificationLabel.text = "Отлючить уведомления"
+        notificationLabel.text = "Уведомления"
         notificationLabel.snp.makeConstraints{
             $0.top.equalToSuperview().offset(30)
             $0.left.equalToSuperview().offset(15)
@@ -47,11 +47,11 @@ class SettingsFooterView: UIView {
     
     @objc func onOffNotification(){
         if notificationSwitcher.isOn{
-            UIApplication.shared.unregisterForRemoteNotifications()
-            UserDefaults.standard.set(true, forKey: "notification")
-        }else{
             UIApplication.shared.registerForRemoteNotifications()
             UserDefaults.standard.set(false, forKey: "notification")
+        }else{
+            UIApplication.shared.unregisterForRemoteNotifications()
+            UserDefaults.standard.set(true, forKey: "notification")
         }
     }
     
