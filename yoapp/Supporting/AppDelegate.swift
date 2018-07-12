@@ -17,7 +17,6 @@ import AccountKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate {
     
-    
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -30,11 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         center.requestAuthorization(options: [.alert, .sound,  .sound]) { (granted, error) in
             UNUserNotificationCenter.current().delegate = self
         }
+        
         application.registerForRemoteNotifications()
+        
         Store.initCoreStore()
         
         checkStorage()
-        
         return true
     }
     
@@ -52,17 +52,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         ProfileApi().uploadDeviceToken(deviceToken: deviceTokenString, success: { _ in }, failure: { _ in })
     }
     
-    
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("APNs registration failed: \(error)")
     }
     
-  
-    
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent: UNNotification,
                                 withCompletionHandler: @escaping (UNNotificationPresentationOptions)->()) {
-        withCompletionHandler([.alert, .sound, .badge])
+
+        if UserDefaults.standard.bool(forKey: "notification") {
+            withCompletionHandler([.alert, .sound, .badge])
+        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -81,13 +81,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
        
-        let aps = userInfo["aps"] as! [String: AnyObject]
-        MainTabViewController().textToVoice(aps["alert"] as? String)
-       
+        if UserDefaults.standard.bool(forKey: "notification"){
+            let aps = userInfo["aps"] as! [String: AnyObject]
+            MainTabViewController().textToVoice(aps["alert"] as? String)
+        }
+        
         let window = UIApplication.shared.keyWindow
         switch application.applicationState {
         case .active:
-            print("Send IN APP")
             completionHandler(.noData)
         case .background:
             let vc = MainTabViewController()
@@ -98,8 +99,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
             let vc = MainTabViewController()
             let rootVC = UINavigationController(rootViewController: vc)
             window?.rootViewController = rootVC
+            completionHandler(.newData)
         }
-        
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -204,12 +205,7 @@ class Application {
         center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
             if granted {
                 DispatchQueue.main.async(execute: {
-                    let getNotification = UserDefaults.standard.bool(forKey: "notification")
-                    if getNotification {
                         UIApplication.shared.registerForRemoteNotifications()
-                    }else{
-                        UIApplication.shared.unregisterForRemoteNotifications()
-                    }
                 })
             }
         }
