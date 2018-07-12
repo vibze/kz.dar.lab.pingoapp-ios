@@ -16,7 +16,7 @@ private struct Constants {
     static let blockContact = "Заблокировать контакт"
     static let unblockContact = "Разблокировать контакт"
     static let basePhrasesHeader = "Выберите базовые фразы"
-    static let writeToFriendHeader = "Или напишите собеседнику"
+    static let writeToFriendHeader = "или напишите собеседнику"
 }
 
 class MessageViewController: UIViewController {
