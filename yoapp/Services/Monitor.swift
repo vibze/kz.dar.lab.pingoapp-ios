@@ -16,12 +16,17 @@ struct Monitor {
     }()
     
     static var registeredContactsMonitor: ListMonitor<Contact> = {
-        let monitor = CoreStore.monitorList(From<Contact>().orderBy(.ascending(\.name)).where(\.profileId != 0))
+        let monitor = CoreStore.monitorList(From<Contact>()
+            .orderBy(.ascending(\.name))
+            .where(\.profileId != 0))
         return monitor
     }()
     
     static var recentlyActiveMonitor: ListMonitor<Contact> = {
-        let monitor = CoreStore.monitorList(From<Contact>().orderBy(.ascending(\.pingedAt)).where(\.profileId != 0))
+        let monitor = CoreStore.monitorList(From<Contact>()
+            .orderBy(.descending(\.pingedAt))
+            .where(\.profileId != 0)
+        )
         return monitor
     }()
     

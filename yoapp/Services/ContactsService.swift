@@ -25,7 +25,7 @@ struct ContactsService {
                     do {
                         try store.enumerateContacts(with: request, usingBlock: { (contact, sd) in
                             if let phoneNumber = contact.phoneNumbers.first?.value.stringValue {
-                                let normalizedPhoneNumber = self.changeNumberType(phoneNumber)
+                                let normalizedPhoneNumber = ContactsOperation.changeNumberType(phoneNumber)
                                 let myContact = transaction.fetchOne(From<Contact>().where(\.phoneNumber == normalizedPhoneNumber))
                                 if myContact == nil {
                                     let newContact = transaction.create(Into<Contact>())
@@ -54,20 +54,6 @@ struct ContactsService {
                 }
             )
         }
-    }
-    
-    private func changeNumberType(_ number: String) -> String {
-        var redeclaredNumber = ""
-        for char in number {
-            if char >= "0" && char <= "9" {
-                redeclaredNumber += String(char)
-            }
-        }
-        if redeclaredNumber.first == "8" {
-            redeclaredNumber.removeFirst()
-            return "7" + redeclaredNumber
-        }
-        return redeclaredNumber
     }
     
     private func requestAccessToContacts(_ completion: @escaping (CNContactStore) -> Void) {
