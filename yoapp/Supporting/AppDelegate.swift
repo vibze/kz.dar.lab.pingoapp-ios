@@ -29,7 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         center.requestAuthorization(options: [.alert, .sound,  .sound]) { (granted, error) in
             UNUserNotificationCenter.current().delegate = self
         }
+        
         application.registerForRemoteNotifications()
+        
         Store.initCoreStore()
         
         checkStorage()
@@ -50,7 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         ProfileApi().uploadDeviceToken(deviceToken: deviceTokenString, success: { _ in }, failure: { _ in })
     }
     
-    
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("APNs registration failed: \(error)")
     }
@@ -58,7 +59,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent: UNNotification,
                                 withCompletionHandler: @escaping (UNNotificationPresentationOptions)->()) {
-        withCompletionHandler([.alert, .sound, .badge])
+
+        if UserDefaults.standard.bool(forKey: "notification") {
+            withCompletionHandler([.alert, .sound, .badge])
+        }
     }
     
      func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -76,16 +80,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        let getNotification = UserDefaults.standard.bool(forKey: "notification")
-        if getNotification {
-            UIApplication.shared.registerForRemoteNotifications()
-        }else{
-            UIApplication.shared.unregisterForRemoteNotifications()
+       
+        if UserDefaults.standard.bool(forKey: "notification"){
+            let aps = userInfo["aps"] as! [String: AnyObject]
+            MainTabViewController().textToVoice(aps["alert"] as? String)
         }
         
-        let aps = userInfo["aps"] as! [String: AnyObject]
-        MainTabViewController().textToVoice(aps["alert"] as? String)
-       
         let window = UIApplication.shared.keyWindow
         switch application.applicationState {
         case .active:

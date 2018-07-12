@@ -12,22 +12,24 @@ class SettingsFooterView: UIView {
     
     let notificationLabel = UILabel.basic(textColor: .myPurple, fontSize: 20, fontType: .mySemiBold)
     
-    var notificationSwitcher: UISwitch = {
+    lazy var notificationSwitcher: UISwitch = {
         let switcher = UISwitch()
         switcher.backgroundColor = .myPurple
         switcher.layer.cornerRadius = 20
-        let status = UserDefaults.standard.bool(forKey: "notification")
-        switcher.isOn = status
         switcher.thumbTintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         switcher.layer.borderColor = UIColor.white.cgColor
         switcher.addTarget(self, action: #selector(onOffNotification), for: .valueChanged)
+        let status = UserDefaults.standard.bool(forKey: "notification")
+        switcher.isOn = status
         return switcher
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         self.addSubview(notificationLabel)
         self.addSubview(notificationSwitcher)
+        
         setUpView()
     }
     
@@ -46,12 +48,13 @@ class SettingsFooterView: UIView {
     }
     
     @objc func onOffNotification(){
+        print(UserDefaults.standard.bool(forKey: "notification"), "Settings View")
         if notificationSwitcher.isOn{
             UIApplication.shared.registerForRemoteNotifications()
-            UserDefaults.standard.set(false, forKey: "notification")
+            UserDefaults.standard.set(true, forKey: "notification")
         }else{
             UIApplication.shared.unregisterForRemoteNotifications()
-            UserDefaults.standard.set(true, forKey: "notification")
+            UserDefaults.standard.set(false, forKey: "notification")
         }
     }
     
