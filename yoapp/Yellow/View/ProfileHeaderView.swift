@@ -36,7 +36,7 @@ class ProfileHeaderView: UIView {
         label.clipsToBounds = true
         label.layer.cornerRadius = 20
         label.textAlignment = .center
-        label.font = UIFont(name: "ProximaNovaSoft-Bold", size: 20)
+        label.font = UIFont(name: FontType.myBold.rawValue, size: 20)
         return label
     }()
     

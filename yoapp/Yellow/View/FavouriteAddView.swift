@@ -20,7 +20,7 @@ class FavouriteAddView: UIView, UITextViewDelegate {
         textField.clipsToBounds = true
         textField.textAlignment = .left
         textField.layer.borderColor = UIColor.lightGray.cgColor
-        textField.font = UIFont(name: "ProximaNovaSoft-Bold", size: 18)
+        textField.font = UIFont(name: FontType.myBold.rawValue, size: 18)
         return textField
     }()
     
@@ -28,7 +28,7 @@ class FavouriteAddView: UIView, UITextViewDelegate {
         let button = UIButton()
         button.setTitle("Отменить", for: .normal)
         button.backgroundColor = .myPurple
-        button.titleLabel?.font = UIFont(name: "ProximaNovaSoft-Medium", size: 18)
+        button.titleLabel?.font = UIFont(name: FontType.mySemiBold.rawValue, size: 18)
         return button
     }()
     
@@ -36,7 +36,7 @@ class FavouriteAddView: UIView, UITextViewDelegate {
         let button = UIButton()
         button.setTitle("Добавить", for: .normal)
         button.backgroundColor = .myPurple
-        button.titleLabel?.font = UIFont(name: "ProximaNovaSoft-Medium", size: 18)
+        button.titleLabel?.font = UIFont(name: FontType.mySemiBold.rawValue, size: 18)
         return button
     }()
     
@@ -49,7 +49,7 @@ class FavouriteAddView: UIView, UITextViewDelegate {
         self.addSubview(stackView)
         
         self.layer.cornerRadius = 10
-        self.backgroundColor = UIColor(hexString: "FEC95F")
+        self.backgroundColor = #colorLiteral(red: 0.9960784314, green: 0.7882352941, blue: 0.3725490196, alpha: 1)
         self.layer.borderColor = UIColor.myYellow.cgColor
         self.layer.borderWidth = 5
         setUpViews()

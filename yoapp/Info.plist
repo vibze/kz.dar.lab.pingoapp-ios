@@ -45,13 +45,11 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Select</string>
 	<key>UIAppFonts</key>
-	<array>
-		<string>ProximaNovaSoft-Regular.ttf</string>
-		<string>ProximaNovaSoft-Bold.ttf</string>
-		<string>ProximaNovaSoft-Medium.ttf</string>
-	</array>
+	<array/>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>audio</string>
+		<string>external-accessory</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

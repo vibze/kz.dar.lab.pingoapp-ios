@@ -25,6 +25,8 @@ class ComposeViewController: UIViewController {
     }
     
     @objc func composeButtonPressed() {
+        view.endEditing(true)
+
         guard let buddy = contact
             ,let sendText = messageTextView.text
             ,let phoneNumber = buddy.phoneNumber else { return }
