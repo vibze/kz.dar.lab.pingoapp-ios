@@ -30,7 +30,7 @@ class ComposeViewController: UIViewController {
         guard let buddy = contact
             ,let sendText = messageTextView.text
             ,let phoneNumber = buddy.phoneNumber else { return }
-
+        
         PingsApi().postPing(buddyId: buddy.profileId, pingText: sendText, success: { _ in
                 self.alertView.isHidden = false
                 self.navigationController?.isNavigationBarHidden = true

@@ -34,6 +34,13 @@ struct ContactsOperation {
                 registeredSlicedContacts.append(contact)
             }
         }
+        registeredSlicedContacts = registeredSlicedContacts.sorted(by: {
+            if let firstName = $0.name, let secondName = $1.name {
+                return firstName < secondName
+            }
+            return false
+        })
+
         registeredContacts = registeredSlicedContacts
         recentlyActiveContacts = recentlyslicedContacts
     }

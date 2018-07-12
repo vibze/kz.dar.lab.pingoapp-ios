@@ -30,10 +30,20 @@ struct SearchContact {
         return allContacts
     }
     
+    private static func checkCharacter(_ char: Character) -> Bool {
+        if char >= "0" && char <= "9" ||
+            char >= "a" && char <= "z" ||
+            char >= "а" && char <= "я" {
+            return true
+        }
+        return false
+    }
+    
     private static func removeSymbols(text: String) -> String {
         var searchText = ""
+        
         for char in text {
-            if char >= "0" && char <= "9" || char >= "a" && char <= "z" || char == " " {
+            if checkCharacter(char) || char == " " {
                 searchText += String(char)
             }
         }
