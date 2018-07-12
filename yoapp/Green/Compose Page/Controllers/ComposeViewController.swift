@@ -25,12 +25,14 @@ class ComposeViewController: UIViewController {
     }
     
     @objc func composeButtonPressed() {
-        let txt = messageTextView.text
-        
-        let buddyId = contact?.profileId
-        PingsApi().postPing(buddyId: buddyId!, pingText: txt!, success: { _ in
+        guard let buddy = contact
+            ,let sendText = messageTextView.text
+            ,let phoneNumber = buddy.phoneNumber else { return }
+
+        PingsApi().postPing(buddyId: buddy.profileId, pingText: sendText, success: { _ in
                 self.alertView.isHidden = false
                 self.navigationController?.isNavigationBarHidden = true
+                Store.updateContactPingTime(phoneNumber: phoneNumber)
             }, failure: { _ in
                 self.showAlert(errorType: "Ошибка! Сообщение не доставлено.", image: #imageLiteral(resourceName: "errorIcon"))
         })

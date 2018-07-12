@@ -61,6 +61,7 @@ class ContactsViewController: UIViewController {
     func monitorsSetup() {
         registeredContacts = registeredContactsMonitor.objectsInAllSections()
         recentlyActiveContacts = recentlyActiveMonitor.objectsInAllSections()
+        ContactsOperation.sliceContactsList(&recentlyActiveContacts, &registeredContacts)
     }
     
     func textFieldSetup() {
@@ -90,11 +91,12 @@ class ContactsViewController: UIViewController {
     }
     
     @objc func handleTextFieldChange(textField: UITextField) {
-        if let charCount = textField.text?.count {
-            textFieldDidBeginTyping(charCount: charCount)
-        }
+        guard let charCount = textField.text?.count else { return }
+        textFieldDidBeginTyping(charCount: charCount)
         
-        self.recentlyActiveContacts = SearchContact.searchFor(monitor: recentlyActiveMonitor, text: textField.text)
+        if charCount > 0 {
+            self.recentlyActiveContacts = SearchContact.searchFor(monitor: recentlyActiveMonitor, text: textField.text)
+        }
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
@@ -108,8 +110,7 @@ class ContactsViewController: UIViewController {
         }
         else {
             searchTextField.rightView?.isHidden = true
-            self.registeredContacts = registeredContactsMonitor.objectsInAllSections()
-            self.recentlyActiveContacts = recentlyActiveMonitor.objectsInAllSections()
+            monitorsSetup()
         }
     }
     

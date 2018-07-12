@@ -25,6 +25,7 @@
 		7C910C5120D6AAFC0072A673 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C910C5020D6AAFC0072A673 /* Assets.xcassets */; };
 		7C910C5C20D6B2E50072A673 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C910C5B20D6B2E50072A673 /* ContactsViewController.swift */; };
 		7CC4E13420DA37850094F6CD /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC4E13320DA37850094F6CD /* MessageCollectionViewCell.swift */; };
+		7CCBAB6320F7148300BC7C60 /* ContactsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCBAB6220F7148300BC7C60 /* ContactsOperation.swift */; };
 		7CF5950420E48CCF00C641A7 /* Urls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF5950320E48CCF00C641A7 /* Urls.swift */; };
 		843C3DEC20E37DB9004ACFB1 /* PushAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3DEB20E37DB9004ACFB1 /* PushAlert.swift */; };
 		843C3DF420E37DF0004ACFB1 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C3DF320E37DF0004ACFB1 /* MainTabViewController.swift */; };
@@ -91,6 +92,7 @@
 		7C910C5520D6AAFC0072A673 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C910C5B20D6B2E50072A673 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		7CC4E13320DA37850094F6CD /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
+		7CCBAB6220F7148300BC7C60 /* ContactsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsOperation.swift; sourceTree = "<group>"; };
 		7CF5950320E48CCF00C641A7 /* Urls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Urls.swift; sourceTree = "<group>"; };
 		843C3DEB20E37DB9004ACFB1 /* PushAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushAlert.swift; path = "yoapp/Green/Compose Page/Views/PushAlert.swift"; sourceTree = SOURCE_ROOT; };
 		843C3DF320E37DF0004ACFB1 /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTabViewController.swift; path = "yoapp/New Group1/MainTabViewController.swift"; sourceTree = SOURCE_ROOT; };
@@ -362,6 +364,7 @@
 				843C3E0C20E38BA0004ACFB1 /* ContactsService.swift */,
 				845D6FF820ECE62C00562447 /* SearchContact.swift */,
 				7C1EE40320F5B7AB00761EDE /* Avatar.swift */,
+				7CCBAB6220F7148300BC7C60 /* ContactsOperation.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				8E1DCD5220DCBBA500D3A4F6 /* BlackListViewController.swift in Sources */,
 				843C3E1A20E38D9B004ACFB1 /* ImageSwipeCell.swift in Sources */,
 				843C3DF720E37E3B004ACFB1 /* app.xcdatamodeld in Sources */,
+				7CCBAB6320F7148300BC7C60 /* ContactsOperation.swift in Sources */,
 				8E3B73B520E0B91500DD3366 /* AboutAppCell.swift in Sources */,
 				845D6FFD20ECE65700562447 /* Monitor.swift in Sources */,
 				8E59AD9320E072E2003CA5CC /* BlockUserLabelView.swift in Sources */,

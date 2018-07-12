@@ -146,7 +146,7 @@ class MessageViewController: UIViewController {
         collectionView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(32)
             $0.width.equalToSuperview().inset(32)
-            $0.height.equalTo(120)
+            $0.height.equalTo(80)
             $0.top.equalTo(basePhrasesTitleLabel.snp.bottom).offset(14)
         }
         
@@ -198,16 +198,22 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
         pushAlert.isHidden = false
         navigationController?.isNavigationBarHidden = true
         
-        let buddyId = contact?.profileId
-        let txt = phrasesMonitor[indexPath.row].word
-        PingsApi().postPing(buddyId: buddyId!, pingText: txt!, success: { _ in }, failure: { _ in })
+        guard let buddy = contact
+        ,let sendText = phrasesMonitor[indexPath.row].word
+        ,let phoneNumber = buddy.phoneNumber else { return }
+        
+        PingsApi().postPing(buddyId: buddy.profileId, pingText: sendText, success: { _ in
+            Store.updateContactPingTime(phoneNumber: phoneNumber)
+        }, failure: { _ in
+            print("error")
+        })
         print("tap&send")
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let phrase = phrasesMonitor[indexPath.row].word else { return CGSize(width: 0, height: 0) }
         let width = phrase.size().width
-        return CGSize(width: width + 60, height: 100)
+        return CGSize(width: width + 60, height: 50)
     }
 }
 

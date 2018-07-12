@@ -43,11 +43,10 @@ class MainTabViewController: UIViewController {
         super.viewDidLoad()
         tabBarBtnPressed(sender: homeButton)
         blurEffectView.isHidden = false
-        
         setupViews()
         setupButtons()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
     }
@@ -102,5 +101,4 @@ class MainTabViewController: UIViewController {
             $0.width.equalToSuperview().inset(24)
         }
     }
-    
 }

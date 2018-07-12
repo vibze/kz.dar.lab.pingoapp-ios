@@ -40,4 +40,19 @@ class Store {
             }
         )
     }
+    
+    static func updateContactPingTime(phoneNumber: String) {
+        CoreStore.perform(
+            asynchronous: {
+                let contact = $0.fetchOne(From<Contact>().where(\.phoneNumber == phoneNumber))
+                contact?.pingedAt = Date()
+            },
+            completion: { (result) -> Void in
+                switch result {
+                case .success: print("success!")
+                case .failure(let error): print(error)
+                }
+            }
+        )
+    }
 }
