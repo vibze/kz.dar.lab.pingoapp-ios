@@ -48,7 +48,6 @@ class SettingsFooterView: UIView {
     }
     
     @objc func onOffNotification(){
-        print(UserDefaults.standard.bool(forKey: "notification"), "Settings View")
         if notificationSwitcher.isOn{
             UIApplication.shared.registerForRemoteNotifications()
             UserDefaults.standard.set(true, forKey: "notification")
