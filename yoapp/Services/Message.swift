@@ -10,6 +10,7 @@ import Foundation
 import CoreStore
 
 class Message: BaseAPI {
+    //TODO: Переписать Аяну
     func performBlock(profileId: Int32, isBlacklisted: Bool, _ completion: @escaping (String?) -> Void) {
         if isBlacklisted {
             unblacklistContact(profileId: profileId) { (message) in
@@ -30,6 +31,7 @@ class Message: BaseAPI {
         }
     }
     
+    //TODO: поменять логику, с completion-ом, дописать failure. Аян
     private func blacklistContact(profileId: Int32, _ completion: @escaping (String?) -> Void) {
         let url = "buddies/\(profileId)/blacklist"
         put(url: url, params: [:], success: { (json) in
@@ -45,6 +47,7 @@ class Message: BaseAPI {
         }
     }
     
+    //TODO: заюзать, написать сервис для контактов. Камила.
     private func unblacklistContact(profileId: Int32, _ completion: @escaping (String?) -> Void) {
         let url = "buddies/\(profileId)/unblacklist"
         delete(url: url, params: [:], success: { (json) in

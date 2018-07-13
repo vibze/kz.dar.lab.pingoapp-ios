@@ -43,10 +43,10 @@ class ProfileFooterView : UIView {
         friendLabel.text = "Пригласить друзей в Ping App"
         
         friendLabel.snp.makeConstraints{(make) in
-            if screenBounds.height == 568{
+            if screenBounds.height == 568 {
                 make.top.equalToSuperview().offset(0)
                 make.centerX.equalToSuperview()
-            }else{
+            } else {
                 make.top.equalToSuperview().offset(30)
                 make.centerX.equalToSuperview()
             }
@@ -56,9 +56,9 @@ class ProfileFooterView : UIView {
             $0.top.equalTo(friendLabel.snp.bottom).offset(16)
             $0.left.equalToSuperview().offset(27)
             $0.right.equalToSuperview().offset(-27)
-            if screenHeight == 568{
+            if screenHeight == 568 {
                 $0.bottom.equalToSuperview().offset(-5)
-            }else{
+            } else {
                 $0.bottom.equalToSuperview().offset(30)
             }
         }
