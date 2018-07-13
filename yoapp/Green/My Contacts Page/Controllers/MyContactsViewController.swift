@@ -75,6 +75,7 @@ class MyContactsViewController: UIViewController, MFMessageComposeViewController
     
     @objc func handlePullToRefresh(_ sender: UIRefreshControl) {
         tableView.reloadData()
+        ContactsService().syncContacts()
         sender.endRefreshing()
     }
     

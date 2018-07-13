@@ -38,6 +38,7 @@ class ContactsViewController: UIViewController {
     @objc func handlePullToRefresh(_ sender: UIRefreshControl) {
         DispatchQueue.main.async {
             sender.endRefreshing()
+            ContactsService().syncContacts()
             self.collectionView.reloadData()
         }
     }
