@@ -94,7 +94,7 @@ extension ProfileTableViewController {
     }
     
     func openMessengerView(urlApp: String){
-        let msg = "Install YoApp"
+        let msg = "Привет! Установливай Pingo приложение и отправялй ping своим друзьям."
         let urlWhats = urlApp + msg
         if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             if let whatsappURL = NSURL(string: urlString) {

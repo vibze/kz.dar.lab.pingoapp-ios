@@ -19,7 +19,7 @@ class LoginViewController: UIViewController,
     UICollectionViewDelegateFlowLayout,
 AKFViewControllerDelegate {
     
-    let swypePage = ["preview","preview","preview"]
+    let swypePage = ["balloon","phone","bumb"]
     
     var accountKit: AKFAccountKit!
     var bottomControllView = UIStackView()

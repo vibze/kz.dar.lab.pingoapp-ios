@@ -36,7 +36,7 @@ extension AboutAppViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: aboutCell, for: indexPath) as! AboutAppCell
-        cell.aboutLabel.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been."
+        cell.aboutLabel.text = "PingoApp служит для отправки коротких уведомлений, с воспроизведением  текста  вашего сообщения."
         return cell
     }
 }
