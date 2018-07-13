@@ -9,19 +9,20 @@
 import UIKit
 import Contacts
 import CoreStore
+import MessageUI
 
 private struct Constants {
     static let myContactCell = "myContactCell"
 }
 
-class MyContactsViewController: UIViewController {
+class MyContactsViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
         tableView.showsVerticalScrollIndicator = false
         tableView.allowsSelection = true
-        tableView.separatorColor = #colorLiteral(red: 0.3450980392, green: 0.6784313725, blue: 0.4941176471, alpha: 1)
+        tableView.separatorColor = #colorLiteral(red: 0.431372549, green: 0.6588235294, blue: 0.8431372549, alpha: 1)
         tableView.rowHeight = 82
         
         return tableView
@@ -36,7 +37,7 @@ class MyContactsViewController: UIViewController {
     
     let searchBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.431372549, green: 0.6588235294, blue: 0.8431372549, alpha: 1)
         return view
     }()
     
@@ -48,7 +49,7 @@ class MyContactsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.431372549, green: 0.6588235294, blue: 0.8431372549, alpha: 1)
         
         monitor.addObserver(self)
         listOfContacts = monitor.objectsInAllSections()
@@ -92,7 +93,7 @@ class MyContactsViewController: UIViewController {
         tableView.addSubview(refreshController)
         
         searchTextField.delegate = self
-        
+        searchTextField.backgroundColor = UIColor.init(hexString: "5D93BF")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MyContactsTableViewCell.self, forCellReuseIdentifier: Constants.myContactCell)
@@ -132,10 +133,31 @@ extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource, 
         return SectionHeaderView()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let phoneNumber = listOfContacts[indexPath.row].phoneNumber
+      
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = "Привет! Установливай Pingo приложение и отправялй ping своим друзьям."
+            controller.recipients = ([phoneNumber] as! [String])
+            controller.messageComposeDelegate = self
+            self.present(controller, animated: true, completion: nil)
+        }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         scrollView.contentOffset.y > 0 ?
             setBlur(false, .clear, #colorLiteral(red: 0.3450980392, green: 0.6784313725, blue: 0.4941176471, alpha: 0.2)) :
-            setBlur(true, #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), #colorLiteral(red: 0.3450980392, green: 0.6784313725, blue: 0.4941176471, alpha: 1))
+            setBlur(true, #colorLiteral(red: 0.431372549, green: 0.6588235294, blue: 0.8431372549, alpha: 1), #colorLiteral(red: 0.431372549, green: 0.6588235294, blue: 0.8431372549, alpha: 1))
     }
     
     func setBlur(_ isHidden: Bool, _ backColor: UIColor, _ textColor: UIColor) {

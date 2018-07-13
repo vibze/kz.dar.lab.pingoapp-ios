@@ -56,6 +56,7 @@ extension BlackListViewController {
         return blackListMonitor.numberOfObjects()
     }
     
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: userBlockCell, for: indexPath) as! BlockUserCell
         let name = blackListMonitor[indexPath.row].name
