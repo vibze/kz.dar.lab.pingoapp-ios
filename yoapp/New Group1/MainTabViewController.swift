@@ -40,7 +40,7 @@ class MainTabViewController: UIViewController {
     let profileButton = TabBarButton(tag: 2, image: #imageLiteral(resourceName: "profile"))
     
     let controllers = [MyContactsViewController(), ContactsViewController(), ProfileTableViewController()]
-    let vcBackgroundColors = [#colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), #colorLiteral(red: 0.9960784314, green: 0.7882352941, blue: 0.3725490196, alpha: 1)]
+    let vcBackgroundColors = [#colorLiteral(red: 0.431372549, green: 0.6588235294, blue: 0.8431372549, alpha: 1), #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), #colorLiteral(red: 0.9960784314, green: 0.7882352941, blue: 0.3725490196, alpha: 1)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
