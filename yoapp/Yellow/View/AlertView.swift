@@ -10,7 +10,7 @@ import UIKit
 
 class AlertView: UIView {
     
-    var okButton: UIButton =  {
+    var okButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         button.isEnabled = true
@@ -40,21 +40,21 @@ class AlertView: UIView {
     }
     
     func configView(){
-        imgView.snp.makeConstraints{
+        imgView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(30)
             $0.left.equalToSuperview().offset(88)
             $0.right.equalToSuperview().offset(-88)
             $0.bottom.equalTo(-115)
         }
         
-        errorTypeLabel.snp.makeConstraints{
+        errorTypeLabel.snp.makeConstraints {
             $0.top.equalTo(imgView.snp.bottom).offset(10)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
             $0.bottom.equalTo(okButton.snp.top)
         }
         
-        okButton.snp.makeConstraints{
+        okButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().offset(-12)
             $0.left.equalToSuperview().offset(64)
             $0.right.equalToSuperview().offset(-64)
