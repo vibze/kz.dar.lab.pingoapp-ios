@@ -27,7 +27,7 @@ class AboutAppCell: UITableViewCell {
     }
     
     func setUpView(){
-        appNameLabel.text = "YoApp"
+        appNameLabel.text = "PingoApp"
         appNameLabel.snp.makeConstraints{
             $0.top.equalToSuperview().offset(4)
             $0.centerX.equalToSuperview()

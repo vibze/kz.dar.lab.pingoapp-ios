@@ -78,7 +78,8 @@ AKFViewControllerDelegate {
         let dA = UILabel()
         dA.numberOfLines = 0
         dA.lineBreakMode = .byWordWrapping
-        dA.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been."
+        dA.textAlignment = .center
+        dA.text = "Регистрируйтесь, приглашайте друзей и начните отправлять уведомления уже сейчас!"
         dA.textColor = .white
         dA.font = UIFont(name: "Helvetica", size: 16)
         return dA
