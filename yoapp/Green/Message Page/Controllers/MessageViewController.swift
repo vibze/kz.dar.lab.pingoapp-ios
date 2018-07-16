@@ -16,7 +16,7 @@ private struct Constants {
     static let blockContact = "Заблокировать контакт"
     static let unblockContact = "Разблокировать контакт"
     static let basePhrasesHeader = "Выберите базовые фразы"
-    static let writeToFriendHeader = "или напишите собеседнику"
+    static let writeToFriendHeader = "Или напишите собеседнику"
 }
 
 class MessageViewController: UIViewController {
@@ -206,16 +206,13 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
         pushAlert.isHidden = false
         navigationController?.isNavigationBarHidden = true
         
-        guard let buddy = contact
-        ,let sendText = phrasesMonitor[indexPath.row].word
-        ,let phoneNumber = buddy.phoneNumber else { return }
+        guard let buddy = contact, let sendText = phrasesMonitor[indexPath.row].word, let phoneNumber = buddy.phoneNumber else { return }
         
         PingsApi().postPing(buddyId: buddy.profileId, pingText: sendText, success: { _ in
-            Store.updateContactPingTime(phoneNumber: phoneNumber)
+            Store.updateContactPingTime(phoneNumber: phoneNumber, date: Date())
         }, failure: { _ in
             print("error")
         })
-        print("tap&send")
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

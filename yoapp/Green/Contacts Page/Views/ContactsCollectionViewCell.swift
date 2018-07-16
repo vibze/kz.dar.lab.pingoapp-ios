@@ -12,21 +12,29 @@ import SnapKit
 class ContactsCollectionViewCell: UICollectionViewCell {
     
     let contactImageView = ImageView(radius: 68 / 2)
-    
-    let activityIndicator: UIActivityIndicatorView = {
-        let indicatorView = UIActivityIndicatorView()
-        indicatorView.color = .red
-        return indicatorView
-    }()
-    
+
     let contactNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         
         return label
+    }()
+    
+    let removeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "removeIcon"), for: .normal)
+        button.isHidden = true
+        return button
+    }()
+
+    let longPressTapGestureRecognizer: UILongPressGestureRecognizer = {
+        let tapRecognizer = UILongPressGestureRecognizer()
+        tapRecognizer.minimumPressDuration = 1
+        
+        return tapRecognizer
     }()
 
     var contact: Contact? {
@@ -39,6 +47,16 @@ class ContactsCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addViews()
+        removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
+        longPressTapGestureRecognizer.addTarget(self, action: #selector(handleLongPressTap))
+    }
+    
+    @objc func removeButtonPressed() {
+        print("hello")
+    }
+
+    @objc func handleLongPressTap(sender: UILongPressGestureRecognizer) {
+        removeButton.isHidden = false
     }
     
     func contactDidUpdate(_ contact: Contact) {
@@ -59,9 +77,17 @@ class ContactsCollectionViewCell: UICollectionViewCell {
     }
 
     func addViews() {
-        addSubview(contactImageView)
-        addSubview(contactNameLabel)
+        [contactImageView, contactNameLabel, removeButton].forEach {
+            addSubview($0)
+        }
+        addGestureRecognizer(longPressTapGestureRecognizer)
         contactImageView.addSubview(activityIndicator)
+        
+        removeButton.snp.makeConstraints {
+            $0.top.equalTo(self.snp.top).offset(-10)
+            $0.right.equalTo(self.snp.right).offset(10)
+            $0.width.height.equalTo(30)
+        }
         
         activityIndicator.snp.makeConstraints {
             $0.center.equalTo(contactImageView.snp.center)
@@ -71,7 +97,7 @@ class ContactsCollectionViewCell: UICollectionViewCell {
             constraint.width.height.equalTo(68)
         }
         contactNameLabel.snp.makeConstraints { (constraint) in
-            constraint.top.equalTo(contactImageView.snp.bottom).offset(10)
+            constraint.top.equalTo(contactImageView.snp.bottom).offset(5)
             constraint.left.right.equalTo(0)
         }
     }

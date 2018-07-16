@@ -22,6 +22,13 @@ class ContactsViewController: UIViewController {
     let blurEffectView = UIVisualEffectView.getBlurEffectView()
     let searchTextField = SearchTextField()
     
+    let emptyListView: BlackListFooterView = {
+        let emptyView = BlackListFooterView()
+        emptyView.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
+        emptyView.isHidden = true
+        return emptyView
+    }()
+    
     let searchBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
@@ -38,7 +45,6 @@ class ContactsViewController: UIViewController {
     @objc func handlePullToRefresh(_ sender: UIRefreshControl) {
         DispatchQueue.main.async {
             sender.endRefreshing()
-            ContactsService().syncContacts()
             self.collectionView.reloadData()
         }
     }
@@ -54,15 +60,26 @@ class ContactsViewController: UIViewController {
         recentlyActiveMonitor.addObserver(self)
         
         view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
+        
         collectionViewSetup()
         textFieldSetup()
         monitorsSetup()
+        
+        self.view.addSubview(emptyListView)
+        emptyListView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    func checkForContactsExistence() {
+        emptyListView.isHidden = registeredContacts.count == 0 ? false : true
     }
     
     func monitorsSetup() {
         registeredContacts = registeredContactsMonitor.objectsInAllSections()
         recentlyActiveContacts = recentlyActiveMonitor.objectsInAllSections()
         ContactsOperation.sliceContactsList(&recentlyActiveContacts, &registeredContacts)
+        checkForContactsExistence()
     }
     
     func textFieldSetup() {

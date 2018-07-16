@@ -72,8 +72,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if UserDefaults.standard.bool(forKey: "notification"){
-            let aps = userInfo["aps"] as! [String: AnyObject]
-            MainTabViewController().textToVoice(aps["alert"] as? String)
+            if let aps = userInfo["aps"] as? [String: AnyObject],
+                let text = aps["alert"] as? String {
+                SpeechSynthesizer.speak(text)
+            }
         }
         
         switch application.applicationState {
@@ -111,6 +113,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
+        if Profile.current() != nil {
+            ContactsService().syncContacts()
+        }
         Timer.scheduledTimer(timeInterval: 0.05,
                              target: self,
                              selector: #selector(self.removeNotification),
