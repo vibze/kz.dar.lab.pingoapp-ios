@@ -85,7 +85,12 @@ extension BlackListViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let contactId = blackListMonitor[indexPath.row].profileId
-            Message().performBlock(profileId: contactId, isBlacklisted: true) { (nil) in}
+            BlacklistService().unblacklistContact(profileId: contactId, {
+                print("success")
+            }) { (error) in
+                print(error)
+            }
+          
         }
     }
     
