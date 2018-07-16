@@ -69,21 +69,22 @@ extension FavouriteWordViewController {
     }
 }
 
-extension FavouriteWordViewController{
+extension FavouriteWordViewController {
+    
     @objc func addFavourWordAction(){
         let vc = AddFavoriteWordController()
         vc.favoriteWordArray = favoriteWordArray
         self.present(vc, animated: false, completion: nil)
     }
     
-    func fetchFromCoreStore(){
-        FavoriteWordModel.fetchFavoriteWordFromCore(completionHandler: {(array) in
+    @objc func fetchFromCoreStore(){
+        FavoriteWordsServices.fetchFavoriteWordFromCore(completionHandler: {(array) in
             self.favoriteWordArray = array
         })
     }
     
     func deleteFavoriteWordFromCore(word: FavoriteWords){
-        FavoriteWordModel.deleteFavoriteWordFromCore(word: word)
+        FavoriteWordsServices.deleteFavoriteWordFromCore(word: word)
     }
     
     func listMonitorDidChange(_ monitor: ListMonitor<FavoriteWords>) {

@@ -66,13 +66,12 @@ class AddFavoriteWordController: UIViewController {
             showAlert(errorType: "Добавьте фразу", image: #imageLiteral(resourceName: "errorIcon"))
             return
         }
-        
         addToWord(index: favoriteWordArray.count + 1, word: word!)
         dismiss(animated: false, completion: nil)
     }
     
     func addToWord(index:Int,word:String){
-        FavoriteWordModel.addFavoriteWordToCore(index: index, word: word){(array) in
+        FavoriteWordsServices.addFavoriteWordToCore(index: index, word: word){(array) in
             self.favoriteWordArray = array
         }
     }

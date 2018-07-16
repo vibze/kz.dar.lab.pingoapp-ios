@@ -12,6 +12,7 @@ import CoreStore
 class BlackListViewController: UITableViewController, ListObserver {
     
     let titleHeaderView = BlockUserLabelView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 30))
+    let footerView = BlackListFooterView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 200))
     var userBlockCell = "userBlockCell"
     let blackListMonitor = Monitor.blackListMonitor
     
@@ -31,6 +32,7 @@ class BlackListViewController: UITableViewController, ListObserver {
         self.tableView = UITableView(frame: self.tableView.frame, style: .plain)
         tableView.backgroundColor = .backgroundYellow
         tableView.separatorStyle = .none
+        tableView.tableFooterView = footerView
         tableView.rowHeight = 75
         tableView.register(BlockUserCell.self, forCellReuseIdentifier: userBlockCell)
     }
@@ -53,7 +55,13 @@ extension BlackListViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return blackListMonitor.numberOfObjects()
+        let blackListCount = blackListMonitor.numberOfObjects()
+        if blackListCount == 0 {
+            tableView.tableFooterView?.isHidden = false
+        }else{
+            tableView.tableFooterView?.isHidden = true
+        }
+        return blackListCount
     }
     
     
@@ -63,7 +71,6 @@ extension BlackListViewController {
         let phoneNumber = blackListMonitor[indexPath.row].phoneNumber
         let image = blackListMonitor[indexPath.row].avatarUrl
         cell.viewData(image: image ?? "", name: name!, phone: phoneNumber!)
-        
         return cell
     }
     
@@ -77,8 +84,8 @@ extension BlackListViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let phonemNumber = blackListMonitor[indexPath.row].phoneNumber
-            removeFromBlockList(phonemNumber: phonemNumber!)
+            let contactId = blackListMonitor[indexPath.row].profileId
+            Message().performBlock(profileId: contactId, isBlacklisted: true) { (nil) in}
         }
     }
     
@@ -87,15 +94,6 @@ extension BlackListViewController {
     }
     
     func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {
-    }
-    
-    func removeFromBlockList(phonemNumber: String){
-        CoreStore.perform(asynchronous: {(transaction) -> Void in
-            let person = transaction.fetchOne(From<Contact>().where(\.phoneNumber == phonemNumber))
-            person?.isBlacklisted = false
-        },completion: {(result) -> Void in
-            debugPrint(result)
-        })
     }
 }
 
