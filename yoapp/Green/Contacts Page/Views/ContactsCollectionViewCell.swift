@@ -12,17 +12,11 @@ import SnapKit
 class ContactsCollectionViewCell: UICollectionViewCell {
     
     let contactImageView = ImageView(radius: 68 / 2)
-    
-    let activityIndicator: UIActivityIndicatorView = {
-        let indicatorView = UIActivityIndicatorView()
-        indicatorView.color = .red
-        return indicatorView
-    }()
-    
+
     let contactNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         
@@ -61,17 +55,13 @@ class ContactsCollectionViewCell: UICollectionViewCell {
     func addViews() {
         addSubview(contactImageView)
         addSubview(contactNameLabel)
-        contactImageView.addSubview(activityIndicator)
-        
-        activityIndicator.snp.makeConstraints {
-            $0.center.equalTo(contactImageView.snp.center)
-        }
+
         contactImageView.snp.makeConstraints { (constraint) in
             constraint.top.left.right.equalTo(0)
             constraint.width.height.equalTo(68)
         }
         contactNameLabel.snp.makeConstraints { (constraint) in
-            constraint.top.equalTo(contactImageView.snp.bottom).offset(10)
+            constraint.top.equalTo(contactImageView.snp.bottom).offset(5)
             constraint.left.right.equalTo(0)
         }
     }

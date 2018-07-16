@@ -10,14 +10,14 @@ import Foundation
 
 class Profile: NSObject, NSCoding  {
     
-    var phoneNumber: String
-    var avatarImageUrl: String
-    var authorizationToken: String
+    var phoneNumber: String = ""
+    var avatarImageUrl: String = ""
+    var authorizationToken: String = ""
     
-    init (phoneNumber: String, avatarImageUrl: String, authorizationToken: String){
-        self.phoneNumber = phoneNumber
-        self.avatarImageUrl = avatarImageUrl
-        self.authorizationToken = authorizationToken
+    init (phoneNumber: String?, avatarImageUrl: String?, authorizationToken: String?){
+        self.phoneNumber = phoneNumber ?? ""
+        self.avatarImageUrl = avatarImageUrl ?? ""
+        self.authorizationToken = authorizationToken ?? ""
     }
     
     func encode(with aCoder: NSCoder) {
@@ -27,9 +27,9 @@ class Profile: NSObject, NSCoding  {
     }
     
     required convenience init(coder aDecoder: NSCoder) {
-        let phoneNumber = aDecoder.decodeObject(forKey: "phoneNumber") as! String
-        let avatarImageUrl = aDecoder.decodeObject(forKey: "avatarImageUrl") as! String
-        let authorizationToken = aDecoder.decodeObject(forKey: "authorizationToken") as! String
+        let phoneNumber = aDecoder.decodeObject(forKey: "phoneNumber") as? String
+        let avatarImageUrl = aDecoder.decodeObject(forKey: "avatarImageUrl") as? String
+        let authorizationToken = aDecoder.decodeObject(forKey: "authorizationToken") as? String
         self.init(phoneNumber: phoneNumber, avatarImageUrl: avatarImageUrl, authorizationToken: authorizationToken)
     }
     

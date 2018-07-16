@@ -51,7 +51,6 @@ class MainTabViewController: UIViewController {
     }
     
     func textToVoice(_ text: String?) {
-        print("in texttovoice")
         guard let unwrappedText = text else { return }
         
         let session = AVAudioSession.sharedInstance()
