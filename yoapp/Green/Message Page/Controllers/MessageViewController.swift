@@ -150,7 +150,7 @@ class MessageViewController: UIViewController {
         }
         
         basePhrasesTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(phoneNumberLabel.snp.bottom).offset(22)
+            $0.top.equalTo(phoneNumberLabel.snp.bottom).offset(16)
             $0.left.equalToSuperview().offset(32)
         }
         
@@ -169,12 +169,12 @@ class MessageViewController: UIViewController {
             $0.centerX.equalTo(self.view.center)
         }
         profileImageBackgroundView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(65)
+            $0.top.equalTo(topLayoutGuide.snp.bottom).offset(10)
             $0.height.width.equalTo(110)
             $0.centerX.equalTo(self.view.center)
         }
         profileImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(70)
+            $0.top.equalTo(profileImageBackgroundView.snp.top).offset(5)
             $0.height.width.equalTo(100)
             $0.centerX.equalTo(self.view.center)
         }

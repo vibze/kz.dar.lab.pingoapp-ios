@@ -109,15 +109,17 @@ func setupViews() {
     stackViewBackground.addSubview(blurEffectView)
     
     stackViewBackground.snp.makeConstraints {
-        $0.bottom.equalTo(bottomLayoutGuide.snp.top)
-        $0.height.equalTo(60)
+        $0.bottom.equalTo(bottomLayoutGuide.snp.bottom)
+        screenHeight != 812 ? $0.height.equalTo(60) : $0.height.equalTo(90)
         $0.left.right.equalToSuperview()
     }
+    
     containerView.snp.makeConstraints {
         $0.leading.trailing.equalToSuperview()
         $0.top.equalTo(topLayoutGuide.snp.bottom)
         $0.bottom.equalTo(bottomLayoutGuide.snp.top)
     }
+    
     stackView.snp.makeConstraints {
         $0.left.equalToSuperview().offset(24)
         $0.bottom.equalTo(bottomLayoutGuide.snp.top)

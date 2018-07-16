@@ -10,14 +10,12 @@ import Alamofire
 import SwiftyJSON
 import CoreStore
 
-//TODO: отрефакторить. Камила
-class ProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,
-UINavigationControllerDelegate {
+class ProfileTableViewController: UITableViewController, UIImagePickerControllerDelegate,
+                                  UINavigationControllerDelegate {
     
     let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 200))
-    let footerView = ProfileFooterView(frame: CGRect(x: 0, y: 0, width: 307, height: 105))
+    let footerView = ProfileFooterView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 105))
     var profileCell = "profileCell"
-    var settingsType = ["Настройки","О приложении","Выход"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +77,7 @@ extension ProfileTableViewController {
         Application.shared.logout()
     }
     
+    //MARK: - FooterView Buttons
     func touchDetect(){
         let openTelegramGesture = UITapGestureRecognizer(target: self, action: #selector(openTelegram))
         footerView.telegramView.addGestureRecognizer(openTelegramGesture)
@@ -103,7 +102,6 @@ extension ProfileTableViewController {
                     showAlert(errorType: "У вас не установленно это приложение", image: #imageLiteral(resourceName: "errorIcon"))
                     return
                 }
-//                UIApplication.shared.openURL(whatsappURL)
                 UIApplication.shared.open(whatsappURL, options: [:]) { (_ ) in
                     print("success")
                 }
@@ -113,12 +111,13 @@ extension ProfileTableViewController {
 }
 
 extension ProfileTableViewController{
-     // MARK: - Image properties
+     // MARK: - Upload Image properties
     
     @objc func addImageProfile(){
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
         let actionSheet = UIAlertController(title: "Сменить фото", message: "", preferredStyle: .actionSheet)
+       
         actionSheet.addAction(UIAlertAction(title: "Камера", style: .default, handler:
             { (action:UIAlertAction) in
                 guard UIImagePickerController.isSourceTypeAvailable(.camera) else{
@@ -128,74 +127,29 @@ extension ProfileTableViewController{
                 imagePicker.sourceType = .camera
                 self.present(imagePicker, animated: true, completion: nil)
         }))
+        
         actionSheet.addAction(UIAlertAction(title: "Фотопленка", style: .default, handler: { (action:UIAlertAction) in
             imagePicker.sourceType = .photoLibrary
             self.present(imagePicker, animated: true, completion: nil)
         }))
+        
         actionSheet.addAction(UIAlertAction(title: "Отменить", style: .cancel, handler: nil))
         self.present(actionSheet, animated: true, completion: nil)
-        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let avatarImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         
         headerView.profileImg.image = avatarImage
-        uploadImage(avatar: fixOrientation(img: avatarImage), success: { response in
+        ProfileImageUpload.uploadImage(avatar: fixOrientation(img: avatarImage), success: { response in
             print("OKKK", response)
         }) { (error) in
             self.showAlert(errorType: "Ошибка при загрузки фото", image: #imageLiteral(resourceName: "errorIcon"))
         }
-        
         dismiss(animated: true, completion: nil)
-    }
-    //Убрать это от сюда. Камила
-    func uploadImage(avatar: UIImage, success: @escaping (Bool) -> Void, failure: @escaping (Error) -> Void){
-        guard
-            let imageData = UIImageJPEGRepresentation(avatar, 0.3),
-            let url = URL(string: Urls.getUrl(.avatarUpload)) else {
-                return
-        }
-        let token = UserDefaults().getAccessToken()
-        let header = ["Content-Type": "application/x-www-form-urlencoded",
-                      "Authorization": "Bearer \(token)",
-            "Accept":"application/json"]
-        
-        Alamofire.upload(multipartFormData: { data in
-            data.append(imageData, withName: "file", fileName: "myImage.png", mimeType: "image/png")
-        }, to: url, method: .post, headers: header) { result in
-            switch result {
-            case .success(request: let uploadRequest, _, _):
-                uploadRequest.validate(statusCode: 200..<600).responseJSON(completionHandler: {dataResponse in
-                    if dataResponse.result.isSuccess {
-                        success(dataResponse.result.isSuccess)
-                    } else {
-                        guard let error = dataResponse.error else { return }
-                        failure(error)
-                    }
-                })
-            case .failure(let error):
-                failure(error)
-            }
-        }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    func fixOrientation(img: UIImage) -> UIImage {
-        if (img.imageOrientation == .up) {
-            return img
-        }
-        
-        UIGraphicsBeginImageContextWithOptions(img.size, false, img.scale)
-        let rect = CGRect(x: 0, y: 0, width: img.size.width, height: img.size.height)
-        img.draw(in: rect)
-        
-        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        
-        return normalizedImage
     }
 }
