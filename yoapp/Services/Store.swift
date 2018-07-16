@@ -40,11 +40,11 @@ class Store {
         )
     }
     
-    static func updateContactPingTime(phoneNumber: String) {
+    static func updateContactPingTime(phoneNumber: String, date: Date) {
         CoreStore.perform(
             asynchronous: {
                 let contact = $0.fetchOne(From<Contact>().where(\.phoneNumber == phoneNumber))
-                contact?.pingedAt = Date()
+                contact?.pingedAt = date
             },
             completion: { (result) -> Void in
                 switch result {
@@ -75,6 +75,23 @@ class Store {
                 }
             }
         )
+    }
+    
+    static func addPhrase(phrase: String) {
+        CoreStore.perform(asynchronous: {
+            let existedPhrase = $0.fetchOne(From<FavoriteWords>().where(\.word == phrase))
+            if existedPhrase == nil {
+                let phrases = $0.create(Into<FavoriteWords>())
+                phrases.word = phrase
+            }
+        }) { (result) in
+            switch result {
+            case .success:
+                print("success")
+            case .failure:
+                print("failure")
+            }
+        }
     }
     
     static func updateContactInCore(profileId: Int32, isBlacklisted: Bool,

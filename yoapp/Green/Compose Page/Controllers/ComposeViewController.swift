@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UserNotifications
 
 class ComposeViewController: UIViewController {
     
@@ -23,14 +22,14 @@ class ComposeViewController: UIViewController {
     @objc func composeButtonPressed() {
         view.endEditing(true)
 
-        guard let buddy = contact
-            ,let sendText = messageTextView.text
-            ,let phoneNumber = buddy.phoneNumber else { return }
+        guard let buddy = contact, let sendText = messageTextView.text, let phoneNumber = buddy.phoneNumber
+            else { return }
         
         PingsApi().postPing(buddyId: buddy.profileId, pingText: sendText, success: { _ in
                 self.alertView.isHidden = false
                 self.navigationController?.isNavigationBarHidden = true
-                Store.updateContactPingTime(phoneNumber: phoneNumber)
+                Store.updateContactPingTime(phoneNumber: phoneNumber, date: Date())
+                Store.addPhrase(phrase: sendText)
             }, failure: { _ in
                 self.showAlert(errorType: "Ошибка! Сообщение не доставлено.", image: #imageLiteral(resourceName: "errorIcon"))
         })
@@ -49,9 +48,9 @@ class ComposeViewController: UIViewController {
     }
     
     func fillContactInfo() {
-        if let contact = contact {
+        if let contact = contact, let phoneNumber = contact.phoneNumber {
             nameLabel.text = contact.name
-            phoneNumberLabel.text = "+" + contact.phoneNumber!
+            phoneNumberLabel.text = "+" + phoneNumber
             guard let avatarUrl = contact.avatarUrl else { return }
             profileImageView.setContactImage(url: avatarUrl)
         }
@@ -101,6 +100,7 @@ extension ComposeViewController: UITextViewDelegate {
 
 extension ComposeViewController: AlerViewDelegate {
     func closeButtonTapped(isClosed: Bool) {
+        self.navigationController?.popViewController(animated: true)
         navigationController?.isNavigationBarHidden = false
     }
 }

@@ -209,7 +209,7 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
         guard let buddy = contact, let sendText = phrasesMonitor[indexPath.row].word, let phoneNumber = buddy.phoneNumber else { return }
         
         PingsApi().postPing(buddyId: buddy.profileId, pingText: sendText, success: { _ in
-            Store.updateContactPingTime(phoneNumber: phoneNumber)
+            Store.updateContactPingTime(phoneNumber: phoneNumber, date: Date())
         }, failure: { _ in
             print("error")
         })
