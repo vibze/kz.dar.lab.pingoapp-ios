@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreStore
-import Contacts
 
 class Store {
 
@@ -54,5 +53,44 @@ class Store {
                 }
             }
         )
+    }
+    
+    static func addDefaultPhrases() {
+        let favoriteWords = ["Привет", "Как дела?"]
+        CoreStore.perform(
+            asynchronous: {
+                if $0.fetchAll(From<FavoriteWords>())?.count == 0 {
+                    for word in favoriteWords {
+                        let favoritePhrases = $0.create(Into<FavoriteWords>())
+                        favoritePhrases.word = word
+                    }
+                }
+            },
+            completion: { (result) -> Void in
+                switch result {
+                case .success:
+                    print("added default phrases")
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        )
+    }
+    
+    static func updateContactInCore(profileId: Int32, isBlacklisted: Bool,
+                                    _ success: @escaping () -> Void, _ failure: @escaping (String?) -> Void) {
+        CoreStore.perform(asynchronous: {
+            let contact = $0.fetchOne(From<Contact>().where(\.profileId == profileId))
+            contact?.isBlacklisted = isBlacklisted
+        }) { (result) in
+            switch result {
+            case .success:
+                success()
+                print("contact is updated")
+            case .failure(let error):
+                failure(error.localizedDescription)
+                print("error")
+            }
+        }
     }
 }

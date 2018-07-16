@@ -25,7 +25,7 @@ class CustomInviteView: UIView {
         setUpViews()
     }
     
-    func setUpViews(){
+    func setUpViews() {
         self.addSubview(nameLabel)
         self.addSubview(iconImage)
         

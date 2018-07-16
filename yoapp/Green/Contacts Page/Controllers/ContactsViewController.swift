@@ -153,9 +153,9 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.sectionHeader, for: indexPath) as! SectionHeader
+        
         sectionHeader.categoryTitleLabel.text = Constants.sectionLabels[indexPath.section]
         sectionHeader.sectionInfo = (indexPath.section, searchTextField.text?.count)
-        
         return sectionHeader
     }
     

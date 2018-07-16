@@ -47,15 +47,24 @@ class MessageViewController: UIViewController {
     var contact: Contact?
     
     @objc func blockBtnPressed() {
-        guard let isBlacklisted = contact?.isBlacklisted else { return }
-        Message().performBlock(profileId: contact!.profileId, isBlacklisted: isBlacklisted) { (message) in
-            if let message = message {
-                print(message)
-            }
-            else {
-                let blockButtonTitle = isBlacklisted ? Constants.blockContact : Constants.unblockContact
+        guard let isBlacklisted = contact?.isBlacklisted,
+            let profileId = contact?.profileId, var blockButtonTitle = blockButton.titleLabel?.text else { return }
+        if isBlacklisted {
+            BlacklistService().unblacklistContact(profileId: profileId, {
+                print("success")
+                blockButtonTitle = Constants.blockContact
                 self.blockButton.setTitle(blockButtonTitle, for: .normal)
+            }) { (error) in
+                print("err")
             }
+            return
+        }
+        BlacklistService().blacklistContact(profileId: profileId, {
+            print("success")
+            blockButtonTitle = Constants.unblockContact
+            self.blockButton.setTitle(blockButtonTitle, for: .normal)
+        }) { (error) in
+            print("err")
         }
     }
     
@@ -98,12 +107,12 @@ class MessageViewController: UIViewController {
     }
     
     func fillContactInfo() {
-        if let contact = contact {
+        if let contact = contact, let phoneNumber = contact.phoneNumber {
             if let avatarUrl = contact.avatarUrl {
                 profileImageView.setContactImage(url: avatarUrl)
             }
             userNameLabel.text = contact.name
-            phoneNumberLabel.text = "+" + contact.phoneNumber!
+            phoneNumberLabel.text = "+" + phoneNumber
         }
     }
     

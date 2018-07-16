@@ -9,6 +9,11 @@
 import UIKit
 import SnapKit
 
+private struct Constants {
+    static let searchResult = "Результаты поиска"
+    static let allContacts = "Все, кто в теме"
+}
+
 class SectionHeader: UICollectionReusableView {
     var sectionInfo: (section: Int, charCount: Int?)? {
         didSet {
@@ -28,12 +33,13 @@ class SectionHeader: UICollectionReusableView {
     }
     
     private func changeParameters(sectionIndex: Int, charCount: Int) {
-        if sectionIndex == 1, charCount > 0 {
+        if sectionIndex == 1 && charCount > 0 {
+            print(" Herere")
             self.isHidden = true
         }
         else {
             if charCount > 0 {
-                self.categoryTitleLabel.text = "Результаты поиска"
+                self.categoryTitleLabel.text = Constants.searchResult
             }
             self.isHidden = false
         }
