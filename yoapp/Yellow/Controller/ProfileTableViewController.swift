@@ -10,6 +10,7 @@ import Alamofire
 import SwiftyJSON
 import CoreStore
 
+//TODO: отрефакторить. Камила
 class ProfileTableViewController: UITableViewController,UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
     
@@ -94,15 +95,18 @@ extension ProfileTableViewController {
     }
     
     func openMessengerView(urlApp: String){
-        let msg = "Install YoApp"
+        let msg = "Привет! Установливай Pingo приложение и отправялй ping своим друзьям."
         let urlWhats = urlApp + msg
         if let urlString = urlWhats.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            if let whatsappURL = NSURL(string: urlString) {
+            if let whatsappURL = URL(string: urlString) {
                 guard UIApplication.shared.canOpenURL(whatsappURL as URL) else{
                     showAlert(errorType: "У вас не установленно это приложение", image: #imageLiteral(resourceName: "errorIcon"))
                     return
                 }
-                UIApplication.shared.openURL(whatsappURL as URL)
+//                UIApplication.shared.openURL(whatsappURL)
+                UIApplication.shared.open(whatsappURL, options: [:]) { (_ ) in
+                    print("success")
+                }
             }
         }
     }
@@ -145,7 +149,7 @@ extension ProfileTableViewController{
         
         dismiss(animated: true, completion: nil)
     }
-    
+    //Убрать это от сюда. Камила
     func uploadImage(avatar: UIImage, success: @escaping (Bool) -> Void, failure: @escaping (Error) -> Void){
         guard
             let imageData = UIImageJPEGRepresentation(avatar, 0.3),

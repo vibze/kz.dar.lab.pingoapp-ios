@@ -38,6 +38,7 @@ class ContactsViewController: UIViewController {
     @objc func handlePullToRefresh(_ sender: UIRefreshControl) {
         DispatchQueue.main.async {
             sender.endRefreshing()
+            ContactsService().syncContacts()
             self.collectionView.reloadData()
         }
     }
@@ -153,10 +154,8 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
         
         let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.sectionHeader, for: indexPath) as! SectionHeader
         
-        let isEmpty = recentlyActiveContacts.count == 0 ? true : false
         sectionHeader.categoryTitleLabel.text = Constants.sectionLabels[indexPath.section]
-        sectionHeader.sectionInfo = (indexPath.section, searchTextField.text?.count, false)
-        
+        sectionHeader.sectionInfo = (indexPath.section, searchTextField.text?.count)
         return sectionHeader
     }
     

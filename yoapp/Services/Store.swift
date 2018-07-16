@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreStore
-import Contacts
 
 class Store {
 
@@ -76,5 +75,22 @@ class Store {
                 }
             }
         )
+    }
+    
+    static func updateContactInCore(profileId: Int32, isBlacklisted: Bool,
+                                    _ success: @escaping () -> Void, _ failure: @escaping (String?) -> Void) {
+        CoreStore.perform(asynchronous: {
+            let contact = $0.fetchOne(From<Contact>().where(\.profileId == profileId))
+            contact?.isBlacklisted = isBlacklisted
+        }) { (result) in
+            switch result {
+            case .success:
+                success()
+                print("contact is updated")
+            case .failure(let error):
+                failure(error.localizedDescription)
+                print("error")
+            }
+        }
     }
 }

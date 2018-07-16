@@ -13,6 +13,7 @@ class FavoriteWordModel {
     var index: Int?
     var word: String?
     
+    //TODO: убрать логику из модели
     static func addFavoriteWordToCore(index: Int,word: String,completionHandler: @escaping([FavoriteWords]) -> ()){
         CoreStore.perform(asynchronous: {(transaction) -> Void in
             if transaction.fetchOne(From<FavoriteWords>().where(\.word == word)) != nil{

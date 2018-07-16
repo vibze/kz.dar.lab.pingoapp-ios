@@ -17,15 +17,15 @@ class SectionHeaderView: UIView {
     
     let headerView: UIView = {
         let headerView = UIView()
-        headerView.backgroundColor = #colorLiteral(red: 0.5058823529, green: 0.8862745098, blue: 0.6666666667, alpha: 1)
+        headerView.backgroundColor = #colorLiteral(red: 0.3450980392, green: 0.6078431373, blue: 0.8156862745, alpha: 1)
         return headerView
     }()
 
-    let headerLabel = UILabel.basic(textColor: #colorLiteral(red: 0.1882352941, green: 0.5294117647, blue: 0.3411764706, alpha: 1), fontSize: 16, fontType: .myRegular)
+    let headerLabel = UILabel.basic(textColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), fontSize: 16, fontType: .myRegular)
     
     required init() {
         super.init(frame: .zero)
-        backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
+        backgroundColor = #colorLiteral(red: 0.431372549, green: 0.6588235294, blue: 0.8431372549, alpha: 1)
         headerLabel.text = Constants.allContactsHeader
         headerLabel.textAlignment = .left
         setupViews()

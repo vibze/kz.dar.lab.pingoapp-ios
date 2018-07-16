@@ -24,7 +24,7 @@ class BlockUserCell: UITableViewCell {
     
     let nameLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 16, fontType: .mySemiBold)
     let phoneLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 14, fontType: .myRegular)
-    
+ 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
@@ -39,6 +39,7 @@ class BlockUserCell: UITableViewCell {
         self.addSubview(phoneLabel)
         
         separatorView.backgroundColor = #colorLiteral(red: 0.9960784314, green: 0.8470588235, blue: 0.5450980392, alpha: 1)
+        
         separatorView.snp.makeConstraints{
             $0.left.right.equalTo(0)
             $0.height.equalTo(1)

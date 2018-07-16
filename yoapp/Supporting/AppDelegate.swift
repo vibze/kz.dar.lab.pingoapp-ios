@@ -12,7 +12,6 @@ import CoreStore
 import UserNotifications
 import AccountKit
 
-
 @available(iOS 10.0, *)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate {
@@ -55,9 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent: UNNotification,
                                 withCompletionHandler: @escaping (UNNotificationPresentationOptions)->()) {
-
-        if UserDefaults.standard.bool(forKey: "notification") {
-            withCompletionHandler([.alert, .sound, .badge])
+        if UserDefaults.standard.bool(forKey: "notification"){
+            withCompletionHandler([.alert, .sound])
         }
     }
     
@@ -65,38 +63,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler: @escaping ()-> ()) {
         switch response.actionIdentifier {
-        case "com.apple.UNNotificationDefaultActionIdentifier":
-            let vc = MainTabViewController()
-            let rootVC = UINavigationController(rootViewController: vc)
-            let window = UIApplication.shared.keyWindow
-            window?.rootViewController = rootVC
+        case UNNotificationDefaultActionIdentifier: // "com.apple.UNNotificationDefaultActionIdentifier"
+            openSenderProfile()
         default:
             withCompletionHandler()
         }
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-       
         if UserDefaults.standard.bool(forKey: "notification"){
             let aps = userInfo["aps"] as! [String: AnyObject]
             MainTabViewController().textToVoice(aps["alert"] as? String)
         }
         
-        let window = UIApplication.shared.keyWindow
         switch application.applicationState {
         case .active:
             completionHandler(.noData)
         case .background:
-            let vc = MainTabViewController()
-            let rootVC = UINavigationController(rootViewController: vc)
-            window?.rootViewController = rootVC
+            openSenderProfile()
             completionHandler(.newData)
         case .inactive:
-            let vc = MainTabViewController()
-            let rootVC = UINavigationController(rootViewController: vc)
-            window?.rootViewController = rootVC
+            openSenderProfile()
             completionHandler(.newData)
         }
+    }
+    
+    func openSenderProfile(){
+        let vc = MainTabViewController()
+        let rootVC = UINavigationController(rootViewController: vc)
+        let window = UIApplication.shared.keyWindow
+        window?.rootViewController = rootVC
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -199,7 +195,7 @@ class Application {
     
     private func registerForRemoteNotification() {
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+        center.requestAuthorization(options:[.alert, .sound]) { (granted, error) in
             if granted {
                 DispatchQueue.main.async(execute: {
                         UIApplication.shared.registerForRemoteNotifications()
