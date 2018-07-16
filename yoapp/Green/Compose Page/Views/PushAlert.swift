@@ -36,13 +36,6 @@ class PushAlert: UIView {
         return imageView
     }()
     
-//    let alertLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "Пуш в пути"
-//        label.font = UIFont(name: "Avenir Next", size: 18)
-//        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-//        return label
-//    }()
     let alertLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 18, fontType: .mySemiBold)
     
     

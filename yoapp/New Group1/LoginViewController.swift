@@ -79,7 +79,10 @@ class LoginViewController: UIViewController,
         collectionView.layer.borderColor = UIColor(red: 168/255, green: 60/255, blue: 76/255, alpha: 0.5).cgColor
         
         collectionView.snp.makeConstraints{
-            $0.top.equalTo(75)
+            if screenHeight == 812 {
+                 $0.top.equalTo(140)
+            } else {
+                $0.top.equalTo(75) }
             $0.left.equalTo(32)
             $0.right.equalTo(-32)
             $0.height.equalTo(190)
@@ -101,11 +104,6 @@ class LoginViewController: UIViewController,
             $0.height.equalTo(50)
             $0.left.equalTo(40)
             $0.right.equalTo(-40)
-//            if screenHeight == 812 {
-//                $0.bottom.equalToSuperview().offset(-100)
-//            } else if {
-//                $0.bottom.equalToSuperview().offset(-25)
-//            }
         }
     }
     

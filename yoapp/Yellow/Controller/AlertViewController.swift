@@ -28,8 +28,8 @@ class AlertViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.55)
     }
     
-    func configView(isMessage: Bool){
-        if isMessage{
+    func configView(isError: Bool){
+        if isError{
         view.addSubview(alertView)
         alertView.snp.makeConstraints{
             $0.centerY.equalToSuperview()
