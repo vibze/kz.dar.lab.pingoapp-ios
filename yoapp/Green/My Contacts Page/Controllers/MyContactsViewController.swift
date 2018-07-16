@@ -17,6 +17,13 @@ private struct Constants {
 
 class MyContactsViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     
+    let emptyListView: BlackListFooterView = {
+        let emptyView = BlackListFooterView()
+        emptyView.backgroundColor = #colorLiteral(red: 0.431372549, green: 0.6588235294, blue: 0.8431372549, alpha: 1)
+        emptyView.isHidden = true
+        return emptyView
+    }()
+    
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
@@ -56,6 +63,11 @@ class MyContactsViewController: UIViewController, MFMessageComposeViewController
         
         setupViews()
         setupTargets()
+        checkForContactsExistence()
+    }
+    
+    func checkForContactsExistence() {
+        emptyListView.isHidden = listOfContacts.count > 0 ? true : false
     }
     
     @objc func cancelButtonPressed(sender: UIButton) {
@@ -75,7 +87,7 @@ class MyContactsViewController: UIViewController, MFMessageComposeViewController
     
     @objc func handlePullToRefresh(_ sender: UIRefreshControl) {
         tableView.reloadData()
-        ContactsService().syncContacts()
+        checkForContactsExistence()
         sender.endRefreshing()
     }
     
@@ -85,7 +97,7 @@ class MyContactsViewController: UIViewController, MFMessageComposeViewController
     }
     
     func setupViews() {
-        [tableView, searchBackgroundView].forEach {
+        [tableView, searchBackgroundView, emptyListView].forEach {
             view.addSubview($0)
         }
         [blurEffectView, searchTextField].forEach {
@@ -101,6 +113,10 @@ class MyContactsViewController: UIViewController, MFMessageComposeViewController
         tableView.keyboardDismissMode = .onDrag
         tableView.contentInset = UIEdgeInsets(top: 75, left: 0, bottom: 60, right: 0)
         
+        
+        emptyListView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         blurEffectView.snp.makeConstraints {
             $0.edges.equalTo(searchBackgroundView.snp.edges)
         }
@@ -139,7 +155,7 @@ extension MyContactsViewController: UITableViewDelegate, UITableViewDataSource, 
       
         if (MFMessageComposeViewController.canSendText()) {
             let controller = MFMessageComposeViewController()
-            controller.body = "Привет! Установливай Pingo приложение и отправялй ping своим друзьям."
+            controller.body = "Привет! Установливай Pingo приложение и отправляй ping своим друзьям."
             controller.recipients = ([phoneNumber] as! [String])
             controller.messageComposeDelegate = self
             self.present(controller, animated: true, completion: nil)
@@ -179,6 +195,7 @@ extension MyContactsViewController: UITextFieldDelegate {
 extension MyContactsViewController: ListObserver {
     func listMonitorDidChange(_ monitor: ListMonitor<Contact>) {
         listOfContacts = monitor.objectsInAllSections()
+        checkForContactsExistence()
         self.tableView.reloadData()
     }
     func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {

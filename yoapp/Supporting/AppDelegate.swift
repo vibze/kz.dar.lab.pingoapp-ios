@@ -111,6 +111,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
+        if Profile.current() != nil {
+            ContactsService().syncContacts()
+        }
         Timer.scheduledTimer(timeInterval: 0.05,
                              target: self,
                              selector: #selector(self.removeNotification),
