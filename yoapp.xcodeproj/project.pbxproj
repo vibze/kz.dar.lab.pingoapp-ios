@@ -63,6 +63,11 @@
 		8E67642E20E3B23A006D5652 /* SettingsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD4F20DCA43600D3A4F6 /* SettingsFooterView.swift */; };
 		8E70CA5420FBB05000A38448 /* ProfileImageUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E70CA5320FBB05000A38448 /* ProfileImageUpload.swift */; };
 		8E70CA5620FBB8EF00A38448 /* FavoriteWordsServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E70CA5520FBB8EF00A38448 /* FavoriteWordsServices.swift */; };
+		8E731A7920FCABBB0087A64A /* RegistrationDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E731A7820FCABBB0087A64A /* RegistrationDescriptionView.swift */; };
+		8E731A7B20FCADB40087A64A /* ComposeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E731A7A20FCADB40087A64A /* ComposeHeaderView.swift */; };
+		8E731A7D20FCB1990087A64A /* ComposeMessageCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E731A7C20FCB1990087A64A /* ComposeMessageCellView.swift */; };
+		8E731A7F20FCB4F40087A64A /* ComposeFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E731A7E20FCB4F40087A64A /* ComposeFooterView.swift */; };
+		8E731A8120FCBC100087A64A /* SendAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E731A8020FCBC100087A64A /* SendAlertView.swift */; };
 		8E9CFFC820F5B039000C5B9B /* AddFavoriteWordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CFFC720F5B039000C5B9B /* AddFavoriteWordController.swift */; };
 		8EC7F28920E09A2000C4BFE7 /* FavouriteWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */; };
 		8EC7F28D20E0AA0C00C4BFE7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */; };
@@ -137,6 +142,11 @@
 		8E67E70F20E9B9DE007EB870 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		8E70CA5320FBB05000A38448 /* ProfileImageUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageUpload.swift; sourceTree = "<group>"; };
 		8E70CA5520FBB8EF00A38448 /* FavoriteWordsServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteWordsServices.swift; sourceTree = "<group>"; };
+		8E731A7820FCABBB0087A64A /* RegistrationDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationDescriptionView.swift; sourceTree = "<group>"; };
+		8E731A7A20FCADB40087A64A /* ComposeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeHeaderView.swift; sourceTree = "<group>"; };
+		8E731A7C20FCB1990087A64A /* ComposeMessageCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeMessageCellView.swift; sourceTree = "<group>"; };
+		8E731A7E20FCB4F40087A64A /* ComposeFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeFooterView.swift; sourceTree = "<group>"; };
+		8E731A8020FCBC100087A64A /* SendAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAlertView.swift; sourceTree = "<group>"; };
 		8E9CFFC720F5B039000C5B9B /* AddFavoriteWordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavoriteWordController.swift; sourceTree = "<group>"; };
 		8EC7F28820E09A2000C4BFE7 /* FavouriteWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteWordViewController.swift; sourceTree = "<group>"; };
 		8EC7F28C20E0AA0B00C4BFE7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -338,13 +348,18 @@
 		843C3DE320E37D7A004ACFB1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8E731A7820FCABBB0087A64A /* RegistrationDescriptionView.swift */,
 				845D700020ECE7FF00562447 /* AlertView.swift */,
 				843C3E2820E64866004ACFB1 /* CustomInviteView.swift */,
+				8E731A8020FCBC100087A64A /* SendAlertView.swift */,
+				8E731A7C20FCB1990087A64A /* ComposeMessageCellView.swift */,
 				7C1B8DE620DB6B9B004BE38B /* ActionButton.swift */,
 				8E3A4A3820FA798300D26409 /* BlackListFooterView.swift */,
+				8E731A7E20FCB4F40087A64A /* ComposeFooterView.swift */,
 				7C1B8DEC20DB92DC004BE38B /* ImageView.swift */,
 				7C1B8DEE20DB9650004BE38B /* SearchTextField.swift */,
 				7C1B8DF020DB9A23004BE38B /* TabBarButton.swift */,
+				8E731A7A20FCADB40087A64A /* ComposeHeaderView.swift */,
 				843C3E1820E38D9B004ACFB1 /* ImageSwipeCell.swift */,
 				843C3E1720E38D9B004ACFB1 /* ImageSwipeStruct.swift */,
 				843C3E0420E3806E004ACFB1 /* ProfileViewCell.swift */,
@@ -619,16 +634,19 @@
 				8E67642B20E3B23A006D5652 /* ProfileHeaderView.swift in Sources */,
 				8E67642D20E3B23A006D5652 /* SettingViewCell.swift in Sources */,
 				8E67642E20E3B23A006D5652 /* SettingsFooterView.swift in Sources */,
+				8E731A7B20FCADB40087A64A /* ComposeHeaderView.swift in Sources */,
 				845D6FFB20ECE64B00562447 /* BlacklistService.swift in Sources */,
 				843C3E0D20E38BA0004ACFB1 /* ContactsService.swift in Sources */,
 				845D6FF920ECE62C00562447 /* SearchContact.swift in Sources */,
 				7C1B8DF120DB9A23004BE38B /* TabBarButton.swift in Sources */,
 				843C3E1620E38D97004ACFB1 /* LoginViewController.swift in Sources */,
 				7C1EE40420F5B7AB00761EDE /* Avatar.swift in Sources */,
+				8E731A8120FCBC100087A64A /* SendAlertView.swift in Sources */,
 				7C1CDFC920D7632B00A90E16 /* Extensions.swift in Sources */,
 				845D6FFF20ECE7B700562447 /* AlertViewController.swift in Sources */,
 				7C1D3FB920D6D7B7007037D9 /* SectionHeader.swift in Sources */,
 				7C910C4A20D6AAF90072A673 /* AppDelegate.swift in Sources */,
+				8E731A7F20FCB4F40087A64A /* ComposeFooterView.swift in Sources */,
 				843C3E0520E3806E004ACFB1 /* ProfileViewCell.swift in Sources */,
 				843C3E2920E64866004ACFB1 /* CustomInviteView.swift in Sources */,
 				7C1B8DF720DBA87A004BE38B /* ComposeViewController.swift in Sources */,
@@ -662,6 +680,8 @@
 				7CCBAB6320F7148300BC7C60 /* ContactsOperation.swift in Sources */,
 				8E3B73B520E0B91500DD3366 /* AboutAppCell.swift in Sources */,
 				845D6FFD20ECE65700562447 /* Monitor.swift in Sources */,
+				8E731A7D20FCB1990087A64A /* ComposeMessageCellView.swift in Sources */,
+				8E731A7920FCABBB0087A64A /* RegistrationDescriptionView.swift in Sources */,
 				8E59AD9320E072E2003CA5CC /* BlockUserLabelView.swift in Sources */,
 				8E3A4A3920FA798300D26409 /* BlackListFooterView.swift in Sources */,
 				99C744EF20F3820600A0117B /* PingsApi.swift in Sources */,
