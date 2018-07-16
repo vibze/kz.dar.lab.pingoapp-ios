@@ -42,7 +42,7 @@ AKFViewControllerDelegate {
     
     let nameApp: UILabel = {
         let lTA = UILabel()
-        lTA.text = "Ping App"
+        lTA.text = "Pingo"
         lTA.textColor = .white
         lTA.font = UIFont(name: "Helvetica", size: 24)
         return lTA
@@ -138,10 +138,10 @@ AKFViewControllerDelegate {
         collectionView.layer.borderColor = UIColor(red: 168/255, green: 60/255, blue: 76/255, alpha: 0.5).cgColor
         
         collectionView.snp.makeConstraints{
-            $0.top.equalTo(75)
             $0.left.equalTo(32)
             $0.right.equalTo(-32)
-            $0.bottom.equalTo(bottomControllView.snp.top).offset(-32)
+            $0.height.equalTo(190)
+            $0.bottom.equalTo(bottomControllView.snp.top).offset(-20)
         }
         nameApp.snp.makeConstraints{
             $0.top.equalTo(bottomControllView.snp.bottom).offset(25)
@@ -193,7 +193,8 @@ AKFViewControllerDelegate {
         bottomControllView.backgroundColor = .red
         view.addSubview(bottomControllView)
         bottomControllView.snp.makeConstraints{
-            $0.center.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(-15)
             $0.width.equalTo(50)
             $0.height.equalTo(10)
         }

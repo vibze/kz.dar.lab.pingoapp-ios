@@ -18,6 +18,7 @@ class ImageSwipeCell: UICollectionViewCell {
     
      let firstImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
