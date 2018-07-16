@@ -29,6 +29,11 @@ fastlane screenshots
 fastlane ios custom_lane
 ```
 Description of what the lane does
+### ios dev_testflight
+```
+fastlane ios dev_testflight
+```
+
 
 ----
 

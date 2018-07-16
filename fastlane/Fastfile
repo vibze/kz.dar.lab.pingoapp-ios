@@ -13,8 +13,6 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
-default_platform(:ios)
-
 platform :ios do
   desc "Description of what the lane does"
   lane :custom_lane do
@@ -28,4 +26,28 @@ lane :screenshots do
   # upload_to_app_store
 end
 
+fastlane_version "2.80.0"
 
+default_platform :ios
+
+ENV["MATCH_PASSWORD"] = "dar"
+ENV["FASTLANE_USER"] = "kz.dar.jenkins@gmail.com"
+ENV["FASTLANE_PASSWORD"] = "Cicduser112"
+
+def version_bump
+  increment_build_number
+  # commit_version_bump
+  # git_push_to_remote
+end
+
+platform :ios do
+  changelog = File.read("../Changelog.txt")
+
+  lane :dev_testflight do
+    version_bump
+    match(app_identifier: "kz.dar.lab.pingoapp", readonly: true)
+    gym(scheme: 'yoapp')
+    testflight 
+  end
+
+end
