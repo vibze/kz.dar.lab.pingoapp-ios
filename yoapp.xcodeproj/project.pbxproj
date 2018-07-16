@@ -21,6 +21,7 @@
 		7C26365A20DA048A008D34E1 /* MyContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C26365920DA048A008D34E1 /* MyContactsTableViewCell.swift */; };
 		7C48C3A620E3972200396466 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B8DEC20DB92DC004BE38B /* ImageView.swift */; };
 		7C48C3A720E3972200396466 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1B8DE620DB6B9B004BE38B /* ActionButton.swift */; };
+		7C78882220F85B3800422ADB /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C78882120F85B3800422ADB /* EmptyListView.swift */; };
 		7C910C4A20D6AAF90072A673 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C910C4920D6AAF90072A673 /* AppDelegate.swift */; };
 		7C910C5120D6AAFC0072A673 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C910C5020D6AAFC0072A673 /* Assets.xcassets */; };
 		7C910C5C20D6B2E50072A673 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C910C5B20D6B2E50072A673 /* ContactsViewController.swift */; };
@@ -86,6 +87,7 @@
 		7C1EE40320F5B7AB00761EDE /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		7C1EE40520F5FEF600761EDE /* MessageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTextView.swift; sourceTree = "<group>"; };
 		7C26365920DA048A008D34E1 /* MyContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContactsTableViewCell.swift; sourceTree = "<group>"; };
+		7C78882120F85B3800422ADB /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		7C910C4620D6AAF90072A673 /* yoapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yoapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C910C4920D6AAF90072A673 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C910C5020D6AAFC0072A673 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				843C3E0420E3806E004ACFB1 /* ProfileViewCell.swift */,
 				843C3DEB20E37DB9004ACFB1 /* PushAlert.swift */,
 				7C1EE40520F5FEF600761EDE /* MessageTextView.swift */,
+				7C78882120F85B3800422ADB /* EmptyListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -628,6 +631,7 @@
 				8E56778B20DBBEB400E65AFE /* SettingViewController.swift in Sources */,
 				7C1D3FB720D6BA8E007037D9 /* ContactsCollectionViewCell.swift in Sources */,
 				9956F13720ECDA82000820AC /* Token.swift in Sources */,
+				7C78882220F85B3800422ADB /* EmptyListView.swift in Sources */,
 				7C48C3A620E3972200396466 /* ImageView.swift in Sources */,
 				843C3E1920E38D9B004ACFB1 /* ImageSwipeStruct.swift in Sources */,
 				843C3E1E20E38E0E004ACFB1 /* Profile.swift in Sources */,

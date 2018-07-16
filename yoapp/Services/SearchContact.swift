@@ -52,7 +52,7 @@ struct SearchContact {
         return searchText.crop(begin: begin, end: end)
     }
     
-    private static func removeExtraSpaces(_ text: String) -> Int {
+    static func removeExtraSpaces(_ text: String) -> Int {
         for (index, char) in text.enumerated() {
             if char != " " {
                 return index

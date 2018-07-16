@@ -55,4 +55,26 @@ class Store {
             }
         )
     }
+    
+    static func addDefaultPhrases() {
+        let favoriteWords = ["Привет", "Как дела?"]
+        CoreStore.perform(
+            asynchronous: {
+                if $0.fetchAll(From<FavoriteWords>())?.count == 0 {
+                    for word in favoriteWords {
+                        let favoritePhrases = $0.create(Into<FavoriteWords>())
+                        favoritePhrases.word = word
+                    }
+                }
+            },
+            completion: { (result) -> Void in
+                switch result {
+                case .success:
+                    print("added default phrases")
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        )
+    }
 }

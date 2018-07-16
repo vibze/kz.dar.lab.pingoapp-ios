@@ -21,7 +21,6 @@ class ContactsCollectionViewCell: UICollectionViewCell {
     
     let contactNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Hello"
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -25,11 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         Application.shared.window = window
         window.makeKeyAndVisible()
         
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound,  .sound]) { (granted, error) in
-            UNUserNotificationCenter.current().delegate = self
-        }
-        
+        UNUserNotificationCenter.current().delegate = self
         application.registerForRemoteNotifications()
         
         Store.initCoreStore()
@@ -193,6 +189,7 @@ class Application {
         window?.rootViewController = vc
         registerForRemoteNotification()
         ContactsService().syncContacts()
+        Store.addDefaultPhrases()
     }
     
     func logout() {

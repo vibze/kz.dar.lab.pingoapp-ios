@@ -20,10 +20,6 @@ class ComposeViewController: UIViewController {
 
     var contact: Contact?
     
-    @objc func backButtonPressed() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     @objc func composeButtonPressed() {
         view.endEditing(true)
 
