@@ -36,7 +36,10 @@ extension AboutAppViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: aboutCell, for: indexPath) as! AboutAppCell
-        cell.aboutLabel.text = "служит для отправки коротких уведомлений, с воспроизведением текста Вашего сообщения."
+        let dictionary = Bundle.main.infoDictionary!
+        let version = dictionary["CFBundleShortVersionString"] as! String
+        let build = dictionary["CFBundleVersion"] as! String
+        cell.aboutLabel.text = "Версия \(version).\(build)"
         return cell
     }
 }

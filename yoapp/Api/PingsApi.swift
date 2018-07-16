@@ -19,9 +19,10 @@ class PingsApi: BaseAPI {
         post(url: "pings/new", params: parameters, success: { (json) in
             print(json)
             success(json)
-        }) { (Error) in
-            print("error")
-            failure("error1")
+        }) { (error) in
+            print("Ping post failed")
+            print(error)
+            failure("Не удалось отправить пинг ((")
         }
     }
 }

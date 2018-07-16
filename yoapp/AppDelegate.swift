@@ -43,12 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        print("APNs device token: \(deviceTokenString)")
+        debugPrint("APNs device token: \(deviceTokenString)")
         ProfileApi().uploadDeviceToken(deviceToken: deviceTokenString, success: { _ in }, failure: { _ in })
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("APNs registration failed: \(error)")
+        debugPrint("APNs registration failed: \(error)")
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -72,8 +72,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if UserDefaults.standard.bool(forKey: "notification"){
-            let aps = userInfo["aps"] as! [String: AnyObject]
-            MainTabViewController().textToVoice(aps["alert"] as? String)
+            if let aps = userInfo["aps"] as? [String: AnyObject],
+                let text = aps["alert"] as? String {
+                SpeechSynthesizer.speak(text)
+            }
         }
         
         switch application.applicationState {
