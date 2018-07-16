@@ -11,16 +11,7 @@ import UIKit
 class BlockUserCell: UITableViewCell {
     
     var separatorView = UIView()
-    
-    var profileImage: UIImageView = {
-        let image = UIImageView()
-        image.layer.masksToBounds = true
-        image.contentMode = .scaleAspectFill
-        image.layer.cornerRadius = 25
-        image.layer.borderColor = #colorLiteral(red: 0.8901960784, green: 0.4117647059, blue: 0.5019607843, alpha: 1).cgColor
-        image.layer.borderWidth = 2
-        return image
-    }()
+    let profileImage = ImageView(radius: 25)
     
     let nameLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 16, fontType: .mySemiBold)
     let phoneLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 14, fontType: .myRegular)
@@ -64,7 +55,7 @@ class BlockUserCell: UITableViewCell {
     }
     
     func viewData(image: String, name: String,phone: String){
-        profileImage.setCustomImage(Urls.baseUrl + image, custom: #imageLiteral(resourceName: "contactPlaceholder"))
+        profileImage.setContactImage(url: image)
         nameLabel.text = name
         phoneLabel.text = "+\(phone)"
     }

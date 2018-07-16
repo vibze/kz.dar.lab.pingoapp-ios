@@ -47,27 +47,27 @@ class ProfileFooterView : UIView {
                 make.top.equalToSuperview().offset(0)
                 make.centerX.equalToSuperview()
             } else {
-                make.top.equalToSuperview().offset(30)
+                make.top.equalToSuperview().offset(32)
                 make.centerX.equalToSuperview()
             }
         }
         
         backStackView.snp.makeConstraints{
             $0.top.equalTo(friendLabel.snp.bottom).offset(16)
-            $0.left.equalToSuperview().offset(27)
-            $0.right.equalToSuperview().offset(-27)
+            $0.left.equalToSuperview().offset(32)
+            $0.right.equalToSuperview().offset(-32)
             if screenHeight == 568 {
-                $0.bottom.equalToSuperview().offset(-5)
+                $0.bottom.equalToSuperview().offset(-4)
             } else {
-                $0.bottom.equalToSuperview().offset(30)
+                $0.bottom.equalToSuperview().offset(32)
             }
         }
         
         stackView.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(5)
-            $0.left.equalToSuperview().offset(5)
-            $0.right.equalToSuperview().offset(-5)
-            $0.bottom.equalToSuperview().offset(-5)
+            $0.top.equalToSuperview().offset(4)
+            $0.left.equalToSuperview().offset(4)
+            $0.right.equalToSuperview().offset(-4)
+            $0.bottom.equalToSuperview().offset(-4)
         }
         stackViewConfig()
     }
