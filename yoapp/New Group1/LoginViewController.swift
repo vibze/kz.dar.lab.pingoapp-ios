@@ -73,15 +73,17 @@ class LoginViewController: UIViewController,
         view.addSubview(descriptionView)
         view.addSubview(registrationButton)
         
-        collectionView.snp.makeConstraints {
-            if screenHeight == 812 {
-                $0.top.equalTo(140)
-            } else {
-                $0.top.equalTo(75)
-            }
+        registrationButton.layer.borderColor = UIColor(red: 168/255, green: 60/255, blue: 76/255, alpha: 0.5).cgColor
+        collectionView.layer.borderWidth = 4
+        collectionView.layer.cornerRadius = 12
+        collectionView.layer.borderColor = UIColor(red: 168/255, green: 60/255, blue: 76/255, alpha: 0.5).cgColor
+        
+        collectionView.snp.makeConstraints{
+            $0.top.equalTo(75)
             $0.left.equalTo(32)
             $0.right.equalTo(-32)
-            $0.bottom.equalTo(bottomControllView.snp.top).offset(-32)
+            $0.height.equalTo(190)
+            $0.bottom.equalTo(bottomControllView.snp.top).offset(-20)
         }
         
         descriptionView.snp.makeConstraints{
@@ -112,7 +114,8 @@ class LoginViewController: UIViewController,
         bottomControllView.backgroundColor = .red
         view.addSubview(bottomControllView)
         bottomControllView.snp.makeConstraints{
-            $0.center.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(-15)
             $0.width.equalTo(50)
             $0.height.equalTo(10)
         }

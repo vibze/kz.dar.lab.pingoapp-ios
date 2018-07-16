@@ -28,7 +28,7 @@ class BlacklistService: BaseAPI {
         }
     }
     
-    func unblacklistContact(profileId: Int32, _ success: @escaping () -> Void, _ failure: @escaping (String?) -> Void) {
+    func unblacklistContact(profileId: Int32, _ success: @escaping () -> Void, _ failure: @escaping (String) -> Void) {
         let url = "buddies/\(profileId)/unblacklist"
         delete(url: url, params: [:], success: { (json) in
             let result = json["success"].boolValue
@@ -36,6 +36,7 @@ class BlacklistService: BaseAPI {
                 Store.updateContactInCore(profileId: profileId, isBlacklisted: false, {
                     success()
                 }, { (error) in
+                    guard let error = error else { return }
                     failure(error)
                 })
                 return

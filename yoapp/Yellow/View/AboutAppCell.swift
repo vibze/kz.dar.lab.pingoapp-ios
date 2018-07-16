@@ -10,7 +10,7 @@ import UIKit
 
 class AboutAppCell: UITableViewCell {
     
-    let appNameLabel = UILabel.basic(textColor: .myPurple, fontSize: 20, fontType: .myBold)
+    let appNameLabel = UILabel.basic(textColor: .myPurple, fontSize: 20, fontType: .mySemiBold)
     var aboutBackgroundView = UIView()
     let aboutLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 18, fontType: .mySemiBold)
     
@@ -21,15 +21,15 @@ class AboutAppCell: UITableViewCell {
         self.backgroundColor = .clear
         self.addSubview(appNameLabel)
         self.addSubview(aboutBackgroundView)
-        aboutBackgroundView.backgroundColor = .myYellow
+        aboutBackgroundView.backgroundColor = .clear
         aboutBackgroundView.addSubview(aboutLabel)
         setUpView()
     }
     
     func setUpView(){
-        appNameLabel.text = "PingoApp"
+        appNameLabel.text = "Pingo App"
         appNameLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(4)
+            $0.top.equalToSuperview().offset(25)
             $0.centerX.equalToSuperview()
         }
         
