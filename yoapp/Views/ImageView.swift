@@ -52,7 +52,7 @@ class ImageView: UIImageView {
             self.activityIndicator.stopAnimating()
             UIView.transition(with: self,
                               duration: 0.75,
-                              options: .transitionCrossDissolve,
+//                              options: .transitionCrossDissolve,
                               animations: { self.image = avatarImage },
                               completion: nil)
         

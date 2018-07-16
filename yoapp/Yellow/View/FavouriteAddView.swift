@@ -67,7 +67,7 @@ class FavouriteAddView: UIView, UITextViewDelegate {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         let flexible = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
-        let doneBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.temp))
+        let doneBTN = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.hideKeyboard))
         
         toolBar.setItems([flexible, doneBTN], animated: false)
         
@@ -114,7 +114,7 @@ class FavouriteAddView: UIView, UITextViewDelegate {
         return true
     }
     
-    @objc func temp(){
+    @objc func hideKeyboard(){
         self.endEditing(true)
     }
     
