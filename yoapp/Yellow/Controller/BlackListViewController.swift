@@ -88,7 +88,7 @@ extension BlackListViewController {
             BlacklistService().unblacklistContact(profileId: contactId, {
                 print("success")
             }) { (error) in
-                print(error)
+                print("error")
             }
           
         }

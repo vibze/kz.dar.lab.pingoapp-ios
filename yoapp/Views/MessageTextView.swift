@@ -20,7 +20,7 @@ class MessageTextView: UITextView {
         font = UIFont(name: "Avenir Next", size: 18)
         backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         layer.sublayerTransform = CATransform3DMakeTranslation(8, 0, 0)
-        contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 10)
+        textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 10)
     }
     
     required init?(coder aDecoder: NSCoder) {
