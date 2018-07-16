@@ -43,12 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        print("APNs device token: \(deviceTokenString)")
+        debugPrint("APNs device token: \(deviceTokenString)")
         ProfileApi().uploadDeviceToken(deviceToken: deviceTokenString, success: { _ in }, failure: { _ in })
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("APNs registration failed: \(error)")
+        debugPrint("APNs registration failed: \(error)")
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
