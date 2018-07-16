@@ -110,10 +110,11 @@ func setupViews() {
     
     stackViewBackground.snp.makeConstraints {
         $0.bottom.equalTo(bottomLayoutGuide.snp.bottom)
+    
         if screenHeight == 812 {
             $0.height.equalTo(90)
         } else {
-            $0.height.equalTo(60)
+        $0.height.equalTo(60)
         }
         $0.left.right.equalToSuperview()
     }
