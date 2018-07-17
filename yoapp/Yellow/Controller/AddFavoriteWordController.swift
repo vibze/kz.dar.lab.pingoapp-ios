@@ -9,8 +9,7 @@
 import UIKit
 
 class AddFavoriteWordController: UIViewController {
-    var favoriteWordArray = [FavoriteWords]()
-    
+    var counter: Int = 0
     let addWordView = FavouriteAddView()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -29,7 +28,7 @@ class AddFavoriteWordController: UIViewController {
         viewSetUp()
     }
     
-    func viewSetUp(){
+    func viewSetUp() {
         addWordView.snp.makeConstraints{
             $0.centerY.equalToSuperview()
             $0.left.equalTo(30)
@@ -56,23 +55,16 @@ class AddFavoriteWordController: UIViewController {
         }
     }
     
-    @objc func cancelAction(){
+    @objc func cancelAction() {
         dismiss(animated: false, completion: nil)
     }
     
-    @objc func addAction(){
-        let word = addWordView.inputWord.text
-        guard (word!.isEmpty) == false else{
+    @objc func addAction() {
+        guard let word = addWordView.inputWord.text, word.isEmpty == false else {
             showAlert(errorType: "Добавьте фразу", image: #imageLiteral(resourceName: "errorIcon"))
             return
         }
-        addToWord(index: favoriteWordArray.count + 1, word: word!)
+        FavoriteWordsServices.addFavoriteWordToCore(index: counter, word: word)
         dismiss(animated: false, completion: nil)
-    }
-    
-    func addToWord(index:Int,word:String){
-        FavoriteWordsServices.addFavoriteWordToCore(index: index, word: word){(array) in
-            self.favoriteWordArray = array
-        }
     }
 }

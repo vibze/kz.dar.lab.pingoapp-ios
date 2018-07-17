@@ -60,9 +60,10 @@ class Store {
         CoreStore.perform(
             asynchronous: {
                 if $0.fetchAll(From<FavoriteWords>())?.count == 0 {
-                    for word in favoriteWords {
+                    for (index, word) in favoriteWords.enumerated() {
                         let favoritePhrases = $0.create(Into<FavoriteWords>())
                         favoritePhrases.word = word
+                        favoritePhrases.index = Int16(index)
                     }
                 }
             },
@@ -79,10 +80,12 @@ class Store {
     
     static func addPhrase(phrase: String) {
         CoreStore.perform(asynchronous: {
+            guard let counter = $0.fetchAll(From<FavoriteWords>())?.count else { return }
             let existedPhrase = $0.fetchOne(From<FavoriteWords>().where(\.word == phrase))
             if existedPhrase == nil {
                 let phrases = $0.create(Into<FavoriteWords>())
                 phrases.word = phrase
+                phrases.index = Int16(counter)
             }
         }) { (result) in
             switch result {

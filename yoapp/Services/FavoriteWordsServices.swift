@@ -11,36 +11,33 @@ import CoreStore
 
 class FavoriteWordsServices {
     
-    static func addFavoriteWordToCore(index: Int,word: String,completionHandler: @escaping([FavoriteWords]) -> ()){
+    static func addFavoriteWordToCore(index: Int, word: String) {
         CoreStore.perform(asynchronous: {(transaction) -> Void in
-            if transaction.fetchOne(From<FavoriteWords>().where(\.word == word)) != nil{
-                transaction.deleteAll(From<FavoriteWords>().where(\.word == word))
+            if transaction.fetchOne(From<FavoriteWords>().where(\.word == word)) == nil{
+                let favoriteWords = transaction.create(Into<FavoriteWords>())
+                favoriteWords.word = word
+                favoriteWords.index = Int16(index)
             }
-            
-            let addfavorWords = transaction.create(Into<FavoriteWords>())
-            addfavorWords.word = word
-            addfavorWords.index = Int16(index)
-            
-            let fetching = transaction.fetchAll(From<FavoriteWords>().orderBy(.descending(\.index)))
-            completionHandler(fetching!)
-        },completion: {(result) -> Void in
+        }, completion: {(result) -> Void in
+            switch result {
+            case .success:
+                print("success")
+            case .failure:
+                print("failure")
+            }
         })
     }
     
-    static func fetchFavoriteWordFromCore(completionHandler: @escaping([FavoriteWords]) -> ()){
-        CoreStore.perform(asynchronous: {(transaction) -> Void in
-            let allFavoriteWords = transaction.fetchAll(From<FavoriteWords>()
-                .orderBy(.descending(\.index)))
-            completionHandler(allFavoriteWords!)
-        },completion: {(result) -> Void in
-        })
-    }
-    
-    static func deleteFavoriteWordFromCore(word: FavoriteWords){
+    static func deleteFavoriteWordFromCore(word: FavoriteWords) {
         CoreStore.perform(asynchronous: {(transaction) -> Void in
             transaction.delete(word)
-        },completion: {(result) -> Void in
-            debugPrint(result)
+        }, completion: {(result) -> Void in
+            switch result {
+            case .success:
+                print("success")
+            case .failure:
+                print("failure")
+            }
         })
     }
 }

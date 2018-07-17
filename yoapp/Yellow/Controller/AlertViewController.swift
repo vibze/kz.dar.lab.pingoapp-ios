@@ -39,7 +39,6 @@ class AlertViewController: UIViewController {
             }
             $0.left.equalToSuperview().offset(24)
             $0.right.equalToSuperview().offset(-24)
-            
         }
         alertView.okButton.addTarget(self, action: #selector(okAction), for: .touchUpInside)
     }

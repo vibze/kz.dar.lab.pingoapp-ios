@@ -9,10 +9,9 @@
 import UIKit
 import CoreStore
 
-class FavouriteWordViewController: UITableViewController, ListObserver {
+class FavouriteWordViewController: UITableViewController {
     
     var favoriteCell = "FavouriteCell"
-    var favoriteWordArray = [FavoriteWords]()
     let monitor = Monitor.favoriteWordsMonitor
     
     override func viewDidLoad() {
@@ -22,14 +21,8 @@ class FavouriteWordViewController: UITableViewController, ListObserver {
         configTableView()
         monitor.addObserver(self)
     }
-   
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        fetchFromCoreStore()
-        self.tableView.reloadData()
-    }
     
-    func configTableView(){
+    func configTableView() {
         tableView.backgroundColor = .backgroundYellow
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -40,15 +33,15 @@ class FavouriteWordViewController: UITableViewController, ListObserver {
 extension FavouriteWordViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favoriteWordArray.count
+        return monitor.numberOfObjects()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: favoriteCell, for: indexPath) as! SettingViewCell
-        guard (favoriteWordArray[indexPath.row].word != nil) else{
+        guard (monitor[indexPath.row].word != nil) else {
             return cell
         }
-        cell.textName(text: favoriteWordArray[indexPath.row].word!)
+        cell.textName(text: monitor[indexPath.row].word!)
         return cell
     }
     
@@ -60,39 +53,27 @@ extension FavouriteWordViewController {
         return [deleteButton]
     }
     
-   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            deleteFavoriteWordFromCore(word: (favoriteWordArray[indexPath.row]))
-            favoriteWordArray.remove(at: indexPath.row)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            FavoriteWordsServices.deleteFavoriteWordFromCore(word: monitor[indexPath.row])
         }
     }
 }
 
 extension FavouriteWordViewController {
-    
-    @objc func addFavourWordAction(){
+    @objc func addFavourWordAction() {
         let vc = AddFavoriteWordController()
-        vc.favoriteWordArray = favoriteWordArray
+        vc.counter = monitor.numberOfObjects()
         self.present(vc, animated: false, completion: nil)
     }
-    
-    @objc func fetchFromCoreStore(){
-        FavoriteWordsServices.fetchFavoriteWordFromCore(completionHandler: {(array) in
-            self.favoriteWordArray = array
-        })
-    }
-    
-    func deleteFavoriteWordFromCore(word: FavoriteWords){
-        FavoriteWordsServices.deleteFavoriteWordFromCore(word: word)
-    }
-    
+}
+
+extension FavouriteWordViewController: ListObserver {
     func listMonitorDidChange(_ monitor: ListMonitor<FavoriteWords>) {
-        favoriteWordArray = monitor.objectsInAllSections()
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
-    func listMonitorDidRefetch(_ monitor: ListMonitor<FavoriteWords>) {
-        self.tableView.reloadData()
-    }
+    func listMonitorDidRefetch(_ monitor: ListMonitor<FavoriteWords>) { }
 }

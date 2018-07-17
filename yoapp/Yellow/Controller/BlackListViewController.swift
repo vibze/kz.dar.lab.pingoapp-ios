@@ -24,7 +24,6 @@ class BlackListViewController: UITableViewController, ListObserver {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
         addNavigationController(backgrounColor: .backgroundYellow, title: "Черный список")
     }
     
@@ -90,12 +89,13 @@ extension BlackListViewController {
             }) { (error) in
                 print("error")
             }
-          
         }
     }
     
     func listMonitorDidChange(_ monitor: ListMonitor<Contact>) {
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     func listMonitorDidRefetch(_ monitor: ListMonitor<Contact>) {

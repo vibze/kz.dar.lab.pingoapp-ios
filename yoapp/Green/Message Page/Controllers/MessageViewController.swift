@@ -34,7 +34,7 @@ class MessageViewController: UIViewController {
     
     let profileImageView = ImageView(radius: 100 / 2)
     let pushAlert = PushAlert()
-    let phrasesMonitor = Monitor.basePhrasesMonitor
+    let phrasesMonitor = Monitor.favoriteWordsMonitor
     
     let writeButton = ActionButton(title: Constants.writeToContact, type: .write)
     let blockButton = ActionButton(title: Constants.blockContact, type: .block)
