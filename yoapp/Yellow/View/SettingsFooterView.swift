@@ -19,7 +19,7 @@ class SettingsFooterView: UIView {
         switcher.thumbTintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         switcher.layer.borderColor = UIColor.white.cgColor
         switcher.addTarget(self, action: #selector(onOffNotification), for: .valueChanged)
-        let status = UserDefaults.standard.bool(forKey: "notification")
+        let status = UserDefaults.standard.bool(forKey: "turnOffNotification")
         switcher.isOn = status
         return switcher
     }()
@@ -33,27 +33,27 @@ class SettingsFooterView: UIView {
         setUpView()
     }
     
-    func setUpView(){
-        notificationLabel.text = "Уведомления"
-        notificationLabel.snp.makeConstraints{
+    func setUpView() {
+        notificationLabel.text = "Отключить уведомления"
+        notificationLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(30)
             $0.left.equalToSuperview().offset(15)
             $0.height.equalTo(30)
         }
         
-        notificationSwitcher.snp.makeConstraints{
+        notificationSwitcher.snp.makeConstraints {
             $0.top.equalTo(notificationLabel)
             $0.right.equalToSuperview().offset(-15)
         }
     }
     
-    @objc func onOffNotification(){
-        if notificationSwitcher.isOn{
-            UIApplication.shared.registerForRemoteNotifications()
-            UserDefaults.standard.set(true, forKey: "notification")
-        }else{
+    @objc func onOffNotification() {
+        if notificationSwitcher.isOn {
+            UserDefaults.standard.set(true, forKey: "turnOffNotification")
             UIApplication.shared.unregisterForRemoteNotifications()
-            UserDefaults.standard.set(false, forKey: "notification")
+        } else {
+            UserDefaults.standard.set(false, forKey: "turnOffNotification")
+            UIApplication.shared.registerForRemoteNotifications()
         }
     }
     
