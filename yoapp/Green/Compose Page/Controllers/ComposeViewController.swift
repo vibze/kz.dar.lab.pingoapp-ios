@@ -41,9 +41,12 @@ class ComposeViewController: UITableViewController {
             guard let avatarUrl = contact.avatarUrl else { return }
             headerView.viewData(image: avatarUrl, phoneNumber: contact.phoneNumber!, profileName: contact.name!)}
         footerView.composeButton.addTarget(self, action: #selector(composeButtonPressed), for: .touchUpInside)
+        footerView.soundButton.addTarget(self, action: #selector(playSound), for: .touchUpInside)
+        
         guard screenHeight == 568 else {
             return
         }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: Notification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: Notification.Name.UIKeyboardWillHide, object: nil)
     }
@@ -93,6 +96,11 @@ class ComposeViewController: UITableViewController {
              self.showAlert(errorType: "Введите текст!", image: #imageLiteral(resourceName: "errorIcon"))
         }
         print("tap&send")
+    }
+    
+    @objc func playSound(){
+        let text = footerView.messageText.text
+        SpeechSynthesizer.speak(text)
     }
 }
 

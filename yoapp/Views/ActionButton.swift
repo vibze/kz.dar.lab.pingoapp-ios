@@ -37,7 +37,7 @@ class ActionButton: UIButton {
         
         var mainColor: UIColor {
             switch self {
-            case .write: return UIColor(hexString: "308757")
+            case .write: return UIColor(hexString: "5AA079")
             case .block: return UIColor(hexString: "AA4778")
             case .rgstr: return UIColor(hexString: "A83C4C")
             case .setting: return UIColor.white.withAlphaComponent(0.5)
@@ -47,7 +47,6 @@ class ActionButton: UIButton {
     }
 
     required init(title: String, type: ActionButtonType) {
-        
         super.init(frame: .zero)
         
         self.backgroundColor = type.backgroundColor
@@ -57,7 +56,7 @@ class ActionButton: UIButton {
         self.layer.cornerRadius = 10
         self.layer.borderColor = type.mainColor.cgColor
         self.layer.borderWidth = 5
-        self.titleLabel?.font = UIFont(name: FontType.myBold.rawValue, size: 18)
+        self.titleLabel?.font = UIFont(name: FontType.mySemiBold.rawValue, size: 16)
     }
     
     required init?(coder aDecoder: NSCoder) {
