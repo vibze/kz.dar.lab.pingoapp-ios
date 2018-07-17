@@ -20,7 +20,7 @@ class ComposeFooterView: UIView, UITextViewDelegate {
         textView.font = UIFont(name: "Avenir Next", size: 18)
         textView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         textView.layer.sublayerTransform = CATransform3DMakeTranslation(8, 0, 0)
-        textView.contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 10)
+        textView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 0, right: 10)
         return textView
     }()
     

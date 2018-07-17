@@ -72,7 +72,7 @@ class ContactsViewController: UIViewController {
     }
     
     func checkForContactsExistence() {
-        emptyListView.isHidden = registeredContacts.count == 0 ? false : true
+        emptyListView.isHidden = registeredContactsMonitor.numberOfObjects() == 0 ? false : true
     }
     
     func monitorsSetup() {
