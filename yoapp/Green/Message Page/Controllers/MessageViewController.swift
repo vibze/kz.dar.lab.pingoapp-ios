@@ -11,7 +11,6 @@ import CoreStore
 
 private struct Constants {
     static let messageCell = "messageCell"
-    
     static let writeToContact = "Написать сообщение"
     static let blockContact = "Заблокировать контакт"
     static let unblockContact = "Разблокировать контакт"
@@ -33,7 +32,6 @@ class MessageViewController: UIViewController {
     }()
     
     let profileImageView = ImageView(radius: 100 / 2)
-    let pushAlert = PushAlert()
     let phrasesMonitor = Monitor.basePhrasesMonitor
     
     let writeButton = ActionButton(title: Constants.writeToContact, type: .write)
@@ -80,7 +78,6 @@ class MessageViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
         
         phrasesMonitor.addObserver(self)
-        pushAlert.delegate = self
         
         setupViews()
         setupButtons()
@@ -117,7 +114,6 @@ class MessageViewController: UIViewController {
     }
     
     func setupViews() {
-        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.estimatedItemSize = CGSize(width: 50, height: 50)
@@ -131,13 +127,10 @@ class MessageViewController: UIViewController {
         collectionView.allowsSelection = true
         view.addSubview(collectionView)
         
-        [profileImageView, blockButton, profileImageBackgroundView, userNameLabel, writeButton, phoneNumberLabel, basePhrasesTitleLabel, messageTitleLabel, pushAlert].forEach { newView in
+        [profileImageView, blockButton, profileImageBackgroundView, userNameLabel, writeButton, phoneNumberLabel, basePhrasesTitleLabel, messageTitleLabel].forEach { newView in
             view.addSubview(newView)
         }
         
-        pushAlert.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
     
         blockButton.snp.makeConstraints {
             $0.top.equalTo(writeButton.snp.bottom).offset(16)
@@ -154,7 +147,7 @@ class MessageViewController: UIViewController {
         collectionView.snp.makeConstraints {
             $0.left.equalToSuperview().offset(32)
             $0.width.equalToSuperview().inset(32)
-            $0.height.equalTo(80)
+            $0.height.equalTo(50)
             $0.top.equalTo(basePhrasesTitleLabel.snp.bottom).offset(14)
         }
         
@@ -203,12 +196,13 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        pushAlert.isHidden = false
-        navigationController?.isNavigationBarHidden = true
-        
         guard let buddy = contact, let sendText = phrasesMonitor[indexPath.row].word, let phoneNumber = buddy.phoneNumber else { return }
         
         PingsApi().postPing(buddyId: buddy.profileId, pingText: sendText, success: { _ in
+            let alertView = AlertViewController()
+            alertView.configView(isError: false)
+            alertView.delegate = self
+            self.present(alertView, animated: false, completion: nil)
             Store.updateContactPingTime(phoneNumber: phoneNumber, date: Date())
         }, failure: { _ in
             print("error")
@@ -232,9 +226,12 @@ extension MessageViewController: ListObserver {
     }
 }
 
-extension MessageViewController: AlerViewDelegate {
-    func closeButtonTapped(isClosed: Bool) {
-        navigationController?.isNavigationBarHidden = false
+
+extension MessageViewController: AlertViewDelegate {
+    func closeView(popupVC: AlertViewController) {
+        dismiss(animated: false, completion: nil)
     }
+
+    
 }
 

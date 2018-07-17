@@ -34,6 +34,7 @@ class ComposeFooterView: UIView, UITextViewDelegate {
     }
     
     func configView(){
+        composeButton.isUserInteractionEnabled = true
         messageText.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
             $0.left.equalToSuperview().offset(32)
@@ -46,6 +47,7 @@ class ComposeFooterView: UIView, UITextViewDelegate {
             $0.left.equalToSuperview().offset(32)
             $0.width.equalToSuperview().inset(32)
             $0.height.equalTo(50)
+            $0.bottom.equalTo(self)
         }
         
         let toolBar = UIToolbar()
