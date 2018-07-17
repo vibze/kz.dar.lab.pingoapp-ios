@@ -29,12 +29,18 @@ class ImageView: UIImageView {
     }
     
     func setContactImage(url: String) {
-        af_setImage(withURL: URL(string: Urls.baseUrl + url)!, placeholderImage: #imageLiteral(resourceName: "contactPlaceholder"))
+        let urlRequest = URLRequest(url: URL(string: Urls.baseUrl + url)!)
+        let imageDownloader = af_imageDownloader ?? UIImageView.af_sharedImageDownloader
+        let imageCache = imageDownloader.imageCache
+        let result = imageCache?.removeImage(for: urlRequest, withIdentifier: nil)
+        print("is image removed from cache", result!)
+        
+        af_setImage(withURL: URL(string: Urls.baseUrl + url)!, placeholderImage: #imageLiteral(resourceName: "contactPlaceholder"), filter: nil, progress: nil, progressQueue: .main, imageTransition: .crossDissolve(0.5), runImageTransitionIfCached: true, completion: nil)
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        layer.cornerRadius = bounds.width/2
+        layer.cornerRadius = bounds.width / 2
     }
 }
 
