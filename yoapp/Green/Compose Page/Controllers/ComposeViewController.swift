@@ -63,24 +63,38 @@ class ComposeViewController: UITableViewController {
         }
     }
     
+    private func isTextContainsCharacter(_ word: String) -> Bool {
+        for char in word.lowercased() {
+            if SearchContact.checkCharacter(char) {
+                return true
+            }
+        }
+        return false
+    }
+    
     @objc func composeButtonPressed() {
-        view.endEditing(true)
-        hideKeyboard()
-        guard let buddy = contact
-            ,let sendText = footerView.messageText.text
-            ,let phoneNumber = buddy.phoneNumber else { return }
+        guard let text = footerView.messageText.text else { return }
+        if isTextContainsCharacter(text) {
+            view.endEditing(true)
+            hideKeyboard()
+            guard let buddy = contact
+                ,let sendText = footerView.messageText.text
+                ,let phoneNumber = buddy.phoneNumber else { return }
 
-        PingsApi().postPing(buddyId: buddy.profileId, pingText: sendText, success: { _ in
-            let alertView = AlertViewController()
-            alertView.configView(isError: false)
-            alertView.delegate = self
-            self.present(alertView, animated: false, completion: nil)
-            Store.updateContactPingTime(phoneNumber: phoneNumber, date: Date())
-            Store.addPhrase(phrase: sendText)
-            self.footerView.messageText.text = ""
-        }, failure: { _ in
-            self.showAlert(errorType: "Ошибка! Сообщение не доставлено.", image: #imageLiteral(resourceName: "errorIcon"))
-        })
+            PingsApi().postPing(buddyId: buddy.profileId, pingText: sendText, success: { _ in
+                let alertView = AlertViewController()
+                alertView.configView(isError: false)
+                alertView.delegate = self
+                self.present(alertView, animated: false, completion: nil)
+                Store.updateContactPingTime(phoneNumber: phoneNumber, date: Date())
+                Store.addPhrase(phrase: sendText)
+                self.footerView.messageText.text = ""
+            }, failure: { _ in
+                self.showAlert(errorType: "Ошибка! Сообщение не доставлено.", image: #imageLiteral(resourceName: "errorIcon"))
+            })
+        } else {
+             self.showAlert(errorType: "Введите текст!", image: #imageLiteral(resourceName: "errorIcon"))
+        }
         print("tap&send")
     }
     

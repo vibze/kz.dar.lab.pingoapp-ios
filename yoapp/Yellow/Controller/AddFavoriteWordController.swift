@@ -59,8 +59,17 @@ class AddFavoriteWordController: UIViewController {
         dismiss(animated: false, completion: nil)
     }
     
+    private func isTextContainsCharacter(_ word: String) -> Bool {
+        for char in word.lowercased() {
+            if SearchContact.checkCharacter(char) {
+                return true
+            }
+        }
+        return false
+    }
+    
     @objc func addAction() {
-        guard let word = addWordView.inputWord.text, word.isEmpty == false else {
+        guard let word = addWordView.inputWord.text, isTextContainsCharacter(word) else {
             showAlert(errorType: "Добавьте фразу", image: #imageLiteral(resourceName: "errorIcon"))
             return
         }

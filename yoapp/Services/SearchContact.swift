@@ -30,7 +30,7 @@ struct SearchContact {
         return allContacts
     }
     
-    private static func checkCharacter(_ char: Character) -> Bool {
+    static func checkCharacter(_ char: Character) -> Bool {
         if char >= "0" && char <= "9" ||
             char >= "a" && char <= "z" ||
             char >= "а" && char <= "я" {

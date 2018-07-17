@@ -20,6 +20,7 @@ class FavouriteAddView: UIView, UITextViewDelegate {
         textField.clipsToBounds = true
         textField.textAlignment = .left
         textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.layer.sublayerTransform = CATransform3DMakeTranslation(8, 0, 0)
         textField.font = UIFont(name: FontType.myBold.rawValue, size: 18)
         return textField
     }()
