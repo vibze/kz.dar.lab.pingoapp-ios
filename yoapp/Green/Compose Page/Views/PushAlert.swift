@@ -15,7 +15,7 @@ protocol AlerViewDelegate: class {
 
 class PushAlert: UIView {
     
-    var delegate: AlerViewDelegate?
+    weak var delegate: AlerViewDelegate?
     
     let submitButton = ActionButton(title: "OK", type: .write)
     

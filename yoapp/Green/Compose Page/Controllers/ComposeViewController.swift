@@ -55,7 +55,7 @@ class ComposeViewController: UITableViewController {
             let alertView = AlertViewController()
             alertView.configView(isError: false)
             self.present(alertView, animated: false, completion: nil)
-            Store.updateContactPingTime(phoneNumber: phoneNumber)
+            Store.updateContactPingTime(phoneNumber: phoneNumber, date: Date())
             self.footerView.messageText.text = ""
         }, failure: { _ in
             self.showAlert(errorType: "Ошибка! Сообщение не доставлено.", image: #imageLiteral(resourceName: "errorIcon"))
