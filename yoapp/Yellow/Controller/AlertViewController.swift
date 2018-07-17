@@ -8,10 +8,15 @@
 
 import UIKit
 
+protocol AlertViewDelegate {
+    func closeView(popupVC: AlertViewController)
+}
+
 class AlertViewController: UIViewController {
     
     let alertView = AlertView()
     let sendMessageAlert = SendAlerView()
+    var delegate: AlertViewDelegate?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -26,6 +31,7 @@ class AlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.55)
+        
     }
     
     func configView(isError: Bool){
@@ -56,7 +62,7 @@ class AlertViewController: UIViewController {
                 $0.right.equalToSuperview().offset(-24)
                 
             }
-            sendMessageAlert.submitButton.addTarget(self, action: #selector(okAction), for: .touchUpInside)
+            sendMessageAlert.submitButton.addTarget(self, action: #selector(sendMessageOK), for: .touchUpInside)
         }
     }
     
@@ -67,5 +73,9 @@ class AlertViewController: UIViewController {
     
     @objc func okAction(){
         dismiss(animated: false, completion: nil)
+    }
+    
+    @objc func sendMessageOK(){
+        delegate?.closeView(popupVC: self)
     }
 }

@@ -14,7 +14,6 @@ class ComposeViewController: UITableViewController {
     let footerView = ComposeFooterView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 160))
     var messageCell = "messageCell"
     var mainText: String?
-    
     var contact: Contact?
     
     override func viewDidLoad() {
@@ -42,8 +41,25 @@ class ComposeViewController: UITableViewController {
             guard let avatarUrl = contact.avatarUrl else { return }
             headerView.viewData(image: avatarUrl, phoneNumber: contact.phoneNumber!, profileName: contact.name!)}
         footerView.composeButton.addTarget(self, action: #selector(composeButtonPressed), for: .touchUpInside)
+        guard screenHeight == 568 else {
+            return
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: Notification.Name.UIKeyboardWillHide, object: nil)
     }
-  
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        if self.view.frame.origin.y == 0 {
+            self.view.frame.origin.y -= 100
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y += 100
+        }
+    }
+    
     @objc func composeButtonPressed() {
         view.endEditing(true)
         hideKeyboard()
@@ -65,11 +81,16 @@ class ComposeViewController: UITableViewController {
     }
 }
 
-
 extension ComposeViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         self.hideKeyboard()
     }
 }
 
-
+extension ComposeViewController: AlertViewDelegate {
+    func closeView(popupVC: AlertViewController) {
+        dismiss(animated: true) {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+}

@@ -81,7 +81,8 @@ class ContactsCollectionViewCell: UICollectionViewCell {
             addSubview($0)
         }
         addGestureRecognizer(longPressTapGestureRecognizer)
-
+        contactImageView.addSubview(activityIndicator)
+        
         removeButton.snp.makeConstraints {
             $0.top.equalTo(self.snp.top).offset(-10)
             $0.right.equalTo(self.snp.right).offset(10)
