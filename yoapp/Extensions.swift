@@ -93,10 +93,12 @@ extension UIViewController {
     
     func showAlert(errorType: String, image: UIImage){
         let alertView = AlertViewController()
+        alertView.configView(isError: true)
         alertView.errorView(errorType: errorType, image: image)
         self.present(alertView, animated: false, completion: nil)
     }
     
+  
     func fixOrientation(img: UIImage) -> UIImage {
         if (img.imageOrientation == .up) {
             return img

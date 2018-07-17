@@ -8,100 +8,66 @@
 
 import UIKit
 
-class ComposeViewController: UIViewController {
+class ComposeViewController: UITableViewController {
     
-    let phoneNumberLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 16, fontType: .myRegular)
-    let nameLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 20, fontType: .myRegular)
-    let composeButton = ActionButton(title: "Отправить сообщение", type: .write)
-    let profileImageView = ImageView(radius: 90 / 2)
-    let alertView = PushAlert()
-    let messageTextView = MessageTextView()
-
+    let headerView = ComposeHeaderView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 200))
+    let footerView = ComposeFooterView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 160))
+    var messageCell = "messageCell"
+    var mainText: String?
+    
     var contact: Contact?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configTableView()
+        viewData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addNavigationController(backgrounColor: #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), title: "")
+    }
+    
+    func configTableView(){
+        tableView.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
+        tableView.separatorStyle = .none
+        tableView.isScrollEnabled = true
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.tableHeaderView = headerView
+        tableView.tableFooterView = footerView
+    }
+    
+    func viewData(){
+        if let contact = contact {
+            guard let avatarUrl = contact.avatarUrl else { return }
+            headerView.viewData(image: avatarUrl, phoneNumber: contact.phoneNumber!, profileName: contact.name!)}
+        footerView.composeButton.addTarget(self, action: #selector(composeButtonPressed), for: .touchUpInside)
+    }
+  
     @objc func composeButtonPressed() {
         view.endEditing(true)
+        hideKeyboard()
+        guard let buddy = contact
+            ,let sendText = footerView.messageText.text
+            ,let phoneNumber = buddy.phoneNumber else { return }
 
-        guard let buddy = contact, let sendText = messageTextView.text, let phoneNumber = buddy.phoneNumber
-            else { return }
-        
         PingsApi().postPing(buddyId: buddy.profileId, pingText: sendText, success: { _ in
-                self.alertView.isHidden = false
-                self.navigationController?.isNavigationBarHidden = true
-                Store.updateContactPingTime(phoneNumber: phoneNumber, date: Date())
-                Store.addPhrase(phrase: sendText)
-            }, failure: { _ in
-                self.showAlert(errorType: "Ошибка! Сообщение не доставлено.", image: #imageLiteral(resourceName: "errorIcon"))
+            let alertView = AlertViewController()
+            alertView.configView(isError: false)
+            self.present(alertView, animated: false, completion: nil)
+            Store.updateContactPingTime(phoneNumber: phoneNumber, date: Date())
+            self.footerView.messageText.text = ""
+        }, failure: { _ in
+            self.showAlert(errorType: "Ошибка! Сообщение не доставлено.", image: #imageLiteral(resourceName: "errorIcon"))
         })
         print("tap&send")
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupViews()
-        fillContactInfo()
-        composeButton.addTarget(self, action: #selector(composeButtonPressed), for: .touchUpInside)
-        addNavigationController(backgrounColor: #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), title: "")
-        messageTextView.delegate = self
-        alertView.delegate = self
-        view.backgroundColor = #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1)
-    }
-    
-    func fillContactInfo() {
-        if let contact = contact, let phoneNumber = contact.phoneNumber {
-            nameLabel.text = contact.name
-            phoneNumberLabel.text = "+" + phoneNumber
-            guard let avatarUrl = contact.avatarUrl else { return }
-            profileImageView.setContactImage(url: avatarUrl)
-        }
-    }
-    
-    func setupViews() {
-        [profileImageView, phoneNumberLabel, nameLabel, composeButton, messageTextView, alertView].forEach {
-            view.addSubview($0)
-        }
-        alertView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        profileImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(70)
-            $0.centerX.equalTo(self.view.center)
-            $0.width.height.equalTo(90)
-        }
-        nameLabel.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.bottom).offset(16)
-            $0.centerX.equalTo(self.view.center)
-        }
-        phoneNumberLabel.snp.makeConstraints {
-            $0.top.equalTo(nameLabel.snp.bottom).offset(4)
-            $0.centerX.equalTo(self.view.center)
-        }
-        messageTextView.snp.makeConstraints {
-            $0.top.equalTo(phoneNumberLabel.snp.bottom).offset(24)
-            $0.left.equalToSuperview().offset(32)
-            $0.width.equalToSuperview().inset(32)
-            $0.height.equalTo(100)
-        }
-        composeButton.snp.makeConstraints {
-            $0.top.equalTo(messageTextView.snp.bottom).offset(24)
-            $0.left.equalToSuperview().offset(32)
-            $0.width.equalToSuperview().inset(32)
-            $0.height.equalTo(50)
-        }
-    }
 }
+
 
 extension ComposeViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         self.hideKeyboard()
-    }
-}
-
-extension ComposeViewController: AlerViewDelegate {
-    func closeButtonTapped(isClosed: Bool) {
-        self.navigationController?.popViewController(animated: true)
-        navigationController?.isNavigationBarHidden = false
     }
 }
 
