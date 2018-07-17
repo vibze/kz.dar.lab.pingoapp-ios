@@ -37,5 +37,4 @@ class MessageCollectionViewCell: UICollectionViewCell {
             $0.height.equalTo(22)
         }
     }
-    
 }

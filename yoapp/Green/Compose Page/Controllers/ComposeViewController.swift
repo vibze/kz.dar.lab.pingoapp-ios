@@ -14,7 +14,6 @@ class ComposeViewController: UITableViewController {
     let footerView = ComposeFooterView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: 160))
     var messageCell = "messageCell"
     var mainText: String?
-    
     var contact: Contact?
     
     override func viewDidLoad() {
@@ -42,28 +41,49 @@ class ComposeViewController: UITableViewController {
             guard let avatarUrl = contact.avatarUrl else { return }
             headerView.viewData(image: avatarUrl, phoneNumber: contact.phoneNumber!, profileName: contact.name!)}
         footerView.composeButton.addTarget(self, action: #selector(composeButtonPressed), for: .touchUpInside)
+        guard screenHeight == 568 else {
+            return
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: Notification.Name.UIKeyboardWillHide, object: nil)
     }
-  
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        if self.view.frame.origin.y == 0 {
+            self.view.frame.origin.y -= 100
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y += 100
+        }
+    }
+    
     @objc func composeButtonPressed() {
         view.endEditing(true)
         hideKeyboard()
-        guard let buddy = contact
-            ,let sendText = footerView.messageText.text
-            ,let phoneNumber = buddy.phoneNumber else { return }
-
-        PingsApi().postPing(buddyId: buddy.profileId, pingText: sendText, success: { _ in
-            let alertView = AlertViewController()
-            alertView.configView(isError: false)
-            self.present(alertView, animated: false, completion: nil)
-            Store.updateContactPingTime(phoneNumber: phoneNumber)
-            self.footerView.messageText.text = ""
-        }, failure: { _ in
-            self.showAlert(errorType: "Ошибка! Сообщение не доставлено.", image: #imageLiteral(resourceName: "errorIcon"))
-        })
+        if footerView.messageText.text.isEmpty {
+            self.showAlert(errorType: "Введите текст!", image: #imageLiteral(resourceName: "errorIcon"))
+        } else {
+            guard let buddy = contact
+                ,let sendText = footerView.messageText.text
+                ,let phoneNumber = buddy.phoneNumber,
+                let date = buddy.pingedAt else { return }
+            
+            PingsApi().postPing(buddyId: buddy.profileId, pingText: sendText, success: { _ in
+                let alertView = AlertViewController()
+                alertView.configView(isError: false)
+                alertView.delegate = self
+                self.navigationController?.present(alertView, animated: false, completion: nil)
+                Store.updateContactPingTime(phoneNumber: phoneNumber, date: date)
+                self.footerView.messageText.text = ""
+            }, failure: { _ in
+                self.showAlert(errorType: "Ошибка! Сообщение не доставлено.", image: #imageLiteral(resourceName: "errorIcon"))
+            })}
         print("tap&send")
     }
 }
-
 
 extension ComposeViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -71,4 +91,10 @@ extension ComposeViewController: UITextViewDelegate {
     }
 }
 
-
+extension ComposeViewController: AlertViewDelegate {
+    func closeView(popupVC: AlertViewController) {
+        dismiss(animated: true) {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+}
