@@ -25,11 +25,23 @@ class ComposeFooterView: UIView, UITextViewDelegate {
     }()
     
     let composeButton = ActionButton(title: "Отправить сообщение", type: .write)
+   
+    var soundButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = #colorLiteral(red: 1, green: 0.7764705882, blue: 0.3568627451, alpha: 1)
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = 10
+        button.layer.borderColor = #colorLiteral(red: 0.3529411765, green: 0.6274509804, blue: 0.4745098039, alpha: 1).cgColor
+        button.layer.borderWidth = 5
+        button.setImage(#imageLiteral(resourceName: "soundImage"), for: .normal)
+        return button
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(messageText)
         self.addSubview(composeButton)
+        self.addSubview(soundButton)
         configView()
     }
     
@@ -45,9 +57,15 @@ class ComposeFooterView: UIView, UITextViewDelegate {
         composeButton.snp.makeConstraints {
             $0.top.equalTo(messageText.snp.bottom).offset(24)
             $0.left.equalToSuperview().offset(32)
-            $0.width.equalToSuperview().inset(32)
+            $0.right.equalTo(soundButton.snp.left).offset(-10)
             $0.height.equalTo(50)
             $0.bottom.equalTo(self)
+        }
+        
+        soundButton.snp.makeConstraints{
+            $0.top.height.bottom.equalTo(composeButton)
+            $0.right.equalToSuperview().offset(-32)
+            $0.width.equalTo(55)
         }
         
         let toolBar = UIToolbar()
