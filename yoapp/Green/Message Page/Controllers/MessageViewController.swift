@@ -231,7 +231,5 @@ extension MessageViewController: AlertViewDelegate {
     func closeView(popupVC: AlertViewController) {
         dismiss(animated: false, completion: nil)
     }
-
-    
 }
 
