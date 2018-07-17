@@ -105,7 +105,7 @@ extension ComposeViewController: UITextViewDelegate {
 extension ComposeViewController: AlertViewDelegate {
     func closeView(popupVC: AlertViewController) {
         dismiss(animated: true) {
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
         }
     }
 }
