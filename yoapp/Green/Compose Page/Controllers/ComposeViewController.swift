@@ -70,6 +70,7 @@ class ComposeViewController: UITableViewController {
         PingsApi().postPing(buddyId: buddy.profileId, pingText: sendText, success: { _ in
             let alertView = AlertViewController()
             alertView.configView(isError: false)
+            alertView.delegate = self
             self.present(alertView, animated: false, completion: nil)
             Store.updateContactPingTime(phoneNumber: phoneNumber, date: Date())
             Store.addPhrase(phrase: sendText)
