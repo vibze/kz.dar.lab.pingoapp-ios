@@ -20,20 +20,22 @@ class BlackListFooterView: UIView {
         setUpView()
     }
     
-    func setUpView(){
-        emptyLabel.text = "Список пуст"
-        emptyImage.image = #imageLiteral(resourceName: "emptyImage")
-        
+    func setUpView() {
         emptyLabel.snp.makeConstraints{
             $0.top.equalToSuperview().offset(30)
             $0.centerX.equalToSuperview()
         }
         
-        emptyImage.snp.makeConstraints{
+        emptyImage.snp.makeConstraints {
             $0.top.equalTo(emptyLabel.snp.bottom).offset(16)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(160)
         }
+    }
+    
+    func viewData(text: String, image: UIImage) {
+        emptyLabel.text = text
+        emptyImage.image = image
     }
     
     required init?(coder aDecoder: NSCoder) {

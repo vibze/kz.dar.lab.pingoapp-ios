@@ -132,6 +132,7 @@ class MyContactsViewController: UIViewController, MFMessageComposeViewController
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        emptyListView.viewData(text: "Добавьте контакты в свой телефон", image: #imageLiteral(resourceName: "inviteFriends"))
     }
 }
 

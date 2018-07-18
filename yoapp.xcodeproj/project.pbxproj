@@ -405,17 +405,9 @@
 			path = "New Group1";
 			sourceTree = "<group>";
 		};
-		8E04FC8020E48F2D004B7D29 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		8E56776A20DB765A00E65AFE /* Yellow */ = {
 			isa = PBXGroup;
 			children = (
-				8E04FC8020E48F2D004B7D29 /* Model */,
 				8E56777720DB87BD00E65AFE /* Helpers */,
 				8E56776E20DB86AA00E65AFE /* View */,
 				8E56776D20DB86A000E65AFE /* Controller */,

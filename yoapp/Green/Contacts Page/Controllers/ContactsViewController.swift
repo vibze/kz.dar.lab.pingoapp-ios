@@ -66,6 +66,7 @@ class ContactsViewController: UIViewController {
         monitorsSetup()
         
         self.view.addSubview(emptyListView)
+        emptyListView.viewData(text: "Пригласите своих друзей", image: #imageLiteral(resourceName: "inviteFriends"))
         emptyListView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -206,6 +207,7 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
             setBlur(false, .clear, #colorLiteral(red: 0.3450980392, green: 0.6784313725, blue: 0.4941176471, alpha: 0.2)) :
             setBlur(true, #colorLiteral(red: 0.4196078431, green: 0.7450980392, blue: 0.5647058824, alpha: 1), #colorLiteral(red: 0.3450980392, green: 0.6784313725, blue: 0.4941176471, alpha: 1))
     }
+    
     func setBlur(_ isHidden: Bool, _ backColor: UIColor, _ textColor: UIColor) {
         UIView.animate(withDuration: (isHidden ? 0 : 0.5)) {
             self.blurEffectView.isHidden = isHidden

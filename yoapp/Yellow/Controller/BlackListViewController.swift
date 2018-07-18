@@ -32,6 +32,7 @@ class BlackListViewController: UITableViewController, ListObserver {
         tableView.backgroundColor = .backgroundYellow
         tableView.separatorStyle = .none
         tableView.tableFooterView = footerView
+        footerView.viewData(text: "Список пуст", image: #imageLiteral(resourceName: "emptyImage"))
         tableView.rowHeight = 75
         tableView.register(BlockUserCell.self, forCellReuseIdentifier: userBlockCell)
     }
