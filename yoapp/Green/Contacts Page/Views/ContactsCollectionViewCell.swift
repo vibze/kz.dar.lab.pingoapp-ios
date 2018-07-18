@@ -23,19 +23,19 @@ class ContactsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let removeButton: UIButton = {
-        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "removeIcon"), for: .normal)
-        button.isHidden = true
-        return button
-    }()
+//    let removeButton: UIButton = {
+//        let button = UIButton()
+//        button.setImage(#imageLiteral(resourceName: "removeIcon"), for: .normal)
+//        button.isHidden = true
+//        return button
+//    }()
 
-    let longPressTapGestureRecognizer: UILongPressGestureRecognizer = {
-        let tapRecognizer = UILongPressGestureRecognizer()
-        tapRecognizer.minimumPressDuration = 1
-        
-        return tapRecognizer
-    }()
+//    let longPressTapGestureRecognizer: UILongPressGestureRecognizer = {
+//        let tapRecognizer = UILongPressGestureRecognizer()
+//        tapRecognizer.minimumPressDuration = 1
+//
+//        return tapRecognizer
+//    }()
 
     var contact: Contact? {
         didSet {
@@ -47,17 +47,17 @@ class ContactsCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addViews()
-        removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
-        longPressTapGestureRecognizer.addTarget(self, action: #selector(handleLongPressTap))
+//        removeButton.addTarget(self, action: #selector(removeButtonPressed), for: .touchUpInside)
+//        longPressTapGestureRecognizer.addTarget(self, action: #selector(handleLongPressTap))
     }
     
-    @objc func removeButtonPressed() {
-        print("hello")
-    }
+//    @objc func removeButtonPressed() {
+//        print("hello")
+//    }
 
-    @objc func handleLongPressTap(sender: UILongPressGestureRecognizer) {
-        removeButton.isHidden = false
-    }
+//    @objc func handleLongPressTap(sender: UILongPressGestureRecognizer) {
+//        removeButton.isHidden = false
+//    }
     
     func contactDidUpdate(_ contact: Contact) {
         contactImageView.image = #imageLiteral(resourceName: "contactPlaceholder")
@@ -77,16 +77,16 @@ class ContactsCollectionViewCell: UICollectionViewCell {
     }
 
     func addViews() {
-        [contactImageView, contactNameLabel, removeButton].forEach {
+        [contactImageView, contactNameLabel].forEach {
             addSubview($0)
         }
-        addGestureRecognizer(longPressTapGestureRecognizer)
+//        addGestureRecognizer(longPressTapGestureRecognizer)
         
-        removeButton.snp.makeConstraints {
-            $0.top.equalTo(self.snp.top).offset(-10)
-            $0.right.equalTo(self.snp.right).offset(10)
-            $0.width.height.equalTo(30)
-        }
+//        removeButton.snp.makeConstraints {
+//            $0.top.equalTo(self.snp.top).offset(-10)
+//            $0.right.equalTo(self.snp.right).offset(10)
+//            $0.width.height.equalTo(30)
+//        }
 
         contactImageView.snp.makeConstraints { (constraint) in
             constraint.top.left.right.equalTo(0)
