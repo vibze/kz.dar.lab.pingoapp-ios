@@ -31,7 +31,7 @@ class MessageViewController: UIViewController {
         return view
     }()
     
-    let profileImageView = ImageView(radius: 100 / 2)
+    let profileImageView = ImageView()
     let phrasesMonitor = Monitor.favoriteWordsMonitor
     
     let writeButton = ActionButton(title: Constants.writeToContact, type: .write)

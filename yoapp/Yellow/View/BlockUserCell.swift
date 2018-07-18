@@ -11,7 +11,7 @@ import UIKit
 class BlockUserCell: UITableViewCell {
     
     var separatorView = UIView()
-    let profileImage = ImageView(radius: 25)
+    let profileImage = ImageView()
     
     let nameLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 16, fontType: .mySemiBold)
     let phoneLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 14, fontType: .myRegular)

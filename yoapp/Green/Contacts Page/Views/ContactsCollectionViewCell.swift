@@ -11,7 +11,7 @@ import SnapKit
 
 class ContactsCollectionViewCell: UICollectionViewCell {
     
-    let contactImageView = ImageView(radius: 68 / 2)
+    let contactImageView = ImageView()
 
     let contactNameLabel: UILabel = {
         let label = UILabel()

@@ -18,7 +18,7 @@ class MyContactsTableViewCell: UITableViewCell {
         }
     }
 
-    let contactImageView = ImageView(radius: 55 / 2)
+    let contactImageView = ImageView()
     
     let contactNameLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 16, fontType: .myRegular)
     let phoneNumberLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 14, fontType: .myRegular)

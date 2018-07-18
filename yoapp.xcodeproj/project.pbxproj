@@ -47,7 +47,6 @@
 		845D6FFD20ECE65700562447 /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D6FFC20ECE65700562447 /* Monitor.swift */; };
 		845D6FFF20ECE7B700562447 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D6FFE20ECE7B700562447 /* AlertViewController.swift */; };
 		845D700120ECE7FF00562447 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D700020ECE7FF00562447 /* AlertView.swift */; };
-		8499C5A120FCB5540078C024 /* RegistrationDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C5A020FCB5540078C024 /* RegistrationDescriptionView.swift */; };
 		8499C5A320FCB62E0078C024 /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8499C5A220FCB62E0078C024 /* SpeechSynthesizer.swift */; };
 		8E13525F20F7DCE8007ECDB3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E13525E20F7DCE8007ECDB3 /* MessageUI.framework */; };
 		8E1DCD5220DCBBA500D3A4F6 /* BlackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1DCD5120DCBBA500D3A4F6 /* BlackListViewController.swift */; };
@@ -363,7 +362,6 @@
 				843C3E1720E38D9B004ACFB1 /* ImageSwipeStruct.swift */,
 				843C3E0420E3806E004ACFB1 /* ProfileViewCell.swift */,
 				843C3DEB20E37DB9004ACFB1 /* PushAlert.swift */,
-				7C1EE40520F5FEF600761EDE /* MessageTextView.swift */,
 				8499C5A020FCB5540078C024 /* RegistrationDescriptionView.swift */,
 			);
 			path = Views;

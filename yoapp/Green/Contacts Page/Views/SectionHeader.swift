@@ -12,13 +12,14 @@ import SnapKit
 private struct Constants {
     static let searchResult = "Результаты поиска"
     static let allContacts = "Все, кто в теме"
+    static let recentContacsts = "Недавние"
 }
 
 class SectionHeader: UICollectionReusableView {
-    var sectionInfo: (section: Int, charCount: Int?)? {
+    var sectionInfo: (section: Int, charCount: Int?, objectCount: Int)? {
         didSet {
             guard let section = sectionInfo, let charCount = section.charCount else { return }
-            changeParameters(sectionIndex: section.section, charCount: charCount)
+            changeParameters(sectionIndex: section.section, charCount: charCount, objectCount: section.objectCount)
         }
     }
     
@@ -32,15 +33,18 @@ class SectionHeader: UICollectionReusableView {
         }
     }
     
-    private func changeParameters(sectionIndex: Int, charCount: Int) {
-        if sectionIndex == 1 && charCount > 0 {
-            print(" Herere")
+    private func changeParameters(sectionIndex: Int, charCount: Int, objectCount: Int) {
+        if sectionIndex == 1 && (charCount > 0 || objectCount == 0) {
             self.isHidden = true
         }
         else {
-            if charCount > 0 {
-                self.categoryTitleLabel.text = Constants.searchResult
-            }
+            self.categoryTitleLabel.text = charCount == 0 ? Constants.allContacts : Constants.searchResult
+            
+//            if objectCount > 0 {
+//
+//            }
+//            self.categoryTitleLabel.text = charCount > 0 ? Constants.searchResult :
+//                objectCount == 0 ? Constants.allContacts : Constants.recentContacsts
             self.isHidden = false
         }
     }

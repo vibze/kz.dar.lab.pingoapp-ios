@@ -15,7 +15,7 @@ class ImageView: UIImageView {
     
     var imageUrlString: String?
     
-    required init(radius: CGFloat) {
+    required init() {
         super.init(frame: .zero)
         layer.masksToBounds = true
         layer.borderColor = UIColor(hexString: "E36980").cgColor

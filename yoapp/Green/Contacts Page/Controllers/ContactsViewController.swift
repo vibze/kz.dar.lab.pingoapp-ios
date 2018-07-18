@@ -79,6 +79,15 @@ class ContactsViewController: UIViewController {
         registeredContacts = registeredContactsMonitor.objectsInAllSections()
         recentlyActiveContacts = recentlyActiveMonitor.objectsInAllSections()
         ContactsOperation.sliceContactsList(&recentlyActiveContacts, &registeredContacts)
+        if recentlyActiveContacts.count == 0 {
+            recentlyActiveContacts = registeredContactsMonitor.objectsInAllSections()
+            registeredContacts = []
+        }
+        else {
+            recentlyActiveContacts = recentlyActiveMonitor.objectsInAllSections()
+            registeredContacts = registeredContactsMonitor.objectsInAllSections()
+            ContactsOperation.sliceContactsList(&recentlyActiveContacts, &registeredContacts)
+        }
         checkForContactsExistence()
     }
     
@@ -172,7 +181,7 @@ extension ContactsViewController: UICollectionViewDelegate, UICollectionViewData
         let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.sectionHeader, for: indexPath) as! SectionHeader
         
         sectionHeader.categoryTitleLabel.text = Constants.sectionLabels[indexPath.section]
-        sectionHeader.sectionInfo = (indexPath.section, searchTextField.text?.count)
+        sectionHeader.sectionInfo = (indexPath.section, searchTextField.text?.count, registeredContacts.count)
         return sectionHeader
     }
     

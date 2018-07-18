@@ -18,7 +18,7 @@ class ComposeHeaderView: UIView {
         return view
     }()
     
-    let profileImg = ImageView(radius: 50)
+    let profileImg = ImageView()
     let profileNameLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 20, fontType: FontType.myRegular)
     let phoneNumberLabel = UILabel.basic(textColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 20, fontType: FontType.myRegular)
  

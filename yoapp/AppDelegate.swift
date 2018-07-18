@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         window.makeKeyAndVisible()
         
         UNUserNotificationCenter.current().delegate = self
-        application.registerForRemoteNotifications()
         
         Store.initCoreStore()
         
@@ -54,9 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent: UNNotification,
                                 withCompletionHandler: @escaping (UNNotificationPresentationOptions)->()) {
-        if UserDefaults.standard.bool(forKey: "notification"){
-            withCompletionHandler([.alert, .sound])
-        }
+//        if UserDefaults.standard.bool(forKey: "turnOffNotification"){
+            withCompletionHandler([.alert])
+//        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -70,14 +69,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         }
     }
     
+    
+    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if !UserDefaults.standard.bool(forKey: "turnOffNotification"){
+        print("OK")
+        if !UserDefaults.standard.bool(forKey: "turnOffNotification") {
+            print(userInfo["aps"])
             if let aps = userInfo["aps"] as? [String: AnyObject],
                 let text = aps["alert"] as? String {
                 SpeechSynthesizer.speak(text)
             }
         }
-        
+
         switch application.applicationState {
         case .active:
             completionHandler(.noData)
