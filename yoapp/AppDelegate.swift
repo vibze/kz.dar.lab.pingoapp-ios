@@ -69,14 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
         }
     }
     
-    
-    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("OK")
         if !UserDefaults.standard.bool(forKey: "turnOffNotification") {
-            print(userInfo["aps"])
             if let aps = userInfo["aps"] as? [String: AnyObject],
                 let text = aps["alert"] as? String {
+                print(aps)
                 SpeechSynthesizer.speak(text)
             }
         }
@@ -194,6 +191,7 @@ class Application {
         registerForRemoteNotification()
         ContactsService().syncContacts()
         Store.addDefaultPhrases()
+        UserDefaults.standard.set(false, forKey: "turnOffNotification")
     }
     
     func logout() {
@@ -206,7 +204,7 @@ class Application {
         center.requestAuthorization(options:[.alert, .sound]) { (granted, error) in
             if granted {
                 DispatchQueue.main.async(execute: {
-                        UIApplication.shared.registerForRemoteNotifications()
+                    UIApplication.shared.registerForRemoteNotifications()
                 })
             }
         }

@@ -12,7 +12,6 @@ import SnapKit
 private struct Constants {
     static let searchResult = "Результаты поиска"
     static let allContacts = "Все, кто в теме"
-    static let recentContacsts = "Недавние"
 }
 
 class SectionHeader: UICollectionReusableView {
@@ -38,13 +37,12 @@ class SectionHeader: UICollectionReusableView {
             self.isHidden = true
         }
         else {
-            self.categoryTitleLabel.text = charCount == 0 ? Constants.allContacts : Constants.searchResult
-            
-//            if objectCount > 0 {
-//
-//            }
-//            self.categoryTitleLabel.text = charCount > 0 ? Constants.searchResult :
-//                objectCount == 0 ? Constants.allContacts : Constants.recentContacsts
+            if charCount > 0 {
+                self.categoryTitleLabel.text = Constants.searchResult
+            }
+            else if objectCount == 0 {
+                self.categoryTitleLabel.text = Constants.allContacts
+            }
             self.isHidden = false
         }
     }

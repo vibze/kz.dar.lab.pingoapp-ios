@@ -77,19 +77,21 @@ class ContactsViewController: UIViewController {
     }
     
     func monitorsSetup() {
-        registeredContacts = registeredContactsMonitor.objectsInAllSections()
-        recentlyActiveContacts = recentlyActiveMonitor.objectsInAllSections()
-        ContactsOperation.sliceContactsList(&recentlyActiveContacts, &registeredContacts)
+        setArray()
         if recentlyActiveContacts.count == 0 {
             recentlyActiveContacts = registeredContactsMonitor.objectsInAllSections()
             registeredContacts = []
         }
         else {
-            recentlyActiveContacts = recentlyActiveMonitor.objectsInAllSections()
-            registeredContacts = registeredContactsMonitor.objectsInAllSections()
-            ContactsOperation.sliceContactsList(&recentlyActiveContacts, &registeredContacts)
+            setArray()
         }
         checkForContactsExistence()
+    }
+    
+    func setArray() {
+        registeredContacts = registeredContactsMonitor.objectsInAllSections()
+        recentlyActiveContacts = recentlyActiveMonitor.objectsInAllSections()
+        ContactsOperation.sliceContactsList(&recentlyActiveContacts, &registeredContacts)
     }
     
     func textFieldSetup() {
