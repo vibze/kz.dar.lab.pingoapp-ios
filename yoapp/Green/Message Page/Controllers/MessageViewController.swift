@@ -212,7 +212,7 @@ extension MessageViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let phrase = phrasesMonitor[indexPath.row].word else { return CGSize(width: 0, height: 0) }
         let width = phrase.size().width
-        return CGSize(width: width + 60, height: 50)
+        return CGSize(width: width * 1.44 + 60, height: 50)
     }
 }
 
