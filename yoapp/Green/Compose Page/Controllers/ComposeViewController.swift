@@ -38,8 +38,8 @@ class ComposeViewController: UITableViewController {
     
     func viewData(){
         if let contact = contact {
-            guard let avatarUrl = contact.avatarUrl else { return }
-            headerView.viewData(image: avatarUrl, phoneNumber: contact.phoneNumber!, profileName: contact.name!)}
+            headerView.viewData(image: contact.avatarUrl, phoneNumber: contact.phoneNumber!, profileName: contact.name!)
+        }
         footerView.composeButton.addTarget(self, action: #selector(composeButtonPressed), for: .touchUpInside)
         footerView.soundButton.addTarget(self, action: #selector(playSound), for: .touchUpInside)
         

@@ -14,7 +14,7 @@ import AccountKit
 
 @available(iOS 10.0, *)
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     var window: UIWindow?
     
@@ -53,7 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent: UNNotification,
                                 withCompletionHandler: @escaping (UNNotificationPresentationOptions)->()) {
-//        if UserDefaults.standard.bool(forKey: "turnOffNotification"){
+        
+//        if UserDefaults.standard.bool(forKey: "turnOffNotification") {
             withCompletionHandler([.alert])
 //        }
     }
@@ -70,6 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("OK")
         if !UserDefaults.standard.bool(forKey: "turnOffNotification") {
             if let aps = userInfo["aps"] as? [String: AnyObject],
                 let text = aps["alert"] as? String {

@@ -61,9 +61,10 @@ class ComposeHeaderView: UIView {
         }
     }
     
-    func viewData(image: String, phoneNumber: String, profileName: String) {
+    func viewData(image: String?, phoneNumber: String, profileName: String) {
         profileNameLabel.text = profileName
         phoneNumberLabel.text = "+\(phoneNumber)"
+        guard let image = image else { return }
         profileImg.setContactImage(url: image)
     }
 }
